@@ -1,0 +1,321 @@
+/* MENSAJERIA */
+
+#btnNewMsg{
+    padding: 10px;
+    font-weight: 800;
+    font-size: 12px;
+    color: black;
+    text-transform: uppercase;
+    border-radius: 6px;
+    box-shadow: 0px 0px 20px rgb(102, 102, 102);
+    cursor: pointer;
+    margin-left: 80%;
+}
+
+#btnNewMsg:hover{
+    color: white;
+    background:rgb(226, 3, 26);
+}
+
+/* TABLA */
+
+#iconoVer{
+  opacity: 0.5;
+  margin: 0px auto;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+#iconoVer img{
+  margin: 0px auto;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+}
+
+
+
+#iconoEditar{
+  opacity: 0.5;
+  margin: 0px auto;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+#iconoEditar img{
+  margin: 0px auto;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+}
+
+#iconoEliminar{
+    opacity: 0.5;
+    margin: 0px auto;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  
+  #iconoEliminar img{
+    margin: 0px auto;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+  }
+
+  #iconoVer:hover, #iconoEditar:hover, #iconoEliminar:hover{
+    opacity: 1;
+}
+
+.wrap{
+width: 100%;
+max-width: 95%;
+margin: 30px auto;
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0px;
+  max-width:100%;
+}
+
+#respuesta{
+color: red;
+text-transform: uppercase;
+text-align: center;
+margin-top: 20px;
+margin-bottom: 30px;
+}
+
+#myInput {
+background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+background-position: 10px 12px; /* Position the search icon */
+width: 25%; /* Full-width */
+font-size: 16px; /* Increase font-size */
+padding: 12px 20px 12px 40px; /* Add some padding */
+border: 1px solid #ddd; /* Add a grey border */
+margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myInput:hover{
+    border: 1px solid black;
+}
+
+#myTable {
+border-collapse: collapse; /* Collapse borders */
+width: 100%; /* Full-width */
+border: 1px solid #ddd; /* Add a grey border */
+font-size: 14px; /* Increase font-size */
+}
+
+#myTable th{
+background: rgb(187, 187, 187);
+}
+
+#myTable th, #myTable td {
+text-transform: uppercase;
+font-family: Arial, Helvetica, sans-serif;
+text-align: left; /* Left-align text */
+padding: 12px; /* Add padding */
+}
+
+#myTable tr {
+/* Add a bottom border to all table rows */
+border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+/* Add a grey background color to the table header and on hover */
+background-color: #a3a3a3;
+}
+
+/* FIN TABLA */
+
+/* RADIO BUTTONS */
+
+.textoRadioButton{
+    color: rgb(160, 160, 160);
+    font-weight: bold;
+}
+
+/* TEXTO SELECTO ACTIVO OR INACTIVO */
+
+.textoSelectActivo{
+    color: rgb(160, 160, 160);
+    font-weight: bold;
+}
+
+#mySelect {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    width: 20%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+    }
+    
+#mySelect:hover{
+    border: 1px solid black;
+}
+
+/* MENU PAGINACION */
+
+#paginacion{
+    float: right;
+    border-top: 0.5px solid rgb(190, 190, 190);
+    border-bottom: 0.5px solid rgb(190, 190, 190);
+    border-left: 0.5px solid rgb(190, 190, 190);
+    border-right: 0.5px solid rgb(190, 190, 190);
+
+    
+}
+
+#paginacion ul{
+    
+    line-height: 46px;
+    list-style: none;
+}
+
+#paginacion ul li{
+    display: inline-block;
+    transition: all 100ms;
+    
+}
+
+#paginacion a{
+    display: block;
+    color: rgb(65, 65, 65);
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+}
+
+#paginacion a:hover:not(.activePage){
+    transition: color 500ms, transform 500ms;
+    transform:scale(1.15,1.15);
+    /* font-weight: bold; */
+}
+
+#paginacion ul li{
+    position: relative;
+}
+
+#paginacion ul li .activePage{
+    background: rgb(138, 138, 138);
+}
+
+#paginacion .activePage{
+    background: rgb(138, 138, 138);
+}
+
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+select{
+    padding: 5px;
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    width: 80%;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+form input[type="submit"]{
+    background: #eee;
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: #333;
+    cursor: pointer;
+}
+
+#box{
+    width: 65%;
+    float: left;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+#acordeon{
+    margin-top: 20px;
+}
+
+#reloj{
+    font-size: 40px;
+    font-weight: bold;
+    font-family: Helvetica, Arial;
+    color: #333;
+    border: 0px dashed #333;
+    width: 30%;
+    padding: 30px;
+    margin: 0px auto;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#form-contact{
+    width: 50%;
+    margin-top: 20px;
+    margin-left: 30%;
+}
+
+#form-contact label{
+    width: 100%;
+    font-family: Helvetica, Arial;
+    /* Salto de Linea */
+    display: block;
+    margin-top: 5px;
+}
+
+.help-block, .form-error{
+    display: block;
+    margin: 0px auto;
+    color: red;
+    margin-bottom: 20px;
+}
+
+#form-contact input[type="submit"]{
+    margin-bottom: 20px;
+}
+
+
+
+#formNewCorreo input[type="email"]{
+    padding: 7px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    width: 100%;
+
+}
+
+#formNewCorreo input[type="submit"]{
+    padding: 7px;
+    border-radius: 50px;
+    color: white;
+    background: crimson;
+    width: 50%;
+
+
+}
+
+
+
+.simple {
+    display:none;
+    position:fixed;
+    border:4px solid #808080;
+    background:#fff;
+    z-index:3;
+    padding:12px;
+    width:50%;
+    min-width:70%;
+    }
+    
