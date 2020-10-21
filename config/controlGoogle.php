@@ -3,11 +3,8 @@ require_once "../controller/LoginController.php";
 require_once "../view/login/loginUser/config.php";
 
 if (isset($_GET['code'])) {
-    $token = $gClient->fetchAccessTokenWithAuthCode($_GET['code']);
-    
-    var_dump($token);   
+    $token = $gClient->fetchAccessTokenWithAuthCode($_GET['code']); 
 }else{
-    var_dump($token);
     header('Location: ../index.php');
     exit();
 }
@@ -16,7 +13,7 @@ if(isset($token["error"]) != "invalid_grant"){
     // get data from google
     $oAuth = new Google_Service_Oauth2($gClient);
     $userData = $oAuth->userinfo_v2_me->get();
-    setcookie("idea", $userData['id'], time()+60*60*24*30, "/", NULL);
+    // setcookie("idea", $userData['id'], time()+60*60*24*30, "/", NULL);
 
     // var_dump($userData);
 
@@ -34,8 +31,6 @@ if(isset($token["error"]) != "invalid_grant"){
     );
 }
 else{
-    // var_dump($token);
-
     header('Location: ../index.php');
     exit();
 }

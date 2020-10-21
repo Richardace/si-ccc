@@ -14,7 +14,31 @@
             $checkUser -> execute(array(
                 'id' => $idGoogle
 			));
-			
+
+			$cuenta = NULL;
+			while($row = $checkUser->fetch(PDO::FETCH_ASSOC)){
+				$cuenta[] = $row;
+			}
+			return $cuenta;
+		}
+
+		public function checkUserProblema($idGoogle){
+			$db = new Connect;
+			$checkUser = $db -> prepare("SELECT * FROM user WHERE idGoogle=:id");
+            $checkUser -> execute(array(
+                'id' => $idGoogle
+			));
+
+			return $checkUser;
+		}
+
+		public function checkValidarUser($idGoogle){
+			$db = new Connect;
+			$checkUser = $db -> prepare("SELECT * FROM user WHERE idGoogle=:id");
+            $checkUser -> execute(array(
+                'id' => $idGoogle
+			));
+
 			return $checkUser;
 		}
 
@@ -24,9 +48,24 @@
             $checkUser -> execute(array(
                 'email' => $email
 			));
-			
+
+			$cuenta = NULL;
+			while($row = $checkUser->fetch(PDO::FETCH_ASSOC)){
+				$cuenta[] = $row;
+			}
+			return $cuenta;
+		}
+
+		public function checkIdUserProblema($email){
+			$db = new Connect;
+			$checkUser = $db -> prepare("SELECT * FROM user WHERE email=:email");
+            $checkUser -> execute(array(
+                'email' => $email
+			));
+
 			return $checkUser;
 		}
+
 
 		public function checkStatus($id, $session){
 			$db = new Connect;
@@ -40,15 +79,19 @@
 			return $user;
 		}
 
+
+
+
+
+
+
+
+		
+
 		public function newUser($data, $sess, $pass, $id){
 
 			$db = new Connect;
-			// $insertNewUser = $db -> prepare("INSERT INTO user (firstName, lastName, email, avatar, pass, sess, state, rol_id) 
-			// 												 VALUES (:f_name, :l_name, :email, :avatar, :password, :session, :state, :rol_id)");
-
 			$insertNewUser = $db -> prepare("UPDATE user SET firstName=:f_name, lastName=:l_name, avatar=:avatar, pass=:password, sess=:session, state=:state, idGoogle=:idGoogle WHERE id = :id");
-															 
-
 			$insertNewUser -> execute([
 				':f_name'   => $data["givenName"],
 				':l_name'   => $data["familyName"],
@@ -63,6 +106,22 @@
 			return $insertNewUser;
 		}
 
+		public function validarCorreoAutorizado($email){
+			$db = new Connect;
+			
+			$validarCorreo = $db -> prepare("SELECT * FROM correoautorizado WHERE email=:email");
+			$validarCorreo -> execute([
+				':email'   => $email
+			]);
+
+			$correos = NULL;
+			while($row = $validarCorreo->fetch(PDO::FETCH_ASSOC)){
+				$correos[] = $row;
+			}
+			return $correos;
+
+		}
+		
 		public function newCorreo($email){
 
 			$db = new Connect;
@@ -79,7 +138,7 @@
 			$db = new Connect;
 			$consulta = $db -> prepare('SELECT * FROM correoautorizado ORDER BY id');
         	$consulta -> execute();
-
+			$correos = NULL;
 			while($row = $consulta->fetch(PDO::FETCH_ASSOC))
 			{
 				$correos[] = $row;

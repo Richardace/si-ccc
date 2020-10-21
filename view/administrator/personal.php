@@ -413,15 +413,22 @@
 
 
                 <tbody>
-                  <?php foreach($data["correos"] as $correo) {
-                    echo "<tr>";
-                    echo "<td>".$correo["id"]."</td>";
-                    echo "<td>".$correo["email"]."</td>";
-
-                    echo "<td><a href='index.php?c=user&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoEliminar'><img src='view/assets/img/eliminar.png' title='Eliminar'></span></a></td>";
-
-                    echo "</tr>";
+                  <?php 
+                  
+                  if($data["correos"] != NULL){
+                    foreach($data["correos"] as $correo) {
+                      echo "<tr>";
+                      echo "<td>".$correo["id"]."</td>";
+                      echo "<td>".$correo["email"]."</td>";
+  
+                      echo "<td><a href='index.php?c=user&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoEliminar'><img src='view/assets/img/eliminar.png' title='Eliminar'></span></a></td>";
+  
+                      echo "</tr>";
+                    }
+                  }else{
+                    echo "<td>No hay Correos Registrados</td>";
                   }
+                  
                   ?>
                 </tbody>
 
