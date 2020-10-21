@@ -52,28 +52,24 @@
       <div class="wrap">
 
         <ul class="tabs">
-          <li><a href="#tab1"><span class="fa fa-home"></span><span class="tab-text">Directores de Programa</span></a></li>
+          <li><a href="#tab1"><span class="fa fa-home"></span><span class="tab-text">Directores de Programa</span></a>
+          </li>
           <li><a href="#tab2"><span class="fa fa-group"></span><span class="tab-text">Evaluadores</span></a></li>
           <li><a href="#tab3"><span class="fa fa-group"></span><span class="tab-text">Administradores</span></a></li>
-          <li><a href="#tab4"><span class="fa fa-group"></span><span class="tab-text">Correos Institucionales</span></a></li>
+          <li><a href="#tab4"><span class="fa fa-group"></span><span class="tab-text">Correos Institucionales</span></a>
+          </li>
 
         </ul>
 
         <div class="secciones">
 
           <article id="tab1">
-            
+
             <div>
               <div class="btn-agregarUsuario">
                 <a id="lanzarRegistroDirector" href="#">
                   <img src="view/assets/img/agregar-usuario.png" alt="Agregar Director de Programa"
                     title="Crear Nuevo Director de Programa">
-                </a>
-              </div>
-              <div class="btn-agregarExcel">
-                <a href="" target="_blank">
-                  <img src="view/assets/img/añadir-excel.png" alt="Agregar Directores desde Excel"
-                    title="Añadir lista de Directores">
                 </a>
               </div>
             </div>
@@ -106,13 +102,12 @@
               <table id="myTable" class="table table-hover">
                 <thead>
                   <tr class="header">
-                    <th>Codigo</th>
+                    <th>id</th>
                     <th>DEPENDENCIA</th>
                     <th>Nombre y Apellido</th>
                     <th>correo</th>
-                    <th>fecha de registro</th>
                     <th>ESTADO</th>
-                    <th>OPCIONES</th>
+                    <th><center>OPCIONES</th>
                   </tr>
 
                 </thead>
@@ -123,31 +118,36 @@
                 </tr>
 
                 <tbody>
-                  <tr>
-                    <td>0021541</td>
-                    <td>INGENIERIA DE SISTEMAS</td>
-                    <td>Richard Acevedo</td>
-                    <td>richardalexanderar@ufps.edu.co</td>
-                    <td>26-08-2020 1:45 P.M.</td>
-                    <td>Activo</td>
-                    <td>
-                      <center>
-                        <button id="iconoVer">
-                          <img src="view/assets/img/ver.png">
-                        </button>
-                        &nbsp &nbsp
-                        <button id="iconoEditar">
-                          <img src="view/assets/img/editar.png">
-                        </button>
-                      </center>
-                    </td>
-                  </tr>
+                  <?php 
+                    
+                    if($data["solicitante"] != NULL){
+                      foreach($data["solicitante"] as $correo) {
+                        echo "<tr>";
+                        echo "<td>".$correo["id"]."</td>";
+                        echo "<td>INGENIERIA DE SISTEMAS</td>";
+                        echo "<td>".$correo["firstName"]." ".$correo['lastName']."</td>";
+                        echo "<td>".$correo["email"]."</td>";
+                        echo "<td>".$correo["state"]."</td>";
+    
+                        echo "<td><center>
+                                <a href='index.php?c=correo&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
+                                <a href='index.php?c=correo&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                              </td>";
+    
+                        echo "</tr>";
+                      }
+                    }else{
+                      echo "<td>No hay Directores o Decanos Registrados</td>";
+                    }
+                    
+                    ?>
+
                 </tbody>
 
 
 
               </table>
-              
+
               <br>
 
               <nav id="paginacion">
@@ -165,18 +165,12 @@
           </article>
 
           <article id="tab2">
-            
-          <div>
+
+            <div>
               <div class="btn-agregarUsuario">
                 <a id="lanzarRegistroDirector" href="#">
                   <img src="view/assets/img/agregar-usuario.png" alt="Agregar Director de Programa"
                     title="Crear Nuevo Director de Programa">
-                </a>
-              </div>
-              <div class="btn-agregarExcel">
-                <a href="" target="_blank">
-                  <img src="view/assets/img/añadir-excel.png" alt="Agregar Directores desde Excel"
-                    title="Añadir lista de Directores">
                 </a>
               </div>
             </div>
@@ -207,7 +201,7 @@
 
               <!-- INICIO TABLA -->
 
-              
+
 
               <table id="myTable" class="table table-hover">
                 <thead>
@@ -229,25 +223,30 @@
                 </tr>
 
                 <tbody>
-                  <tr>
-                    <td>0021541</td>
-                    <td>INGENIERIA DE SISTEMAS</td>
-                    <td>Richard Acevedo</td>
-                    <td>richardalexanderar@ufps.edu.co</td>
-                    <td>26-08-2020 1:45 P.M.</td>
-                    <td>Activo</td>
-                    <td>
-                      <center>
-                        <button id="iconoVer">
-                          <img src="view/assets/img/ver.png">
-                        </button>
-                        &nbsp &nbsp
-                        <button id="iconoEditar">
-                          <img src="view/assets/img/editar.png">
-                        </button>
-                      </center>
-                    </td>
-                  </tr>
+                <?php 
+                    
+                    if($data["evaluador"] != NULL){
+                      foreach($data["evaluador"] as $correo) {
+                        echo "<tr>";
+                        echo "<td>".$correo["id"]."</td>";
+                        echo "<td>INGENIERIA DE SISTEMAS</td>";
+                        echo "<td>".$correo["firstName"]." ".$correo['lastName']."</td>";
+                        echo "<td>".$correo["email"]."</td>";
+                        echo "<td>".$correo["state"]."</td>";
+    
+                        echo "<td><center>
+                                <a href='index.php?c=correo&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
+                                <a href='index.php?c=correo&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                              </td>";
+    
+                        echo "</tr>";
+                      }
+                    }else{
+                      echo "<td>No hay Evaluadores Registrados</td>";
+                    }
+                    
+                    ?>
+
                 </tbody>
 
               </table>
@@ -267,17 +266,11 @@
             </div>
           </article>
           <article id="tab3">
-          <div>
+            <div>
               <div class="btn-agregarUsuario">
                 <a id="lanzarRegistroDirector" href="#">
                   <img src="view/assets/img/agregar-usuario.png" alt="Agregar Director de Programa"
                     title="Crear Nuevo Director de Programa">
-                </a>
-              </div>
-              <div class="btn-agregarExcel">
-                <a href="" target="_blank">
-                  <img src="view/assets/img/añadir-excel.png" alt="Agregar Directores desde Excel"
-                    title="Añadir lista de Directores">
                 </a>
               </div>
             </div>
@@ -307,15 +300,14 @@
 
               <!-- INICIO TABLA -->
 
-              
+
 
               <table id="myTable" class="table table-hover">
                 <thead>
                   <tr class="header">
-                    <th>Codigo</th>
+                    <th>id</th>
                     <th>Nombre y Apellido</th>
                     <th>correo</th>
-                    <th>fecha de registro</th>
                     <th>ESTADO</th>
                     <th>OPCIONES</th>
                   </tr>
@@ -328,24 +320,28 @@
                 </tr>
 
                 <tbody>
-                  <tr>
-                    <td>0021541</td>
-                    <td>Richard Acevedo</td>
-                    <td>richardalexanderar@ufps.edu.co</td>
-                    <td>26-08-2020 1:45 P.M.</td>
-                    <td>Activo</td>
-                    <td>
-                      <center>
-                        <button id="iconoVer">
-                          <img src="view/assets/img/ver.png">
-                        </button>
-                        &nbsp &nbsp
-                        <button id="iconoEditar">
-                          <img src="view/assets/img/editar.png">
-                        </button>
-                      </center>
-                    </td>
-                  </tr>
+                <?php 
+                    
+                    if($data["administrador"] != NULL){
+                      foreach($data["administrador"] as $correo) {
+                        echo "<tr>";
+                        echo "<td>".$correo["id"]."</td>";
+                        echo "<td>".$correo["firstName"]." ".$correo['lastName']."</td>";
+                        echo "<td>".$correo["email"]."</td>";
+                        echo "<td>".$correo["state"]."</td>";
+    
+                        echo "<td><center>
+                                <a href='index.php?c=correo&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
+                                <a href='index.php?c=correo&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                              </td>";
+    
+                        echo "</tr>";
+                      }
+                    }else{
+                      echo "<td>No hay Administradores Registrados</td>";
+                    }
+                    
+                    ?>
                 </tbody>
 
               </table>
@@ -366,9 +362,8 @@
           <article id="tab4">
             <div>
               <div class="btn-agregarUsuario">
-                <a id="lanzarRegistroCorreo" >
-                  <img src="view/assets/img/agregar-usuario.png" alt="Agregar Correo"
-                    title="Añadir nuevo Correo">
+                <a id="lanzarRegistroCorreo">
+                  <img src="view/assets/img/agregar-usuario.png" alt="Agregar Correo" title="Añadir nuevo Correo">
                 </a>
               </div>
               <div class="btn-agregarExcel">
@@ -380,16 +375,16 @@
             </div>
 
             <div id="popupCorreo" class="simple" title="Registro de Correos" style="display:none">
-                <form id="formNewCorreo" action="index.php?c=user&a=addCorreo" method="post"> 
-                  <center><input type="email" name="email" placeholder="Nuevo Correo" />
+              <form id="formNewCorreo" action="index.php?c=correo&a=addCorreo" method="post">
+                <center><input type="email" name="email" placeholder="Nuevo Correo" />
                   <center><input type="submit" value="Agregar" />
-                </form>
+              </form>
             </div>
 
 
             <div class="wrapper">
               <br>
-              
+
               <input style="float: right;" type="text" id="myInput" placeholder="Buscar Correo...">
 
 
@@ -421,7 +416,7 @@
                       echo "<td>".$correo["id"]."</td>";
                       echo "<td>".$correo["email"]."</td>";
   
-                      echo "<td><a href='index.php?c=user&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoEliminar'><img src='view/assets/img/eliminar.png' title='Eliminar'></span></a></td>";
+                      echo "<td><a href='index.php?c=correo&a=eliminarCorreo&id=".$correo["id"]."'><span id='iconoEliminar'><img src='view/assets/img/eliminar.png' title='Eliminar'></span></a></td>";
   
                       echo "</tr>";
                     }
@@ -433,7 +428,7 @@
                 </tbody>
 
               </table>
-              
+
               <br>
 
               <nav id="paginacion">

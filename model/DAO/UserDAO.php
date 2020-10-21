@@ -4,89 +4,8 @@
 		
 		public function __construct(){
 			require_once($_SERVER['DOCUMENT_ROOT']."/si-ccc/config/database.php");
-			$this->users = array();
 			require_once($_SERVER['DOCUMENT_ROOT'].'/si-ccc/model/DTO/UserDTO.php');
 		}
-
-		public function checkUser($idGoogle){
-			$db = new Connect;
-			$checkUser = $db -> prepare("SELECT * FROM user WHERE idGoogle=:id");
-            $checkUser -> execute(array(
-                'id' => $idGoogle
-			));
-
-			$cuenta = NULL;
-			while($row = $checkUser->fetch(PDO::FETCH_ASSOC)){
-				$cuenta[] = $row;
-			}
-			return $cuenta;
-		}
-
-		public function checkUserProblema($idGoogle){
-			$db = new Connect;
-			$checkUser = $db -> prepare("SELECT * FROM user WHERE idGoogle=:id");
-            $checkUser -> execute(array(
-                'id' => $idGoogle
-			));
-
-			return $checkUser;
-		}
-
-		public function checkValidarUser($idGoogle){
-			$db = new Connect;
-			$checkUser = $db -> prepare("SELECT * FROM user WHERE idGoogle=:id");
-            $checkUser -> execute(array(
-                'id' => $idGoogle
-			));
-
-			return $checkUser;
-		}
-
-		public function checkIdUser($email){
-			$db = new Connect;
-			$checkUser = $db -> prepare("SELECT * FROM user WHERE email=:email");
-            $checkUser -> execute(array(
-                'email' => $email
-			));
-
-			$cuenta = NULL;
-			while($row = $checkUser->fetch(PDO::FETCH_ASSOC)){
-				$cuenta[] = $row;
-			}
-			return $cuenta;
-		}
-
-		public function checkIdUserProblema($email){
-			$db = new Connect;
-			$checkUser = $db -> prepare("SELECT * FROM user WHERE email=:email");
-            $checkUser -> execute(array(
-                'email' => $email
-			));
-
-			return $checkUser;
-		}
-
-
-		public function checkStatus($id, $session){
-			$db = new Connect;
-
-			$user = $db -> prepare("SELECT id FROM user WHERE id=:id AND sess=:session");
-            $user -> execute([
-                ':id'       => $id,
-                ':session'  => $session
-			]);
-
-			return $user;
-		}
-
-
-
-
-
-
-
-
-		
 
 		public function newUser($data, $sess, $pass, $id){
 
@@ -106,85 +25,46 @@
 			return $insertNewUser;
 		}
 
-		public function validarCorreoAutorizado($email){
+		public function getSolicitantes(){
 			$db = new Connect;
-			
-			$validarCorreo = $db -> prepare("SELECT * FROM correoautorizado WHERE email=:email");
-			$validarCorreo -> execute([
-				':email'   => $email
+			$consulta = $db -> prepare('SELECT * FROM user WHERE rol_id=:id');
+        	$consulta -> execute([
+				':id'   => 2
 			]);
-
-			$correos = NULL;
-			while($row = $validarCorreo->fetch(PDO::FETCH_ASSOC)){
-				$correos[] = $row;
-			}
-			return $correos;
-
-		}
-		
-		public function newCorreo($email){
-
-			$db = new Connect;
-			
-			$insertNewCorreo = $db -> prepare("INSERT INTO correoautorizado (email) VALUES (:email)");
-			$insertNewCorreo -> execute([
-				':email'   => $email
-			]);
-				
-			return $insertNewCorreo;
-		}
-
-		public function getCorreos(){
-			$db = new Connect;
-			$consulta = $db -> prepare('SELECT * FROM correoautorizado ORDER BY id');
-        	$consulta -> execute();
-			$correos = NULL;
+			$users = NULL;
 			while($row = $consulta->fetch(PDO::FETCH_ASSOC))
 			{
-				$correos[] = $row;
+				$users[] = $row;
 			}
-			return $correos;
+			return $users;
 		}
 
-		public function deleteCorreo($id){
+		public function getEvaluadores(){
 			$db = new Connect;
-			$consulta = $db -> prepare("DELETE FROM correoautorizado WHERE id = '$id'");
-			$consulta -> execute();
-			
-			return $consulta;
-		}
-
-
-
-		
-		public function validarUsuario($email, $password){
-
-			$consulta = $this->db->query("SELECT * FROM user WHERE email = '$email' AND pass = '$password'");
-			$resultado = $consulta->fetch_assoc();
-			if($resultado == NULL){
-				return NULL;
-			}else{
-				$usuario = new UserDTO($resultado['id'], $resultado['name'], $resultado['lastName'], $resultado['email'], $resultado['phone'], $resultado['register_date'], $resultado['pass'], $resultado['state'], $resultado['rol_id']);
-				return $usuario;
+			$consulta = $db -> prepare('SELECT * FROM user WHERE rol_id=:id');
+        	$consulta -> execute([
+				':id'   => 3
+			]);
+			$users = NULL;
+			while($row = $consulta->fetch(PDO::FETCH_ASSOC))
+			{
+				$users[] = $row;
 			}
+			return $users;
 		}
 
-		public function recContra($email){
-
-			$consulta = $this->db->query("SELECT * FROM user WHERE email = '$email'");
-			$resultado = $consulta->fetch_assoc();
-			if($resultado == NULL){
-				return NULL;
-			}else{
-				$usuario = new UserDTO($resultado['id'], $resultado['name'], $resultado['lastName'], $resultado['email'], $resultado['phone'], $resultado['register_date'], $resultado['pass'], $resultado['state'], $resultado['rol_id']);
-				return $usuario;
+		public function getAdministradores(){
+			$db = new Connect;
+			$consulta = $db -> prepare('SELECT * FROM user WHERE rol_id=:id');
+        	$consulta -> execute([
+				':id'   => 1
+			]);
+			$users = NULL;
+			while($row = $consulta->fetch(PDO::FETCH_ASSOC))
+			{
+				$users[] = $row;
 			}
-		}
-
-		public function changePassword($idUser, $password){
-
-			$consulta = $this->db->query("UPDATE user SET pass = '$password' WHERE id = '$idUser'");
-			
+			return $users;
 		}
 
 	} 

@@ -52,9 +52,8 @@
       <div class="wrap">
 
         <ul class="tabs">
-          <li><a href="#tab1"><span class="fa fa-home"></span><span class="tab-text">Directores de Programa</span></a></li>
-          <li><a href="#tab2"><span class="fa fa-group"></span><span class="tab-text">Evaluadores</span></a></li>
-          <li><a href="#tab3"><span class="fa fa-group"></span><span class="tab-text">Administradores</span></a></li>
+          <li><a href="#tab1"><span class="fa fa-home"></span><span class="tab-text">Miembros del Comite Curricular</span></a></li>
+          
 
         </ul>
 
@@ -225,72 +224,6 @@
               </table>
 
 
-
-              <!-- FIN TABLA -->
-
-            </div>
-          </article>
-          <article id="tab3">
-            <!-- INICIO TABLA -->
-            <div class="wrapper">
-
-              <div>
-                <div class="btn-agregarUsuario">
-                  <a href="" target="_blank">
-                    <img src="view/assets/img/agregar-usuario.png" alt="Agregar Director de Programa"
-                      title="Crear Nuevo Director de Programa">
-                  </a>
-                </div>
-                <div class="btn-agregarExcel">
-                  <a href="" target="_blank">
-                    <img src="view/assets/img/añadir-excel.png" alt="Agregar Directores desde Excel"
-                      title="Añadir lista de Directores">
-                  </a>
-                </div>
-              </div>
-
-              <!-- INICIO TABLA -->
-
-              <input type="text" id="myInput" placeholder="Search for names..">
-
-              <table id="myTable">
-                <tr class="header">
-                  <!-- <th style="width:60%;">Name</th>
-                  <th style="width:40%;">Country</th> -->
-                  <th>No RADICADO</th>
-                  <th>DEPENDENCIA</th>
-                  <th>FECHA DE RECIBIDO</th>
-                  <th>TIPO DE DOCUMENTO</th>
-                  <th>DESTINO</th>
-                  <th>ESTADO</th>
-                  <th>OPCIONES</th>
-                </tr>
-
-                <tr>
-
-                  <h1 id="respuesta">
-
-                  </h1>
-
-                </tr>
-
-                <tr>
-                  <td>0021541</td>
-                  <td>INGENIERIA DE SISTEMAS</td>
-                  <td>26-08-2020 1:45 P.M.</td>
-                  <td>Registro Calificado</td>
-                  <td>Consejo Academico</td>
-                  <td>Pendiente por Revisar</td>
-                  <td>
-                    <center>
-                      <button id="iconoVer">
-                        <img src="view/assets/img/ver.png">
-                      </button>
-                    </center>
-                  </td>
-                </tr>
-
-              </table>
 
               <!-- FIN TABLA -->
 

@@ -4,14 +4,16 @@
 		
 		public function __construct(){
             require_once($_SERVER['DOCUMENT_ROOT']."/si-ccc/model/DAO/UserDAO.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/si-ccc/model/DAO/LoginDAO.php");
+            require_once($_SERVER['DOCUMENT_ROOT']."/si-ccc/model/DAO/CorreoDAO.php");
             require_once($_SERVER['DOCUMENT_ROOT']."/si-ccc/config/database.php");
         }
         
         function checkUserStatus($id, $sess){
             $db = new Connect;
-            $UserDAO = new UserDAO;
+            $LoginDAO = new LoginDAO;
 
-            $user = $UserDAO->checkStatus((intval($id)), $sess);
+            $user = $LoginDAO->checkStatus((intval($id)), $sess);
 
             $userInfo = $user->fetch(PDO::FETCH_ASSOC);
             
@@ -39,20 +41,21 @@
         function insertData($data){
             
             $db = new Connect;
-            $UserDAO = new UserDAO;
+            $LoginDAO = new LoginDAO;
+            $CorreoDAO = new CorreoDAO;
             
-            $correoValido = $UserDAO->validarCorreoAutorizado($data['email']);
+            $correoValido = $CorreoDAO->validarCorreoAutorizado($data['email']);
 
             if($correoValido != NULL){
                 
-                $checkUser = $UserDAO->checkUser($data['idGoogle']);
-                $validarDatos = $UserDAO->checkValidarUser($data['idGoogle']);
+                $checkUser = $LoginDAO->checkUser($data['idGoogle']);
+                $validarDatos = $LoginDAO->checkValidarUser($data['idGoogle']);
                 $info = $validarDatos -> fetch(PDO::FETCH_ASSOC);
                 
                 if($checkUser == NULL){
                     
-                    $checkIdUser = $UserDAO->checkIdUser($data['email']);
-                    $checkIdUserProblema = $UserDAO->checkIdUserProblema($data['email']);
+                    $checkIdUser = $LoginDAO->checkIdUser($data['email']);
+                    $checkIdUserProblema = $LoginDAO->checkIdUserProblema($data['email']);
                     $infoUser = $checkIdUserProblema->fetch(PDO::FETCH_ASSOC);
 
                     if($checkIdUser != NULL){
@@ -63,7 +66,7 @@
 
                         if($insertNewUser){
 
-                            $checkUserEmail = $UserDAO->checkIdUserProblema($data['email']);
+                            $checkUserEmail = $LoginDAO->checkIdUserProblema($data['email']);
                             $info = $checkUserEmail->fetch(PDO::FETCH_ASSOC);
                             setcookie("id", $info['id'], time()+60*60*24*30, "/", NULL);
                             setcookie("sess", $session, time()+60*60*24*30, "/", NULL);
