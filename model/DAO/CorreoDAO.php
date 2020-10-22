@@ -42,6 +42,20 @@
 			return $correos;
 		}
 
+		public function getCorreo($id){
+			$db = new Connect;
+			$consulta = $db -> prepare('SELECT * FROM correoautorizado WHERE id=:id');
+			$consulta -> execute([
+				':id'   => $id
+			]);
+			$correos = NULL;
+			while($row = $consulta->fetch(PDO::FETCH_ASSOC))
+			{
+				$correos[] = $row;
+			}
+			return $correos;
+		}
+
 		public function deleteCorreo($id){
 			$db = new Connect;
 			$consulta = $db -> prepare("DELETE FROM correoautorizado WHERE id = '$id'");

@@ -65,17 +65,17 @@ $(document).ready(function () {
     $("#message").addClass("activeMenu");
   }
 
-  if (window.location.href.indexOf('documentos') >= 0) {
+  if (window.location.href.indexOf('documento') >= 0) {
     $("#message").removeClass("activeMenu");
     $("#documentos").addClass("activeMenu");
   }
 
-  if (window.location.href.indexOf('estados') >= 0) {
+  if (window.location.href.indexOf('estado') >= 0) {
     $("#message").removeClass("activeMenu");
     $("#estados").addClass("activeMenu");
   }
 
-  if (window.location.href.indexOf('consultas') >= 0) {
+  if (window.location.href.indexOf('consulta') >= 0) {
     $("#message").removeClass("activeMenu");
     $("#consultas").addClass("activeMenu");
   }

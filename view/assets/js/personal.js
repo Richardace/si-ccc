@@ -94,11 +94,17 @@ $(document).ready(function () {
 
   // LANZAR POPUP DE REGISTRO
 
-  // Dialog
+  // Dialog Registro Correo
   $("#lanzarRegistroCorreo").click(function () {
     console.log("funciona");
     $("#popupCorreo").dialog();
-  })
+  });
+
+    // Dialog Registro Correo
+    $("#lanzarRegistroSolicitante").click(function () {
+      console.log("funciona");
+      $("#popupRegistroSolicitante").dialog();
+    });
 
 
 
@@ -126,25 +132,51 @@ $(document).ready(function () {
     return false;
   });
 
-  if (window.location.href.indexOf('index') >= 0) {
-    $("#inicio").addClass("activeMenu");
+  $("#message").addClass("activeMenu");
+  if (window.location.href.indexOf('message') >= 0) {
+    $("#message").addClass("activeMenu");
   }
 
-  if (window.location.href.indexOf('documentos') >= 0) {
+  if (window.location.href.indexOf('documento') >= 0) {
+    $("#message").removeClass("activeMenu");
     $("#documentos").addClass("activeMenu");
   }
 
-  if (window.location.href.indexOf('estados') >= 0) {
+  if (window.location.href.indexOf('estado') >= 0) {
+    $("#message").removeClass("activeMenu");
     $("#estados").addClass("activeMenu");
   }
 
-  if (window.location.href.indexOf('consultas') >= 0) {
+  if (window.location.href.indexOf('consulta') >= 0) {
+    $("#message").removeClass("activeMenu");
     $("#consultas").addClass("activeMenu");
   }
 
   if (window.location.href.indexOf('personal') >= 0) {
+    $("#message").removeClass("activeMenu");
     $("#personal").addClass("activeMenu");
   }
+
+  $("#programa").click(function () {
+    $("#selectPrograma").show();
+    $("#selectDepartamento").hide();
+    $("#selectFacultad").hide();
+    $("#state").show();
+  });
+
+  $("#departamento").click(function () {
+    $("#selectPrograma").hide();
+    $("#selectDepartamento").show();
+    $("#selectFacultad").hide();
+    $("#state").show();
+  });
+
+  $("#facultad").click(function () {
+    $("#selectPrograma").hide();
+    $("#selectDepartamento").hide();
+    $("#selectFacultad").show();
+    $("#state").show();
+  });
 
   // Reloj
   if (window.location.href.indexOf('reloj') >= 0) {

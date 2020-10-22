@@ -42,6 +42,7 @@
             
             $db = new Connect;
             $LoginDAO = new LoginDAO;
+            $UserDAO = new UserDAO;
             $CorreoDAO = new CorreoDAO;
             
             $correoValido = $CorreoDAO->validarCorreoAutorizado($data['email']);

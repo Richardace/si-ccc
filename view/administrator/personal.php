@@ -67,23 +67,77 @@
 
             <div>
               <div class="btn-agregarUsuario">
-                <a id="lanzarRegistroDirector" href="#">
-                  <img src="view/assets/img/agregar-usuario.png" alt="Agregar Director de Programa"
-                    title="Crear Nuevo Director de Programa">
+                <a id="lanzarRegistroSolicitante" >
+                  <img src="view/assets/img/agregar-usuario.png" alt="Agregar Nuevo solicitante"
+                    title="Asignar nuevo solicitante">
                 </a>
               </div>
             </div>
 
-            <div id="popup" title="Registro de Director de Programa" style="display:none">
+            <div  id="popupRegistroSolicitante" class="simple" title="Registro de Solicitante" style="display:none; width:500px">
+                <!-- INICIO TABLA CORREOS -->
 
+              <div style="width:500px">
+              <br>
+
+              <input style="float: left;" type="text" id="myInput" placeholder="Buscar Correo...">
+
+              <!-- INICIO TABLA -->
+
+              <table id="myTable" class="table table-hover">
+                <thead>
+                  <tr class="header">
+                    <th>Correo Institucional</th>
+                    <th>OPCIONES</th>
+                  </tr>
+
+                </thead>
+
+                <tr>
+                  <h1 id="respuesta">
+                  </h1>
+                </tr>
+                <tbody>
+                  <?php 
+                  
+                  if($data["correos"] != NULL){
+                    foreach($data["correos"] as $correo) {
+                      echo "<tr>";
+                      echo "<td>".$correo["email"]."</td>";
+  
+                      echo "<td><a href='index.php?c=personal&a=addSolicitanteView&id=".$correo["id"]."'><span id='iconoEliminar'><img src='view/assets/img/eliminar.png' title='Eliminar'></span></a></td>";
+  
+                      echo "</tr>";
+                    }
+                  }else{
+                    echo "<td>No hay Correos Registrados</td>";
+                  }
+                  
+                  ?>
+                </tbody>
+
+              </table>
+
+              <br>
+
+              <nav id="paginacion">
+                <ul class="pagination pagination-lg pager" id="myPager">
+
+                </ul>
+              </nav>
+
+
+              <!-- FIN TABLA -->
+
+            </div>
+
+                <!-- FIN TABLA CORREOS -->
             </div>
 
 
             <div class="wrapper">
               <br>
               <label class="textoRadioButton">FILTRAR POR: &nbsp;</label>
-              <input type="radio" name="filtro" id="codigo" value="0"> <span class="textoRadioButton">CODIGO </span>
-              &nbsp; &nbsp;
               <input type="radio" name="filtro" id="dependencia" value="1"> <span class="textoRadioButton">DEPENDENCIA
               </span> &nbsp; &nbsp;
               <input type="radio" name="filtro" id="nombre" value="2"> <span class="textoRadioButton">NOMBRE </span>
@@ -106,6 +160,8 @@
                     <th>DEPENDENCIA</th>
                     <th>Nombre y Apellido</th>
                     <th>correo</th>
+                    <th>Fecha de registro</th>
+                    <th>Fecha de Finalizacion</th>
                     <th>ESTADO</th>
                     <th><center>OPCIONES</th>
                   </tr>
@@ -127,6 +183,8 @@
                         echo "<td>INGENIERIA DE SISTEMAS</td>";
                         echo "<td>".$correo["firstName"]." ".$correo['lastName']."</td>";
                         echo "<td>".$correo["email"]."</td>";
+                        echo "<td>28-02-2020</td>";
+                        echo "<td>28-06-2020</td>";
                         echo "<td>".$correo["state"]."</td>";
     
                         echo "<td><center>
@@ -205,14 +263,15 @@
 
               <table id="myTable" class="table table-hover">
                 <thead>
-                  <tr class="header">
-                    <th>Codigo</th>
+                <tr class="header">
+                    <th>id</th>
                     <th>DEPENDENCIA</th>
                     <th>Nombre y Apellido</th>
                     <th>correo</th>
-                    <th>fecha de registro</th>
+                    <th>Fecha de registro</th>
+                    <th>Fecha de Finalizacion</th>
                     <th>ESTADO</th>
-                    <th>OPCIONES</th>
+                    <th><center>OPCIONES</th>
                   </tr>
 
                 </thead>
@@ -232,6 +291,8 @@
                         echo "<td>INGENIERIA DE SISTEMAS</td>";
                         echo "<td>".$correo["firstName"]." ".$correo['lastName']."</td>";
                         echo "<td>".$correo["email"]."</td>";
+                        echo "<td>28-02-2020</td>";
+                        echo "<td>28-06-2020</td>";
                         echo "<td>".$correo["state"]."</td>";
     
                         echo "<td><center>

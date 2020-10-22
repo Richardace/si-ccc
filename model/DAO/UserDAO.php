@@ -7,6 +7,34 @@
 			require_once($_SERVER['DOCUMENT_ROOT'].'/si-ccc/model/DTO/UserDTO.php');
 		}
 
+		public function insert($email, $state, $rol_id){
+			$db = new Connect;
+			
+			$inserNewUser = $db -> prepare("INSERT INTO user (firstName, lastName, email, avatar, pass, sess, state, idGoogle, rol_id) 
+											VALUES ('', '', :email, '', '', '', :state, '', :rol_id)");
+			$inserNewUser -> execute([
+				':email'   => $email,
+				':state'   => $state,
+				':rol_id'   => $rol_id
+			]);
+				
+			return $inserNewUser;
+		}
+
+		public function getUserByEmail($email){
+			$db = new Connect;
+			$consulta = $db -> prepare('SELECT * FROM user WHERE email=:email');
+        	$consulta -> execute([
+				':email'   => $email
+			]);
+			$users = NULL;
+			while($row = $consulta->fetch(PDO::FETCH_ASSOC))
+			{
+				$users[] = $row;
+			}
+			return $users;
+		}
+
 		public function newUser($data, $sess, $pass, $id){
 
 			$db = new Connect;
