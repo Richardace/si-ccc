@@ -60,11 +60,11 @@ session_start();
 
       <div class="card text-center">
         <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
-          AÑADIR NUEVO SOLICITANTE
+          AÑADIR NUEVO EVALUADOR
         </div>
         <div class="card-body">
 
-          <form method="post" action="index.php?c=personal&a=addSolicitante">
+          <form method="post" action="index.php?c=personal&a=addEvaluador">
             <br>
             <input type="radio" id="programa" name="dependency" value="program">
             <label for="program">Programa Academico</label>&nbsp;&nbsp;&nbsp;
@@ -109,7 +109,7 @@ session_start();
 
             <div id="selectFacultad" style="display: none;">
               <label for="inputState">Elija el Departamento</label><br>
-              <select class="form-control" name="idFacultad" style="width:40%;">
+              <select name="idFacultad" style="width:40%;">
                 <option>Elija la Facultad</option>
                 <?php
                 foreach ($data["facultades"] as $programa) {

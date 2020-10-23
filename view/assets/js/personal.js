@@ -162,6 +162,7 @@ $(document).ready(function () {
     $("#selectDepartamento").hide();
     $("#selectFacultad").hide();
     $("#state").show();
+    $("#agregar").show();
   });
 
   $("#departamento").click(function () {
@@ -169,6 +170,7 @@ $(document).ready(function () {
     $("#selectDepartamento").show();
     $("#selectFacultad").hide();
     $("#state").show();
+    $("#agregar").show();
   });
 
   $("#facultad").click(function () {
@@ -176,6 +178,7 @@ $(document).ready(function () {
     $("#selectDepartamento").hide();
     $("#selectFacultad").show();
     $("#state").show();
+    $("#agregar").show();
   });
 
   // Reloj

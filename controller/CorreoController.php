@@ -7,12 +7,28 @@
 		}
 
         public function addCorreo(){
+			$CorreoDAO = new CorreoDAO;
 			$email = $_POST['email'];
 
-			$CorreoDAO = new CorreoDAO;
-            $newCorreo = $CorreoDAO->newCorreo($email);
-            
-			header('Location: index.php?c=personal&a=administrador');	
+			// validar si el correo ya existe
+			$validar =  $CorreoDAO->getCorreoByEmail($email);
+			
+			if($validar != NULL){
+				echo "
+					<script>
+							alert('Correo Electronico ya Existe');
+							window.location= 'index.php?c=personal&a=administrador'
+					</script>
+					";
+			}else{
+				$newCorreo = $CorreoDAO->newCorreo($email);
+				echo "
+					<script>
+							alert('Correo Electronico añadido con Exito');
+							window.location= 'index.php?c=personal&a=administrador'
+					</script>
+					";
+			}
 
 		}
 
