@@ -36,19 +36,6 @@
 
       <br>
 
-      <div id="popupRecuperar" title="Recuperar Contraseña" style="display:none">
-          <div>
-            <form method="post" action="index.php?l=login&a=recContra">
-              <label>
-                Correo Electronico
-              </label>
-              
-              <input name="email" type="text">
-              <input type="submit" value="Recuperar Contraseña">
-            </form>
-          </div>
-      </div>  
-
       <button onclick="window.location = '<?php echo $login_url; ?>'" type="button" class="loginBtn loginBtn--google">
         Login with Google
       </button>

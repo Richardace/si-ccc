@@ -15,7 +15,7 @@
 
                 <nav class="controlMenu">
                     <ul>
-                    <a href="config/logout.php">Cerrar Sessión</a>
+                        <a href="config/logout.php">Cerrar Sessión</a>
                     </ul>
                 </nav>
 
@@ -32,8 +32,14 @@
 
 </div>
 
-<nav id="menu">
-    <?php
-        include('menu.php');
-    ?>
-</nav>
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light" id="menu">
+    <div class="collapse navbar-collapse">
+        <?php
+            //include('menu.php');
+        ?>
+        </div>
+</nav> -->
+
+<?php
+            include('menu.php');
+        ?>

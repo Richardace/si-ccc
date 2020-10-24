@@ -324,67 +324,67 @@ session_start();
 
                             <!-- INICIO TABLA -->
 
+                            <div class="table-responsive-lg">
 
-
-                            <table id="myTable" class="table table-hover">
-                                <thead>
-                                    <tr class="header">
-                                        <th>id</th>
-                                        <th>DEPENDENCIA</th>
-                                        <th>Nombre y Apellido</th>
-                                        <th>correo</th>
-                                        <th>Fecha de registro</th>
-                                        <th>Fecha de Finalizacion</th>
-                                        <th>ESTADO</th>
-                                        <th>
-                                            <center>OPCIONES
-                                        </th>
+                                <table id="myTable" class="table table-hover">
+                                    <thead>
+                                        <tr class="header">
+                                            <th>id</th>
+                                            <th>DEPENDENCIA</th>
+                                            <th>Nombre y Apellido</th>
+                                            <th>correo</th>
+                                            <th>Fecha de registro</th>
+                                            <th>Fecha de Finalizacion</th>
+                                            <th>ESTADO</th>
+                                            <th>
+                                                <center>OPCIONES
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <h1 id="respuesta">
+                                        </h1>
                                     </tr>
-                                </thead>
-                                <tr>
-                                    <h1 id="respuesta">
-                                    </h1>
-                                </tr>
-                                <tbody>
-                                    <?php
+                                    <tbody>
+                                        <?php
 
-                                    if ($data["evaluador"] != NULL) {
-                                        foreach ($data["evaluador"] as $correo) {
-                                            echo "<tr>";
-                                            echo "<td>" . $correo["id"] . "</td>";
-                                            echo "<td>INGENIERIA DE SISTEMAS</td>";
-                                            echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
-                                            echo "<td>" . $correo["email"] . "</td>";
-                                            echo "<td>28-02-2020</td>";
-                                            echo "<td>28-06-2020</td>";
-                                            echo "<td>" . $correo["state"] . "</td>";
+                                        if ($data["evaluador"] != NULL) {
+                                            foreach ($data["evaluador"] as $correo) {
+                                                echo "<tr>";
+                                                echo "<td>" . $correo["id"] . "</td>";
+                                                echo "<td>INGENIERIA DE SISTEMAS</td>";
+                                                echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
+                                                echo "<td>" . $correo["email"] . "</td>";
+                                                echo "<td>28-02-2020</td>";
+                                                echo "<td>28-06-2020</td>";
+                                                echo "<td>" . $correo["state"] . "</td>";
 
-                                            echo "<td><center>
+                                                echo "<td><center>
                                                   <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
                                                   <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
                                                 </td>";
 
-                                            echo "</tr>";
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            echo "<td>No hay Evaluadores Registrados</td>";
                                         }
-                                    } else {
-                                        echo "<td>No hay Evaluadores Registrados</td>";
-                                    }
 
-                                    ?>
+                                        ?>
 
-                                </tbody>
+                                    </tbody>
 
-                            </table>
-                            <br>
+                                </table>
+                                <br>
 
-                            <nav id="paginacion">
-                                <ul class="pagination pagination-lg pager" id="myPager">
+                                <nav id="paginacion">
+                                    <ul class="pagination pagination-lg pager" id="myPager">
 
 
 
-                                </ul>
-                            </nav>
-
+                                    </ul>
+                                </nav>
+                            </div>
 
                             <!-- FIN TABLA -->
 
@@ -482,61 +482,61 @@ session_start();
 
                             <!-- INICIO TABLA -->
 
+                            <div class="table-responsive-lg">
 
+                                <table id="myTable" class="table table-hover">
+                                    <thead>
+                                        <tr class="header">
+                                            <th>id</th>
+                                            <th>Nombre y Apellido</th>
+                                            <th>correo</th>
+                                            <th>ESTADO</th>
+                                            <th>OPCIONES</th>
+                                        </tr>
 
-                            <table id="myTable" class="table table-hover">
-                                <thead>
-                                    <tr class="header">
-                                        <th>id</th>
-                                        <th>Nombre y Apellido</th>
-                                        <th>correo</th>
-                                        <th>ESTADO</th>
-                                        <th>OPCIONES</th>
+                                    </thead>
+
+                                    <tr>
+                                        <h1 id="respuesta">
+                                        </h1>
                                     </tr>
 
-                                </thead>
+                                    <tbody>
+                                        <?php
 
-                                <tr>
-                                    <h1 id="respuesta">
-                                    </h1>
-                                </tr>
+                                        if ($data["administrador"] != NULL) {
+                                            foreach ($data["administrador"] as $correo) {
+                                                echo "<tr>";
+                                                echo "<td>" . $correo["id"] . "</td>";
+                                                echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
+                                                echo "<td>" . $correo["email"] . "</td>";
+                                                echo "<td>" . $correo["state"] . "</td>";
 
-                                <tbody>
-                                    <?php
-
-                                    if ($data["administrador"] != NULL) {
-                                        foreach ($data["administrador"] as $correo) {
-                                            echo "<tr>";
-                                            echo "<td>" . $correo["id"] . "</td>";
-                                            echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
-                                            echo "<td>" . $correo["email"] . "</td>";
-                                            echo "<td>" . $correo["state"] . "</td>";
-
-                                            echo "<td><center>
+                                                echo "<td><center>
                                                   <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
                                                   <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
                                                 </td>";
 
-                                            echo "</tr>";
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            echo "<td>No hay Administradores Registrados</td>";
                                         }
-                                    } else {
-                                        echo "<td>No hay Administradores Registrados</td>";
-                                    }
 
-                                    ?>
-                                </tbody>
+                                        ?>
+                                    </tbody>
 
-                            </table>
+                                </table>
 
-                            <br>
+                                <br>
 
-                            <nav id="paginacion">
-                                <ul class="pagination pagination-lg pager" id="myPager">
+                                <nav id="paginacion">
+                                    <ul class="pagination pagination-lg pager" id="myPager">
 
-                                </ul>
-                            </nav>
+                                    </ul>
+                                </nav>
 
-
+                            </div>
                             <!-- FIN TABLA -->
 
                         </div>
@@ -576,21 +576,18 @@ session_start();
                                     </div>
                                     <div class="modal-body">
                                         <!-- Contenido -->
-                                        
                                         <h6 class="modal-title" id="staticBackdropLabel">Cargar archivo desde su ordenador</h6>
                                         <br>
 
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="inputGroupFileAddon01">Cargar</span>
+                                        <form action="index.php?c=correo&a=addCorreoExcel" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                                            <div class="input-group mb-3">
+                                                <div class="custom-file">
+                                                    <center><input type="file" name="excel" id="file" accept=".xls,.xlsx" /><br>
+                                                </div>
                                             </div>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                                <label class="custom-file-label" for="inputGroupFile01"></label>
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <center><input id="agregar" type="submit" value="Añadir" class="btn btn-primary" style="background:rgb(226, 3, 26); border:none; color:white; " />
+                                            <br>
+                                            <center><input id="agregar" type="submit" value="Cargar" class="btn btn-primary" style="background:rgb(226, 3, 26); border:none; color:white; " />
+                                        </form>
 
                                         <!-- FIN Contenido -->
                                     </div>
@@ -610,51 +607,54 @@ session_start();
 
 
                             <!-- INICIO TABLA -->
+                            <div class="table-responsive-lg">
 
-                            <table id="myTable" class="table table-hover">
-                                <thead>
-                                    <tr class="header">
-                                        <th>id</th>
-                                        <th>Correo Institucional</th>
-                                        <th>OPCIONES</th>
+                                <table id="myTable" class="table table-hover">
+                                    <thead>
+                                        <tr class="header">
+                                            <th>id</th>
+                                            <th>Correo Institucional</th>
+                                            <th>OPCIONES</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tr>
+                                        <h1 id="respuesta">
+                                        </h1>
                                     </tr>
 
-                                </thead>
 
-                                <tr>
-                                    <h1 id="respuesta">
-                                    </h1>
-                                </tr>
+                                    <tbody>
+                                        <?php
 
+                                        if ($data["correos"] != NULL) {
+                                            foreach ($data["correos"] as $correo) {
+                                                echo "<tr>";
+                                                echo "<td>" . $correo["id"] . "</td>";
+                                                echo "<td>" . $correo["email"] . "</td>";
+                                                echo "<td><a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span class='badge badge-danger'>Eliminar</span></a></td>";
 
-                                <tbody>
-                                    <?php
-
-                                    if ($data["correos"] != NULL) {
-                                        foreach ($data["correos"] as $correo) {
-                                            echo "<tr>";
-                                            echo "<td>" . $correo["id"] . "</td>";
-                                            echo "<td>" . $correo["email"] . "</td>";
-                                            echo "<td><a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span class='badge badge-danger'>Eliminar</span></a></td>";
-
-                                            echo "</tr>";
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            echo "<td>No hay Correos Registrados</td>";
                                         }
-                                    } else {
-                                        echo "<td>No hay Correos Registrados</td>";
-                                    }
 
-                                    ?>
-                                </tbody>
+                                        ?>
+                                    </tbody>
 
-                            </table>
+                                </table>
 
-                            <br>
+                                <br>
 
-                            <nav id="paginacion">
-                                <ul class="pagination pagination-lg pager" id="myPager">
+                                <nav id="paginacion">
+                                    <ul class="pagination pagination-lg pager" id="myPager">
 
-                                </ul>
-                            </nav>
+                                    </ul>
+                                </nav>
+
+                            </div>
 
 
                             <!-- FIN TABLA -->
