@@ -1,0 +1,3 @@
+
+ALTER TABLE t2
+ADD FOREIGN KEY (fechaT1) REFERENCES t1(fecha);

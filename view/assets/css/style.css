@@ -234,3 +234,23 @@ footer{
 footer .part2Footer{
     margin-top: -20px;
 }
+
+.btn-agregarDocumento {
+    margin-top: 40px;
+    margin-bottom: 40px;
+	opacity: 50%;
+	width:20px;
+	height:20px;
+	color: #fff;
+	/* margin-left: 45%; */
+	z-index:999;
+}
+
+.btn-agregarDocumento:hover{
+	opacity: 1;
+}
+
+.btn-agregarDocumento img{
+	width:40px;
+	height: 40px;
+}

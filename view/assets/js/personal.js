@@ -3,13 +3,6 @@ $(document).ready(function () {
 
   var seleccion = 0;
   var valueSelect;
-
-  // BUSCADOR
-
-  // SELECT
-
-
-
   // RADIO BUTTON DE PERSONAL
 
   $("#codigo").click(function () {

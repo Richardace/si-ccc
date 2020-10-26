@@ -138,6 +138,10 @@
         public function index(){
 			require_once "view/login/loginUser/index.php";	
         }
+
+        public function loginEvaluador(){
+            require_once "view/login/loginEvaluador/index.php";
+        }
         
     }
 

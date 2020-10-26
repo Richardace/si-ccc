@@ -2,6 +2,7 @@
 require_once "../controller/LoginController.php";
 require_once "../view/login/loginUser/config.php";
 
+
 if (isset($_GET['code'])) {
     $token = $gClient->fetchAccessTokenWithAuthCode($_GET['code']); 
 }else{

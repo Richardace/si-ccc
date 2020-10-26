@@ -60,13 +60,9 @@ session_start();
             <div class="wrap">
 
                 <ul class="tabs">
-                    <li><a href="#tab1"><span class="fa fa-home"></span><span class="tab-text">Solicitantes</span></a>
-                    </li>
-                    <li><a href="#tab2"><span class="fa fa-group"></span><span class="tab-text">Evaluadores</span></a>
-                    </li>
-                    <li><a href="#tab3"><span class="fa fa-group"></span><span class="tab-text">Administradores</span></a></li>
-                    <li><a href="#tab4"><span class="fa fa-group"></span><span class="tab-text">Correos
-                                Institucionales</span></a></li>
+                    <li><a href="#tab1"><span class="fa fa-home"></span><span class="tab-text">Solicitantes</span></a></li>
+
+                    <li><a href="#tab4"><span class="fa fa-group"></span><span class="tab-text">Correos Institucionales</span></a></li>
                 </ul>
 
                 <div class="secciones">
@@ -221,6 +217,128 @@ session_start();
                             <nav id="paginacion">
                                 <ul class="pagination pagination-lg pager" id="myPager"></ul>
                             </nav>
+
+                            <!-- FIN TABLA -->
+
+                        </div>
+                    </article>
+
+                    
+                    <article id="tab4">
+                        <div>
+                            <div class="btn-agregarUsuario" style="cursor: pointer;">
+                                <a id="lanzarRegistroCorreo" style="cursor: pointer;">
+                                    <img src="view/assets/img/agregar-usuario.png" alt="Agregar Correo" title="Añadir nuevo Correo" style="cursor: pointer;">
+                                </a>
+                            </div>
+                            <div class="btn-agregarExcel">
+                                <a data-toggle="modal" data-target="#añadirCorreoExcel" style="cursor: pointer;">
+                                    <img src="view/assets/img/añadir-excel.png" alt="Carga masiva de Correos" title="Carga masiva de Correos">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="popupCorreo" class="simple" title="Registro de Correos" style="display:none">
+                            <form id="formNewCorreo" action="index.php?c=correo&a=addCorreo" method="post">
+                                <center><input type="email" name="email" placeholder="Nuevo Correo" />
+                                    <center><input type="submit" value="Agregar" />
+                            </form>
+                        </div>
+
+                        <!-- INICIO POPUP -->
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="añadirCorreoExcel" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Añadir Listado Masivo de Correos</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Contenido -->
+                                        <h6 class="modal-title" id="staticBackdropLabel">Cargar archivo desde su ordenador</h6>
+                                        <br>
+
+                                        <form action="index.php?c=correo&a=addCorreoExcel" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                                            <div class="input-group mb-3">
+                                                <div class="custom-file">
+                                                    <center><input type="file" name="excel" id="file" accept=".xls,.xlsx" /><br>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <center><input id="agregar" type="submit" value="Cargar" class="btn btn-primary" style="background:rgb(226, 3, 26); border:none; color:white; " />
+                                        </form>
+
+                                        <!-- FIN Contenido -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- FIN POPUP -->
+
+
+                        <div class="wrapper">
+                            <br>
+
+                            <input style="float: right;" type="text" id="myInput" placeholder="Buscar Correo...">
+
+
+
+                            <!-- INICIO TABLA -->
+                            <div class="table-responsive-lg">
+
+                                <table id="myTable" class="table table-hover">
+                                    <thead>
+                                        <tr class="header">
+                                            <th>id</th>
+                                            <th>Correo Institucional</th>
+                                            <th>OPCIONES</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tr>
+                                        <h1 id="respuesta">
+                                        </h1>
+                                    </tr>
+
+
+                                    <tbody>
+                                        <?php
+
+                                        if ($data["correos"] != NULL) {
+                                            foreach ($data["correos"] as $correo) {
+                                                echo "<tr>";
+                                                echo "<td>" . $correo["id"] . "</td>";
+                                                echo "<td>" . $correo["email"] . "</td>";
+                                                echo "<td><a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span class='badge badge-danger'>Eliminar</span></a></td>";
+
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            echo "<td>No hay Correos Registrados</td>";
+                                        }
+
+                                        ?>
+                                    </tbody>
+
+                                </table>
+
+                                <br>
+
+                                <nav id="paginacion">
+                                    <ul class="pagination pagination-lg pager" id="myPager">
+
+                                    </ul>
+                                </nav>
+
+                            </div>
+
 
                             <!-- FIN TABLA -->
 
