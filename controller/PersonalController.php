@@ -31,6 +31,11 @@ class PersonalController
     }
 
     public function solicitante(){
+        $user = new UserDAO();
+        $correo = new CorreoDAO();
+        $data["correos"] = $correo->getCorreos();
+        $data["solicitante"] = $user->getSolicitantes();
+
         require_once "view/solicitante/personal.php";
     }
 

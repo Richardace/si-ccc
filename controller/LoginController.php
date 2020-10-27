@@ -135,8 +135,94 @@
             }
         }
 
+        function insertDataEvaluador($data){
+            
+            $db = new Connect;
+            $LoginDAO = new LoginDAO;
+            $UserDAO = new UserDAO;
+            $CorreoDAO = new CorreoDAO;
+            
+            $correoValido = $CorreoDAO->validarCorreoAutorizado($data['email']);
+
+            if($correoValido != NULL){
+                
+                $checkUser = $LoginDAO->checkUser($data['idGoogle']);
+                $validarDatos = $LoginDAO->checkValidarUser($data['idGoogle']);
+                $info = $validarDatos -> fetch(PDO::FETCH_ASSOC);
+                
+                if($checkUser == NULL){
+                    
+                    $checkIdUser = $LoginDAO->checkIdUser($data['email']);
+                    $checkIdUserProblema = $LoginDAO->checkIdUserProblema($data['email']);
+                    $infoUser = $checkIdUserProblema->fetch(PDO::FETCH_ASSOC);
+
+                    if($checkIdUser != NULL){
+
+                        $session = $this -> generateCode(10);
+                        $pass = $this -> generateCode(5);
+                        $insertNewUser = $UserDAO->newUser($data, $session, $pass, $infoUser['id']);
+
+                        if($insertNewUser){
+
+                            $checkUserEmail = $LoginDAO->checkIdUserProblema($data['email']);
+                            $info = $checkUserEmail->fetch(PDO::FETCH_ASSOC);
+                            setcookie("id", $info['id'], time()+60*60*24*30, "/", NULL);
+                            setcookie("sess", $session, time()+60*60*24*30, "/", NULL);
+
+                            session_start();
+                            $_SESSION['id'] = $info['id'];
+                            $_SESSION['name'] = $info['firstName'];
+                            $_SESSION['lastName'] = $info['lastName'];
+                            $_SESSION['email'] = $info['email'];
+                            $_SESSION['rol_id'] = $info['rol_id'];
+
+                            header('Location: ../index.php?c=documento&a=viewEvaluadorInit');
+
+                            exit();
+                        }else{
+                            session_destroy();
+                            echo "<script>
+                                alert('Error al intentar Insertar sus datos, Verifique su conexion a internet o intente mas tarde');
+                                window.location= '../index.php?l=login&a=indexEvaluador'
+                            </script>";
+                        }
+                    }else{
+                        echo "<script>
+                                alert('No te han asignado de evaluador de momento');
+                                window.location= '../index.php?l=login&a=indexEvaluador'
+                            </script>";
+                    }
+                }else{
+
+                    setcookie("id", $info['id'], time()+60*60*24*30, "/", NULL);
+                    setcookie("sess", $info["sess"], time()+60*60*24*30, "/", NULL);
+
+                    session_start();
+                    $_SESSION['id'] = $info['id'];
+                    $_SESSION['name'] = $info['firstName'];
+                    $_SESSION['lastName'] = $info['lastName'];
+                    $_SESSION['email'] = $info['email'];
+                    $_SESSION['rol_id'] = $info['rol_id'];
+
+                    header('Location: ../index.php?c=documento&a=viewEvaluadorInit');
+
+                    exit();
+                }
+            }else{
+
+                echo "<script>
+                                alert('Cuenta de Correo no esta Autorizada para el acceso a esta Plataforma');
+                                window.location= '../index.php?l=login&a=indexEvaluador'
+                    </script>";
+            }
+        }
+
         public function index(){
-			require_once "view/login/loginUser/index.php";	
+			require_once "view/login/loginUser/index.php";
+        }
+
+        public function indexEvaluador(){
+            require_once "view/login/loginEvaluador/index.php";
         }
         
     }
