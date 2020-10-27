@@ -234,3 +234,14 @@ footer{
 footer .part2Footer{
     margin-top: -20px;
 }
+/* Navbar Prueba */
+
+.navbartext {
+    display: inline-block;
+    width: 12cm;
+    height: 1.5em;
+    vertical-align: middle;
+    content: "";
+    background: no-repeat center center;
+    background-size: 100% 100%;
+}

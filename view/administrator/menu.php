@@ -7,9 +7,9 @@
 </ul> -->
 
 <nav class="navbar navbar-expand-lg" id="menu">
-    <button style="background: black;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    <button style="background: #dc3545;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" >
-        <span class="navbar-toggler-icon" style="color:white; font-size: 10px; float:left;">MENU</span>
+        <span class="navbartext" style="color:white; font-size: 15px; float:left;">MENU</span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
