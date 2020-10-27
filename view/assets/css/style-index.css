@@ -78,10 +78,13 @@ margin-bottom: 12px; /* Add some space below the input */
 }
 
 #myTable {
-border-collapse: collapse; /* Collapse borders */
-width: 100%; /* Full-width */
-border: 1px solid #ddd; /* Add a grey border */
+/*border-collapse: collapse; /* Collapse borders */
+/*width: 100%; /* Full-width */
+/* border: 1px solid #ddd; /* Add a grey border */
 font-size: 14px; /* Increase font-size */
+display: block;
+width: 100%;
+overflow-x: auto;
 }
 
 #myTable th{
