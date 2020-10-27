@@ -28,7 +28,7 @@
       <img id="imgLogo" src="view/login/assets/img/logoufps.jpg">
 
       <h2>
-        ACCESO ADMINISTRATIVO perro
+        ACCESO DEL EVALUADOR
         <br>
         COMITE CURRICULAR CENTRAL
       </h2>
@@ -37,7 +37,7 @@
       <br>
 
       <button onclick="window.location = '<?php echo $login_url_evaluador; ?>'" type="button" class="loginBtn loginBtn--google">
-        Login with Google
+        Ingresar con Google
       </button>
 
     </div>
