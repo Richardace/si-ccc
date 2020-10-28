@@ -5,7 +5,7 @@ $(".multimediaFisica").dropzone({
 	url: "/",
 	addRemoveLinks: true,
 	maxFilesize: 15, //Mb
-	maxFiles: 3, 	//maximo de archivos
+	maxFiles: 10, 	//maximo de archivos
 	init: function () {
 		this.on("addedfile", function (file) {
 			arrayFiles.push(file);
@@ -114,7 +114,7 @@ function agregarMiProducto(imagen) {
 
 				swal({
 					type: "success",
-					title: "El producto ha sido guardado correctamente",
+					title: "El Documento ha sido enviado correctamente",
 					showConfirmButton: true,
 					confirmButtonText: "Cerrar"
 				}).then(function (result) {

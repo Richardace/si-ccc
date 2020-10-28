@@ -11,6 +11,8 @@ class DocumentoController
 
     public function administrador()
     {
+        $document = new DocumentDAO;
+        $data['documentos'] = $document->getDocumentsPending();
         require_once "view/administrator/documentos.php";
     }
 
@@ -136,6 +138,13 @@ class DocumentoController
         readfile('documentos.zip');
         // Por último eliminamos el archivo temporal creado
         unlink('documentos.zip'); //Destruye el archivo temporal
+
+    }
+
+    public function addEvaluadorDocumentoView($id){
+        $document = new DocumentDAO;
+        $data['documentos'] = $document->getDocumentById($id);
+        require_once "view/administrator/addEvaluadorDocument.php";
 
     }
 }

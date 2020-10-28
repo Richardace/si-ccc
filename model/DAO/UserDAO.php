@@ -35,6 +35,21 @@
 			return $users;
 		}
 
+		public function getEmailByIdUser($id){
+			
+			$db = new Connect;
+			$consulta = $db -> prepare('SELECT * FROM user WHERE id=:idUser');
+        	$consulta -> execute([
+				':idUser'   => $id
+			]);
+			$email = "";
+			while($row = $consulta->fetch(PDO::FETCH_ASSOC))
+			{
+				$email = $row['email'];
+			}
+			return $email;
+		}
+
 		public function newUser($data, $sess, $pass, $id){
 
 			$db = new Connect;
@@ -93,6 +108,21 @@
 				$users[] = $row;
 			}
 			return $users;
+		}
+
+		// Funciones de extraccion de detalles
+		public function getNameAndLastNameById($idUser){
+			$db = new Connect;
+			$consulta = $db -> prepare('SELECT * FROM user WHERE id=:idUser');
+        	$consulta -> execute([
+				':idUser'   => $idUser
+			]);
+			$fullName = "";
+			while($row = $consulta->fetch(PDO::FETCH_ASSOC))
+			{
+				$fullName = $row['firstName']. " " .$row['lastName'];
+			}
+			return $fullName;
 		}
 
 	} 

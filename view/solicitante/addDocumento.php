@@ -66,7 +66,7 @@ session_start();
         <div class="card-body">
           <div class="box-body">
 
-            <input type="hidden" class="usuario" value="1" readonly>
+            <input type="hidden" class="usuario" value="<?php echo $_SESSION['id']; ?>" readonly>
 
             <?php
               function generateCode($length){
@@ -119,7 +119,7 @@ session_start();
             <div class="form-group agregarMultimedia">
               <div class="multimediaFisica needsclick dz-clickable">
                 <div class="dz-message needsclick">
-                  Arrastrar o dar click para subir documentos.
+                  Arrastrar o dar click para subir documentos - Maximo 10 Archivos
                 </div>
               </div>
             </div>

@@ -69,8 +69,8 @@
 
                             $checkUserEmail = $LoginDAO->checkIdUserProblema($data['email']);
                             $info = $checkUserEmail->fetch(PDO::FETCH_ASSOC);
-                            setcookie("id", $info['id'], time()+60*60*24*30, "/", NULL);
-                            setcookie("sess", $session, time()+60*60*24*30, "/", NULL);
+                            setcookie("id", $info['id'], 0, "/", NULL);
+                            setcookie("sess", $session, 0, "/", NULL);
 
                             session_start();
                             $_SESSION['id'] = $info['id'];
@@ -104,8 +104,8 @@
                     }
                 }else{
 
-                    setcookie("id", $info['id'], time()+60*60*24*30, "/", NULL);
-                    setcookie("sess", $info["sess"], time()+60*60*24*30, "/", NULL);
+                    setcookie("id", $info['id'], 0, "/", NULL);
+                    setcookie("sess", $info["sess"], 0, "/", NULL);
 
                     session_start();
                     $_SESSION['id'] = $info['id'];
@@ -166,8 +166,8 @@
 
                             $checkUserEmail = $LoginDAO->checkIdUserProblema($data['email']);
                             $info = $checkUserEmail->fetch(PDO::FETCH_ASSOC);
-                            setcookie("id", $info['id'], time()+60*60*24*30, "/", NULL);
-                            setcookie("sess", $session, time()+60*60*24*30, "/", NULL);
+                            setcookie("id", $info['id'], 0, "/", NULL);
+                            setcookie("sess", $session, 0, "/", NULL);
 
                             session_start();
                             $_SESSION['id'] = $info['id'];
@@ -194,8 +194,8 @@
                     }
                 }else{
 
-                    setcookie("id", $info['id'], time()+60*60*24*30, "/", NULL);
-                    setcookie("sess", $info["sess"], time()+60*60*24*30, "/", NULL);
+                    setcookie("id", $info['id'], 0, "/", NULL);
+                    setcookie("sess", $info["sess"], 0, "/", NULL);
 
                     session_start();
                     $_SESSION['id'] = $info['id'];
