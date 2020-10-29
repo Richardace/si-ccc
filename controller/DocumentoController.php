@@ -6,6 +6,15 @@ class DocumentoController
     public function __construct()
     {
         require_once "model/DAO/DocumentDAO.php";
+
+        require_once "model/DAO/UserDAO.php";
+        require_once "model/DAO/ProgramDAO.php";
+        require_once "model/DAO/DepartmentDAO.php";
+        require_once "model/DAO/FacultadDAO.php";
+
+        require_once "model/DAO/ProgramUserDAO.php";
+        require_once "model/DAO/DepartmentUserDAO.php";
+        require_once "model/DAO/FacultadUserDAO.php";
     }
 
 
@@ -95,6 +104,7 @@ class DocumentoController
 
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentById($id);
+        $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
         require_once "view/evaluador/evaluador.php";
     }
 
@@ -122,13 +132,12 @@ class DocumentoController
         $obj = json_decode($files);
 
         for ($i = 0; $i <= count($obj); $i++) {
-            
-            $obj2 = $obj[$i]->elemento;
-        
-            $zip->addFile(str_replace("../","", $obj2), $dir . "/".basename($obj2));
 
+            $obj2 = $obj[$i]->elemento;
+
+            $zip->addFile(str_replace("../", "", $obj2), $dir . "/" . basename($obj2));
         }
-        
+
         // Una vez añadido los archivos deseados cerramos el zip.
         $zip->close();
         // Creamos las cabezeras que forzaran la descarga del archivo como archivo zip.
@@ -141,10 +150,175 @@ class DocumentoController
 
     }
 
-    public function addEvaluadorDocumentoView($id){
+    public function addEvaluadorDocumentoViewInit($id)
+    {
         $document = new DocumentDAO;
-        $data['documentos'] = $document->getDocumentById($id);
-        require_once "view/administrator/addEvaluadorDocument.php";
 
+        $programas = new ProgramDAO;
+        $departamentos = new DepartmentDAO;
+        $facultades = new FacultadDAO;
+
+        $data["programas"] = $programas->getPrograms();
+        $data["departamentos"] = $departamentos->getDepartamentos();
+        $data["facultades"] = $facultades->getFacultades();
+
+        $data['documentos'] = $document->getDocumentById($id);
+
+        require_once "view/administrator/addEvaluadorDocumentInit.php";
+    }
+
+    public function addEvaluadorDocumentoView()
+    {
+        $document = new DocumentDAO;
+        $userDAO = new UserDAO;
+
+        $dependency = $_POST['dependency'];
+
+        if ($dependency == "program") {
+
+            $data['documentos'] = $document->getDocumentById($_POST['idDocument']);
+            $data['dependencia'] = $dependency;
+            $data['usuarios'] = $userDAO->getUsersProgramById($_POST['idProgram']);
+
+            require_once "view/administrator/addEvaluadorDocument.php";
+        } else if ($dependency == "department") {
+
+            $data['documentos'] = $document->getDocumentById($_POST['idDocument']);
+            $data['usuarios'] = $userDAO->getUsersDepartmentsById($_POST['idDepartment']);
+
+            require_once "view/administrator/addEvaluadorDocument.php";
+        } else if ($dependency == "facultad") {
+
+            $data['documentos'] = $document->getDocumentById($_POST['idDocument']);
+            $data['usuarios'] = $userDAO->getUsersFacultadById($_POST['idFacultad']);
+
+            require_once "view/administrator/addEvaluadorDocument.php";
+        }
+    }
+
+    public function addDocumentToEvaluate()
+    {
+        $document = new DocumentDAO;
+
+
+        $idUser = $_POST['idUser'];
+        $idDocument = $_POST['idDocument'];
+        $dateLimit = $_POST['fechaLimite'];
+        $token = $_POST['token'];
+
+        $document->insertDocumentToEvaluate($idUser, $idDocument, $dateLimit, $token);
+
+        $this->enviarCorreoEvaluador($idUser, $token, $dateLimit);
+
+        $data['documentos'] = $document->getDocumentsPending();
+
+        require_once "view/administrator/documentos.php";
+    }
+
+    public function recuperarToken($id){
+
+        $document = new DocumentDAO;
+        $UserDAO = new UserDAO;
+
+        $tokens = $document->getTokenEnableById($id);
+        $tokensRecuperados = "";
+        $i = 0;
+        foreach ($tokens as $token) {
+            $i = $i + 1;
+            $tokensRecuperados = $tokensRecuperados . "Token N° ".$i.": ".$token."<br>";
+            
+        }
+        $tokensActivos = count($tokens);
+        $fullName = $UserDAO->getNameAndLastNameById($id);
+        $email = $UserDAO->getEmailByIdUser($id);
+
+        // $para = 'richardacevedo98@gmail.com';
+        $para = $email;
+
+        $titulo = 'Recuperacion de TOKENS de Seguridad';
+
+        $mensaje = '<html>' .
+            '<head><center><title>Recuperacion de Tokens de Seguridad</title></center></head>' .
+            "<body style='background: #DCDCDC;>
+            <center>
+                <h1 style='font-weight: bold;' >Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</h1>
+            </center>" .
+            '<hr>' .
+            "<center><div style='width:70%; background: white; border-radius:10px;'>
+            <br>
+            <br>
+            <img src='https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logoufps.png' style='width:60px; height:60px'><br><br>
+            Cordial Saludo $fullName <br><br>
+            En base a su solicitud de recuperación de TOKENS, encontramos que tiene $tokensActivos activos <br><br>
+            $tokensRecuperados <br><br>
+            Para acceder al Nuevo Sistema del COMITE CURRICULAR, lo podra hacer mediante el siguiente enlace: <a href='http://localhost/si-ccc/index.php?l=login&a=indexEvaluador' style='font-weight: bold;'> INGRESAR </a><br><br>
+            Una vez ingrese, debera ingresar el TOKEN de seguridad que le permitira acceder a los documentos: <br><br>
+
+            Att: COMITE CURRICULAR CENTRAL UFPS <br><br>
+
+            </div></center>" .
+
+            '</body>' .
+            '</html>';
+
+        $cabeceras = 'MIME-Version: 1.0' . "\r\n";
+        $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $cabeceras .= 'From: COMITE CURRICULAR CENTRAL UFPS';
+
+        $enviado = mail($para, $titulo, $mensaje, $cabeceras);
+
+        echo "<script>
+                        alert('Se han enviado nuevamente a su correo electronico los Tokens de Seguridad');
+                        window.location= 'index.php?c=documento&a=viewEvaluadorInit'
+            </script>";
+    }
+
+    // Correos Electronicos
+    public function enviarCorreoEvaluador($idUser, $token, $dateLimit)
+    {
+
+        $UserDAO = new UserDAO;
+
+        $fullName = $UserDAO->getNameAndLastNameById($idUser);
+        $email = $UserDAO->getEmailByIdUser($idUser);
+
+        // $para = 'richardacevedo98@gmail.com';
+        $para = $email;
+
+        $titulo = 'Solicitud para Evaluar Documentos - Comite Curricular Central UFPS';
+
+        $mensaje = '<html>' .
+            '<head><center><title>Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</title></center></head>' .
+            "<body style='background: #DCDCDC;>
+            <center>
+                <h1 style='font-weight: bold;' >Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</h1>
+            </center>" .
+            '<hr>' .
+            "<center><div style='width:70%; background: white; border-radius:10px;'>
+            <br>
+            <br>
+            <img src='https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logoufps.png' style='width:60px; height:60px'><br><br>
+            Cordial Saludo $fullName <br><br>
+            La presente es para solicitarle su valiosa colaboración en la revision de documentos enviados al COMITE CURRICULAR CENTRAL. <br><br>
+            Para acceder al Nuevo Sistema del COMITE CURRICULAR, lo podra hacer mediante el siguiente enlace: <a href='http://localhost/si-ccc/index.php?l=login&a=indexEvaluador' style='font-weight: bold;'> INGRESAR </a><br><br>
+            Una vez ingrese, debera ingresar el TOKEN de seguridad que le permitira acceder a los documentos: <br><br>
+            TOKEN DE SEGURIDAD: <span style='font-weight: bold; background: white;'>$token</span> <br><br>
+            FECHA MAXIMA DE REVISIÓN: <span style='font-weight: bold;'>$dateLimit</span> <br><br>
+            En la misma plataforma podras asignar correcciones si asi lo ameriten, o en caso contrario si el documento esta apto y cumple con la normativa, podra regresarlo con la Aprobación. <br>
+            Se le agradece su valiosa colaboración.<br><br>
+            Att: COMITE CURRICULAR CENTRAL UFPS <br><br>
+
+            </div></center>" .
+
+            '</body>' .
+            '</html>';
+
+        $cabeceras = 'MIME-Version: 1.0' . "\r\n";
+        $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $cabeceras .= 'From: COMITE CURRICULAR CENTRAL UFPS';
+
+        $enviado = mail($para, $titulo, $mensaje, $cabeceras);
+
+        return true;
     }
 }

@@ -110,7 +110,7 @@ session_start();
                       echo "<td>" . $documentos["destiny"] . "</td>";
 
                       echo "<td><center>
-                              <a href='index.php?c=documento&a=addEvaluadorDocumentoView&id=" . $documentos["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                              <a href='index.php?c=documento&a=addEvaluadorDocumentoViewInit&id=" . $documentos["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
                             </td>";
 
                       echo "</tr>";

@@ -58,7 +58,13 @@ session_start();
     foreach ($data['documentos'] as $infoDocumento) {
       $idDocumento = $infoDocumento['id'];
       $title = $infoDocumento['title'];
+      $source = $infoDocumento['source'];
+      $destiny = $infoDocumento['destiny'];
+      $description = $infoDocumento['description'];
+    }
 
+    foreach ($data['documentoEvaluador'] as $docEvaluador) {
+      $dateLimite = $docEvaluador['dateLimit'];
     }
     ?>
     <!-- Contenido -->
@@ -74,31 +80,40 @@ session_start();
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label>Origen</label>
-                <input type="text" class="form-control origen" value="Plan de Estudios de Ingenieria de Sistemas" readonly>
+                <input type="text" class="form-control origen" value="<?php echo $source; ?>" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label>Destino</label>
-                <input type="text" class="form-control destino" value="Consejo Academico">
+                <input type="text" class="form-control destino" value="<?php echo $destiny; ?>" readonly>
               </div>
             </div>
 
             <div class="form-row">
-              <div class="form-group col-md-12">
+              <div class="form-group col-md-6">
                 <label>Asunto</label>
-                <input type="text" class="form-control titulo" value="Documentos para aprobacion por parte del consejo academico" readonly>
+                <input type="text" class="form-control titulo" value="<?php echo $title; ?>" readonly>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Fecha Limite</label>
+                <input type="text" class="form-control titulo" value="<?php echo $dateLimite; ?>" readonly>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>Descripción u Observación</label>
-                <textarea type="text" style="height: 150px;" class="form-control descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu tempor ante. Morbi eget risus dolor. Praesent ut sapien nulla. Sed pulvinar mi non nibh hendrerit mollis. Praesent eros est, tincidunt ut odio ac, malesuada imperdiet eros. Nunc finibus nulla vitae augue tincidunt, eget ultrices nulla viverra. Donec scelerisque dui nec orci mollis scelerisque eget eget magna. Aliquam erat volutpat. Vestibulum leo ligula, fermentum a justo vitae, varius auctor nunc. In eget dui enim. Ut vulputate vel metus a convallis. Pellentesque blandit diam eu erat semper, id laoreet dolor posuere. Quisque eros turpis, blandit quis vulputate efficitur, sagittis a neque. Mauris ut libero vel neque lobortis molestie eget non sem. Nullam ultricies felis vel orci placerat, vel mollis arcu porta. Nunc in cursus felis.
+                <textarea type="text" style="height: 150px;" class="form-control descripcion" readonly><?php echo $description; ?>
                 </textarea>
               </div>
             </div>
 
-            <a href="index.php?c=documento&a=descargarDocumentosById&id=<?php echo $idDocumento; ?>" target="_blank">Descargar Documentos Adjuntos</a>
-
+            <div class="form-row" style="float: right;">
+              <div class="form-group col-md-12">
+                <label>DESCARGA : </label>
+                <a href="index.php?c=documento&a=descargarDocumentosById&id=<?php echo $idDocument; ?>" target="_blank">Descargar Documentos Adjuntos &nbsp; <span><img style="widht:25px; height:25px;" src="view/assets/img/descargar.png" ></span>&nbsp;&nbsp;</a>
+              </div>
+            </div>
+<br>
           </div>
           <br>
           <center><input id="agregar" type="submit" value="Enviar Documentos" class="btn btn-primary guardarProducto" style="background:rgb(226, 3, 26); border:none; color:white; " /></center>

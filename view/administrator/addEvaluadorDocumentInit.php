@@ -81,65 +81,73 @@ foreach ($data["documentos"] as $documento) {
         </header>
         <section id="content">
 
-            <div class="card text-center">
+            <div class="card">
                 <center>
                     <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
-                        AGREGAR EVALUADOR AL DOCUMENTO
+                        ELEGIR DEPENDENCIA ACADEMICA DEL EVALUADOR
                     </div>
                 </center>
 
                 <div class="card-body">
                     <div class="box-body">
 
-                        <form method="post" action="index.php?c=documento&a=addDocumentToEvaluate">
-                            <center>
-                                <div class="form-row">
-                                    <div class="col" style>
-                                        <label>Fecha Limite de Revisión</label><br>
-                                        <input type="date" class="form-control" name="fechaLimite" style="width: 190px;" required>
-                                        <!-- <input type="text" class="form-control" placeholder="First name"> -->
-                                    </div>
-                                </div>
-                            </center>
-                            <br>
-                            <center>
-                                <div class="form-row">
+                        <form method="post" action="index.php?c=documento&a=addEvaluadorDocumentoView">
 
-                                    <div class="col">
-                                        <label>Token de Acceso</label><br>
-                                        <input type="text" class="form-control" style="width:30%;" name="token" value="<?php echo generateCode(15); ?>" readonly>
-                                    </div>
-                                </div>
 
+                        <input type="hidden" value="<?php echo $idDocument;?>" name="idDocument" readonly>
+
+                            <center>
+                                <input type="radio" id="programa" name="dependency" value="program" required>
+                                <label for="program">Programa Academico</label>&nbsp;&nbsp;&nbsp;
+                                <input type="radio" id="departamento" name="dependency" value="department" required>
+                                <label for="department">Departamento</label>&nbsp;&nbsp;&nbsp;
+                                <input type="radio" id="facultad" name="dependency" value="facultad" required>
+                                <label for="facultad">Facultad</label>
                             </center>
                             <br>
                             <center>
                                 <div class="form-row">
                                     <div class="col">
-                                        <div>
-                                            <label for="inputState">Elija el Evaluador</label><br>
-                                            <select id="selectPrograma" class="form-control" name="idUser" style="width:30%;" required>
+                                        <div id="selectPrograma" style="display: none;">
+                                            <label for="inputState">Elija el Programa Academico</label><br>
+                                            <select id="selectPrograma" class="form-control" name="idProgram" style="width:90%;" required>
                                                 <?php
-                                                $none = true;
-                                                if($data["usuarios"] == NULL){
-                                                    $none = false;
-                                                    echo "<option>No hay Evaluadores Disponibles para esta dependencia</option>";
+                                                foreach ($data["programas"] as $programa) {
+                                                    echo "<option  value='" . $programa['id'] . "'>". $programa['id'] ." - ". $programa['name'] . "</option>";
                                                 }
-                                                foreach ($data["usuarios"] as $usuario) {
-                                                    echo "<option value='" . $usuario['user_id'] . "'>" . $usuario['fullName'] . "</option>";
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div id="selectDepartamento" style="display: none;">
+                                            <label for="inputState">Elija el Departamento</label><br>
+                                            <select class="form-control" name="idFacultad" style="width:90%;" required>
+                                                
+                                                <?php
+                                                foreach ($data["departamentos"] as $programa) {
+                                                    echo "<option value='" . $programa['id'] . "'>" . $programa['name'] . "</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div id="selectFacultad" style="display: none;">
+                                            <label for="inputState">Elija el Departamento</label><br>
+                                            <select class="form-control" name="idDepartment" style="width:90%;" required>
+                                                
+                                                <?php
+                                                foreach ($data["facultades"] as $programa) {
+                                                    echo "<option  value='" . $programa['id'] . "'>". $programa['id'] ." ". $programa['name'] . "</option>";
                                                 }
                                                 ?>
                                             </select>
                                         </div>
                                     </div>
+
                                 </div>
                             </center>
-                            
-                            <input type="hidden" value="<?php echo $idDocument; ?>" name="idDocument">
 
                             <br>
-                            <center><input id="add" type="submit" value="Asignar Evaluador" class="btn btn-primary guardarProducto" style="background:rgb(226, 3, 26); border:none; color:white; <?php if(!$none){echo "display:none;";} ?>" /></center>
-                            <br>
+
+                            <center><input id="agregar" type="submit" value="Continuar" class="btn btn-primary guardarProducto" style="background:rgb(226, 3, 26); border:none; color:white; " /></center>
                         </form>
                     </div>
                 </div>

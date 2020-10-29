@@ -68,12 +68,15 @@ session_start();
             <br>
             <label style="text-transform: uppercase;">Correo Electronico</label><br>
             <center><input type='text' style='width:40%; text-align:center;' name='correo' class='form-control' id='formGroupExampleInput' value="<?php echo $_SESSION['email']; ?>" readonly></center>
-            
+
             <input type='hidden' name='idUser' value="<?php echo $_SESSION['id']; ?>">
-            
+
             <br>
             <label style="text-transform: uppercase; font-weight: bold;">Codigo de Acceso enviado a su correo institucional </label><br>
-            <center><input type='text' style='width:40%; text-align:center;' name='codigoAcceso' class='form-control' id='formGroupExampleInput'></center>
+            <center><input type='text' style='width:40%; text-align:center;' name='codigoAcceso' class='form-control' id='formGroupExampleInput' required></center>
+            <center>
+              ¿ Olvidaste el Token ? <a href="index.php?c=documento&a=recuperarToken&id=<?php echo $_SESSION['id']; ?>" style="font-weight: bold;">Recuperar TOKEN</a>
+            </center>
             <br>
             <input id="agregar" type="submit" value="Validar" class="btn btn-primary" style="background:rgb(226, 3, 26); border:none; color:white" />
 

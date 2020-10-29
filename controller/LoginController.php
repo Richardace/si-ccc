@@ -224,6 +224,7 @@
         public function indexEvaluador(){
             require_once "view/login/loginEvaluador/index.php";
         }
+
         
     }
 

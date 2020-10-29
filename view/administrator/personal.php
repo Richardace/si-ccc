@@ -349,19 +349,19 @@ session_start();
                                         <?php
 
                                         if ($data["evaluador"] != NULL) {
-                                            foreach ($data["evaluador"] as $correo) {
+                                            foreach ($data["evaluador"] as $evaluador) {
                                                 echo "<tr>";
-                                                echo "<td>" . $correo["id"] . "</td>";
+                                                echo "<td>" . $evaluador["id"] . "</td>";
                                                 echo "<td>INGENIERIA DE SISTEMAS</td>";
-                                                echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
-                                                echo "<td>" . $correo["email"] . "</td>";
+                                                echo "<td>" . $evaluador["firstName"] . " " . $evaluador['lastName'] . "</td>";
+                                                echo "<td>" . $evaluador["email"] . "</td>";
                                                 echo "<td>28-02-2020</td>";
                                                 echo "<td>28-06-2020</td>";
-                                                echo "<td>" . $correo["state"] . "</td>";
+                                                echo "<td>" . $evaluador["state"] . "</td>";
 
                                                 echo "<td><center>
-                                                  <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
-                                                  <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                                                  <a href='index.php?c=personal&a=verUsuario&id=" . $evaluador["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
+                                                  <a href='index.php?c=correo&a=eliminarCorreo&id=" . $evaluador["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
                                                 </td>";
 
                                                 echo "</tr>";
