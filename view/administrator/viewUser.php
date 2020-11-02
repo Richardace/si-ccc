@@ -90,11 +90,25 @@ session_start();
         </div>
         <div class="card-body">
 
+<br>
+            <label>Id del Usuario </label>
+            <input value="<?php echo $id; ?>">
+<br>  
             <label>Nombre del Usuario </label>
             <input value="<?php echo $firstName; ?>">
 <br>
             <label>Apellido del Usuario </label>
             <input value="<?php echo $lastName; ?>">
+
+<br>
+            <label>email del Usuario </label>
+            <input value="<?php echo $email; ?>">
+<br>
+            <label>estado del Usuario </label>
+            <input value="<?php echo $state; ?>">
+<br>
+            <label>rol del Usuario </label>
+            <input value="<?php echo $rol_id; ?>">
 
           <form method="post" action="index.php?c=personal&a=addSolicitante">
             <br>
