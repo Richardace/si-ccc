@@ -39,6 +39,15 @@ class PersonalController
         require_once "view/solicitante/personal.php";
     }
 
+    public function verUsuario($id){
+        $user= new UserDAO();
+        $data["usuario"] = $user->getUserById($id);
+
+        require_once "view/administrator/viewUser.php";
+    }
+
+
+
     public function addSolicitanteView($id){
         $programas = new ProgramDAO;
         $departamentos = new DepartmentDAO;

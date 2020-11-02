@@ -188,19 +188,19 @@ session_start();
                                         <?php
 
                                         if ($data["solicitante"] != NULL) {
-                                            foreach ($data["solicitante"] as $correo) {
+                                            foreach ($data["solicitante"] as $solicitante) {
                                                 echo "<tr>";
-                                                echo "<td>" . $correo["id"] . "</td>";
+                                                echo "<td>" . $solicitante["id"] . "</td>";
                                                 echo "<td>INGENIERIA DE SISTEMAS</td>";
-                                                echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
-                                                echo "<td>" . $correo["email"] . "</td>";
+                                                echo "<td>" . $solicitante["firstName"] . " " . $solicitante['lastName'] . "</td>";
+                                                echo "<td>" . $solicitante["email"] . "</td>";
                                                 echo "<td>28-02-2020</td>";
                                                 echo "<td>28-06-2020</td>";
-                                                echo "<td>" . $correo["state"] . "</td>";
+                                                echo "<td>" . $solicitante["state"] . "</td>";
 
                                                 echo "<td><center>
-                                                    <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
-                                                    <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                                                    <a href='index.php?c=personal&a=verUsuario&id=" . $solicitante["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
+                                                    <a href='index.php?c=correo&a=eliminarCorreo&id=" . $solicitante["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
                                                   </td>";
 
                                                 echo "</tr>";

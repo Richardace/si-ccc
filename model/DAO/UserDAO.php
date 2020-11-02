@@ -35,6 +35,21 @@
 			return $users;
 		}
 
+		public function getUserById($id){
+			$db = new Connect;
+			$consulta = $db -> prepare('SELECT * FROM user WHERE id=:idUser');
+        	$consulta -> execute([
+				':idUser'   => $id
+			]);
+			$users = NULL;
+			while($row = $consulta->fetch(PDO::FETCH_ASSOC))
+			{
+				$users[] = $row;
+			}
+			return $users;
+		}
+
+
 		public function newUser($data, $sess, $pass, $id){
 
 			$db = new Connect;
