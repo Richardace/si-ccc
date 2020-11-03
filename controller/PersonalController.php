@@ -45,7 +45,35 @@ class PersonalController
 
         require_once "view/administrator/viewUser.php";
     }
+   
+    public function editarUsuario($id){
+        
+        $user= new UserDAO();
+        $data["usuario"] = $user->getUserById($id);
 
+        require_once "view/administrator/viewEditUser.php";
+
+    }
+
+    public function actualizarUsuario(){
+        
+        $id = $_POST['idUser'];
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $email = $_POST['email'];
+        $estate = $_POST['estate'];
+        $rol_id = $_POST['rol_id'];
+
+
+        $user= new UserDAO();
+       
+        $user->modificarUser($id,$firstName,$lastName,$email,$estate,$rol_id);
+
+
+
+        $this->administrador();
+
+    }
 
 
     public function addSolicitanteView($id){

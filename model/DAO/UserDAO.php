@@ -68,6 +68,20 @@
 			return $insertNewUser;
 		}
 
+		public function modificarUser($id,$firstName,$lastName,$email,$estate,$rol_id){
+
+			$db = new Connect;
+			$consulta = $db -> prepare("UPDATE user SET firstName=:firstName, lastName= :lastName, email= :email, state= :state, rol_id = :rol_id  WHERE id =:id");
+        	$consulta -> execute([
+				':id'   => $id,
+				':firstName'   => $firstName,
+				':lastName'   => $lastName,
+				':email'   => $email,
+				':state'   => $estate,
+				':rol_id'   => $rol_id
+			]);			
+		}
+
 		public function getSolicitantes(){
 			$db = new Connect;
 			$consulta = $db -> prepare('SELECT * FROM user WHERE rol_id=:id');

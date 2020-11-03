@@ -86,29 +86,34 @@ session_start();
 
       <div class="card text-center">
         <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26); text-transform: uppercase;">
-          VER INFORMACION DE <?php echo $fullName; ?>
+          ACTUALIZAR A: <?php echo $fullName; ?>
         </div>
         <div class="card-body">
+        <form method="post" action="index.php?c=personal&a=actualizarUsuario">
 
 <br>
             <label>Id del Usuario </label>
-            <input value="<?php echo $id; ?>">
+            <input type="text" name="idUser" value="<?php echo $id; ?>">
 <br>  
             <label>Nombre del Usuario </label>
-            <input value="<?php echo $firstName; ?>">
+            <input type="text" name="firstName" value="<?php echo $firstName; ?>">
 <br>
             <label>Apellido del Usuario </label>
-            <input value="<?php echo $lastName; ?>">
+            <input type="text" name="lastName" value="<?php echo $lastName; ?>">
 
 <br>
             <label>email del Usuario </label>
-            <input value="<?php echo $email; ?>">
+            <input type="text" name="email"  value="<?php echo $email; ?>">
 <br>
             <label>estado del Usuario </label>
-            <input value="<?php echo $state; ?>">
+            <input type="text" name="estate" value="<?php echo $state; ?>">
 <br>
             <label>rol del Usuario </label>
-            <input value="<?php echo $rol_id; ?>">
+            <input type="text" name="rol_id" value="<?php echo $rol_id; ?>">
+<br>
+            <button type="submit" class="btn btn-outline-primary">Guadar Cambios </button>
+        
+        </form>
 
           
         </div>

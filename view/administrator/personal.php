@@ -200,7 +200,7 @@ session_start();
 
                                                 echo "<td><center>
                                                     <a href='index.php?c=personal&a=verUsuario&id=" . $solicitante["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
-                                                    <a href='index.php?c=correo&a=eliminarCorreo&id=" . $solicitante["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                                                    <a href='index.php?c=personal&a=editarUsuario&id=" . $solicitante["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
                                                   </td>";
 
                                                 echo "</tr>";
@@ -360,7 +360,7 @@ session_start();
                                                 echo "<td>" . $evaluador["state"] . "</td>";
                                                 echo "<td><center>
                                                   <a href='index.php?c=personal&a=verUsuario&id=" . $evaluador["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
-                                                  <a href='index.php?c=correo&a=eliminarCorreo&id=" . $evaluado["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                                                  <a href='index.php?c=correo&a=eliminarCorreo&id=" . $evaluador["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
                                                 </td>";
 
                                                 echo "</tr>";
@@ -512,9 +512,8 @@ session_start();
                                                 echo "<td>" . $administrador["state"] . "</td>";
 
                                                 echo "<td><center>
-                                                =personal&a=verUsuario&id=
-                                                  <a href='index.php?c=personal&a=verUsuario&id=" . $administrador["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
-                                                  <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                                                  <a href='index.php?c=personal&a=verUsuario&id=" . $administrador["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Ver'></span></a>&nbsp&nbsp&nbsp&nbsp
+                                                  <a href='index.php?c=personal&a=editarUsuario&id=" . $administrador["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Editar'></span></a>
                                                 </td>";
 
                                                 echo "</tr>";
