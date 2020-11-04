@@ -95,6 +95,7 @@ function agregarMiProducto(imagen) {
 	datosDocumento.append("descripcion", $(".descripcion").val());
 	datosDocumento.append("nameFolder", $(".folder").val());
 	datosDocumento.append("documentos", imagen);
+	var idSolicitante = $(".usuario").val();
 
 
 	$.ajax({
@@ -120,7 +121,7 @@ function agregarMiProducto(imagen) {
 				}).then(function (result) {
 					if (result.value) {
 						$('.guardarProducto').html("Guardar producto");
-						window.location = "index.php?c=documento&a=solicitante";
+						window.location = "index.php?c=documento&a=solicitante&id=" + idSolicitante;
 
 					}
 				})

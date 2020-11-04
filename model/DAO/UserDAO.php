@@ -81,6 +81,7 @@ class UserDAO
 		]);
 		$users = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$row['dependencyUser'] = $this->getDependencyByIdUser($row['id']);
 			$users[] = $row;
 		}
 		return $users;
@@ -95,6 +96,7 @@ class UserDAO
 		]);
 		$users = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$row['dependencyUser'] = $this->getDependencyByIdUser($row['id']);
 			$users[] = $row;
 		}
 		return $users;
@@ -125,6 +127,12 @@ class UserDAO
 		$users = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 			$row['fullName'] = $this->getNameAndLastNameById($row['user_id']);
+
+			if ($row['fullName'] == " ") {
+				$row['fullName'] = "Nombre sin Registrar";
+			}
+
+			$row['email'] = $this->getEmailByIdUser($row['user_id']);
 			$users[] = $row;
 		}
 		return $users;
@@ -160,6 +168,47 @@ class UserDAO
 		return $users;
 	}
 
+	public function getDependencyByIdUser($idUser)
+	{
+		$program = $this->findUserInProgram($idUser);
+		$department = $this->findUserInDepartment($idUser);
+		$facultad = $this->findUserInFacultad($idUser);
+
+		if ($program != NULL) {
+			$db = new Connect;
+			$consulta = $db->prepare('SELECT * FROM program WHERE id=:id');
+			$consulta->execute([
+				':id'   => $program
+			]);
+			while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+				return $row['name'];
+			}
+		}else if($department != NULL){
+			$db = new Connect;
+			$consulta = $db->prepare('SELECT * FROM department WHERE id=:id');
+			$consulta->execute([
+				':id'   => $program
+			]);
+			while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+				return $row['name'];
+			}
+			
+		}else if($facultad != NULL){
+			$db = new Connect;
+			$consulta = $db->prepare('SELECT * FROM facultad WHERE id=:id');
+			$consulta->execute([
+				':id'   => $program
+			]);
+			while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+				return $row['name'];
+			}
+		}else{
+			
+		}
+
+		
+	}
+
 	// Funciones de extraccion de detalles
 	public function getNameAndLastNameById($idUser)
 	{
@@ -173,5 +222,48 @@ class UserDAO
 			$fullName = $row['firstName'] . " " . $row['lastName'];
 		}
 		return $fullName;
+	}
+
+	// Consulta de Dependencia
+	public function findUserInProgram($idUser)
+	{
+		$db = new Connect;
+		$consulta = $db->prepare('SELECT * FROM program_user WHERE user_id=:id');
+		$consulta->execute([
+			':id'   => $idUser
+		]);
+		$users = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$users = $row['program_id'];
+		}
+		return $users;
+	}
+
+	public function findUserInDepartment($idUser)
+	{
+		$db = new Connect;
+		$consulta = $db->prepare('SELECT * FROM department_user WHERE user_id=:id');
+		$consulta->execute([
+			':id'   => $idUser
+		]);
+		$users = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$users = $row['department_id'];
+		}
+		return $users;
+	}
+
+	public function findUserInFacultad($idUser)
+	{
+		$db = new Connect;
+		$consulta = $db->prepare('SELECT * FROM facultad_user WHERE user_id=:id');
+		$consulta->execute([
+			':id'   => $idUser
+		]);
+		$users = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$users = $row['facultad_id'];
+		}
+		return $users;
 	}
 }

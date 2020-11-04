@@ -64,7 +64,7 @@ session_start();
         </div>
         <div class="card-body">
 
-          <form method="post" action="index.php?c=personal&a=addSolicitante">
+          <form method="post" action="index.php?c=personal&a=addSolicitanteSolicitante">
             <br>
             <input type="radio" id="programa" name="dependency" value="program">
             <label for="program">Programa Academico</label>&nbsp;&nbsp;&nbsp;

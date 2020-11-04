@@ -191,7 +191,7 @@ session_start();
                                             foreach ($data["solicitante"] as $correo) {
                                                 echo "<tr>";
                                                 echo "<td>" . $correo["id"] . "</td>";
-                                                echo "<td>INGENIERIA DE SISTEMAS</td>";
+                                                echo "<td>" . $correo["dependencyUser"] . "</td>";
                                                 echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
                                                 echo "<td>" . $correo["email"] . "</td>";
                                                 echo "<td>28-02-2020</td>";
@@ -352,7 +352,7 @@ session_start();
                                             foreach ($data["evaluador"] as $evaluador) {
                                                 echo "<tr>";
                                                 echo "<td>" . $evaluador["id"] . "</td>";
-                                                echo "<td>INGENIERIA DE SISTEMAS</td>";
+                                                echo "<td>" . $evaluador["dependencyUser"] . "</td>";
                                                 echo "<td>" . $evaluador["firstName"] . " " . $evaluador['lastName'] . "</td>";
                                                 echo "<td>" . $evaluador["email"] . "</td>";
                                                 echo "<td>28-02-2020</td>";

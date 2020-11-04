@@ -107,7 +107,7 @@ foreach ($data["documentos"] as $documento) {
 
                                     <div class="col">
                                         <label>Token de Acceso</label><br>
-                                        <input type="text" class="form-control" style="width:30%;" name="token" value="<?php echo generateCode(15); ?>" readonly>
+                                        <input type="text" class="form-control" style="width:30%; text-align:center;" name="token" value="<?php echo generateCode(15); ?>" readonly>
                                     </div>
                                 </div>
 
@@ -118,7 +118,7 @@ foreach ($data["documentos"] as $documento) {
                                     <div class="col">
                                         <div>
                                             <label for="inputState">Elija el Evaluador</label><br>
-                                            <select id="selectPrograma" class="form-control" name="idUser" style="width:30%;" required>
+                                            <select id="selectPrograma" class="form-control" name="idUser" style="width:50%;" required>
                                                 <?php
                                                 $none = true;
                                                 if($data["usuarios"] == NULL){
@@ -126,7 +126,7 @@ foreach ($data["documentos"] as $documento) {
                                                     echo "<option>No hay Evaluadores Disponibles para esta dependencia</option>";
                                                 }
                                                 foreach ($data["usuarios"] as $usuario) {
-                                                    echo "<option value='" . $usuario['user_id'] . "'>" . $usuario['fullName'] . "</option>";
+                                                    echo "<option value='" . $usuario['user_id'] . "'>" .$usuario['email']. " - " . $usuario['fullName'] . "</option>";
                                                 }
                                                 ?>
                                             </select>

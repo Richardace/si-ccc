@@ -25,13 +25,19 @@ class DocumentoController
         require_once "view/administrator/documentos.php";
     }
 
-    public function solicitante()
+    public function solicitante($id)
     {
+        $document = new DocumentDAO;
+        $userDAO = new UserDAO;
+        $dependency = $userDAO->getDependencyByIdUser($id);
+        $data['documentos'] = $document->getDocumentsByDependency($dependency);
         require_once "view/solicitante/documentos.php";
     }
 
-    public function addDocumentView()
+    public function addDocumentView($id)
     {
+        $userDAO = new UserDAO;
+        $data['dependency'] = $dependency = $userDAO->getDependencyByIdUser($id);
         require_once "view/solicitante/addDocumento.php";
     }
 
@@ -56,12 +62,31 @@ class DocumentoController
         }
     }
 
+    public function addCorreccionDocumento(){
+        $idEvaluador = $_POST["idEvaluador"];
+        $radicado = $_POST["radicado"];
+        $descripcion = $_POST["descripcion"];
+        $documentos = $_POST["documentos"];
+        $nameFolder = $_POST["nameFolder"];
+
+        $document = new DocumentDAO;
+
+        $sql = $document->addCorreccionDocument($idEvaluador, $radicado, $descripcion, $documentos, $nameFolder);
+
+        if ($sql) {
+            echo "ok";
+        } else {
+            echo "error";
+        }
+    }
+
     // Entrada del Evaluador al documento
     public function viewEvaluadorInit()
     {
         require_once "view/evaluador/validarDocumento.php";
     }
 
+    // EVALUADOR
     public function validarIdentidad()
     {
         $idUser = $_POST["idUser"];
@@ -87,16 +112,23 @@ class DocumentoController
                 $estado = $documentoEvaluador['state'];
             }
 
-            if ($estado != "Finalizado") {
-
+            if ($estado != "Finalizado" && $estado != "Aprobado" && $estado != "Devuelto con correcciones") {            
                 header("Location: index.php?c=documento&a=evaluador&id=$idDocumento");
             } else {
                 echo "<script>
-                    alert('El documento ya se encuentra en estado FINALIZADO');
+                    alert('El documento no se encuentra Disponible en estos momentos');
                     window.location= 'index.php?c=documento&a=viewEvaluadorInit'
                 </script>";
             }
         }
+    }
+
+    public function devolverDocumentoView($idDocument){
+        $DocumentDAO = new DocumentDAO;
+        $data['idDocument'] = $idDocument;
+        $documento = $DocumentDAO->getFolderDocument($idDocument);
+        $data['nameFolder'] = $documento;
+        require_once "view/evaluador/devolverDocumento.php";
     }
 
     public function evaluador($id)
@@ -105,7 +137,48 @@ class DocumentoController
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentById($id);
         $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
+        $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
+
         require_once "view/evaluador/evaluador.php";
+    }
+
+    // SOLICITANTE
+    public function verCorrecionesDocumentoSolicitante($id){
+        $document = new DocumentDAO;
+        $data['documentos'] = $document->getDocumentById($id);
+        $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
+        $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
+
+        require_once "view/solicitante/viewCorreccionesDocument.php";
+        
+    }
+
+    public function corregirDocumentoView($idCorreccion){
+        $documentDAO = new DocumentDAO;
+        $idDocument = $documentDAO->getDocumentByIdCorreccion($idCorreccion);
+        $data['idCorreccion'] = $idCorreccion;
+        $data['documentos'] = $documentDAO->getDocumentById($idDocument);
+
+        require_once "view/solicitante/updateDocumentByCorrecciones.php";
+
+    }
+
+    public function udpdateCorreccionDocumento(){        
+        
+        $radicado = $_POST['radicado'];
+        $descripcion = $_POST['descripcion'];
+        $documentos = $_POST['documentos'];
+        $idCorreccion = $_POST['idCorreccion'];
+
+        $document = new DocumentDAO;
+        
+        $sql = $document->updateCorreccionDocument($radicado, $descripcion, $documentos, $idCorreccion);
+
+        if ($sql) {
+            echo "ok";
+        } else {
+            echo "error";
+        }
     }
 
     public function descargarDocumentosById($id)
@@ -124,6 +197,48 @@ class DocumentoController
         $zip->open("documentos.zip", ZipArchive::CREATE);
         // Añadimos un directorio
         $dir = $title;
+        $zip->addEmptyDir($dir);
+        // Añadimos un archivo en la raid del zip.
+        //$zip->addFile("index.php", "index.php");
+        //Añadimos un archivo dentro del directorio que hemos creado
+
+        $obj = json_decode($files);
+
+        for ($i = 0; $i <= count($obj); $i++) {
+
+            $obj2 = $obj[$i]->elemento;
+
+            $zip->addFile(str_replace("../", "", $obj2), $dir . "/" . basename($obj2));
+        }
+
+        // Una vez añadido los archivos deseados cerramos el zip.
+        $zip->close();
+        // Creamos las cabezeras que forzaran la descarga del archivo como archivo zip.
+        header("Content-type: application/octet-stream");
+        header("Content-disposition: attachment; filename=documentos.zip");
+        // leemos el archivo creado
+        readfile('documentos.zip');
+        // Por último eliminamos el archivo temporal creado
+        unlink('documentos.zip'); //Destruye el archivo temporal
+
+    }
+
+    public function descargarDocumentosCorregidosById($id)
+    {
+
+        $document = new DocumentDAO;
+        $documento = $document->getCorreccionById($id);
+
+        foreach ($documento as $documentoEvaluador) {
+            $files = $documentoEvaluador['documentos_evaluador'];
+            $title = $documentoEvaluador['date_envio_evaluador'];
+        }
+
+        $zip = new ZipArchive();
+        // Creamos y abrimos un archivo zip temporal
+        $zip->open("documentos.zip", ZipArchive::CREATE);
+        // Añadimos un directorio
+        $dir = "Correcciones ".$title;
         $zip->addEmptyDir($dir);
         // Añadimos un archivo en la raid del zip.
         //$zip->addFile("index.php", "index.php");
@@ -177,7 +292,6 @@ class DocumentoController
         if ($dependency == "program") {
 
             $data['documentos'] = $document->getDocumentById($_POST['idDocument']);
-            $data['dependencia'] = $dependency;
             $data['usuarios'] = $userDAO->getUsersProgramById($_POST['idProgram']);
 
             require_once "view/administrator/addEvaluadorDocument.php";
@@ -213,6 +327,17 @@ class DocumentoController
         $data['documentos'] = $document->getDocumentsPending();
 
         require_once "view/administrator/documentos.php";
+    }
+
+    public function aprobarDocumentoSolicitante($idDocument){
+        $document = new DocumentDAO;
+        $document->aprobarDocumento($idDocument);
+        echo "
+				<script>
+						alert('Documento Aprobado con EXITO !');
+						window.location= 'config/logoutEvaluador.php';
+				</script>
+				";
     }
 
     public function recuperarToken($id){

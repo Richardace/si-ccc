@@ -51,6 +51,18 @@ class PersonalController
         require_once "view/administrator/addSolicitante.php";
     }
 
+    public function addSolicitanteSolicitanteView($id){
+        $programas = new ProgramDAO;
+        $departamentos = new DepartmentDAO;
+        $facultades = new FacultadDAO;
+        $correo = new CorreoDAO();
+        $data["correo"] = $correo->getCorreo($_GET["id"]);
+        $data["programas"] = $programas->getPrograms();
+        $data["departamentos"] = $departamentos->getDepartamentos();
+        $data["facultades"] = $facultades->getFacultades();
+        require_once "view/solicitante/addSolicitante.php";
+    }
+
     public function addEvaluadorView($id){
         $programas = new ProgramDAO;
         $departamentos = new DepartmentDAO;
@@ -113,6 +125,54 @@ class PersonalController
             }
             $inserNewFacultadUser = $FacultadUserDAO->insert($idUser, $idProgram);
             $this->administrador();
+        }
+    }
+
+    public function addSolicitanteSolicitante(){
+        $programUser = new ProgramUserDAO;
+        $DepartmentUserDAO = new DepartmentUserDAO;
+        $FacultadUserDAO = new FacultadUserDAO;
+        $user = new UserDAO();
+
+        $dependency = $_POST['dependency'];
+
+        if ($dependency == "program") {
+            $state = $_POST['state'];
+            $idProgram = $_POST['idProgram'];
+            $correo = $_POST['correo'];
+
+            $insertNewUser = $user->insert($correo, $state, 2);
+            $cuentaRegistrada = $user->getUserByEmail($correo);
+            foreach ($cuentaRegistrada as $cuenta) {
+                $idUser = $cuenta['id'];
+            }
+            $inserNewProgramUser = $programUser->insert($idUser, $idProgram);
+
+            $this->solicitante();
+        } else if ($dependency == "department") {
+            $state = $_POST['state'];
+            $idProgram = $_POST['idDepartamento'];
+            $correo = $_POST['correo'];
+
+            $insertNewUser = $user->insert($correo, $state, 2);
+            $cuentaRegistrada = $user->getUserByEmail($correo);
+            foreach ($cuentaRegistrada as $cuenta) {
+                $idUser = $cuenta['id'];
+            }
+            $inserNewDepartmentUser = $DepartmentUserDAO->insert($idUser, $idProgram);
+            $this->solicitante();
+        } else if ($dependency == "facultad") {
+            $state = $_POST['state'];
+            $idProgram = $_POST['idFacultad'];
+            $correo = $_POST['correo'];
+
+            $insertNewUser = $user->insert($correo, $state, 2);
+            $cuentaRegistrada = $user->getUserByEmail($correo);
+            foreach ($cuentaRegistrada as $cuenta) {
+                $idUser = $cuenta['id'];
+            }
+            $inserNewFacultadUser = $FacultadUserDAO->insert($idUser, $idProgram);
+            $this->solicitante();
         }
     }
 

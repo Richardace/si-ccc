@@ -11,6 +11,16 @@ class DocumentDAO
 		return $sql;
 	}
 
+	public function addCorreccionDocument($idEvaluador, $radicado, $descripcion, $documentos, $nameFolder)
+	{
+		$db = new Connect;
+		$sql = $db->query("INSERT INTO correcciones(id_userEvaluador, id_document, date_envio_evaluador, comentarios_evaluador, documentos_evaluador, nameFolder, state) 
+												VALUES('" . $idEvaluador . "','" . $radicado . "',  NULL , '" . $descripcion . "', '" . $documentos . "', '" . $nameFolder . "', 'Pendiente') ");
+		$sql2 = $db->query("UPDATE documento SET state= 'Devuelto con correcciones' WHERE id = '" . $radicado . "'");
+
+		return $sql;
+	}
+
 	public function validadIdentidad($idUser, $codigoAcceso)
 	{
 		$db = new Connect;
@@ -43,6 +53,104 @@ class DocumentDAO
 		return $documentos;
 	}
 
+	public function getCorreccionById($id)
+	{
+		require_once "model/DAO/UserDAO.php";
+		$db = new Connect;
+		$userDAO = new UserDAO;
+		$consulta = $db->prepare('SELECT * FROM correcciones WHERE id=:id');
+		$consulta->execute([
+			':id'   => $id
+		]);
+		$documentos = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$documentos[] = $row;
+		}
+		return $documentos;
+	}
+
+	public function getCorreccionesDocumentEvaluador($id){
+		require_once "model/DAO/UserDAO.php";
+		$db = new Connect;
+		$userDAO = new UserDAO;
+		$consulta = $db->prepare('SELECT * FROM correcciones WHERE id_document=:id ORDER BY date_envio_evaluador DESC');
+		$consulta->execute([
+			':id'   => $id
+		]);
+		$correcciones = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$correcciones[] = $row;
+		}
+		return $correcciones;
+	}
+
+	public function getFolderDocument($idDocumento)
+	{
+		require_once "model/DAO/UserDAO.php";
+		$db = new Connect;
+		$userDAO = new UserDAO;
+		$consulta = $db->prepare('SELECT * FROM documento WHERE id=:id');
+		$consulta->execute([
+			':id'   => $idDocumento
+		]);
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			return $row['nameFolder'];
+		}
+	}
+
+	public function getDocumentsByDependency($dependency)
+	{
+		require_once "model/DAO/UserDAO.php";
+		$db = new Connect;
+		$userDAO = new UserDAO;
+		$consulta = $db->prepare('SELECT * FROM documento WHERE source = :source');
+		$consulta->execute([
+			':source' => $dependency
+		]);
+		$documentos = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+
+			$row['fullName'] = $userDAO->getNameAndLastNameById($row['id_user']);
+			$row['email'] = $userDAO->getEmailByIdUser($row['id_user']);
+			$documentos[] = $row;
+		}
+		return $documentos;
+	}
+
+	public function getDocumentByIdCorreccion($idCorreccion){
+		
+		$db = new Connect;
+		$consulta = $db->prepare('SELECT * FROM correcciones WHERE id = :id');
+		$consulta->execute([
+			':id' => $idCorreccion
+		]);
+		$idDocumento = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+
+			$idDocumento = $row['id_document'];
+		}
+		return $idDocumento;
+	}
+
+	public function getDocuments()
+	{
+		require_once "model/DAO/UserDAO.php";
+		$db = new Connect;
+		$userDAO = new UserDAO;
+		$consulta = $db->prepare('SELECT * FROM documento WHERE state != :state');
+		$consulta->execute([
+			':state'   => "Radicado"
+		]);
+		$documentos = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+
+			$row['fullName'] = $userDAO->getNameAndLastNameById($row['id_user']);
+			$row['email'] = $userDAO->getEmailByIdUser($row['id_user']);
+			$documentos[] = $row;
+		}
+		return $documentos;
+	}
+
 	public function getDocumentEvaluador($idDocumento)
 	{
 		require_once "model/DAO/UserDAO.php";
@@ -57,6 +165,18 @@ class DocumentDAO
 			$documentos[] = $row;
 		}
 		return $documentos;
+	}
+
+	public function aprobarDocumento($idDocument)
+	{
+		$db = new Connect;
+		$insertNewUser = $db->prepare("UPDATE documento SET state=:state WHERE id = :id");
+		$insertNewUser->execute([
+			':state'   => "Aprobado",
+			':id'   => $idDocument
+		]);
+
+		return true;
 	}
 
 	public function getDocumentsPending()
@@ -133,5 +253,14 @@ class DocumentDAO
 			}
 		}
 		return $tokensActivos;
+	}
+
+	public function updateCorreccionDocument($radicado, $descripcion, $documentos, $idCorreccion){
+		$db = new Connect;
+		$sql = $db->query("UPDATE documento SET state= 'En Revisión', description= '".$descripcion."', files = '".$documentos."' WHERE id = '" . $radicado . "'");
+
+		$sql2 = $db->query("UPDATE correcciones SET state= 'Corregido' WHERE id = '" . $idCorreccion . "'");
+
+		return $sql2;
 	}
 }

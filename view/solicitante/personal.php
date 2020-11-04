@@ -111,7 +111,7 @@ session_start();
                                                         echo "<tr>";
                                                         echo "<td>" . $correo["email"] . "</td>";
 
-                                                        echo "<td><a href='index.php?c=personal&a=addSolicitanteView&id=" . $correo["id"] . "'><span id='iconoEliminar'><img src='view/assets/img/añadirUsuario.png' title='Eliminar'></span></a></td>";
+                                                        echo "<td><a href='index.php?c=personal&a=addSolicitanteSolicitanteView&id=" . $correo["id"] . "'><span id='iconoEliminar'><img src='view/assets/img/añadirUsuario.png' title='Eliminar'></span></a></td>";
 
                                                         echo "</tr>";
                                                     }
@@ -163,7 +163,6 @@ session_start();
                                     <thead>
                                         <tr class="header">
                                             <th>id</th>
-                                            <th>DEPENDENCIA</th>
                                             <th>Nombre y Apellido</th>
                                             <th>correo</th>
                                             <th>Fecha de registro</th>
@@ -187,7 +186,6 @@ session_start();
                                             foreach ($data["solicitante"] as $correo) {
                                                 echo "<tr>";
                                                 echo "<td>" . $correo["id"] . "</td>";
-                                                echo "<td>INGENIERIA DE SISTEMAS</td>";
                                                 echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
                                                 echo "<td>" . $correo["email"] . "</td>";
                                                 echo "<td>28-02-2020</td>";
