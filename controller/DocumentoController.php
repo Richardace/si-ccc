@@ -25,6 +25,15 @@ class DocumentoController
         require_once "view/administrator/documentos.php";
     }
 
+    public function viewDocumentAdministrador($id){
+        $document = new DocumentDAO;
+        $data['documentos'] = $document->getDocumentById($id);
+        $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
+        $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
+
+        require_once "view/administrator/viewDocument.php";
+    }
+
     public function solicitante($id)
     {
         $document = new DocumentDAO;
@@ -263,6 +272,15 @@ class DocumentoController
         // Por último eliminamos el archivo temporal creado
         unlink('documentos.zip'); //Destruye el archivo temporal
 
+    }
+
+    public function viewDocumentSolicitante($id){
+        $document = new DocumentDAO;
+        $data['documentos'] = $document->getDocumentById($id);
+        $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
+        $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
+
+        require_once "view/solicitante/viewDocument.php";
     }
 
     public function addEvaluadorDocumentoViewInit($id)

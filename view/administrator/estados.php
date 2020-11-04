@@ -120,7 +120,7 @@ session_start();
                       }
 
                       echo "<td><center>
-                              <a href='index.php?c=correo&a=eliminarCorreo&id=" . $documentos["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Consultar Documento'></span></a>&nbsp&nbsp&nbsp&nbsp
+                              <a href='index.php?c=documento&a=viewDocumentAdministrador&id=" . $documentos["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Consultar Documento'></span></a>&nbsp&nbsp&nbsp&nbsp
                               
                             </td>";
 
