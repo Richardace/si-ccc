@@ -19,9 +19,11 @@
 
 ul.tabs{
 	width: 100%;
-	background: rgb(255, 255, 255);
-	list-style: none;
-	/*display: flex; */
+    background: rgb(255, 255, 255);
+    list-style: none;
+    display: flex;
+    border-collapse: collapse;
+    overflow-x: auto;
 }
 
 ul.tabs li a:hover:not(.active){
