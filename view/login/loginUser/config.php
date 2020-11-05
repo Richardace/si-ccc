@@ -2,8 +2,8 @@
 
 	require_once($_SERVER['DOCUMENT_ROOT'].'/si-ccc/google-api\vendor\autoload.php'); 
 	$gClient = new Google_Client();
-	$gClient->setClientId("639740004339-0dm18jadol1jg6nvh4a62q7u4mh5sosl.apps.googleusercontent.com");
-	$gClient->setClientSecret("nWspZaaDUmtGrLvKr_bDIhsZ");
+	$gClient->setClientId("466390034500-biv2ngcm1f3unftvco3l20kkf7koceg6.apps.googleusercontent.com");
+	$gClient->setClientSecret("t0qTov6K-0D-eOSyps-2peRY");
 	$gClient->setApplicationName("Vicode Media Login");
 	$gClient->setRedirectUri("http://localhost/si-ccc/config/controlGoogle.php");
 	$gClient->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar");

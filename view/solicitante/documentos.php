@@ -63,8 +63,8 @@ session_start();
 
       <div>
         <center>
-          <div class="btn-agregarDocumento" >
-            <a  style="cursor: pointer;" href="index.php?c=documento&a=addDocumentView">
+          <div class="btn-agregarDocumento">
+            <a style="cursor: pointer;" href="index.php?c=documento&a=addDocumentView&id=<?php echo $_SESSION['id']; ?>">
               <img src="view/assets/img/add-file.png" style="width: 50px; height: 50px;" alt="Agregar Nuevo solicitante" title="Asignar nuevo solicitante">
             </a>
           </div>
@@ -83,43 +83,69 @@ session_start();
 
           <input type="text" id="myInput" placeholder="Buscar ...">
 
+          <select class="textoSelectActivo" style="float: right;" type="text" id="mySelect" placeholder="Buscar ...">
+            <option class="textoSelectActivo" value="Activo">Activo </option>
+            <option class="textoSelectActivo" value="Inactivo">Inactivo</option>
+          </select>
+
           <table id="myTable">
-            <tr class="header">
-              <!-- <th style="width:60%;">Name</th>
-                <th style="width:40%;">Country</th> -->
-              <th>No RADICADO</th>
-              <th>DEPENDENCIA</th>
-              <th>FECHA DE RECIBIDO</th>
-              <th>TIPO DE DOCUMENTO</th>
-              <th>DESTINO</th>
-              <th>ESTADO</th>
-              <th>OPCIONES</th>
-            </tr>
-
+            <thead>
+              <tr class="header">
+                <th>N° RAD</th>
+                
+                <th>SOLICITANTE</th>
+                <th>FECHA RECIBIDO</th>
+                <th>ASUNTO</th>
+                <th>DESTINO</th>
+                <th>ESTADO</th>
+                <th>
+                  <center>OPCIONES</center>
+                </th>
+              </tr>
+            </thead>
             <tr>
-
-              <h1 id="respuesta">
-
-              </h1>
-
+              <h1 id="respuesta"></h1>
             </tr>
+            <tbody>
+              <?php
 
-            <tr>
-              <td>0021541</td>
-              <td>INGENIERIA DE SISTEMAS</td>
-              <td>26-08-2020 1:45 P.M.</td>
-              <td>Registro Calificado</td>
-              <td>Consejo Academico</td>
-              <td>Pendiente por Revisar</td>
-              <td>
-                <center>
-                  <button id="iconoVer">
-                    <img src="view/assets/img/ver.png">
-                  </button>
-                </center>
-              </td>
-            </tr>
+              if ($data["documentos"] != NULL) {
+                foreach ($data["documentos"] as $documentos) {
+                  $documentoID = $documentos["id"];
+                  echo "<tr>";
+                  echo "<td>" . $documentos["id"] . "</td>";
+                  echo "<td>" . $documentos["fullName"] . "</td>";
+                  echo "<td>" . $documentos["dateRegister"] . "</td>";
+                  echo "<td>" . $documentos["title"] . "</td>";
+                  echo "<td>" . $documentos["destiny"] . "</td>";
+                  
+                  if($documentos["state"] == "Devuelto con correcciones"){
+                    echo "<td>
+                          <a href='index.php?c=documento&a=verCorrecionesDocumentoSolicitante&id=$documentoID'>
+                            <span>
+                              Devuelto con Correcciones
+                            </span>
+                          </a>
+                        </td>";
+                  }else if($documentos["state"] == "Aprobado"){
+                    echo "<td><span class='badge badge-success'>Aprobado</span></td>";
+                  }else{
+                    echo "<td>" . $documentos["state"] . "</td>";
+                  }
+                  
+                  echo "<td><center>
+                      <a href='index.php?c=documento&a=viewDocumentSolicitante&id=" . $documentos["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Consultar Documento'></span></a>&nbsp&nbsp&nbsp&nbsp        
+                      
+                            </td>";
 
+                  echo "</tr>";
+                }
+              } else {
+                echo "<td>No hay Documentos Pendientes por Asignar Evaluador</td>";
+              }
+
+              ?>
+            </tbody>
           </table>
 
 

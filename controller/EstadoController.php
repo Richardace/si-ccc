@@ -3,12 +3,14 @@
 	class EstadoController {
 		
 		public function __construct(){
-			// require_once "models/VehiculosModel.php";
+			require_once "model/DAO/DocumentDAO.php";
 		}
 
 		
         public function administrador(){
-            require_once "view/administrator/estados.php";	
+            $document = new DocumentDAO;
+            $data['documentos'] = $document->getDocuments();
+            require_once "view/administrator/estados.php";
         }
 
         public function solicitante(){

@@ -54,8 +54,6 @@ class CorreoController
 		}else{
 			return false;
 		}
-
-		
 	}
 
 	public function addCorreoExcel()

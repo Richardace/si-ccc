@@ -5,7 +5,7 @@ $(".multimediaFisica").dropzone({
 	url: "/",
 	addRemoveLinks: true,
 	maxFilesize: 15, //Mb
-	maxFiles: 3, 	//maximo de archivos
+	maxFiles: 10, 	//maximo de archivos
 	init: function () {
 		this.on("addedfile", function (file) {
 			arrayFiles.push(file);
@@ -18,9 +18,17 @@ $(".multimediaFisica").dropzone({
 	}
 })
 
+$(function () {
+	$('#datetimepicker1').datetimepicker({
+	   format: 'YYYY-MM-DD HH:mm'
+	});
+});
+
 var multimediaFisica = null;
 
 $(".guardarProducto").click(function () {
+
+
 
 	if ($(".usuario").val() != "" && $(".origen").val() != "" && $(".destino").val() != "" && $(".titulo").val() != "" && $(".descripcion").val() != "" && arrayFiles != "") {
 
@@ -95,6 +103,7 @@ function agregarMiProducto(imagen) {
 	datosDocumento.append("descripcion", $(".descripcion").val());
 	datosDocumento.append("nameFolder", $(".folder").val());
 	datosDocumento.append("documentos", imagen);
+	var idSolicitante = $(".usuario").val();
 
 
 	$.ajax({
@@ -114,13 +123,13 @@ function agregarMiProducto(imagen) {
 
 				swal({
 					type: "success",
-					title: "El producto ha sido guardado correctamente",
+					title: "El Documento ha sido enviado correctamente",
 					showConfirmButton: true,
 					confirmButtonText: "Cerrar"
 				}).then(function (result) {
 					if (result.value) {
 						$('.guardarProducto').html("Guardar producto");
-						window.location = "index.php?c=documento&a=solicitante";
+						window.location = "index.php?c=documento&a=solicitante&id=" + idSolicitante;
 
 					}
 				})

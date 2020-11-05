@@ -25,7 +25,6 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous">
   </script>
 
-
   <!-- JQuery-->
   <link rel="stylesheet" href="view/assets/js/jquery-ui/jquery-ui.min.css" />
   <link rel="stylesheet" href="view/assets/js/jquery-ui/jquery-ui.structure.min.css" />
@@ -66,7 +65,7 @@ session_start();
         <div class="card-body">
           <div class="box-body">
 
-            <input type="hidden" class="usuario" value="1" readonly>
+            <input type="hidden" class="usuario" value="<?php echo $_SESSION['id']; ?>" readonly>
 
             <?php
               function generateCode($length){
@@ -85,41 +84,34 @@ session_start();
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label>Origen</label>
-                <input type="text" class="form-control origen" value="Plan de Estudios de Ingenieria de Sistemas" readonly>
+                <input type="text" class="form-control origen" value="<?php echo $data['dependency']; ?>" readonly>
               </div>
               <div class="form-group col-md-6">
                 <label>Destino</label>
-                <input type="text" class="form-control destino" value="Consejo Academico">
+                <input type="text" class="form-control destino" placeholder="Dependencia destino">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>Asunto</label>
-                <input type="text" class="form-control titulo" value="Documentos para aprobacion por parte del consejo academico" readonly>
+                <input type="text" class="form-control titulo" >
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>Descripción u Observación</label>
-                <textarea type="text" style="height: 150px;" class="form-control descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eu tempor ante. Morbi eget risus dolor. Praesent ut sapien nulla. Sed pulvinar mi non nibh hendrerit mollis. Praesent eros est, tincidunt ut odio ac, malesuada imperdiet eros. Nunc finibus nulla vitae augue tincidunt, eget ultrices nulla viverra. Donec scelerisque dui nec orci mollis scelerisque eget eget magna. Aliquam erat volutpat. Vestibulum leo ligula, fermentum a justo vitae, varius auctor nunc. In eget dui enim. Ut vulputate vel metus a convallis. Pellentesque blandit diam eu erat semper, id laoreet dolor posuere. Quisque eros turpis, blandit quis vulputate efficitur, sagittis a neque. Mauris ut libero vel neque lobortis molestie eget non sem. Nullam ultricies felis vel orci placerat, vel mollis arcu porta. Nunc in cursus felis.
-                </textarea>
+                <textarea type="text" style="height: 150px;" class="form-control descripcion"></textarea>
               </div>
             </div>
 
             <br>
 
-            <!-- <div class="form-group">
-              <div class="input-group">
-                <input type="text" class="form-control input-lg tituloProducto" >
-              </div>
-            </div> -->
-
             <div class="form-group agregarMultimedia">
               <div class="multimediaFisica needsclick dz-clickable">
                 <div class="dz-message needsclick">
-                  Arrastrar o dar click para subir documentos.
+                  Arrastrar o dar click para subir documentos - Maximo 10 Archivos
                 </div>
               </div>
             </div>
