@@ -18,9 +18,17 @@ $(".multimediaFisica").dropzone({
 	}
 })
 
+$(function () {
+	$('#datetimepicker1').datetimepicker({
+	   format: 'YYYY-MM-DD HH:mm'
+	});
+});
+
 var multimediaFisica = null;
 
 $(".guardarProducto").click(function () {
+
+
 
 	if ($(".usuario").val() != "" && $(".origen").val() != "" && $(".destino").val() != "" && $(".titulo").val() != "" && $(".descripcion").val() != "" && arrayFiles != "") {
 

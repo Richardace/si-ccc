@@ -129,6 +129,8 @@ session_start();
                         </td>";
                   }else if($documentos["state"] == "Aprobado"){
                     echo "<td><span class='badge badge-success'>Aprobado</span></td>";
+                  }else{
+                    echo "<td>" . $documentos["state"] . "</td>";
                   }
                   
                   echo "<td><center>

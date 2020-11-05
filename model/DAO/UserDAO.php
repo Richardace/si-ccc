@@ -33,9 +33,8 @@ class UserDAO
 		]);
 		$users = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-			$users[] = $row;
+			return $row['id'];
 		}
-		return $users;
 	}
 
 	public function getEmailByIdUser($id)

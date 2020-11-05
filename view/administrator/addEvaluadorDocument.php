@@ -42,6 +42,79 @@ session_start();
     <!-- Mis Scripts-->
     <script type="text/javascript" src="view/assets/js/personal.js"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <script type="text/javascript" src="moment.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function authenticate() {
+            return gapi.auth2.getAuthInstance()
+                .signIn({
+                    scope: "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events"
+                })
+                .then(function() {
+                        console.log("Sign-in successful");
+                    },
+                    function(err) {
+                        console.error("Error signing in", err);
+                    });
+        }
+
+        function loadClient() {
+            gapi.client.setApiKey("AIzaSyAZvvx1JvVrxZ5KOP9Io1IlDVNM4wpP4kc");
+            return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest")
+                .then(function() {
+                        console.log("GAPI client loaded for API");
+                    },
+                    function(err) {
+                        console.error("Error loading GAPI client for API", err);
+                    });;
+        }
+
+
+        function execute() {
+            var fechaLimite = document.getElementsByName("dateLimit")[0].value;
+            var dateStart = fechaLimite + "" + "T17:00:00-07:00";
+            var dateEnd = fechaLimite + "" + "T17:00:00-07:10";
+            var correo = document.getElementsByName("email")[0].value;
+            
+
+            return gapi.client.calendar.events.insert({
+                    "calendarId": "eq2tt4qt2e3k2id62449e4i8oc@group.calendar.google.com",
+                    "maxAttendees": 4,
+                    "sendNotifications": true,
+                    "resource": {
+                        "end": {
+                            "dateTime": dateEnd
+                        },
+                        "start": {
+                            "dateTime": dateStart
+                        },
+                        "summary": "Solicitud de Revisión de Documento Academico - COMITE CURRICULAR CENTRAL",
+                        "attendees": [{
+                            "email": correo
+                        }]
+                    }
+                })
+                .then(function(response) {
+
+                        console.log("Response", response);
+                    },
+                    function(err) {
+                        console.error("Execute error", err);
+                    });
+        }
+        gapi.load("client:auth2", function() {
+            gapi.auth2.init({
+                client_id: "466390034500-biv2ngcm1f3unftvco3l20kkf7koceg6.apps.googleusercontent.com"
+            });
+        });
+    </script>
+
 </head>
 
 <?php
@@ -97,10 +170,25 @@ foreach ($data["documentos"] as $documento) {
                                     <div class="col" style>
                                         <label>Fecha Limite de Revisión</label><br>
                                         <input type="date" class="form-control" name="fechaLimite" style="width: 190px;" required>
-                                        <!-- <input type="text" class="form-control" placeholder="First name"> -->
                                     </div>
                                 </div>
                             </center>
+
+                            <center>
+                                <div class="form-row">
+                                    <div class="col" style>
+                                        <div class="input-group date" id="datetimepicker1" style="width:25%;" data-target-input="nearest">
+                                            <input type="text" style="width:30px; text-align:center;" class="form-control datetimepicker-input" data-target="#datetimepicker1" name="dateLimit" />
+                                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar">Calendario</i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+
+
+
                             <br>
                             <center>
                                 <div class="form-row">
@@ -118,15 +206,15 @@ foreach ($data["documentos"] as $documento) {
                                     <div class="col">
                                         <div>
                                             <label for="inputState">Elija el Evaluador</label><br>
-                                            <select id="selectPrograma" class="form-control" name="idUser" style="width:50%;" required>
+                                            <select id="selectPrograma" class="form-control" name="email" style="width:50%;" required>
                                                 <?php
                                                 $none = true;
-                                                if($data["usuarios"] == NULL){
+                                                if ($data["usuarios"] == NULL) {
                                                     $none = false;
                                                     echo "<option>No hay Evaluadores Disponibles para esta dependencia</option>";
                                                 }
                                                 foreach ($data["usuarios"] as $usuario) {
-                                                    echo "<option value='" . $usuario['user_id'] . "'>" .$usuario['email']. " - " . $usuario['fullName'] . "</option>";
+                                                    echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - " . $usuario['fullName'] . "</option>";
                                                 }
                                                 ?>
                                             </select>
@@ -134,11 +222,13 @@ foreach ($data["documentos"] as $documento) {
                                     </div>
                                 </div>
                             </center>
-                            
+
                             <input type="hidden" value="<?php echo $idDocument; ?>" name="idDocument">
 
                             <br>
-                            <center><input id="add" type="submit" value="Asignar Evaluador" class="btn btn-primary guardarProducto" style="background:rgb(226, 3, 26); border:none; color:white; <?php if(!$none){echo "display:none;";} ?>" /></center>
+                            <center><input id="add" type="submit" onclick="authenticate().then(loadClient).then(execute)" value="Asignar Evaluador" class="btn btn-primary guardarProducto" style="background:rgb(226, 3, 26); border:none; color:white; <?php if (!$none) {
+                                                                                                                                                                                                                                                                echo "display:none;";
+                                                                                                                                                                                                                                                            } ?>" /></center>
                             <br>
                         </form>
                     </div>
@@ -215,6 +305,14 @@ foreach ($data["documentos"] as $documento) {
                 <div class="card-footer text-muted" style="color: white; font-weight: bold; background:rgb(226, 3, 26);"></div>
             </div>
         </section>
+
+        <script type="text/javascript">
+            $(function() {
+                $('#datetimepicker1').datetimepicker({
+                    format: 'YYYY-MM-DD'
+                });
+            });
+        </script>
 </body>
 
 </html>

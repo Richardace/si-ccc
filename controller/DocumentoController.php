@@ -331,11 +331,12 @@ class DocumentoController
     public function addDocumentToEvaluate()
     {
         $document = new DocumentDAO;
+        $UserDAO = new UserDAO;
 
-
-        $idUser = $_POST['idUser'];
+        $idUser = $UserDAO->getUserByEmail($_POST['email']);
+        
         $idDocument = $_POST['idDocument'];
-        $dateLimit = $_POST['fechaLimite'];
+        $dateLimit = $_POST['dateLimit'];
         $token = $_POST['token'];
 
         $document->insertDocumentToEvaluate($idUser, $idDocument, $dateLimit, $token);
