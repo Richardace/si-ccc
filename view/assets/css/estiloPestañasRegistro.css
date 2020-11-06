@@ -19,12 +19,20 @@
 
 ul.tabs{
 	width: 100%;
+<<<<<<< HEAD
+    background: rgb(255, 255, 255);
+    list-style: none;
+    display: flex;
+    border-collapse: collapse;
+    overflow-x: auto;
+=======
 	background: rgb(255, 255, 255);
 	list-style: none;
 	display: flex;
     border-collapse: collapse;
     overflow-x: auto;
 	/*display: flex; */
+>>>>>>> f6b318352c8ac91050cb100f7e2c55fd4b9cae42
 }
 
 ul.tabs li a:hover:not(.active){
