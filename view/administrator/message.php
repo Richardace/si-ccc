@@ -84,13 +84,10 @@
 
               <table id="myTable">
                 <tr class="header">
-                  <!-- <th style="width:60%;">Name</th>
-                <th style="width:40%;">Country</th> -->
-                  <th>No RADICADO</th>
-                  <th>DEPENDENCIA</th>
+
+                  <th>ORIGEN</th>
+                  <th>ASUNTO</th>
                   <th>FECHA DE RECIBIDO</th>
-                  <th>TIPO DE DOCUMENTO</th>
-                  <th>DESTINO</th>
                   <th>ESTADO</th>
                   <th>OPCIONES</th>
                 </tr>
@@ -104,12 +101,10 @@
                 </tr>
 
                 <tr>
-                  <td>0021541</td>
                   <td>INGENIERIA DE SISTEMAS</td>
-                  <td>26-08-2020 1:45 P.M.</td>
                   <td>Registro Calificado</td>
-                  <td>Consejo Academico</td>
-                  <td>Pendiente por Revisar</td>
+                  <td>26-08-2020 1:45 P.M.</td>
+                  <td>Leido</td>
                   <td>
                     <center>
                       <button id="iconoVer">
@@ -135,8 +130,7 @@
 
               <table id="myTable">
                 <tr class="header">
-                  <!-- <th style="width:60%;">Name</th>
-                  <th style="width:40%;">Country</th> -->
+
                   <th>No RADICADO</th>
                   <th>DEPENDENCIA</th>
                   <th>FECHA DE RECIBIDO</th>

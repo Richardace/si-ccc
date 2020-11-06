@@ -165,19 +165,21 @@ foreach ($data["documentos"] as $documento) {
                     <div class="box-body">
 
                         <form method="post" action="index.php?c=documento&a=addDocumentToEvaluate">
-                            <center>
+                            <!-- <center>
                                 <div class="form-row">
                                     <div class="col" style>
                                         <label>Fecha Limite de Revisión</label><br>
                                         <input type="date" class="form-control" name="fechaLimite" style="width: 190px;" required>
                                     </div>
                                 </div>
-                            </center>
+                            </center> -->
 
                             <center>
                                 <div class="form-row">
                                     <div class="col" style>
+                                        <label>Fecha Limite de Revisión</label><br>
                                         <div class="input-group date" id="datetimepicker1" style="width:25%;" data-target-input="nearest">
+                                        
                                             <input type="text" style="width:30px; text-align:center;" class="form-control datetimepicker-input" data-target="#datetimepicker1" name="dateLimit" />
                                             <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                                 <div class="input-group-text"><i class="fa fa-calendar">Calendario</i></div>
