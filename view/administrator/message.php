@@ -131,7 +131,7 @@
               <table id="myTable">
                 <tr class="header">
 
-                  <th>No RADICADO</th>
+                  
                   <th>DEPENDENCIA</th>
                   <th>FECHA DE RECIBIDO</th>
                   <th>TIPO DE DOCUMENTO</th>
