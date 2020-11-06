@@ -9,11 +9,9 @@ class DocumentoController
 
         require_once "model/DAO/UserDAO.php";
         require_once "model/DAO/ProgramDAO.php";
-        require_once "model/DAO/DepartmentDAO.php";
         require_once "model/DAO/FacultadDAO.php";
 
         require_once "model/DAO/ProgramUserDAO.php";
-        require_once "model/DAO/DepartmentUserDAO.php";
         require_once "model/DAO/FacultadUserDAO.php";
     }
 

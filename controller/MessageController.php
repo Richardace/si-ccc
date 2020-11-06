@@ -17,6 +17,12 @@
             require_once "view/solicitante/message.php";	
         }
 
+        public function viewNewMessageAdministrador(){
+
+
+            require_once "view/administrator/addMensajeNuevo.php";
+        }
+
         public function index(){
             session_start();
             if($_SESSION['rol_id'] == 1){

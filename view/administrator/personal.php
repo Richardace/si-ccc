@@ -167,15 +167,12 @@ session_start();
                                     <thead>
                                         <tr class="header">
                                             <th>id</th>
-                                            <th>DEPENDENCIA</th>
-                                            <th>Nombre y Apellido</th>
+                                            <th>Nombre</th>
                                             <th>correo</th>
                                             <th>Fecha de registro</th>
                                             <th>Fecha de Finalizacion</th>
                                             <th>ESTADO</th>
-                                            <th>
-                                                <center>OPCIONES
-                                            </th>
+
                                         </tr>
 
                                     </thead>
@@ -191,17 +188,11 @@ session_start();
                                             foreach ($data["solicitante"] as $correo) {
                                                 echo "<tr>";
                                                 echo "<td>" . $correo["id"] . "</td>";
-                                                echo "<td>" . $correo["dependencyUser"] . "</td>";
                                                 echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
                                                 echo "<td>" . $correo["email"] . "</td>";
                                                 echo "<td>28-02-2020</td>";
                                                 echo "<td>28-06-2020</td>";
                                                 echo "<td>" . $correo["state"] . "</td>";
-
-                                                echo "<td><center>
-                                                    <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
-                                                    <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
-                                                  </td>";
 
                                                 echo "</tr>";
                                             }

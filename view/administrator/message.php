@@ -59,11 +59,9 @@
     <!-- Contenido -->
     <section id="content">
 
-      <!-- <div>
-        <button id="btnNewMsg">Crear Nuevo Mensaje</button>
-      </div> -->
+
       <div class="btn-agregar">
-        <a href="" target="_blank">
+        <a href="index.php?&c=message&a=viewNewMessageAdministrador">
           <img src="view/assets/img/agregar.png" alt="Agregar Mensaje" title="Crear Nuevo Mensaje">
         </a>
       </div>
@@ -131,11 +129,9 @@
               <table id="myTable">
                 <tr class="header">
 
-                  
-                  <th>DEPENDENCIA</th>
-                  <th>FECHA DE RECIBIDO</th>
-                  <th>TIPO DE DOCUMENTO</th>
                   <th>DESTINO</th>
+                  <th>ASUNTO</th>
+                  <th>FECHA DE ENVIADO</th>
                   <th>ESTADO</th>
                   <th>OPCIONES</th>
                 </tr>
@@ -149,12 +145,10 @@
                 </tr>
 
                 <tr>
-                  <td>0021541</td>
                   <td>INGENIERIA DE SISTEMAS</td>
-                  <td>26-08-2020 1:45 P.M.</td>
                   <td>Registro Calificado</td>
-                  <td>Consejo Academico</td>
-                  <td>Pendiente por Revisar</td>
+                  <td>26-08-2020 1:45 P.M.</td>
+                  <td>Leido</td>
                   <td>
                     <center>
                       <button id="iconoVer">

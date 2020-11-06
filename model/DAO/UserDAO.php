@@ -80,7 +80,6 @@ class UserDAO
 		]);
 		$users = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-			$row['dependencyUser'] = $this->getDependencyByIdUser($row['id']);
 			$users[] = $row;
 		}
 		return $users;
@@ -170,7 +169,6 @@ class UserDAO
 	public function getDependencyByIdUser($idUser)
 	{
 		$program = $this->findUserInProgram($idUser);
-		$department = $this->findUserInDepartment($idUser);
 		$facultad = $this->findUserInFacultad($idUser);
 
 		if ($program != NULL) {
@@ -182,16 +180,6 @@ class UserDAO
 			while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 				return $row['name'];
 			}
-		}else if($department != NULL){
-			$db = new Connect;
-			$consulta = $db->prepare('SELECT * FROM department WHERE id=:id');
-			$consulta->execute([
-				':id'   => $program
-			]);
-			while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-				return $row['name'];
-			}
-			
 		}else if($facultad != NULL){
 			$db = new Connect;
 			$consulta = $db->prepare('SELECT * FROM facultad WHERE id=:id');
@@ -204,8 +192,6 @@ class UserDAO
 		}else{
 			
 		}
-
-		
 	}
 
 	// Funciones de extraccion de detalles
