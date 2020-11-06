@@ -59,7 +59,7 @@ session_start();
     <section id="content">
 
       <div class="card">
-        <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+        <div class="card-header" style="color: white; font-weight: bold; background: #dc3545;">
           <CENTER>DOCUMENTOS NUEVOS PARA REVISIÓN</CENTER>
         </div>
         <div class="card-body">
@@ -137,7 +137,7 @@ session_start();
           </div>
           <!-- FIN TABLA -->
         </div>
-        <div class="card-footer text-muted" style="color: white; font-weight: bold; background:rgb(226, 3, 26);"></div>
+        <div class="card-footer text-muted" style="color: white; font-weight: bold; background:background:#dc3545;"></div>
       </div>
       <div class="clearfix"></div>
     </section>

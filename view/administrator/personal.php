@@ -161,7 +161,7 @@ session_start();
 
                             <!-- INICIO TABLA -->
 
-                            <div class="table-responsive-lg">
+                            <div class="table-responsive">
 
                                 <table class="table" id="myTable">
                                     <thead>
