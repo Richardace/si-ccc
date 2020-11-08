@@ -120,7 +120,7 @@
           </article>
           <article id="tab2">
             <!-- INICIO TABLA -->
-            <div class="wrapper">
+            <div class="wrapper" id="mensajes">
 
               <!-- INICIO TABLA -->
 
@@ -137,14 +137,42 @@
                 </tr>
 
                 <tr>
-
-                  <h1 id="respuesta">
-
-                  </h1>
-
+                  <h1 id="respuesta"></h1>
                 </tr>
+                <tbody>
+               <?php
+               
+              //Metodo creado para listar mensaje ->Prueba
+              if ($data["mensajes"] != NULL) {
+                foreach ($data["mensajes"] as $mensajes) {
+                  echo "<tr>";
+                  echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
+                  echo "<td>" . $mensajes["description"] . "</td>";
+                  echo "<td>" . $mensajes["title"] . "</td>";
+                  echo "<td>" . $mensajes["state"] . "</td>";
+     
+                  if($mensajes["state"] == "Leido"){
+                    echo "<td><span class='badge badge-success'>Leido</span></td>";
+                  }else{
+                    echo "<td>" . $mensajes["state"] . "</td>";
+                  }
 
-                <tr>
+                  echo "<td><center>
+                            <button id='iconoVer'>
+                              <img src='view/assets/img/ver.png'>
+                            </button>;        
+                        </td>";
+
+                  echo "</tr>";
+                }
+              } else {
+                echo "<td>No hay Mensajes Leido para Mostrar</td>";
+              }
+
+?>
+
+</tbody>
+               <!-- <tr>
                   <td>INGENIERIA DE SISTEMAS</td>
                   <td>Registro Calificado</td>
                   <td>26-08-2020 1:45 P.M.</td>
@@ -156,7 +184,7 @@
                       </button>
                     </center>
                   </td>
-                </tr>
+                </tr> -->
 
               </table>
 

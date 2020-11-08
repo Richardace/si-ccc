@@ -315,7 +315,7 @@ session_start();
 
                             <!-- INICIO TABLA -->
 
-                            <div class="table-responsive-lg">
+                            <div class="table-responsive">
 
                                 <table id="myTable" class="table table-hover">
                                     <thead>

@@ -4,7 +4,8 @@
 		
 		public function __construct(){
             // require_once "models/VehiculosModel.php";
-            
+            require_once "model/DAO/MessageDAO.php";
+
 		}
 		
         public function administrador(){
@@ -21,6 +22,15 @@
 
 
             require_once "view/administrator/addMensajeNuevo.php";
+        }
+
+        //Metodo creado para listar mensaje ->Prueba
+        public function viewListDocument(){
+            $message = null;
+            $message = new MessageDao;
+            $data['mensajes'] = $message->getMessage();
+    
+            require_once "view/administrator/message.php";
         }
 
         public function index(){

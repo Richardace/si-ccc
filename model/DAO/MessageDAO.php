@@ -19,7 +19,21 @@
 				$this->messages[] = $row;
 			}
 			return $this->messages;
-        }
+		}
+		
+		//Metodo creado para listar mensaje ->Prueba
+		public function getMessage(){
+			$db = new Connect;
+			$consulta = $db->prepare("SELECT * FROM messages WHERE state != :state'");
+			$consulta->execute([
+				':state' => "Leido"
+			]);
+			$mensajes = NULL;
+			while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+				$mensajes[] = $row;
+			}
+			return $mensajes;
+		}
     }
 
 ?>
