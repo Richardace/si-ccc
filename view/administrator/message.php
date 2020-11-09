@@ -124,8 +124,7 @@
 
               <!-- INICIO TABLA -->
 
-              <input type="text" id="myInput" placeholder="Search for names..">
-
+              
               <table id="myTable">
                 <tr class="header">
 
@@ -149,12 +148,11 @@
                   echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
                   echo "<td>" . $mensajes["description"] . "</td>";
                   echo "<td>" . $mensajes["title"] . "</td>";
-                  echo "<td>" . $mensajes["state"] . "</td>";
-     
-                  if($mensajes["state"] == "Leido"){
+                 
+                 if($mensajes["state"] == "Leido"){
                     echo "<td><span class='badge badge-success'>Leido</span></td>";
                   }else{
-                    echo "<td>" . $mensajes["state"] . "</td>";
+                 echo "<td>" . $mensajes["state"] . "</td>";
                   }
 
                   echo "<td><center>

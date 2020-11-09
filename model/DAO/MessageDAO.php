@@ -2,31 +2,15 @@
 	
 	class MessageDao {
 		
-		private $db;
-		private $messages;
 		
-		public function __construct(){
-			$this->db = Conectar::conexion();
-			$this->messages = array();
-		}
-		
-		public function getMessages()
-		{
-			$sql = "SELECT * FROM message";
-			$resultado = $this->db->query($sql);
-			while($row = $resultado->fetch_assoc())
-			{
-				$this->messages[] = $row;
-			}
-			return $this->messages;
-		}
 		
 		//Metodo creado para listar mensaje ->Prueba
-		public function getMessage(){
+
+		public function getMessageEnviado($id_user){
 			$db = new Connect;
-			$consulta = $db->prepare("SELECT * FROM messages WHERE state != :state'");
+			$consulta = $db->prepare("SELECT * FROM messages WHERE user_id_origin = :id_user");
 			$consulta->execute([
-				':state' => "Leido"
+				':id_user' => $id_user
 			]);
 			$mensajes = NULL;
 			while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
