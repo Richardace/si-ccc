@@ -95,18 +95,6 @@ session_start();
               </select>
             </div>
 
-            <div id="selectDepartamento" style="display: none;">
-              <label for="inputState">Elija el Departamento</label><br>
-              <select class="form-control" name="idDepartamento" style="width:40%;">
-                <option>Elija el Departamento</option>
-                <?php
-                foreach ($data["departamentos"] as $programa) {
-                  echo "<option value='" . $programa['id'] . "'>" . $programa['name'] . "</option>";
-                }
-                ?>
-              </select>
-            </div>
-
             <div id="selectFacultad" style="display: none;">
               <label for="inputState">Elija el Departamento</label><br>
               <select class="form-control" name="idFacultad" style="width:40%;">

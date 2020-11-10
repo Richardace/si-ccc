@@ -81,7 +81,7 @@
 
 
                             if($info['rol_id'] == 1){
-                                header('Location: ../index.php?c=message&a=administrador');
+                                header('Location: ../index.php?c=message&a=administrador&id='.$info['id']);
                             } else if($info['rol_id'] == 2){
                                 header('Location: ../index.php?c=message&a=solicitante');
                             }else if($info['rol_id'] == 4){
@@ -115,7 +115,7 @@
                     $_SESSION['rol_id'] = $info['rol_id'];
 
                     if($info['rol_id'] == 1){
-                        header('Location: ../index.php?c=message&a=administrador');
+                        header('Location: ../index.php?c=message&a=administrador&id='.$info['id']);
                     } else if($info['rol_id'] == 2){
                         header('Location: ../index.php?c=message&a=solicitante');
                     }else if($info['rol_id'] == 4){

@@ -10,8 +10,8 @@
 		public function insert($idUser, $idProgram){
             $db = new Connect;
 			
-			$inserNewUserProgram = $db -> prepare("INSERT INTO facultad_user (user_id, facultad_id, entry_date, exit_date) 
-											VALUES (:userID, :facultad_id, NULL, '')");
+			$inserNewUserProgram = $db -> prepare("INSERT INTO facultad_user (user_id, facultad_id) 
+											VALUES (:userID, :facultad_id)");
 			$inserNewUserProgram -> execute([
 				':userID'   => $idUser,
 				':facultad_id'   => $idProgram,

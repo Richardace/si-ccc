@@ -35,9 +35,9 @@ class DocumentoController
     public function solicitante($id)
     {
         $document = new DocumentDAO;
-        $userDAO = new UserDAO;
-        $dependency = $userDAO->getDependencyByIdUser($id);
-        $data['documentos'] = $document->getDocumentsByDependency($dependency);
+        $userDAO = new UserDAO;        
+        $data['documentos'] = $document->getDocumentsByIdUser($id);
+
         require_once "view/solicitante/documentos.php";
     }
 
@@ -51,8 +51,6 @@ class DocumentoController
     public function addDocument()
     {
         $usuario = $_POST["usuario"];
-        $origen = $_POST["origen"];
-        $destino = $_POST["destino"];
         $descripcion = $_POST["descripcion"];
         $titulo = $_POST["titulo"];
         $documentos = $_POST["documentos"];
@@ -60,7 +58,7 @@ class DocumentoController
 
         $document = new DocumentDAO;
 
-        $sql = $document->addDocument($usuario, $origen, $destino, $titulo, $descripcion, $documentos, $nameFolder);
+        $sql = $document->addDocument($usuario, $titulo, $descripcion, $documentos, $nameFolder);
 
         if ($sql) {
             echo "ok";
@@ -284,18 +282,18 @@ class DocumentoController
     public function addEvaluadorDocumentoViewInit($id)
     {
         $document = new DocumentDAO;
-
-        $programas = new ProgramDAO;
-        $departamentos = new DepartmentDAO;
-        $facultades = new FacultadDAO;
-
-        $data["programas"] = $programas->getPrograms();
-        $data["departamentos"] = $departamentos->getDepartamentos();
-        $data["facultades"] = $facultades->getFacultades();
+        $user = new UserDAO;
 
         $data['documentos'] = $document->getDocumentById($id);
-
-        require_once "view/administrator/addEvaluadorDocumentInit.php";
+        $data["evaluadores"] = $user->getEvaluadores(3);
+        $programas = new ProgramDAO;
+        $facultades = new FacultadDAO;
+        
+        $data["programas"] = $programas->getPrograms();
+        $data["facultades"] = $facultades->getFacultades();
+        $data['sesionesActivas'] = $document->getSesionesActivas();
+        
+        require_once "view/administrator/addEvaluadorDocument.php";
     }
 
     public function addEvaluadorDocumentoView()
@@ -327,17 +325,31 @@ class DocumentoController
     }
 
     public function addDocumentToEvaluate()
-    {
+    {   
         $document = new DocumentDAO;
         $UserDAO = new UserDAO;
 
-        $idUser = $UserDAO->getUserByEmail($_POST['email']);
+        $email1 = $_POST['email1'];
+        $email2 = $_POST['email2'];
+
+        $idUser = $UserDAO->getUserByEmail($email1);
         
         $idDocument = $_POST['idDocument'];
         $dateLimit = $_POST['dateLimit'];
+        $radicado = $_POST['radicado'];
+        $sesion = $_POST['sesion'];
+
         $token = $_POST['token'];
 
         $document->insertDocumentToEvaluate($idUser, $idDocument, $dateLimit, $token);
+
+        $document->guardarInfoDocumento($idDocument, $sesion, $radicado);
+
+        if($email2 != "nn"){
+            $idUser2 = $UserDAO->getUserByEmail($email2);
+            $document->insertDocumentToEvaluate($idUser2, $idDocument, $dateLimit, $token);
+            $this->enviarCorreoEvaluador($idUser2, $token, $dateLimit);
+        }
 
         $this->enviarCorreoEvaluador($idUser, $token, $dateLimit);
 
@@ -365,12 +377,18 @@ class DocumentoController
         $tokens = $document->getTokenEnableById($id);
         $tokensRecuperados = "";
         $i = 0;
-        foreach ($tokens as $token) {
-            $i = $i + 1;
-            $tokensRecuperados = $tokensRecuperados . "Token N° ".$i.": ".$token."<br>";
-            
+        if($tokens == NULL){
+            $tokensActivos = 0;
+        }else{
+            foreach ($tokens as $token) {
+                $i = $i + 1;
+                $tokensRecuperados = $tokensRecuperados . "Token N° ".$i.": ".$token['key_access']." -> Fecha Limite: ".$token['dateLimit']."<br>";
+                
+            }
+            $tokensActivos = count($tokens);
         }
-        $tokensActivos = count($tokens);
+        
+        
         $fullName = $UserDAO->getNameAndLastNameById($id);
         $email = $UserDAO->getEmailByIdUser($id);
 
@@ -380,28 +398,58 @@ class DocumentoController
         $titulo = 'Recuperacion de TOKENS de Seguridad';
 
         $mensaje = '<html>' .
-            '<head><center><title>Recuperacion de Tokens de Seguridad</title></center></head>' .
+            '<head><center><title>Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</title></center></head>' .
             "<body style='background: #DCDCDC;>
             <center>
-                <h1 style='font-weight: bold;' >Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</h1>
+                <h1 style='font-weight: bold;' ></h1>
             </center>" .
-            '<hr>' .
-            "<center><div style='width:70%; background: white; border-radius:10px;'>
-            <br>
-            <br>
-            <img src='https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logoufps.png' style='width:60px; height:60px'><br><br>
+            "<center><div style='width:694px; background: white; border-radius:5px;'>
+      
+            <img src='https://i.ibb.co/S621yLn/banner4.png' style='width:694px; height:100px'><br><br>
+
             Cordial Saludo $fullName <br><br>
-            En base a su solicitud de recuperación de TOKENS, encontramos que tiene $tokensActivos activos <br><br>
-            $tokensRecuperados <br><br>
-            Para acceder al Nuevo Sistema del COMITE CURRICULAR, lo podra hacer mediante el siguiente enlace: <a href='http://localhost/si-ccc/index.php?l=login&a=indexEvaluador' style='font-weight: bold;'> INGRESAR </a><br><br>
+            La presente es para solicitarle su valiosa colaboración en la revision de documentos enviados al COMITE CURRICULAR CENTRAL. <br><br>
+            Para acceder al Nuevo Sistema del COMITE CURRICULAR, lo podra hacer mediante el siguiente enlace: <br> <a href='http://localhost/si-ccc/index.php?l=login&a=indexEvaluador&id' style='font-weight: bold;'> INGRESAR </a><br><br>
             Una vez ingrese, debera ingresar el TOKEN de seguridad que le permitira acceder a los documentos: <br><br>
 
+            TOKEN DE SEGURIDAD: <span style='font-weight: bold; background: #cdcdcd; '> <br> $token
+            </span> <br><br>
+            FECHA MAXIMA DE REVISIÓN: <span style='font-weight: bold;background: #cdcdcd;'><br>$fullName</span> <br><br>
+            En la misma plataforma podras asignar correcciones si asi lo ameriten, o en caso contrario si el documento esta apto y cumple con la normativa, podra regresarlo con la Aprobación. <br>
+            Se le agradece su valiosa colaboración.<br><br>
             Att: COMITE CURRICULAR CENTRAL UFPS <br><br>
+
+            <div style='background-color:#c31222;  height:20px; width: 694px;'></div>
+
 
             </div></center>" .
 
             '</body>' .
             '</html>';
+
+        // $mensaje = '<html>' .
+        //     '<head><center><title>Recuperacion de Tokens de Seguridad</title></center></head>' .
+        //     "<body style='background: #DCDCDC;>
+        //     <center>
+        //         <h1 style='font-weight: bold;' >Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</h1>
+        //     </center>" .
+        //     '<hr>' .
+        //     "<center><div style='width:70%; background: white; border-radius:10px;'>
+        //     <br>
+        //     <br>
+        //     <img src='https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logoufps.png' style='width:60px; height:60px'><br><br>
+        //     Cordial Saludo $fullName <br><br>
+        //     En base a su solicitud de recuperación de TOKENS, encontramos que tiene $tokensActivos activos <br><br>
+        //     $tokensRecuperados <br><br>
+        //     Para acceder al Nuevo Sistema del COMITE CURRICULAR, lo podra hacer mediante el siguiente enlace: <a href='http://localhost/si-ccc/index.php?l=login&a=indexEvaluador' style='font-weight: bold;'> INGRESAR </a><br><br>
+        //     Una vez ingrese, debera ingresar el TOKEN de seguridad que le permitira acceder a los documentos: <br><br>
+
+        //     Att: COMITE CURRICULAR CENTRAL UFPS <br><br>
+
+        //     </div></center>" .
+
+        //     '</body>' .
+        //     '</html>';
 
         $cabeceras = 'MIME-Version: 1.0' . "\r\n";
         $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n";

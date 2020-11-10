@@ -152,15 +152,13 @@ $(document).ready(function () {
 
   $("#programa").click(function () {
     $("#selectPrograma").show();
-    $("#selectDepartamento").hide();
     $("#selectFacultad").hide();
     $("#state").show();
     $("#agregar").show();
   });
 
-  $("#departamento").click(function () {
+  $("#sd").click(function () {
     $("#selectPrograma").hide();
-    $("#selectDepartamento").show();
     $("#selectFacultad").hide();
     $("#state").show();
     $("#agregar").show();
@@ -168,10 +166,23 @@ $(document).ready(function () {
 
   $("#facultad").click(function () {
     $("#selectPrograma").hide();
-    $("#selectDepartamento").hide();
     $("#selectFacultad").show();
     $("#state").show();
     $("#agregar").show();
+  });
+
+  $("#evaluador1").click(function () {
+    $("#autGoogle").show();
+    $("#eva1").show();
+    $("#eva2").hide();
+    $("#add").show();
+  });
+
+  $("#evaluador2").click(function () {
+    $("#autGoogle").show();
+    $("#eva1").show();
+    $("#eva2").show();
+    $("#add").show();
   });
 
   // Reloj

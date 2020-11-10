@@ -74,29 +74,14 @@ session_start();
       <div class="wrap">
         <div class="wrapper">
 
-          <br>
-          <label class="textoRadioButton">FILTRAR POR: &nbsp;</label>
-          <input type="radio" name="filtro" id="dependencia" value="1"> <span class="textoRadioButton">DEPENDENCIA
-          </span> &nbsp; &nbsp;
-          <input type="radio" name="filtro" id="nombre" value="2"> <span class="textoRadioButton">NOMBRE </span>
-          &nbsp; &nbsp; &nbsp;
-
-          <input type="text" id="myInput" placeholder="Buscar ...">
-
-          <select class="textoSelectActivo" style="float: right;" type="text" id="mySelect" placeholder="Buscar ...">
-            <option class="textoSelectActivo" value="Activo">Activo </option>
-            <option class="textoSelectActivo" value="Inactivo">Inactivo</option>
-          </select>
-
+<br>
           <table id="myTable">
             <thead>
               <tr class="header">
-                <th>N° RAD</th>
-                
-                <th>SOLICITANTE</th>
-                <th>FECHA RECIBIDO</th>
+
+                <th>N° de Radicado</th>
+                <th>FECHA de registro</th>
                 <th>ASUNTO</th>
-                <th>DESTINO</th>
                 <th>ESTADO</th>
                 <th>
                   <center>OPCIONES</center>
@@ -113,11 +98,15 @@ session_start();
                 foreach ($data["documentos"] as $documentos) {
                   $documentoID = $documentos["id"];
                   echo "<tr>";
-                  echo "<td>" . $documentos["id"] . "</td>";
-                  echo "<td>" . $documentos["fullName"] . "</td>";
+                  if($documentos["radicado"] == 0){
+                    echo "<td>Pendiente</td>";
+                  }else{
+                    
+                    echo "<td><span class='badge badge-warning'>" . $documentos["radicado"] . "</span></td>";
+                  }
+                  
                   echo "<td>" . $documentos["dateRegister"] . "</td>";
                   echo "<td>" . $documentos["title"] . "</td>";
-                  echo "<td>" . $documentos["destiny"] . "</td>";
                   
                   if($documentos["state"] == "Devuelto con correcciones"){
                     echo "<td>
@@ -141,7 +130,7 @@ session_start();
                   echo "</tr>";
                 }
               } else {
-                echo "<td>No hay Documentos Pendientes por Asignar Evaluador</td>";
+                echo "<td>No hay Documentos en esta sección</td>";
               }
 
               ?>

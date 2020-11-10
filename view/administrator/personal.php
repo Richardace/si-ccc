@@ -56,6 +56,8 @@ session_start();
 
         <!-- Contenido -->
 
+
+
         <section id="content">
             <div class="wrap">
 
@@ -94,7 +96,7 @@ session_start();
                                     </div>
                                     <div class="modal-body">
                                         <!-- Contenido -->
-                                        <input type="text" class="form-control" id="myInput" style="width:100%;" placeholder="Buscar Correo ...">
+                                        <!-- <input type="text" class="form-control" id="myInput" style="width:100%;" placeholder="Buscar Correo ..."> -->
 
 
                                         <table id="myTable" class="table table-hover">
@@ -115,7 +117,7 @@ session_start();
                                                         echo "<tr>";
                                                         echo "<td>" . $correo["email"] . "</td>";
 
-                                                        echo "<td><a href='index.php?c=personal&a=addSolicitanteView&id=" . $correo["id"] . "'><span id='iconoEliminar'><img src='view/assets/img/añadirUsuario.png' title='Eliminar'></span></a></td>";
+                                                        echo "<td><a href='index.php?c=personal&a=addSolicitante&id=" . $correo["id"] . "'><span id='iconoEliminar'><img src='view/assets/img/añadirUsuario.png' title='Eliminar'></span></a></td>";
 
                                                         echo "</tr>";
                                                     }
@@ -145,19 +147,7 @@ session_start();
 
 
                         <div class="wrapper">
-                            <br>
-                            <label class="textoRadioButton">FILTRAR POR: &nbsp;</label>
-                            <input type="radio" name="filtro" id="dependencia" value="1"> <span class="textoRadioButton">DEPENDENCIA
-                            </span> &nbsp; &nbsp;
-                            <input type="radio" name="filtro" id="nombre" value="2"> <span class="textoRadioButton">NOMBRE </span>
-                            &nbsp; &nbsp; &nbsp;
 
-                            <input type="text" id="myInput" placeholder="Buscar ...">
-
-                            <select class="textoSelectActivo" style="float: right;" type="text" id="mySelect" placeholder="Buscar ...">
-                                <option class="textoSelectActivo" value="Activo">Activo </option>
-                                <option class="textoSelectActivo" value="Inactivo">Inactivo</option>
-                            </select>
 
                             <!-- INICIO TABLA -->
 
@@ -169,8 +159,6 @@ session_start();
                                             <th>id</th>
                                             <th>Nombre</th>
                                             <th>correo</th>
-                                            <th>Fecha de registro</th>
-                                            <th>Fecha de Finalizacion</th>
                                             <th>ESTADO</th>
 
                                         </tr>
@@ -190,8 +178,6 @@ session_start();
                                                 echo "<td>" . $correo["id"] . "</td>";
                                                 echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
                                                 echo "<td>" . $correo["email"] . "</td>";
-                                                echo "<td>28-02-2020</td>";
-                                                echo "<td>28-06-2020</td>";
                                                 echo "<td>" . $correo["state"] . "</td>";
 
                                                 echo "</tr>";
@@ -298,19 +284,8 @@ session_start();
 
 
                         <div class="wrapper">
-                            <br>
-                            <label class="textoRadioButton">FILTRAR POR: &nbsp;</label>
-                            <input type="radio" name="filtro" id="dependencia" value="1"> <span class="textoRadioButton">DEPENDENCIA
-                            </span> &nbsp; &nbsp;
-                            <input type="radio" name="filtro" id="nombre" value="2"> <span class="textoRadioButton">NOMBRE </span>
-                            &nbsp; &nbsp; &nbsp;
+                            
 
-                            <input type="text" id="myInput" placeholder="Buscar ...">
-
-                            <select class="textoSelectActivo" style="float: right;" type="text" id="mySelect" placeholder="Buscar ...">
-                                <option class="textoSelectActivo" value="Activo">Activo </option>
-                                <option class="textoSelectActivo" value="Inactivo">Inactivo</option>
-                            </select>
 
 
                             <!-- INICIO TABLA -->
@@ -324,8 +299,6 @@ session_start();
                                             <th>DEPENDENCIA</th>
                                             <th>Nombre y Apellido</th>
                                             <th>correo</th>
-                                            <th>Fecha de registro</th>
-                                            <th>Fecha de Finalizacion</th>
                                             <th>ESTADO</th>
                                             <th>
                                                 <center>OPCIONES
@@ -343,11 +316,14 @@ session_start();
                                             foreach ($data["evaluador"] as $evaluador) {
                                                 echo "<tr>";
                                                 echo "<td>" . $evaluador["id"] . "</td>";
-                                                echo "<td>" . $evaluador["dependencyUser"] . "</td>";
+                                                if($evaluador["dependencyUser"] == ""){
+                                                    echo "<td>Sin Dependencia Asociada</td>";
+                                                }else{
+                                                    echo "<td>" . $evaluador["dependencyUser"] . "</td>";
+                                                }
+                                                
                                                 echo "<td>" . $evaluador["firstName"] . " " . $evaluador['lastName'] . "</td>";
                                                 echo "<td>" . $evaluador["email"] . "</td>";
-                                                echo "<td>28-02-2020</td>";
-                                                echo "<td>28-06-2020</td>";
                                                 echo "<td>" . $evaluador["state"] . "</td>";
 
                                                 echo "<td><center>
@@ -459,17 +435,7 @@ session_start();
 
 
                         <div class="wrapper">
-                            <br>
-                            <label class="textoRadioButton">FILTRAR POR: &nbsp;</label>
-                            <input type="radio" name="filtro" id="nombre" value="2"> <span class="textoRadioButton">NOMBRE </span>
-                            &nbsp; &nbsp; &nbsp;
 
-                            <input type="text" id="myInput" placeholder="Buscar ...">
-
-                            <select class="textoSelectActivo" style="float: right;" type="text" id="mySelect" placeholder="Buscar ...">
-                                <option class="textoSelectActivo" value="Activo">Activo </option>
-                                <option class="textoSelectActivo" value="Inactivo">Inactivo</option>
-                            </select>
 
                             <!-- INICIO TABLA -->
 
