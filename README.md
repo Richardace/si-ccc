@@ -1,5 +1,5 @@
 ![Pizzería](http://www.madarme.co/portada-web.png)
-# Título del proyecto: SISTEMA DE INFORMACIÓN PARA EL COMITE CURRICULAR CENTRAL SICCC
+# Título del proyecto: SISTEMA DE INFORMACIÓN DOCUMENTAL COMITE CURRICULAR CENTRAL SICCC
 
 #### Ejemplo de Lectura de datos JSON 
 ***
@@ -15,10 +15,9 @@
 ***
 #### Características:
 
-  - Proyecto con lectura de datos json a través de la API fecth JavaScript
-  - Carga dinámica del JSON 
-  - Archivo json de ejemplo: [ver](https://raw.githubusercontent.com/madarme/persistencia/main/pizza.json)
-***
+  - Proyecto que realize los loguins  mediante la API de google SESSION y los eventos con CALENDAR   
+  - 
+  - 
   #### Contenido del proyecto
   - [index.html](https://gitlab.com/programacion-web---i-sem-2019/lectura-json-ii-2020-pizzeria/-/blob/master/index.html): Archivo principal de invocación a la lectura de JSON
   - [js/proceso.js](https://gitlab.com/programacion-web---i-sem-2019/lectura-json-ii-2020-pizzeria/-/blob/master/js/proceso.js): Archivo JS con el proceso de lectura del JSON y sus funciones adicionales para la impresión de resultados
@@ -27,7 +26,8 @@
 #### Tecnologías
 
   - HTML5
-  - JavaScript
+  - PHP
+  - BOOTSTRAP
 
 Usted puede ver el siguiente marco conceptual sobre la API fetch:
 
@@ -37,7 +37,7 @@ Usted puede ver el siguiente marco conceptual sobre la API fetch:
   ***
 #### IDE
 
-- El proyecto se desarrolla usando sublime text 3 
+- El proyecto se desarrolla usando PHP 
 - Visor de JSON -(http://jsonviewer.stack.hu/)
 
 ***
@@ -59,12 +59,20 @@ Para ver el demo de la aplicación puede dirigirse a: [Pizzería_js](http://ufps
 
 ***
 ### Autor(es)
-Proyecto desarrollado por [Marco Adarme] (<madarme@ufps.edu.co>).
+Proyecto desarrollado por: 
+[Richard Acevedo] (<richara@ufps.edu.co>).
+
+[Jose Suarez] (joseluissm@ufps.edu.co>).
+
+[Marilym Bayona] (<marilymaydeebb@ufps.edu.co>).
+
+
+[Marco Adarme] (<madarme@ufps.edu.co>).
 
 
 ***
 ### Institución Académica   
-Proyecto desarrollado en la Materia programación web del  [Programa de Ingeniería de Sistemas] de la [Universidad Francisco de Paula Santander]
+Proyecto desarrollado para optar a titulo de Ingeniero de Sistemas con la modalidad curso de profundizacioon en el  [Programa de Ingeniería de Sistemas] de la [Universidad Francisco de Paula Santander]
 
 
    [Marco Adarme]: <http://madarme.co>
