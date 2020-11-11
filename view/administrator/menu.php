@@ -17,8 +17,9 @@
             <li><a id="documentos" href="index.php?c=documento&a=administrador">Pendientes</a></li>
             <li><a id="estados" href="index.php?c=estado&a=administrador">Documento</a></li>
             <li><a id="personal" href="index.php?c=personal&a=administrador">Personal</a></li>
+            <li><a id="sesion" href="index.php?c=sesion&a=administrador">Sesiones</a></li>
             <li><a id="consultas" href="index.php?c=consulta&a=administrador">Consultas</a></li>
-            <li><a id="sesiones" href="index.php?c=sesion&a=administrador">Sesiones</a></li>
+            
         </ul>
     </div>
 </nav>

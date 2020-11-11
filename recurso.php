@@ -6,7 +6,7 @@
 	require_once "controller/MessageController.php";
 	require_once "controller/LoginController.php";
 
-	
+
 	if(isset($_COOKIE['id']) && isset($_COOKIE['sess'])){
 		$Controller = new LoginController;
 		if($Controller -> checkUserStatus($_COOKIE['id'], $_COOKIE['sess'])){
