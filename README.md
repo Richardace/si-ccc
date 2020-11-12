@@ -1,4 +1,4 @@
-![SICCC](https://drive.google.com/file/d/1wUYYtPDk4cCSmzFX10m98_1fe2cN2vDe/view?usp=sharing)
+![SICCC]('https://ibb.co/P5ddnHf')
 # Título del proyecto: SISTEMA DE INFORMACIÓN DOCUMENTAL COMITE CURRICULAR CENTRAL SICCC
 
 #### Ejemplo de Lectura de datos JSON 
