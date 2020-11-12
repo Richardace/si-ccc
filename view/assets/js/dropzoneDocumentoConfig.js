@@ -10,6 +10,7 @@ $(".multimediaFisica").dropzone({
 		this.on("addedfile", function (file) {
 			arrayFiles.push(file);
 			console.log("arrayFiles", arrayFiles);
+
 		})
 		this.on("removedfile", function (file) {
 			var index = arrayFiles.indexOf(file);
@@ -82,10 +83,11 @@ $(".guardarProducto").click(function () {
 function agregarMiProducto(imagen) {
 
 	var datosDocumento = new FormData();
-	var d = new Date();
-	var fecha = d.getFullYear() + "-" + d.getMonth() +"-"+ d.getUTCDay();
+	var today = new Date();
+	var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+	
 	datosDocumento.append("documentos", imagen);
-	datosDocumento.append("dateActual", fecha);
+	datosDocumento.append("dateActual", date);
 	
 
 

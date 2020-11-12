@@ -64,6 +64,11 @@ session_start();
             $documentoSesion = $documento['valor'];
             $dateCambio = $documento['dateCambio'];
         }
+
+        $obj = json_decode($documento['valor']);
+        $obj2 = $obj[0]->elemento;
+        $nombreDocumento = basename($obj2);
+
         ?>
         <!-- Contenido -->
 
@@ -78,8 +83,8 @@ session_start();
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Documento Actual</label>
-                            <input type="text" style="text-align:center;" class="form-control origen" value="<?php echo $documentoSesion; ?>" readonly>
-                            <a href="index.php?c=sesion&a=descargarDocumentosById&id=<?php echo $idConfig; ?>">Descargar Documento</a>
+                            <input type="text" style="text-align:center;" class="form-control origen" value="<?php echo $nombreDocumento; ?>" readonly>
+                            <a href="index.php?c=sesion&a=descargarDocumentosById">Descargar Documento</a>
                         </div>
 
                         <div class="form-group col-md-6">
