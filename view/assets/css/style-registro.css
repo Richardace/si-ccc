@@ -216,19 +216,6 @@ background-color: #a3a3a3;
 }
 
 
-form input[type="text"],
-form input[type="email"],
-form input[type="password"],
-form input[type="number"],
-select{
-    padding: 5px;
-    border-radius: 2px;
-    border: 1px solid #ccc;
-    width: 80%;
-    margin-bottom: 10px;
-    margin-top: 5px;
-}
-
 form input[type="submit"]{
     background: #eee;
     padding: 10px;

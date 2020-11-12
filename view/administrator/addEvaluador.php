@@ -41,6 +41,9 @@ session_start();
 
   <!-- Mis Scripts-->
   <script type="text/javascript" src="view/assets/js/personal.js"></script>
+  <style>
+    
+  </style>
 
 </head>
 
@@ -68,10 +71,10 @@ session_start();
             <br>
             <input type="radio" id="programa" name="dependency" value="program">
             <label for="program">Programa Academico</label>&nbsp;&nbsp;&nbsp;
-            <input type="radio" id="departamento" name="dependency" value="department">
-            <label for="department">Departamento</label>&nbsp;&nbsp;&nbsp;
             <input type="radio" id="facultad" name="dependency" value="facultad">
-            <label for="facultad">Facultad</label>
+            <label for="facultad">Facultad</label>&nbsp;&nbsp;&nbsp;
+            <input type="radio" id="sd" name="dependency" value="sd">
+            <label for="sd">Sin Dependencia</label>
             <br>
             <br>
 
@@ -85,7 +88,7 @@ session_start();
 
             <div id="selectPrograma" style="display: none;">
               <label for="inputState">Elija el Programa Academico</label><br>
-              <select id="selectPrograma" class="form-control" name="idProgram" style="width:40%;">
+              <select id="selectPrograma" class="form-control" name="idProgram" style="width:40%;" class='form-control'>
                 <option>Elija el Programa Academico</option>
                 <?php
                 foreach ($data["programas"] as $programa) {
@@ -95,21 +98,9 @@ session_start();
               </select>
             </div>
 
-            <div id="selectDepartamento" style="display: none;">
-              <label for="inputState">Elija el Departamento</label><br>
-              <select class="form-control" name="idDepartamento" style="width:40%;">
-                <option>Elija el Departamento</option>
-                <?php
-                foreach ($data["departamentos"] as $programa) {
-                  echo "<option value='" . $programa['id'] . "'>" . $programa['name'] . "</option>";
-                }
-                ?>
-              </select>
-            </div>
-
             <div id="selectFacultad" style="display: none;">
               <label for="inputState">Elija el Departamento</label><br>
-              <select name="idFacultad" style="width:40%;">
+              <select name="idFacultad" style="width:40%;" class='form-control'>
                 <option>Elija la Facultad</option>
                 <?php
                 foreach ($data["facultades"] as $programa) {
@@ -123,7 +114,7 @@ session_start();
 
             <div id="state" style="display: none;">
               <label for="inputState">Seleccione el estado del usuario</label><br>
-              <select name="state" style="width:40%;">
+              <select name="state" style="width:40%;" class='form-control'>
                 <option value="Inactivo">Estado .. </option>
                 <option value="Activo">Activo</option>
                 <option value="Inactivo">Inactivo</option>

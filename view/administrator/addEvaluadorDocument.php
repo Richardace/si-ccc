@@ -77,11 +77,28 @@ session_start();
 
 
         function execute() {
+
             var fechaLimite = document.getElementsByName("dateLimit")[0].value;
             var dateStart = fechaLimite + "" + "T17:00:00-07:00";
             var dateEnd = fechaLimite + "" + "T17:00:00-07:10";
-            var correo = document.getElementsByName("email")[0].value;
-            
+            var correo = document.getElementsByName("email1")[0].value;
+            var correo2 = document.getElementsByName("email2")[0].value;
+
+
+
+
+
+            if (correo2 == "nn") {
+                var arrayCorreo = [{
+                    "email": correo
+                }];
+            } else {
+                var arrayCorreo = [{
+                    "email": correo
+                }, {
+                    "email": correo2
+                }];
+            }
 
             return gapi.client.calendar.events.insert({
                     "calendarId": "eq2tt4qt2e3k2id62449e4i8oc@group.calendar.google.com",
@@ -94,17 +111,16 @@ session_start();
                         "start": {
                             "dateTime": dateStart
                         },
-                        "summary": "Solicitud de Revisión de Documento Academico - COMITE CURRICULAR CENTRAL",
-                        "attendees": [{
-                            "email": correo
-                        }]
+                        "summary": "SOLICITUD PARA REVISIÓN DE DOCUMENTO - COMITE CURRICULAR CENTRAL",
+                        "attendees": arrayCorreo
                     }
                 })
                 .then(function(response) {
-
+                        alert("Enviado con Exito");
                         console.log("Response", response);
                     },
                     function(err) {
+                        alert("No se pudo enviar");
                         console.error("Execute error", err);
                     });
         }
@@ -132,9 +148,6 @@ function generateCode($length)
 foreach ($data["documentos"] as $documento) {
     $idDocument = $documento['id'];
     $nameUser = $documento['fullName'];
-    // $nameUser = "Richard Acevedo";
-    $origen = $documento['source'];
-    $destino = $documento['destiny'];
     $dateRegister = $documento['dateRegister'];
     $title = $documento['title'];
     $description = $documento['description'];
@@ -164,59 +177,77 @@ foreach ($data["documentos"] as $documento) {
                 <div class="card-body">
                     <div class="box-body">
 
+                        <!-- <form method="post" action="#"> -->
                         <form method="post" action="index.php?c=documento&a=addDocumentToEvaluate">
-                            <!-- <center>
-                                <div class="form-row">
-                                    <div class="col" style>
-                                        <label>Fecha Limite de Revisión</label><br>
-                                        <input type="date" class="form-control" name="fechaLimite" style="width: 190px;" required>
-                                    </div>
-                                </div>
-                            </center> -->
 
                             <center>
+
+                                <br>
                                 <div class="form-row">
-                                    <div class="col" style>
-                                        <label>Fecha Limite de Revisión</label><br>
-                                        <div class="input-group date" id="datetimepicker1" style="width:25%;" data-target-input="nearest">
-                                        
-                                            <input type="text" style="width:30px; text-align:center;" class="form-control datetimepicker-input" data-target="#datetimepicker1" name="dateLimit" />
-                                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar">Calendario</i></div>
-                                            </div>
-                                        </div>
+                                    <br>
+                                    <div class="form-group col-md-6">
+                                        <label>Número de Radicado</label>
+                                        <input type="text" class="form-control origen" name="radicado" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputState">Elija la Sesión del Documento</label><br>
+                                        <select id="selectPrograma" class="form-control" name="sesion" required>
+                                            <?php
+                                            $none = true;
+                                            if ($data["sesionesActivas"] == NULL) {
+                                                echo "<option>No hay Sesiones Activas</option>";
+                                            }
+                                            foreach ($data["sesionesActivas"] as $sesion) {
+                                                echo "<option value='" . $sesion['id'] . "'><span style='font-weight: bold;' >Fecha Sesión: </span>" . $sesion['fechaSesion'] . " / Semestre " . $sesion['semestre'] . " - " . $sesion['anio'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </center>
-
-
-
                             <br>
-                            <center>
-                                <div class="form-row">
+                            <div class="form-row">
 
-                                    <div class="col">
-                                        <label>Token de Acceso</label><br>
-                                        <input type="text" class="form-control" style="width:30%; text-align:center;" name="token" value="<?php echo generateCode(15); ?>" readonly>
-                                    </div>
+                                <div class="form-group col-md-12">
+                                    <label>Cantidad de Evaluadores</label><br>
+
+                                    <input type="radio" name="cant" id="evaluador1">
+                                    <label for="program">1</label>&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="cant" id="evaluador2">
+                                    <label for="program">2</label>&nbsp;&nbsp;&nbsp;
                                 </div>
+                            </div>
 
-                            </center>
+                            <input type="hidden" class="form-control" name="token" value="<?php echo generateCode(15); ?>" readonly>
+
                             <br>
+
                             <center>
-                                <div class="form-row">
+                                <div class="form-row" id="eva1" style="display: none;">
                                     <div class="col">
                                         <div>
-                                            <label for="inputState">Elija el Evaluador</label><br>
-                                            <select id="selectPrograma" class="form-control" name="email" style="width:50%;" required>
+                                            <label for="inputState">Elija el Evaluador 1</label><br>
+                                            <select id="selectPrograma" class="form-control" name="email1">
                                                 <?php
-                                                $none = true;
-                                                if ($data["usuarios"] == NULL) {
-                                                    $none = false;
-                                                    echo "<option>No hay Evaluadores Disponibles para esta dependencia</option>";
+
+                                                if ($data["evaluadores"] == NULL) {
+                                                    echo "<option>No hay Evaluadores Disponibles</option>";
                                                 }
-                                                foreach ($data["usuarios"] as $usuario) {
-                                                    echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - " . $usuario['fullName'] . "</option>";
+                                                foreach ($data["evaluadores"] as $usuario) {
+                                                    if ($usuario['fullName'] == " ") {
+
+                                                        if ($usuario['dependencyUser'] == "") {
+                                                            echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - Sin Nombre Registrado / Sin dependencia Asociada</option>";
+                                                        } else {
+                                                            echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - Sin Nombre Registrado / " . $usuario['dependencyUser'] . "</option>";
+                                                        }
+                                                    } else {
+                                                        if ($usuario['dependencyUser'] == "") {
+                                                            echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - " . $usuario['fullName'] . " / Sin dependencia Asociada</option>";
+                                                        } else {
+                                                            echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - " . $usuario['fullName'] . " / " . $usuario['dependencyUser'] . "</option>";
+                                                        }
+                                                    }
                                                 }
                                                 ?>
                                             </select>
@@ -224,13 +255,70 @@ foreach ($data["documentos"] as $documento) {
                                     </div>
                                 </div>
                             </center>
+                            <br>
+
+                            <center>
+                                <div class="form-row" id="eva2" style="display: none;">
+                                    <div class="col">
+                                        <div>
+                                            <label for="inputState">Elija el Evaluador 2</label><br>
+                                            <select id="selectPrograma" class="form-control" name="email2">
+                                                <?php
+
+                                                if ($data["evaluadores"] == NULL) {
+                                                    echo "<option>No hay Evaluadores Disponibles</option>";
+                                                } else {
+                                                    echo "<option value='nn' >Seleccione el Segundo Evaluador</option>";
+                                                    foreach ($data["evaluadores"] as $usuario) {
+                                                        if ($usuario['fullName'] == " ") {
+
+                                                            if ($usuario['dependencyUser'] == "") {
+                                                                echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - Sin Nombre Registrado / Sin dependencia Asociada</option>";
+                                                            } else {
+                                                                echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - Sin Nombre Registrado / " . $usuario['dependencyUser'] . "</option>";
+                                                            }
+                                                        } else {
+                                                            if ($usuario['dependencyUser'] == "") {
+                                                                echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - " . $usuario['fullName'] . " / Sin dependencia Asociada</option>";
+                                                            } else {
+                                                                echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - " . $usuario['fullName'] . " / " . $usuario['dependencyUser'] . "</option>";
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+                            <br>
+                            <center>
+                                <div class="form-row">
+
+                                    <div id="autGoogle" class="form-group col-md-12" style="display: none;">
+
+                                        <label>Fecha Limite de Revisión</label><br><br>
+                                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest" style="width:50%;"> 
+                                            <input type="text" style="text-align:center;" class="form-control datetimepicker-input" data-target="#datetimepicker1" name="dateLimit" />
+                                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar">Calendario</i></div>
+                                            </div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                                            <label>Notificar Via : &nbsp;&nbsp;</label>
+                                            <a onclick="authenticate().then(loadClient).then(execute)" style="border:1px solid #ccc; border-radius: 20px; cursor:pointer;"><img style="width:150px; height: 40px; border-radius: 20px;" src="view/assets/img/logoCalendar.gif" /></a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </center>
 
                             <input type="hidden" value="<?php echo $idDocument; ?>" name="idDocument">
 
                             <br>
-                            <center><input id="add" type="submit" onclick="authenticate().then(loadClient).then(execute)" value="Asignar Evaluador" class="btn btn-primary guardarProducto" style="background:rgb(226, 3, 26); border:none; color:white; <?php if (!$none) {
-                                                                                                                                                                                                                                                                echo "display:none;";
-                                                                                                                                                                                                                                                            } ?>" /></center>
+                            <center><input id="add" type="submit" value="Guardar Ajustes" class="btn btn-primary guardarProducto" style="background:rgb(226, 3, 26); border:none; color:white; display:inline-block;" /></center>
                             <br>
                         </form>
                     </div>
@@ -248,26 +336,13 @@ foreach ($data["documentos"] as $documento) {
                     <div class="box-body">
 
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Numero de Radicado</label>
-                                <input type="text" class="form-control" value="<?php echo $idDocument; ?>" readonly>
-                            </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-12">
                                 <label>Nombre del Solicitante</label>
                                 <input type="text" class="form-control" value="<?php echo $nameUser; ?>" readonly>
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Dependencia a la que pertenece</label>
-                                <input type="text" class="form-control" value="<?php echo $origen; ?>" readonly>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Destino de la Documentación</label>
-                                <input type="text" class="form-control" value="<?php echo $destino; ?>" readonly>
-                            </div>
-                        </div>
+
 
                         <div class="form-row">
                             <div class="form-group col-md-6">

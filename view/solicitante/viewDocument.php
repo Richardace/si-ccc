@@ -58,14 +58,14 @@ session_start();
     foreach ($data['documentos'] as $infoDocumento) {
       $idDocumento = $infoDocumento['id'];
       $title = $infoDocumento['title'];
-      $source = $infoDocumento['source'];
-      $destiny = $infoDocumento['destiny'];
+      $radicado = $infoDocumento['radicado'];
+      $state = $infoDocumento['state'];
       $description = $infoDocumento['description'];
     }
 
-    foreach ($data['documentoEvaluador'] as $docEvaluador) {
-      $dateLimite = $docEvaluador['dateLimit'];
-    }
+    // foreach ($data['documentoEvaluador'] as $docEvaluador) {
+    //   $dateLimite = $docEvaluador['dateLimit'];
+    // }
     ?>
     <!-- Contenido -->
     <section id="content">
@@ -156,12 +156,12 @@ session_start();
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>Origen</label>
-                <input type="text" class="form-control origen" value="<?php echo $source; ?>" readonly>
+                <label>Numero de Radicado</label>
+                <input type="text" class="form-control origen" value="<?php echo $radicado; ?>" readonly>
               </div>
               <div class="form-group col-md-6">
-                <label>Destino</label>
-                <input type="text" class="form-control destino" value="<?php echo $destiny; ?>" readonly>
+                <label>Estado</label>
+                <input type="text" class="form-control destino" value="<?php echo $state; ?>" readonly>
               </div>
             </div>
 
