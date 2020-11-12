@@ -1,4 +1,4 @@
-![SICCC]('https://ibb.co/P5ddnHf')
+![SICCC](https://ibb.co/P5ddnHf)
 # Título del proyecto: SISTEMA DE INFORMACIÓN DOCUMENTAL COMITE CURRICULAR CENTRAL SICCC
 
 #### Ejemplo de Lectura de datos JSON 
