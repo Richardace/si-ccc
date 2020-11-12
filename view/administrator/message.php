@@ -141,9 +141,14 @@
                 <tbody>
                <?php
                
+              
+
               //Metodo creado para listar mensaje ->Prueba
               if ($data["mensajes"] != NULL) {
                 foreach ($data["mensajes"] as $mensajes) {
+
+                  $variableID = $mensajes["user_id_destiny"];
+
                   echo "<tr>";
                   echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
                   echo "<td>" . $mensajes["description"] . "</td>";
@@ -156,10 +161,8 @@
                   }
 
                   echo "<td><center>
-                            <button id='iconoVer'>
-                              <img src='view/assets/img/ver.png'>
-                            </button>;        
-                        </td>";
+                    <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                    </td>";
 
                   echo "</tr>";
                 }

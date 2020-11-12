@@ -28,6 +28,14 @@
             require_once "view/administrator/addMensajeNuevo.php";
         }
 
+        public function verMensaje($id){
+
+         $message = new MessageDao; 
+         $data['mensajes'] = $message->getMessageEnviado($id);
+        
+         require_once "view/administrator/verMensajeEnviado.php";
+        }
+
                public function index(){
             session_start();
             if($_SESSION['rol_id'] == 1){
