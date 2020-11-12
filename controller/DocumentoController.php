@@ -23,6 +23,8 @@ class DocumentoController
         require_once "view/administrator/documentos.php";
     }
 
+    
+
     public function viewDocumentAdministrador($id){
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentById($id);

@@ -13,7 +13,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li><a id="message" href="index.php?c=message&a=administrador">Mensajeria</a></li>
+
+            <li><a id="message" href="index.php?c=message&a=administrador&id=<?php echo $_SESSION['id']; ?>">Mensajeria</a></li>
             <li><a id="documentos" href="index.php?c=documento&a=administrador">Pendientes</a></li>
             <li><a id="estados" href="index.php?c=estado&a=administrador">Documento</a></li>
             <li><a id="personal" href="index.php?c=personal&a=administrador">Personal</a></li>
