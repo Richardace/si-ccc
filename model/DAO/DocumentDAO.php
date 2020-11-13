@@ -212,6 +212,7 @@ class DocumentDAO
 		]);
 		$documentos = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$row['fullName'] = $userDAO->getNameAndLastNameById($row['id_user']);
 			$documentos[] = $row;
 		}
 		return $documentos;

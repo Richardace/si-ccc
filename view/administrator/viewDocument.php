@@ -59,13 +59,65 @@ session_start();
       $idDocumento = $infoDocumento['id'];
       $title = $infoDocumento['title'];
       $description = $infoDocumento['description'];
+      $nombreSolicitante = $infoDocumento['fullName'];
+      $fechaSolicitud = $infoDocumento['dateRegister'];
     }
-    
-    
-    if(count($data['documentoEvaluador']) == 1){
-      $color = 'green';
-    }else{
-      $color = 'red';
+
+    $contador = 1;
+    if (count($data['documentoEvaluador']) == 1) {
+
+      $estadoEvaluador2 = "nn";
+      
+      foreach ($data['documentoEvaluador'] as $docEvaluador) {
+
+        if($docEvaluador['observaciones'] == ""){
+          $color1 = 'rgb(255, 221, 108)';
+          $estadoEvaluador1 = "pendiente";
+        }else{
+          $color1 = 'rgb(68, 255, 93)';
+          $estadoEvaluador1 = "revisado";
+
+          $observaciones1 = $docEvaluador['observaciones'];
+          $idRevision1 = $docEvaluador['id'];
+          $nombreEvaluador1 = $docEvaluador['fullName'];
+
+        }
+        $dateLimite = $docEvaluador['dateLimit'];
+      }
+
+    } else {
+
+      foreach ($data['documentoEvaluador'] as $docEvaluador) {
+
+        if($contador == 2){
+          if($docEvaluador['observaciones'] == ""){
+            $color2 = 'rgb(255, 221, 108)';
+            $estadoEvaluador2 = "pendiente";
+          }else{
+            $color2 = 'rgb(68, 255, 93)';
+            $estadoEvaluador2 = "revisado";
+
+            $observaciones2 = $docEvaluador['observaciones'];
+            $idRevision2 = $docEvaluador['id'];
+            $nombreEvaluador2 = $docEvaluador['fullName'];
+          }
+          continue;
+        }
+
+        if($docEvaluador['observaciones'] == ""){
+          $color1 = 'rgb(255, 221, 108)';
+          $estadoEvaluador1 = "pendiente";
+        }else{
+          $color1 = 'rgb(68, 255, 93)';
+          $estadoEvaluador1 = "revisado";
+          
+          $observaciones1 = $docEvaluador['observaciones'];
+          $idRevision1 = $docEvaluador['id'];
+          $nombreEvaluador1 = $docEvaluador['fullName'];
+        }
+
+        $contador++;
+      }
     }
     foreach ($data['documentoEvaluador'] as $docEvaluador) {
       $dateLimite = $docEvaluador['dateLimit'];
@@ -162,13 +214,41 @@ session_start();
               <div class="form-group col-md-6">
 
                 <center>
-                  <a class="btn botonevaluador" style="width:90%; background: <?php echo $color1; ?>; border: #ccc 4px outset; color: black; font-weight:bold;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" >
-                    Revision del Evaluador 1
+                  <a class="btn botonevaluador" style="width:90%; background: <?php echo $color1; ?>; border: #ccc 4px outset; color: black; font-weight:bold;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    
+                  <?php
+                    if($estadoEvaluador1 == "pendiente"){
+                      echo "REVISIÓN DEL EVALUADOR 1 - PENDIENTE";
+                    }else{
+                      echo "REVISIÓN DEL EVALUADOR 1";
+                    }
+                  ?>
                   </a>
                 </center>
                 <div class="collapse" id="collapseExample">
                   <div class="card card-body">
-                    Prueba
+                  <?php
+                    if($estadoEvaluador1 == "pendiente"){
+                      echo "PENDIENTE DE REVISIÓN";
+                    }else{
+                      
+                      echo "
+                          <div class='form-row'>
+                          <div class='form-group col-md-12'>
+                            <label>Nombre Evaluador</label>
+                            <input type=text class='form-control' value='$nombreEvaluador1' >
+                          </div>
+                          <br>
+                          <div class='form-group col-md-12'>
+                            <label>Observaciones</label>
+                            <textarea style='height:200px;' type='text' class='form-control'>$observaciones1</textarea>
+                          </div>
+
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>Descargar Documentos Adjuntos</a>
+                        </div>
+                      ";
+                    }
+                  ?>
                   </div>
                 </div>
 
@@ -178,13 +258,43 @@ session_start();
               <div class="form-group col-md-6">
 
                 <center>
-                  <a class="btn botonevaluador" style="width:90%; background: <?php echo $color2; ?>; border: #ccc 4px outset; color: black; font-weight:bold;" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" >
-                    Revision del Evaluador 2
+                  <a class="btn botonevaluador" style="width:90%; background: <?php echo $color2; ?>; border: #ccc 4px outset; color: black; font-weight:bold;" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                  <?php
+                    if($estadoEvaluador2 == "pendiente"){
+                      echo "REVISIÓN DEL EVALUADOR 2 - PENDIENTE";
+                    }else if($estadoEvaluador2 == "nn"){
+                      echo "SIN ASIGNAR SEGUNDO EVALUADOR";
+                    }else{
+                      echo "REVISIÓN DEL EVALUADOR 2";
+                    }
+                  ?>
                   </a>
                 </center>
                 <div class="collapse" id="collapseExample2">
                   <div class="card card-body">
-                    Prueba
+                  <?php
+                    if($estadoEvaluador2 == "pendiente"){
+                      echo "PENDIENTE DE REVISIÓN";
+                    }else if($estadoEvaluador2 == "nn"){
+                      
+                    }else{
+                      echo "
+                          <div class='form-row'>
+                          <div class='form-group col-md-12'>
+                            <label>Nombre Evaluador</label>
+                            <input type=text class='form-control' value='$nombreEvaluador2' >
+                          </div>
+                          <br>
+                          <div class='form-group col-md-12'>
+                            <label>Observaciones</label>
+                            <textarea style='height:200px;' type='text' class='form-control'>$observaciones2</textarea>
+                          </div>
+
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>Descargar Documentos Adjuntos</a>
+                        </div>
+                      ";
+                    }
+                  ?>
                   </div>
                 </div>
 
@@ -193,12 +303,12 @@ session_start();
             <br><br>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>Dependencia Evaluador</label>
-                <input type="text" class="form-control origen" value="PLAN DE ESTUDIO INGENERÍA DE SISTEMAS" readonly>
+                <label>Dependencia Solicitante</label>
+                <input type="text" class="form-control origen" value="<?php echo $nombreSolicitante; ?>" readonly>
               </div>
               <div class="form-group col-md-6">
-                <label>Nombre Evaluador</label>
-                <input type="text" class="form-control destino" value="MARILYM AYDEE BAYONA BUITRAGO" readonly>
+                <label>Fecha de Solicitud</label>
+                <input type="text" class="form-control destino" value="<?php echo $fechaSolicitud; ?>" readonly>
               </div>
             </div>
 
@@ -226,7 +336,18 @@ session_start();
             </div>
             <br>
           </div>
-          <br>
+          <br><br>
+          <center>
+            <div style="display: inline-block;">
+              <div style="background:#DAA900; border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:left; line-height:25px;">
+                <a href="index.php?c=documento&a=devolverDocumentoView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Solicitar Corrección</a>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <div style="background:rgb(47, 196, 0); border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:right; line-height:25px;">
+                <a href="index.php?c=documento&a=aprobarDocumentoSolicitante&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Cambiar Estado</a>
+              </div>
+            </div>
+          </center>
           <br>
 
         </div>

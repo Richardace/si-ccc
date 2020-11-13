@@ -58,8 +58,7 @@ session_start();
     foreach ($data['documentos'] as $infoDocumento) {
       $idDocumento = $infoDocumento['id'];
       $title = $infoDocumento['title'];
-      $source = $infoDocumento['source'];
-      $destiny = $infoDocumento['destiny'];
+      $source = $infoDocumento['fullName'];
       $description = $infoDocumento['description'];
     }
 
@@ -77,91 +76,10 @@ session_start();
         <div class="card-body">
           <div class="box-body">
 
-            <div>
-              <div class="btn-agregarUsuario">
-                <a data-toggle="modal" data-target="#correccionesDocumento" style="cursor: pointer; float: right; text-decoration: underline; color:blue;">
-                  Consultar Revisiones Anteriores del Documento
-                </a>
-              </div>
-            </div>
-            <br>
-            <br>
-
-            <!-- Modal -->
-            <div class="modal fade" id="correccionesDocumento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog" >
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Correcciones del Documento</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <!-- Contenido -->                    
-                    <table id="myTable" class="table table-hover">
-                      <thead>
-                        <tr class="header">
-                          <th>Fecha Corrección</th>
-                          <th>Comentarios</th>
-                          <th>Documentos Adjuntos</th>
-                          <th>Estado</th>
-                        </tr>
-                      </thead>
-                      <tr>
-                        <h1 id="respuesta">
-                        </h1>
-                      </tr>
-                      <tbody>
-                        <?php
-                        if ($data["correccionesDocumento"] != NULL) {
-                          foreach ($data["correccionesDocumento"] as $correcciones) {
-                            $idDocumentoCorregido = $correcciones['id'];
-                            echo "<tr>";
-                            echo "<td>" . $correcciones["date_envio_evaluador"] . "</td>";
-                            echo "<td>" . $correcciones["comentarios_evaluador"] . "</td>";
-                            echo "<td>
-                            <a href='index.php?c=documento&a=descargarDocumentosCorregidosById&id=$idDocumentoCorregido' target='_blank'>
-                              <span>
-                                <img style='widht:25px; height:25px;' src='view/assets/img/descargar.png'>
-                              </span>
-                            </a>
-                            </td>";
-                            echo "<td>" . $correcciones["state"] . "</td>";
-                            echo "</tr>";
-                          }
-                        } else {
-                          echo "<td>No hay Correcciones Registradas para este documento.</td>";
-                        }
-
-                        ?>
-                      </tbody>
-                    </table>
-
-                    <br>
-
-                    <nav id="paginacion">
-                      <ul class="pagination pagination-lg pager" id="myPager">
-
-                      </ul>
-                    </nav>
-
-
-
-                    <!-- FIN Contenido -->
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-12">
                 <label>Origen</label>
                 <input type="text" class="form-control origen" value="<?php echo $source; ?>" readonly>
-              </div>
-              <div class="form-group col-md-6">
-                <label>Destino</label>
-                <input type="text" class="form-control destino" value="<?php echo $destiny; ?>" readonly>
               </div>
             </div>
 
@@ -172,7 +90,38 @@ session_start();
               </div>
               <div class="form-group col-md-6">
                 <label>Fecha Limite</label>
-                <input type="text" class="form-control titulo" value="<?php echo $dateLimite; ?>" readonly>
+                <?php
+
+                  $fechaRegistro = date($dateLimite);
+                  $fechaComoEntero = strtotime($fechaRegistro);
+                  $anioRegistro = date("Y", $fechaComoEntero);
+                  $mesRegistro = date("m", $fechaComoEntero);
+                  $diaRegistro = date("d", $fechaComoEntero);
+
+                  $fechaActual = date("Y-m-d");
+                  $fechaComoEntero2 = strtotime($fechaActual);
+                  $anioActual = date("Y", $fechaComoEntero2);
+                  $mesActual = date("m", $fechaComoEntero2);
+                  $diaActual = date("d", $fechaComoEntero2);
+
+                  $timestamp1 = mktime(0,0,0,$mesRegistro,$diaRegistro,$anioRegistro);
+                  $timestamp2 = mktime(4,12,0,$mesActual,$diaActual-2,$anioActual);
+
+                  //resto a una fecha la otra
+                  $segundos_diferencia = $timestamp1 - $timestamp2;
+                  //echo $segundos_diferencia;
+
+                  //convierto segundos en días
+                  $dias_diferencia = $segundos_diferencia / (60 * 60 * 24);
+
+                  //obtengo el valor absoulto de los días (quito el posible signo negativo)
+                  $dias_diferencia = abs($dias_diferencia);
+
+                  //quito los decimales a los días de diferencia
+                  $dias_diferencia = floor($dias_diferencia);
+
+                ?>
+                <input type="text" class="form-control titulo" value="<?php echo $dateLimite.'   -   '. $dias_diferencia. ' dias Restantes' ; ?>" readonly>
               </div>
             </div>
 
@@ -197,13 +146,9 @@ session_start();
           <center>
             <div style="display: inline-block;">
               <div style="background:#DAA900; border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:left; line-height:25px;">
-                <a href="index.php?c=documento&a=devolverDocumentoView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Devolver Documentos</a>
+                <a href="index.php?c=documento&a=devolverDocumentoView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Enviar Revisión</a>
               </div>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <div style="background:rgb(47, 196, 0); border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:right; line-height:25px;">
-                <a href="index.php?c=documento&a=aprobarDocumentoSolicitante&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Aprobar Documentos</a>
-              </div>
-            </div>
+
           </center>
           <br>
         </div>
