@@ -58,11 +58,15 @@ session_start();
     foreach ($data['documentos'] as $infoDocumento) {
       $idDocumento = $infoDocumento['id'];
       $title = $infoDocumento['title'];
-      $source = $infoDocumento['source'];
-      $destiny = $infoDocumento['destiny'];
       $description = $infoDocumento['description'];
     }
-
+    
+    
+    if(count($data['documentoEvaluador']) == 1){
+      $color = 'green';
+    }else{
+      $color = 'red';
+    }
     foreach ($data['documentoEvaluador'] as $docEvaluador) {
       $dateLimite = $docEvaluador['dateLimit'];
     }
@@ -89,7 +93,7 @@ session_start();
 
             <!-- Modal -->
             <div class="modal fade" id="correccionesDocumento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog" >
+              <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Correcciones del Documento</h5>
@@ -98,7 +102,7 @@ session_start();
                     </button>
                   </div>
                   <div class="modal-body">
-                    <!-- Contenido -->                    
+                    <!-- Contenido -->
                     <table id="myTable" class="table table-hover">
                       <thead>
                         <tr class="header">
@@ -156,15 +160,37 @@ session_start();
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>Origen</label>
-                <input type="text" class="form-control origen" value="<?php echo $source; ?>" readonly>
+
+                <center>
+                  <a class="btn botonevaluador" style="width:90%; background: <?php echo $color1; ?>; border: #ccc 4px outset; color: black; font-weight:bold;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" >
+                    Revision del Evaluador 1
+                  </a>
+                </center>
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body">
+                    Prueba
+                  </div>
+                </div>
+
               </div>
+
+
               <div class="form-group col-md-6">
-                <label>Destino</label>
-                <input type="text" class="form-control destino" value="<?php echo $destiny; ?>" readonly>
+
+                <center>
+                  <a class="btn botonevaluador" style="width:90%; background: <?php echo $color2; ?>; border: #ccc 4px outset; color: black; font-weight:bold;" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" >
+                    Revision del Evaluador 2
+                  </a>
+                </center>
+                <div class="collapse" id="collapseExample2">
+                  <div class="card card-body">
+                    Prueba
+                  </div>
+                </div>
+
               </div>
             </div>
-
+            <br><br>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label>Dependencia Evaluador</label>

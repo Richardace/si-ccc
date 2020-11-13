@@ -138,7 +138,7 @@ class DocumentDAO
 		$db = new Connect;
 
 		$userDAO = new UserDAO;
-		$consulta = $db->prepare('SELECT DISTINCT semestre, anio FROM sesiones ORDER BY id desc');
+		$consulta = $db->prepare("SELECT DISTINCT semestre, anio FROM sesiones WHERE stateView='Visible' ORDER BY id desc");
 		$consulta->execute();
 
 		$semestres = NULL;
@@ -169,7 +169,7 @@ class DocumentDAO
 		$db = new Connect;
 
 		$userDAO = new UserDAO;
-		$consulta = $db->prepare('SELECT * from sesiones WHERE semestre=:semestre AND anio=:anio');
+		$consulta = $db->prepare("SELECT * from sesiones WHERE semestre=:semestre AND anio=:anio AND stateView='Visible'");
 		$consulta->execute([
 			"semestre" => $a,
 			"anio" => $x
@@ -252,8 +252,8 @@ class DocumentDAO
 	{
 		$db = new Connect;
 
-		$insertDocumentEvaluador = $db->prepare("INSERT INTO documento_evaluador (id_user, id_document, dateLimit, dateRegister, key_access) 
-										VALUES (:userID, :documentID, :dateLimit, NULL, :keyAccess)");
+		$insertDocumentEvaluador = $db->prepare("INSERT INTO documento_evaluador (id_user, id_document, dateLimit, dateRegister, observaciones, files, key_access) 
+										VALUES (:userID, :documentID, :dateLimit, NULL, '', '', :keyAccess)");
 		$insertDocumentEvaluador->execute([
 			':userID'   => $idUser,
 			':documentID'   => $idDocument,

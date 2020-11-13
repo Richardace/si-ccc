@@ -281,6 +281,7 @@ class DocumentoController
         require_once "view/solicitante/viewDocument.php";
     }
 
+
     public function addEvaluadorDocumentoViewInit($id)
     {
         $document = new DocumentDAO;

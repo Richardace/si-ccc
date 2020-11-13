@@ -181,3 +181,13 @@ form input[type="submit"]{
 #form-contact input[type="submit"]{
     margin-bottom: 20px;
 }
+
+
+/* .botonevaluador{
+    /* background: #ccc !important; */
+} */
+
+.botonevaluador:hover{
+    background: rgb(226, 3, 26) !important;
+    color: white !important;
+}
