@@ -31,7 +31,7 @@
         public function verMensaje($id){
 
          $message = new MessageDao; 
-         $data['mensajes'] = $message->getMessageEnviado($id);
+         $data['mensajesID'] = $message->getMensajeID($id);
         
          require_once "view/administrator/verMensajeEnviado.php";
         }

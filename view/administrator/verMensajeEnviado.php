@@ -59,86 +59,36 @@ session_start();
     <section id="content">
 
       <div class="card text-center">
-        <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+
+        <div class="card-header" style="color: white; font-weight: bold; background: #dc3545;">
           DETALLE DEL MENSAJE
         </div>
-        <div class="card-body">
 
-          <form method="post" action="index.php?c=personal&a=addEvaluador">
-            <br>
-            <input type="radio" id="programa" name="dependency" value="program">
-            <label for="program">Destino</label>&nbsp;&nbsp;&nbsp;
-            <input type="radio" id="departamento" name="dependency" value="department">
-            <label for="department">Asunto</label>&nbsp;&nbsp;&nbsp;
-            <input type="radio" id="facultad" name="dependency" value="facultad">
-            <label for="facultad">Fecha de Envío</label>
-            <input type="radio" id="facultad" name="dependency" value="facultad">
-            <label for="facultad">Estado</label>
-            <br>
-            <br>
-
-            <?php
-            foreach ($data["correo"] as $correo) {
-              echo " <label for='formGroupExampleInput'>Correo Electronico</label>";
-              echo "<center><input type='text' style='width:40%;' name='correo' class='form-control' id='formGroupExampleInput' value='" . $correo["email"] . "' readonly>";
-            }
-            ?>
-            <br>
-
-            <div id="selectPrograma" style="display: none;">
-              <label for="inputState">Elija el Programa Academico</label><br>
-              <select id="selectPrograma" class="form-control" name="idProgram" style="width:40%;">
-                <option>Elija el Programa Academico</option>
-                <?php
-                foreach ($data["programas"] as $programa) {
-                  echo "<option value='" . $programa['id'] . "'>" . $programa['name'] . "</option>";
+        <div class="card-body" id="mensajesID">
+        <?php
+        //Metodo creado para listar mensaje ->Prueba
+              if ($data["mensajesID"] != NULL) {
+                foreach ($data["mensajesID"] as $mensajes) {
+                  echo "<tr>";
+                  echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
+                  echo "<td>" . $mensajes["description"] . "</td>";
+                  echo "<td>" . $mensajes["title"] . "</td>";
+                 
+                 if($mensajes["state"] == "Leido"){
+                    echo "<td><span class='badge badge-success'>Leido</span></td>";
+                  }else{
+                 echo "<td>" . $mensajes["state"] . "</td>";
+                  }
+                
                 }
-                ?>
-              </select>
-            </div>
+              } else {
+                echo "<td>No hay Mensajes Leido para Mostrar</td>";
+              }
 
-            <div id="selectDepartamento" style="display: none;">
-              <label for="inputState">Elija el Departamento</label><br>
-              <select class="form-control" name="idDepartamento" style="width:40%;">
-                <option>Elija el Departamento</option>
-                <?php
-                foreach ($data["departamentos"] as $programa) {
-                  echo "<option value='" . $programa['id'] . "'>" . $programa['name'] . "</option>";
-                }
-                ?>
-              </select>
-            </div>
-
-            <div id="selectFacultad" style="display: none;">
-              <label for="inputState">Elija el Departamento</label><br>
-              <select name="idFacultad" style="width:40%;">
-                <option>Elija la Facultad</option>
-                <?php
-                foreach ($data["facultades"] as $programa) {
-                  echo "<option value='" . $programa['id'] . "'>" . $programa['name'] . "</option>";
-                }
-                ?>
-              </select>
-            </div>
-
-            <br>
-
-            <div id="state" style="display: none;">
-              <label for="inputState">Seleccione el estado del usuario</label><br>
-              <select name="state" style="width:40%;">
-                <option value="Inactivo">Estado .. </option>
-                <option value="Activo">Activo</option>
-                <option value="Inactivo">Inactivo</option>
-              </select>
-            </div>
-
-            <br>
-
-            <input id="agregar" type="submit" value="Añadir" class="btn btn-primary" style="background:rgb(226, 3, 26); border:none; color:white; display: none;" />
-
-          </form>
+?>
+          
         </div>
-        <div class="card-footer text-muted" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+        <div class="card-footer text-muted" style="color: white; font-weight: bold; background:#dc3545;">
 
         </div>
       </div>
