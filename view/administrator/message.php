@@ -139,8 +139,7 @@
                 </tr>
                 <tbody>
                <?php
-               
-              
+                            
 
               //Metodo creado para listar mensaje ->Prueba
               if ($data["mensajes"] != NULL) {

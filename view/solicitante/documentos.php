@@ -55,7 +55,7 @@ session_start();
     <!-- Contenido -->
     <section id="content">
 
-      <div style="background: rgb(226, 3, 26); height: 40px;" class="tituloDocumento">
+      <div style="background: #dc3545; height: 40px;" class="tituloDocumento">
         <h5 style="font-weight: bold; line-height: 42px; color:white;">DOCUMENTOS SOLICITADOS DE REVISIÓN</h5>
       </div>
 
