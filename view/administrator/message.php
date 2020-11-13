@@ -91,7 +91,6 @@
                 </tr>
 
                 <tr>
-
                   <h1 id="respuesta">
 
                   </h1>

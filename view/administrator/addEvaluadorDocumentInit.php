@@ -59,9 +59,6 @@ function generateCode($length)
 foreach ($data["documentos"] as $documento) {
     $idDocument = $documento['id'];
     $nameUser = $documento['fullName'];
-    // $nameUser = "Richard Acevedo";
-    $origen = $documento['source'];
-    $destino = $documento['destiny'];
     $dateRegister = $documento['dateRegister'];
     $title = $documento['title'];
     $description = $documento['description'];
@@ -99,8 +96,7 @@ foreach ($data["documentos"] as $documento) {
                             <center>
                                 <input type="radio" id="programa" name="dependency" value="program" required>
                                 <label for="program">Programa Academico</label>&nbsp;&nbsp;&nbsp;
-                                <input type="radio" id="departamento" name="dependency" value="department" required>
-                                <label for="department">Departamento</label>&nbsp;&nbsp;&nbsp;
+
                                 <input type="radio" id="facultad" name="dependency" value="facultad" required>
                                 <label for="facultad">Facultad</label>
                             </center>
@@ -114,17 +110,6 @@ foreach ($data["documentos"] as $documento) {
                                                 <?php
                                                 foreach ($data["programas"] as $programa) {
                                                     echo "<option  value='" . $programa['id'] . "'>". $programa['id'] ." - ". $programa['name'] . "</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div id="selectDepartamento" style="display: none;">
-                                            <label for="inputState">Elija el Departamento</label><br>
-                                            <select class="form-control" name="idFacultad" style="width:90%;" required>
-                                                
-                                                <?php
-                                                foreach ($data["departamentos"] as $programa) {
-                                                    echo "<option value='" . $programa['id'] . "'>" . $programa['name'] . "</option>";
                                                 }
                                                 ?>
                                             </select>
@@ -164,26 +149,13 @@ foreach ($data["documentos"] as $documento) {
                     <div class="box-body">
 
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Numero de Radicado</label>
-                                <input type="text" class="form-control" value="<?php echo $idDocument; ?>" readonly>
-                            </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-12">
                                 <label>Nombre del Solicitante</label>
                                 <input type="text" class="form-control" value="<?php echo $nameUser; ?>" readonly>
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Dependencia a la que pertenece</label>
-                                <input type="text" class="form-control" value="<?php echo $origen; ?>" readonly>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Destino de la Documentación</label>
-                                <input type="text" class="form-control" value="<?php echo $destino; ?>" readonly>
-                            </div>
-                        </div>
+
 
                         <div class="form-row">
                             <div class="form-group col-md-6">

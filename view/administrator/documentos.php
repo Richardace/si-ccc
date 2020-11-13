@@ -66,30 +66,17 @@ session_start();
 
           <div class="wrap">
             <div class="wrapper">
-              <label class="textoRadioButton">FILTRAR POR: &nbsp;</label>
-              <input type="radio" name="filtro" id="dependencia" value="1"> <span class="textoRadioButton">DEPENDENCIA
-              </span> &nbsp; &nbsp;
-              <input type="radio" name="filtro" id="nombre" value="2"> <span class="textoRadioButton">NOMBRE </span>
-              &nbsp; &nbsp; &nbsp;
-
-              <input type="text" id="myInput" placeholder="Buscar ...">
-
-              <select class="textoSelectActivo" style="float: right;" type="text" id="mySelect" placeholder="Buscar ...">
-                <option class="textoSelectActivo" value="Activo">Activo </option>
-                <option class="textoSelectActivo" value="Inactivo">Inactivo</option>
-              </select>
 
               <table id="myTable">
                 <thead>
                   <tr class="header">
-                    <th>N° RAD</th>
-                    <th>DEPENDENCIA</th>
                     <th>SOLICITANTE</th>
                     <th>CORREO</th>
                     <th>FECHA RECIBIDO</th>
                     <th>ASUNTO</th>
-                    <th>DESTINO</th>
-                    <th><center>ASIGNAR EVALUADOR</center></th>
+                    <th>
+                      <center>ASIGNAR EVALUADOR</center>
+                    </th>
                   </tr>
                 </thead>
                 <tr>
@@ -101,16 +88,14 @@ session_start();
                   if ($data["documentos"] != NULL) {
                     foreach ($data["documentos"] as $documentos) {
                       echo "<tr>";
-                      echo "<td>" . $documentos["id"] . "</td>";
-                      echo "<td>" . $documentos["source"] . "</td>";
                       echo "<td>" . $documentos["fullName"] . "</td>";
-                      echo "<td>" . $documentos["email"]. "</td>";
+                      echo "<td>" . $documentos["email"] . "</td>";
                       echo "<td>" . $documentos["dateRegister"] . "</td>";
                       echo "<td>" . $documentos["title"] . "</td>";
-                      echo "<td>" . $documentos["destiny"] . "</td>";
 
                       echo "<td><center>
-                              <a href='index.php?c=documento&a=addEvaluadorDocumentoViewInit&id=" . $documentos["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+
+                              <a href='index.php?c=documento&a=addEvaluadorDocumentoViewInit&id=" . $documentos["id"] . "'><span class='badge badge-warning'>Recibir Documento</span></a>
                             </td>";
 
                       echo "</tr>";

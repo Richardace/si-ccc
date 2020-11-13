@@ -86,6 +86,11 @@ $(document).ready(function () {
     $("#personal").addClass("activeMenu");
   }
 
+  if (window.location.href.indexOf('sesion') >= 0) {
+    $("#message").removeClass("activeMenu");
+    $("#sesion").addClass("activeMenu");
+  }
+
 
 
   // Posts

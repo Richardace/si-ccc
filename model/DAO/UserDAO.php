@@ -29,9 +29,8 @@ class UserDAO
 		$db = new Connect;
 		$consulta = $db->prepare('SELECT * FROM user WHERE email=:email');
 		$consulta->execute([
-			':email'   => $email
+			':email' => $email
 		]);
-		$users = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 			return $row['id'];
 		}
@@ -42,6 +41,21 @@ class UserDAO
 
 		$db = new Connect;
 		$consulta = $db->prepare('SELECT * FROM user WHERE id=:idUser');
+		$consulta->execute([
+			':idUser'   => $id
+		]);
+		$email = "";
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$email = $row['email'];
+		}
+		return $email;
+	}
+
+	public function getEmailAutorizadoByIdUser($id)
+	{
+
+		$db = new Connect;
+		$consulta = $db->prepare('SELECT * FROM correoautorizado WHERE id=:idUser');
 		$consulta->execute([
 			':idUser'   => $id
 		]);
@@ -95,6 +109,7 @@ class UserDAO
 		$users = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 			$row['dependencyUser'] = $this->getDependencyByIdUser($row['id']);
+			$row['fullName'] = $this->getNameAndLastNameById($row['id']);
 			$users[] = $row;
 		}
 		return $users;
@@ -184,7 +199,7 @@ class UserDAO
 			$db = new Connect;
 			$consulta = $db->prepare('SELECT * FROM facultad WHERE id=:id');
 			$consulta->execute([
-				':id'   => $program
+				':id'   => $facultad
 			]);
 			while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 				return $row['name'];

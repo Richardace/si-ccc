@@ -56,16 +56,22 @@ session_start();
     <section id="content">
 
       <div style="background: rgb(226, 3, 26); height: 40px;" class="tituloDocumento">
-        <h5 style="font-weight: bold; line-height: 42px; color:white;">DOCUMENTOS SOLICITADOS DE REVISIÓN</h5>
+        <h5 style="font-weight: bold; line-height: 42px; color:white;">SESIONES DEL COMITE CURRICULAR CENTRAL</h5>
       </div>
 
       <!-- INICIO TABLA -->
 
-      <div>
+      <div style="margin-bottom: -40px;">
         <center>
-          <div class="btn-agregarDocumento">
-            <a style="cursor: pointer;" href="index.php?c=documento&a=addDocumentView&id=<?php echo $_SESSION['id']; ?>">
-              <img src="view/assets/img/add-file.png" style="width: 50px; height: 50px;" alt="Agregar Nuevo solicitante" title="Asignar nuevo solicitante">
+          <div class="btn-agregarDocumento" style="display: inline-block;">
+            <a style="cursor: pointer;" href="index.php?c=sesion&a=addSesionView">
+              <img src="view/assets/img/calendario.png" style="width: 50px; height: 50px;" alt="Agregar Nueva Sesión" title="Agregar Nueva Sesión">
+            </a>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="btn-agregarDocumento" style="display: inline-block;">
+            <a style="cursor: pointer;" href="index.php?c=sesion&a=openUploadDocumentSesion">
+              <img src="view/assets/img/add-file.png" style="width: 50px; height: 50px;" alt="Actualizar Documento de Sesion" title="Actualizar Documento de Sesion">
             </a>
           </div>
         </center>
@@ -79,10 +85,12 @@ session_start();
             <thead>
               <tr class="header">
 
-                <th>N° de Radicado</th>
-                <th>FECHA de registro</th>
-                <th>ASUNTO</th>
-                <th>ESTADO</th>
+                <th>Fecha sesión</th>
+                <th>fecha limite para documentos</th>
+                <th>semestre</th>
+                <th>año</th>
+                <th>estado</th>
+                <th>visibilidad</th>
                 <th>
                   <center>OPCIONES</center>
                 </th>
@@ -94,43 +102,37 @@ session_start();
             <tbody>
               <?php
 
-              if ($data["documentos"] != NULL) {
-                foreach ($data["documentos"] as $documentos) {
-                  $documentoID = $documentos["id"];
+              if ($data["sesiones"] != NULL) {
+                foreach ($data["sesiones"] as $sesiones) {
+                  $documentoID = $sesiones["id"];
                   echo "<tr>";
-                  if($documentos["radicado"] == 0){
-                    echo "<td>Pendiente</td>";
+
+                  echo "<td>".$sesiones["fechaSesion"]."</td>";
+                  echo "<td>".$sesiones["fechaLimite"]."</td>";
+                  echo "<td>".$sesiones["semestre"]."</td>";
+                  echo "<td>".$sesiones["anio"]."</td>";
+
+                  if($sesiones["state"] == "Activo"){
+                    echo "<td><a href='index.php?c=sesion&a=changeState&id=$documentoID'><span class='badge badge-success'>".$sesiones["state"]."</span></a></td>";
                   }else{
-                    
-                    echo "<td><span class='badge badge-warning'>" . $documentos["radicado"] . "</span></td>";
+                    echo "<td><a href='index.php?c=sesion&a=changeState&id=$documentoID'><span class='badge badge-danger'>".$sesiones["state"]."</span></a></td>";
                   }
-                  
-                  echo "<td>" . $documentos["dateRegister"] . "</td>";
-                  echo "<td>" . $documentos["title"] . "</td>";
-                  
-                  if($documentos["state"] == "Devuelto con correcciones"){
-                    echo "<td>
-                          <a href='index.php?c=documento&a=verCorrecionesDocumentoSolicitante&id=$documentoID'>
-                            <span>
-                              Devuelto con Correcciones
-                            </span>
-                          </a>
-                        </td>";
-                  }else if($documentos["state"] == "Aprobado"){
-                    echo "<td><span class='badge badge-success'>Aprobado</span></td>";
+
+                  if($sesiones["stateView"] == "Visible"){
+                    echo "<td><a href='index.php?c=sesion&a=changeStateView&id=$documentoID'><span class='badge badge-success'>".$sesiones["stateView"]."</span></a></td>";
                   }else{
-                    echo "<td>" . $documentos["state"] . "</td>";
+                    echo "<td><a href='index.php?c=sesion&a=changeStateView&id=$documentoID'><span class='badge badge-danger'>".$sesiones["stateView"]."</span></a></td>";
                   }
                   
                   echo "<td><center>
-                      <a href='index.php?c=documento&a=viewDocumentSolicitante&id=" . $documentos["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Consultar Documento'></span></a>&nbsp&nbsp&nbsp&nbsp        
+                      <a href='index.php?c=sesion&a=updateSesionView&id=" . $sesiones["id"] . "'><span id='iconoVer'><img src='view/assets/img/editar.png' title='Consultar Documento'></span></a>&nbsp&nbsp&nbsp&nbsp        
                       
                             </td>";
 
                   echo "</tr>";
                 }
               } else {
-                echo "<td>No hay Documentos en esta sección</td>";
+                echo "<td>No hay Sesiones en esta sección</td>";
               }
 
               ?>

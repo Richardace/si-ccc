@@ -1,0 +1,133 @@
+                <!-- ACORDEON 1 -->
+
+                <div class="card">
+                  <div class="card-header" id="headingThree" style="background: red;">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color: white; font-weight: bold; text-decoration: none;">
+                        SEGUNDO SEMESTRE - 2020
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                      <!-- ACORDEON -->
+
+                      <div id="accordion2">
+                        <div class="card">
+                          <div class="card-header" id="head2">
+                            <h5 class="mb-0">
+                              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Collapsible Group Item #3
+                              </button>
+                            </h5>
+                          </div>
+                          <div id="collapseTwo" class="collapse" aria-labelledby="head2" data-parent="#accordion2">
+                            <div class="card-body">
+                              <!-- CONTENIDO ACORDEON -->
+                              <table id="myTable">
+                                <thead>
+                                  <tr class="header">
+                                    <th>N° RAD</th>
+                                    <th>SOLICITANTE</th>
+                                    <th>CORREO</th>
+                                    <th>FECHA RECIBIDO</th>
+                                    <th>ASUNTO</th>
+                                    <th>
+                                      <center>ASIGNAR EVALUADOR</center>
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tr>
+                                  <h1 id="respuesta"></h1>
+                                </tr>
+                                <tbody>
+                                  <?php
+
+                                  if ($data["documentos"] != NULL) {
+                                    foreach ($data["documentos"] as $documentos) {
+                                      echo "<tr>";
+                                      echo "<td>" . $documentos["radicado"] . "</td>";
+                                      echo "<td>" . $documentos["fullName"] . "</td>";
+                                      echo "<td>" . $documentos["email"] . "</td>";
+                                      echo "<td>" . $documentos["dateRegister"] . "</td>";
+                                      echo "<td>" . $documentos["title"] . "</td>";
+
+                                      echo "<td><center>
+              <a href='index.php?c=documento&a=addEvaluadorDocumentoViewInit&id=" . $documentos["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+            </td>";
+
+                                      echo "</tr>";
+                                    }
+                                  } else {
+                                    echo "<td>No hay Documentos Pendientes por Asignar Evaluador</td>";
+                                  }
+
+                                  ?>
+                                </tbody>
+                              </table>
+                              <!-- FIN CONTENIDO ACORDEON -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- FIN ACORDEON  -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FIN CONTENIDO ACORDEON PRINCIPAL -->
+
+
+
+                <!-- TABLA -->
+                <table id="myTable">
+                    <thead>
+                      <tr class="header">
+                        <th>N° RAD</th>
+                        <th>SOLICITANTE</th>
+                        <th>CORREO</th>
+                        <th>FECHA RECIBIDO</th>
+                        <th>ASUNTO</th>
+                        <th>ESTADO</th>
+                        <th>
+                          <center>OPCIONES</center>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tr>
+                      <h1 id="respuesta"></h1>
+                    </tr>
+                    <tbody>
+                      <?php
+    
+                      if ($data["documentos"] != NULL) {
+                        foreach ($data["documentos"] as $documentos) {
+                          echo "<tr>";
+                          echo "<td>" . $documentos["radicado"] . "</td>";
+    
+                          echo "<td>" . $documentos["fullName"] . "</td>";
+                          echo "<td>" . $documentos["email"] . "</td>";
+                          echo "<td>" . $documentos["dateRegister"] . "</td>";
+                          echo "<td>" . $documentos["title"] . "</td>";
+    
+                          if ($documentos["state"] == "Aprobado") {
+                            echo "<td><span class='badge badge-success'>Aprobado</span></td>";
+                          } else {
+                            echo "<td>" . $documentos["state"] . "</td>";
+                          }
+    
+                          echo "<td><center>
+                                  <a href='index.php?c=documento&a=viewDocumentAdministrador&id=" . $documentos["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Consultar Documento'></span></a>&nbsp&nbsp&nbsp&nbsp
+                                  
+                                </td>";
+    
+                          echo "</tr>";
+                        }
+                      } else {
+                        echo "<td>No hay Documentos Pendientes por Asignar Evaluador</td>";
+                      }
+    
+                      ?>
+                    </tbody>
+                  </table>

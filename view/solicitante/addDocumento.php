@@ -82,13 +82,9 @@ session_start();
             <input type="hidden" class="folder" value="<?php echo generateCode(11); ?>" readonly>
 
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-12">
                 <label>Origen</label>
-                <input type="text" class="form-control origen" value="<?php echo $data['dependency']; ?>" readonly>
-              </div>
-              <div class="form-group col-md-6">
-                <label>Destino</label>
-                <input type="text" class="form-control destino" placeholder="Dependencia destino">
+                <input type="text" class="form-control origen" value="<?php echo $_SESSION['name'] . " " . $_SESSION['lastName'] . " - " . $_SESSION['email']; ?>" readonly>
               </div>
             </div>
 

@@ -78,7 +78,7 @@ session_start();
             
             <div id="state" >
               <label for="inputState">Seleccione el estado del usuario</label><br>
-              <select name="state" style="width:40%;">
+              <select name="state" style="width:40%;" class='form-control'>
                 <option value="Inactivo">Estado .. </option>
                 <option value="Activo">Activo</option>
                 <option value="Inactivo">Inactivo</option>

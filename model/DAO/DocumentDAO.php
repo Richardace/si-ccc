@@ -3,10 +3,10 @@
 class DocumentDAO
 {
 
-	public function addDocument($usuario, $origen, $destino, $titulo, $descripcion, $documentos, $nameFolder)
+	public function addDocument($usuario, $titulo, $descripcion, $documentos, $nameFolder)
 	{
 		$db = new Connect;
-		$sql = $db->query("INSERT INTO documento(id_user, source, destiny, dateRegister, title, description, files, state, nameFolder) VALUES('" . $usuario . "','" . $origen . "', '" . $destino . "', NULL , '" . $titulo . "', '" . $descripcion . "', '" . $documentos . "', 'Radicado', '" . $nameFolder . "') ");
+		$sql = $db->query("INSERT INTO documento(radicado, id_user, sesion, dateRegister, title, description, files, state, nameFolder) VALUES('','" . $usuario . "', '', NULL , '" . $titulo . "', '" . $descripcion . "', '" . $documentos . "', 'Radicado', '" . $nameFolder . "') ");
 
 		return $sql;
 	}
@@ -98,14 +98,14 @@ class DocumentDAO
 		}
 	}
 
-	public function getDocumentsByDependency($dependency)
+	public function getDocumentsByIdUser($id)
 	{
 		require_once "model/DAO/UserDAO.php";
 		$db = new Connect;
 		$userDAO = new UserDAO;
-		$consulta = $db->prepare('SELECT * FROM documento WHERE source = :source');
+		$consulta = $db->prepare('SELECT * FROM documento WHERE id_user = :idUser');
 		$consulta->execute([
-			':source' => $dependency
+			':idUser' => $id
 		]);
 		$documentos = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
@@ -136,10 +136,60 @@ class DocumentDAO
 	{
 		require_once "model/DAO/UserDAO.php";
 		$db = new Connect;
+
 		$userDAO = new UserDAO;
-		$consulta = $db->prepare('SELECT * FROM documento WHERE state != :state');
+		$consulta = $db->prepare('SELECT DISTINCT semestre, anio FROM sesiones ORDER BY id desc');
+		$consulta->execute();
+
+		$semestres = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$semestres[] = $row;
+
+
+		}
+		return $semestres;
+
+		// $userDAO = new UserDAO;
+		// $consulta = $db->prepare('SELECT * FROM documento WHERE state != :state');
+		// $consulta->execute([
+		// 	':state'   => "Radicado"
+		// ]);
+		// $documentos = NULL;
+		// while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+
+		// 	$row['fullName'] = $userDAO->getNameAndLastNameById($row['id_user']);
+		// 	$row['email'] = $userDAO->getEmailByIdUser($row['id_user']);
+		// 	$documentos[] = $row;
+		// }
+		// return $documentos;
+	}
+
+	public function getPeriodos($x, $a){
+		require_once "model/DAO/UserDAO.php";
+		$db = new Connect;
+
+		$userDAO = new UserDAO;
+		$consulta = $db->prepare('SELECT * from sesiones WHERE semestre=:semestre AND anio=:anio');
 		$consulta->execute([
-			':state'   => "Radicado"
+			"semestre" => $a,
+			"anio" => $x
+		]);
+
+		$semestres = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$semestres[] = $row;
+
+
+		}
+		return $semestres;
+	}
+
+	public function getDocumentsByPeriodo($idSesion){
+		$db = new Connect;
+		$userDAO = new UserDAO;
+		$consulta = $db->prepare('SELECT * FROM documento WHERE sesion = :sesion');
+		$consulta->execute([
+			':sesion'   => $idSesion
 		]);
 		$documentos = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
@@ -211,17 +261,23 @@ class DocumentDAO
 			':keyAccess'   => $token
 		]);
 
+		return $insertDocumentEvaluador;
+	}
+
+	public function guardarInfoDocumento($idDocument, $sesion, $radicado){
+		$db = new Connect;
+
 		// Change State Document
-		$changeState = $db->prepare("UPDATE documento SET state=:newState WHERE id=:idDocumento");
+		$changeState = $db->prepare("UPDATE documento SET radicado=:radicado, sesion=:sesion, state=:state WHERE id=:idDocumento");
 
 		$changeState->execute([
-			':newState'   => "En Revisión",
-			':idDocumento'   => $idDocument
+			':radicado'   => $radicado,
+			':sesion'   => $sesion,
+			':idDocumento'   => $idDocument,
+			':state'   => "Asignado a Evaluadores"
 		]);
 
-
-
-		return $insertDocumentEvaluador;
+		return $changeState;
 	}
 
 	public function getTokenEnableById($idUser)
@@ -246,10 +302,10 @@ class DocumentDAO
 			$consulta2 = $db->prepare('SELECT * FROM documento WHERE id=:idDocument AND state=:newState');
 			$consulta2->execute([
 				':idDocument'   => $documentoEvaluador['id_document'],
-				':newState'   => "En Revisión"
+				':newState'   => "Asignado a Evaluadores"
 			]);
 			while ($row2 = $consulta2->fetch(PDO::FETCH_ASSOC)) {
-				$tokensActivos[] = $documentoEvaluador['key_access'];
+				$tokensActivos[] = $documentoEvaluador;
 			}
 		}
 		return $tokensActivos;
@@ -262,5 +318,19 @@ class DocumentDAO
 		$sql2 = $db->query("UPDATE correcciones SET state= 'Corregido' WHERE id = '" . $idCorreccion . "'");
 
 		return $sql2;
+	}
+
+	public function getSesionesActivas(){
+		$db = new Connect;
+		$consulta = $db->prepare('SELECT * FROM sesiones WHERE state=:state');
+		$consulta->execute([
+			':state'   => "Activo"
+		]);
+		$sesiones = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			
+			$sesiones[] = $row;
+		}
+		return $sesiones;
 	}
 }
