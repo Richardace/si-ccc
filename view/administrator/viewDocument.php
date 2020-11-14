@@ -344,7 +344,7 @@ session_start();
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <div style="background:rgb(47, 196, 0); border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:right; line-height:25px;">
-                <a href="index.php?c=documento&a=aprobarDocumentoSolicitante&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Cambiar Estado</a>
+                <a href="index.php?c=documento&a=changeStateView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Cambiar Estado</a>
               </div>
             </div>
           </center>

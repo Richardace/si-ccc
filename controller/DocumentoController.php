@@ -361,6 +361,22 @@ class DocumentoController
         require_once "view/administrator/documentos.php";
     }
 
+    public function changeStateView($id){
+        $document = new DocumentDAO;
+        $data['documentos'] = $document->getDocumentById($id);
+        require_once "view/administrator/changeStateView.php";
+    }
+
+    public function changeStateDocument(){
+        $idDocument= $_POST['idDocument'];
+        $newState = $_POST['state'];
+        $document = new DocumentDAO;
+        $document->changeStateDocument($idDocument, $newState);
+
+        $this->viewDocumentAdministrador($idDocument);
+
+    }
+
     public function aprobarDocumentoSolicitante($idDocument){
         $document = new DocumentDAO;
         $document->aprobarDocumento($idDocument);

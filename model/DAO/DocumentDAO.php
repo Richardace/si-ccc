@@ -53,6 +53,18 @@ class DocumentDAO
 		return $documentos;
 	}
 
+	public function changeStateDocument($idDocument, $newState){
+		$db = new Connect;
+		
+		$changeState = $db->prepare("UPDATE documento SET state=:newState WHERE id=:idDocumento");
+		$changeState->execute([
+			':idDocumento'   => $idDocument,
+			':newState'   => $newState
+		]);
+
+		return true;
+	}
+
 	public function getCorreccionById($id)
 	{
 		require_once "model/DAO/UserDAO.php";
