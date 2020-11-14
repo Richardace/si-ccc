@@ -22,7 +22,7 @@
 
 		public function getMensajeID($id_user){
 			$db = new Connect;
-			$consulta = $db->prepare("SELECT user_id_destiny, description, title, state FROM messages WHERE user_id_origin = :id_user");
+			$consulta = $db->prepare("SELECT user_id_destiny, description, title, state FROM messages WHERE id = :id_user");
 			$consulta->execute([
 				':id_user' => $id_user
 			]);

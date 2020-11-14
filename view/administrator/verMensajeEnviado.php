@@ -65,27 +65,37 @@ session_start();
         </div>
 
         <div class="card-body" id="mensajesID">
-        <?php
-        //Metodo creado para listar mensaje ->Prueba
-              if ($data["mensajesID"] != NULL) {
-                foreach ($data["mensajesID"] as $mensajes) {
-                  echo "<tr>";
-                  echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
-                  echo "<td>" . $mensajes["description"] . "</td>";
-                  echo "<td>" . $mensajes["title"] . "</td>";
-                 
-                 if($mensajes["state"] == "Leido"){
-                    echo "<td><span class='badge badge-success'>Leido</span></td>";
-                  }else{
-                 echo "<td>" . $mensajes["state"] . "</td>";
-                  }
-                
-                }
-              } else {
-                echo "<td>No hay Mensajes Leido para Mostrar</td>";
-              }
+       
+      <?php
+ 
+      //Metodo creado para listar mensaje ->Prueba
+         
+  
 
+      if($data['mensajesID']!=NULL){
+
+      foreach ($data['mensajesID'] as $infoDocumento) {
+        $idDocumento = $infoDocumento['user_id_destiny'];
+        $title = $infoDocumento['title'];
+        $description = $infoDocumento['description'];
+        
+       
+      }
+    }
 ?>
+
+<div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Asunto</label>
+                <input type="text" class="form-control origen" value="<?php echo  $title; ?>" readonly>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Mensaje</label>
+                <input type="text" class="form-control destino" value="<?php echo $description; ?>" readonly>
+              </div>
+            </div>
+
+
           
         </div>
         <div class="card-footer text-muted" style="color: white; font-weight: bold; background:#dc3545;">

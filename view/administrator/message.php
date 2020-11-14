@@ -142,10 +142,11 @@
                             
 
               //Metodo creado para listar mensaje ->Prueba
+
               if ($data["mensajes"] != NULL) {
                 foreach ($data["mensajes"] as $mensajes) {
 
-                  $variableID = $mensajes["user_id_destiny"];
+                  $variableID = $mensajes["id"];
 
                   echo "<tr>";
                   echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
@@ -167,8 +168,7 @@
               } else {
                 echo "<td>No hay Mensajes Leido para Mostrar</td>";
               }
-
-?>
+            ?>
 
 </tbody>
                <!-- <tr>
