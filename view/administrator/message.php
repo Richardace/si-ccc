@@ -78,7 +78,7 @@
 
               <!-- INICIO TABLA -->
 
-              <input type="text" id="myInput" placeholder="Search for names..">
+              
 
               <table id="myTable">
                 <tr class="header">
@@ -112,6 +112,39 @@
                 </tr>
 
               </table>
+              <?php
+               
+              
+
+               //Metodo creado para listar mensaje recibido ->Prueba
+               if ($data["mensajesRecibidos"] != NULL) {
+                 foreach ($data["mensajesRecibidos"] as $mensajesR) {
+ 
+                   $variableID = $mensajesR["user_id_destiny"];
+ 
+                   echo "<tr>";
+                   echo "<td>" . $mensajesR["user_id_destiny"] . "</td>";
+                   echo "<td>" . $mensajesR["description"] . "</td>";
+                   echo "<td>" . $mensajesR["title"] . "</td>";
+                   echo "<td>" . $mensajesR["state"] . "</td>";
+                  
+                  if($mensajes["state"] == "Leido"){
+                     echo "<td><span class='badge badge-success'>Leido</span></td>";
+                   }else{
+                  echo "<td>" . $mensajesR["state"] . "</td>";
+                   }
+ 
+                   echo "<td><center>
+                     <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                     </td>";
+ 
+                   echo "</tr>";
+                 }
+               } else {
+                 echo "<td>No hay Mensajes Leido para Mostrar</td>";
+               }
+ 
+               ?>
 
               <!-- FIN TABLA -->
 
