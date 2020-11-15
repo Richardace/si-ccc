@@ -70,21 +70,48 @@ class DocumentoController
     }
 
     public function addCorreccionDocumento(){
-        $idEvaluador = $_POST["idEvaluador"];
-        $radicado = $_POST["radicado"];
+        $idDocumento = $_POST["idDocumento"];
         $descripcion = $_POST["descripcion"];
         $documentos = $_POST["documentos"];
         $nameFolder = $_POST["nameFolder"];
 
         $document = new DocumentDAO;
 
-        $sql = $document->addCorreccionDocument($idEvaluador, $radicado, $descripcion, $documentos, $nameFolder);
+        $sql = $document->addCorreccionDocument($idDocumento, $descripcion, $documentos, $nameFolder);
 
         if ($sql) {
             echo "ok";
         } else {
             echo "error";
         }
+    }
+
+    public function addRevisionDocumento(){
+        $idDocumentoEvaluador = $_POST["idDocumentEvaluador"];
+        $descripcion = $_POST["descripcion"];
+        $documentos = $_POST["documentos"];
+        
+
+        $document = new DocumentDAO;
+        $idDocumento = $document->getDocumentByIdEvaluadorDocumento($idDocumentoEvaluador);
+
+        //HACER ALGORITMO PARA SABER SI YA LOS 2 EVALUADORES EVALUARON
+
+        $sql = $document->addRevisionDocument($idDocumentoEvaluador, $descripcion, $documentos, $idDocumento);
+
+        if ($sql) {
+            echo "ok";
+        } else {
+            echo "error";
+        }
+    }
+
+    public function devolverDocumentoAdministratorView($idDocument){
+        $DocumentDAO = new DocumentDAO;
+        $data['idDocument'] = $idDocument;
+        $data['documento'] = $DocumentDAO->getDocumentById($idDocument);
+
+        require_once "view/administrator/devolverDocumento.php";
     }
 
     // Entrada del Evaluador al documento
@@ -101,6 +128,7 @@ class DocumentoController
 
         $document = new DocumentDAO;
         $identidad = $document->validadIdentidad($idUser, $codigoAcceso);
+        $idDocumentoEvaluador = "";
         $idDocumento = 0;
 
         if ($identidad == NULL) {
@@ -111,6 +139,7 @@ class DocumentoController
         } else {
             foreach ($identidad as $documentoUser) {
                 $idDocumento = $documentoUser['id_document'];
+                $idDocumentoEvaluador = $documentoUser['id'];
             }
 
             $documento = $document->getDocumentById($idDocumento);
@@ -120,7 +149,7 @@ class DocumentoController
             }
 
             if ($estado != "Finalizado" && $estado != "Aprobado" && $estado != "Devuelto con correcciones") {            
-                header("Location: index.php?c=documento&a=evaluador&id=$idDocumento");
+                header("Location: index.php?c=documento&a=evaluador&id=$idDocumentoEvaluador");
             } else {
                 echo "<script>
                     alert('El documento no se encuentra Disponible en estos momentos');
@@ -130,8 +159,11 @@ class DocumentoController
         }
     }
 
-    public function devolverDocumentoView($idDocument){
+    public function devolverDocumentoView($idDocumentEvaluador){
         $DocumentDAO = new DocumentDAO;
+        $data['idDocumentEvaluador'] = $idDocumentEvaluador;
+
+        $idDocument = $DocumentDAO->getDocumentByIdEvaluadorDocumento($idDocumentEvaluador);
         $data['idDocument'] = $idDocument;
         $documento = $DocumentDAO->getFolderDocument($idDocument);
         $data['nameFolder'] = $documento;
@@ -140,11 +172,13 @@ class DocumentoController
 
     public function evaluador($id)
     {
-
         $document = new DocumentDAO;
-        $data['documentos'] = $document->getDocumentById($id);
+        $data['idDocumentoEvaluador'] = $id;
+        $idDocumento = $document->getDocumentByIdEvaluadorDocumento($id);
+        
+
+        $data['documentos'] = $document->getDocumentById($idDocumento);
         $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
-        $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
 
         require_once "view/evaluador/evaluador.php";
     }
@@ -237,8 +271,8 @@ class DocumentoController
         $documento = $document->getCorreccionById($id);
 
         foreach ($documento as $documentoEvaluador) {
-            $files = $documentoEvaluador['documentos_evaluador'];
-            $title = $documentoEvaluador['date_envio_evaluador'];
+            $files = $documentoEvaluador['documentos'];
+            $title = $documentoEvaluador['date_correccion'];
         }
 
         $zip = new ZipArchive();
@@ -372,6 +406,8 @@ class DocumentoController
         $newState = $_POST['state'];
         $document = new DocumentDAO;
         $document->changeStateDocument($idDocument, $newState);
+
+        echo "<script>alert('Estado Actualizado con Exito!')</script>";
 
         $this->viewDocumentAdministrador($idDocument);
 

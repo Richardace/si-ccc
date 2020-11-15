@@ -134,6 +134,11 @@ session_start();
           <div class="box-body">
 
             <div>
+            <div class="btn-agregarUsuario">
+                <a data-toggle="modal" data-target="#correccionesDocumento" style="cursor: pointer; float: left; text-decoration: underline; color:blue;">
+                  Historial de estados del Documento
+                </a>
+              </div>
               <div class="btn-agregarUsuario">
                 <a data-toggle="modal" data-target="#correccionesDocumento" style="cursor: pointer; float: right; text-decoration: underline; color:blue;">
                   Consultar Revisiones Anteriores del Documento
@@ -174,8 +179,8 @@ session_start();
                           foreach ($data["correccionesDocumento"] as $correcciones) {
                             $idDocumentoCorregido = $correcciones['id'];
                             echo "<tr>";
-                            echo "<td>" . $correcciones["date_envio_evaluador"] . "</td>";
-                            echo "<td>" . $correcciones["comentarios_evaluador"] . "</td>";
+                            echo "<td>" . $correcciones["date_correccion"] . "</td>";
+                            echo "<td>" . $correcciones["observaciones"] . "</td>";
                             echo "<td>
                             <a href='index.php?c=documento&a=descargarDocumentosCorregidosById&id=$idDocumentoCorregido' target='_blank'>
                               <span>
@@ -340,7 +345,7 @@ session_start();
           <center>
             <div style="display: inline-block;">
               <div style="background:#DAA900; border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:left; line-height:25px;">
-                <a href="index.php?c=documento&a=devolverDocumentoView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Solicitar Corrección</a>
+                <a href="index.php?c=documento&a=devolverDocumentoAdministratorView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Solicitar Corrección</a>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <div style="background:rgb(47, 196, 0); border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:right; line-height:25px;">

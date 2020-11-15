@@ -60,8 +60,8 @@ session_start();
      foreach ($data["documentos"] as $documentos) {
         $radicado = $documentos["id"];
         $idUser = $documentos["id_user"];
-        $source = $documentos["source"];
-        $destiny = $documentos["destiny"];
+        $dateRegister = $documentos["dateRegister"];
+        $numeroRadicado = $documentos["radicado"];
         $title = $documentos["title"];
         $description = $documentos["description"];
         $nameFolder = $documentos["nameFolder"];
@@ -88,12 +88,12 @@ session_start();
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>Origen</label>
-                <input type="text" class="form-control origen" value="<?php echo $source; ?>" readonly>
+                <label>Numero de Radicado</label>
+                <input type="text" class="form-control origen" value="<?php echo $numeroRadicado; ?>" readonly>
               </div>
               <div class="form-group col-md-6">
-                <label>Destino</label>
-                <input type="text" class="form-control destino" value="<?php echo $destiny; ?>" readonly>
+                <label>Fecha de Registro</label>
+                <input type="text" class="form-control destino" value="<?php echo $dateRegister; ?>" readonly>
               </div>
             </div>
 

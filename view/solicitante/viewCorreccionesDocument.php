@@ -85,8 +85,8 @@ session_start();
                           foreach ($data["correccionesDocumento"] as $correcciones) {
                             $idDocumentoCorregido = $correcciones['id'];
                             echo "<tr>";
-                            echo "<td>" . $correcciones["date_envio_evaluador"] . "</td>";
-                            echo "<td>" . $correcciones["comentarios_evaluador"] . "</td>";
+                            echo "<td>" . $correcciones["date_correccion"] . "</td>";
+                            echo "<td>" . $correcciones["observaciones"] . "</td>";
                             echo "<td>
                             <a href='index.php?c=documento&a=descargarDocumentosCorregidosById&id=$idDocumentoCorregido' target='_blank'>
                               <span>

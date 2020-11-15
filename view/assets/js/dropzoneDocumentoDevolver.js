@@ -22,7 +22,7 @@ var multimediaFisica = null;
 
 $(".guardarProducto").click(function () {
 
-	if ($(".descripcion").val() && arrayFiles != "") {
+	if ($(".idDocument").val() != "" && $(".descripcion").val() && arrayFiles != "") {
 
 		if (arrayFiles.length > 0) {
 
@@ -33,12 +33,12 @@ $(".guardarProducto").click(function () {
 
 				var datosDocumento = new FormData();
 				datosDocumento.append("file", arrayFiles[i]);
-				datosDocumento.append("idDocumentEvaluador", $(".idDocumentEvaluador").val());
+				datosDocumento.append("idDocumento", $(".idDocument").val());
 				datosDocumento.append("descripcion", $(".descripcion").val());
 				datosDocumento.append("nameFolder", $(".nameFolder").val());
 
 				$.ajax({
-					url: "config/documentosCorrecciones.ajax.php",
+					url: "config/documentosDevolver.php",
 					method: "POST",
 					data: datosDocumento,
 					cache: false,
@@ -85,15 +85,16 @@ function agregarMiProducto(imagen) {
 
 	var datosDocumento = new FormData();
 
-	datosDocumento.append("idDocumentEvaluador", $(".idDocumentEvaluador").val());
+	datosDocumento.append("idDocumento", $(".idDocument").val());
 	datosDocumento.append("descripcion", $(".descripcion").val());
 	datosDocumento.append("nameFolder", $(".nameFolder").val());
 	datosDocumento.append("documentos", imagen);
 
+	var idDocumento = $(".idDocument").val();
 
 	$.ajax({
 		// url:"productos.ajaxSubida.php",
-		url: "index.php?c=documento&a=addRevisionDocumento",
+		url: "index.php?c=documento&a=addCorreccionDocumento",
 		method: "POST",
 		data: datosDocumento,
 		cache: false,
@@ -114,7 +115,7 @@ function agregarMiProducto(imagen) {
 				}).then(function (result) {
 					if (result.value) {
 						$('.guardarProducto').html("Guardar producto");
-						window.location = "index.php?c=documento&a=viewEvaluadorInit";
+						window.location = "index.php?c=documento&a=viewDocumentAdministrador&id="+idDocumento;
 
 					}
 				})

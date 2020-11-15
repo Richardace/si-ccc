@@ -11,14 +11,22 @@ class DocumentDAO
 		return $sql;
 	}
 
-	public function addCorreccionDocument($idEvaluador, $radicado, $descripcion, $documentos, $nameFolder)
+	public function addCorreccionDocument($idDocumento, $descripcion, $documentos, $nameFolder)
 	{
 		$db = new Connect;
-		$sql = $db->query("INSERT INTO correcciones(id_userEvaluador, id_document, date_envio_evaluador, comentarios_evaluador, documentos_evaluador, nameFolder, state) 
-												VALUES('" . $idEvaluador . "','" . $radicado . "',  NULL , '" . $descripcion . "', '" . $documentos . "', '" . $nameFolder . "', 'Pendiente') ");
-		$sql2 = $db->query("UPDATE documento SET state= 'Devuelto con correcciones' WHERE id = '" . $radicado . "'");
+		$sql = $db->query("INSERT INTO correcciones(id_document, date_correccion, observaciones, documentos, folder, state) 
+												VALUES('" . $idDocumento . "',  NULL , '" . $descripcion . "', '" . $documentos . "', '" . $nameFolder . "', 'Pendiente') ");
+		$sql2 = $db->query("UPDATE documento SET state= 'Devuelto con correcciones' WHERE id = '" . $idDocumento . "'");
 
 		return $sql;
+	}
+
+	public function addRevisionDocument($idDocumentoEvaluador, $descripcion, $documentos, $idDocumento){
+		$db = new Connect;
+		$sql1 = $db->query("UPDATE documento SET state= 'Revisado Por Evaluador' WHERE id = '" . $idDocumento . "'");
+		$sql2 = $db->query("UPDATE documento_evaluador SET observaciones= '" . $descripcion . "' , files= '" . $documentos . "' WHERE id = '" . $idDocumentoEvaluador . "'");
+
+		return $sql2;
 	}
 
 	public function validadIdentidad($idUser, $codigoAcceso)
@@ -85,7 +93,7 @@ class DocumentDAO
 		require_once "model/DAO/UserDAO.php";
 		$db = new Connect;
 		$userDAO = new UserDAO;
-		$consulta = $db->prepare('SELECT * FROM correcciones WHERE id_document=:id ORDER BY date_envio_evaluador DESC');
+		$consulta = $db->prepare('SELECT * FROM correcciones WHERE id_document=:id ORDER BY date_correccion DESC');
 		$consulta->execute([
 			':id'   => $id
 		]);
@@ -144,6 +152,21 @@ class DocumentDAO
 		return $idDocumento;
 	}
 
+	public function getDocumentByIdEvaluadorDocumento($idCorreccion){
+		
+		$db = new Connect;
+		$consulta = $db->prepare('SELECT * FROM documento_evaluador WHERE id = :id');
+		$consulta->execute([
+			':id' => $idCorreccion
+		]);
+		$idDocumento = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+
+			$idDocumento = $row['id_document'];
+		}
+		return $idDocumento;
+	}
+
 	public function getDocuments()
 	{
 		require_once "model/DAO/UserDAO.php";
@@ -160,20 +183,6 @@ class DocumentDAO
 
 		}
 		return $semestres;
-
-		// $userDAO = new UserDAO;
-		// $consulta = $db->prepare('SELECT * FROM documento WHERE state != :state');
-		// $consulta->execute([
-		// 	':state'   => "Radicado"
-		// ]);
-		// $documentos = NULL;
-		// while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-
-		// 	$row['fullName'] = $userDAO->getNameAndLastNameById($row['id_user']);
-		// 	$row['email'] = $userDAO->getEmailByIdUser($row['id_user']);
-		// 	$documentos[] = $row;
-		// }
-		// return $documentos;
 	}
 
 	public function getPeriodos($x, $a){
@@ -218,7 +227,7 @@ class DocumentDAO
 		require_once "model/DAO/UserDAO.php";
 		$db = new Connect;
 		$userDAO = new UserDAO;
-		$consulta = $db->prepare('SELECT * FROM documento_evaluador WHERE id_document=:id');
+		$consulta = $db->prepare('SELECT * FROM documento_evaluador WHERE id=:id');
 		$consulta->execute([
 			':id'   => $idDocumento
 		]);
@@ -265,8 +274,8 @@ class DocumentDAO
 	{
 		$db = new Connect;
 
-		$insertDocumentEvaluador = $db->prepare("INSERT INTO documento_evaluador (id_user, id_document, dateLimit, dateRegister, observaciones, files, key_access) 
-										VALUES (:userID, :documentID, :dateLimit, NULL, '', '', :keyAccess)");
+		$insertDocumentEvaluador = $db->prepare("INSERT INTO documento_evaluador (id_user, id_document, dateLimit, dateRegister, observaciones, files, folder, key_access) 
+										VALUES (:userID, :documentID, :dateLimit, NULL, '', '', '', :keyAccess)");
 		$insertDocumentEvaluador->execute([
 			':userID'   => $idUser,
 			':documentID'   => $idDocument,
