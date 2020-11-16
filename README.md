@@ -15,9 +15,12 @@
 ***
 #### Características:
 
-  - Proyecto que realize los loguins  mediante la API de google SESSION y los eventos con CALENDAR   
-  - 
-  - 
+  - Proyecto que usa loguins  mediante la API de Google SESSION. 
+  - El prpyecto  maneja eventos con la API de Google CALENDAR.   
+  - Carga dinamica del json enviado por google para registro de datos personales como el nombre,etc.
+  - Carga masiva de archivos mediante la libreria Dropzone de JavaScript
+  
+  
   #### Contenido del proyecto
   - [index.html](https://gitlab.com/programacion-web---i-sem-2019/lectura-json-ii-2020-pizzeria/-/blob/master/index.html): Archivo principal de invocación a la lectura de JSON
   - [js/proceso.js](https://gitlab.com/programacion-web---i-sem-2019/lectura-json-ii-2020-pizzeria/-/blob/master/js/proceso.js): Archivo JS con el proceso de lectura del JSON y sus funciones adicionales para la impresión de resultados
@@ -25,9 +28,18 @@
 ***
 #### Tecnologías
 
-  - HTML5
-  - PHP
-  - BOOTSTRAP
+
+   Tecnologías Frontend: 
+   -Lenguajes: HTML - CSS - JavaScript
+   -Framework: Bootstrap
+   -Librerías: Dropzone, Moment JS, JQuery-UI
+
+   Tecnologías Backend:
+   -Lenguaje: PHP
+   -IDE: Visual Studio Code
+   -Framework: N/A
+
+
 
 Usted puede ver el siguiente marco conceptual sobre la API fetch:
 
@@ -37,7 +49,7 @@ Usted puede ver el siguiente marco conceptual sobre la API fetch:
   ***
 #### IDE
 
-- El proyecto se desarrolla usando PHP 
+- El proyecto se desarrolla usando Sublime text,Visual code
 - Visor de JSON -(http://jsonviewer.stack.hu/)
 
 ***
@@ -53,7 +65,7 @@ El software es necesario para ver la interacción por consola y depuración del 
 ```
 
 ***
-### Demo
+### Demo video corto OJO  y direcciond el link
 
 Para ver el demo de la aplicación puede dirigirse a: [Pizzería_js](http://ufps30.madarme.co/json_pizza/).
 
@@ -62,7 +74,7 @@ Para ver el demo de la aplicación puede dirigirse a: [Pizzería_js](http://ufps
 Proyecto desarrollado por: 
 [Richard Acevedo] (<richara@ufps.edu.co>).
 
-[Jose Suarez] (joseluissm@ufps.edu.co>).
+[Jose Suarez] (<joseluissm@ufps.edu.co>).
 
 [Marilym Bayona] (<marilymaydeebb@ufps.edu.co>).
 
