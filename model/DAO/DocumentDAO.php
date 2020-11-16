@@ -2,7 +2,6 @@
 
 class DocumentDAO
 {
-
 	public function addDocument($usuario, $titulo, $descripcion, $documentos, $nameFolder)
 	{
 		$db = new Connect;
@@ -29,8 +28,6 @@ class DocumentDAO
 												VALUES('" . $idDocumento . "',  NULL , '" . $descripcion . "', '" . $documentos . "', '" . $nameFolder . "', 'Pendiente') ");
 		$sql2 = $db->query("UPDATE documento SET state= 'Devuelto con correcciones' WHERE id = '" . $idDocumento . "'");
 
-
-		//ENVIAR CORREO A LA DEPENDENCIA NOTIFICANDO QUE HAY CORRECCIONES
 
 		return $sql;
 	}
