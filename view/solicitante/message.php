@@ -80,8 +80,7 @@
 
               <!-- INICIO TABLA -->
 
-              <input type="text" id="myInput" placeholder="Search for names..">
-
+             
               <table id="myTable">
                 <tr class="header">
                   <!-- <th style="width:60%;">Name</th>
@@ -131,8 +130,7 @@
 
               <!-- INICIO TABLA -->
 
-              <input type="text" id="myInput" placeholder="Search for names..">
-
+           
               <table id="myTable">
                 <tr class="header">
                   <!-- <th style="width:60%;">Name</th>
@@ -169,6 +167,40 @@
                     </center>
                   </td>
                 </tr>
+                <tbody>
+               <?php
+                            
+
+              //Metodo creado para listar mensaje ->Prueba
+
+              if ($data["mensajes"] != NULL) {
+                foreach ($data["mensajes"] as $mensajes) {
+
+                  $variableID = $mensajes["id"];
+
+                  echo "<tr>";
+                  echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
+                  echo "<td>" . $mensajes["description"] . "</td>";
+                  echo "<td>" . $mensajes["title"] . "</td>";
+                 
+                 if($mensajes["state"] == "Leido"){
+                    echo "<td><span class='badge badge-success'>Leido</span></td>";
+                  }else{
+                 echo "<td>" . $mensajes["state"] . "</td>";
+                  }
+
+                  echo "<td><center>
+                    <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                    </td>";
+
+                  echo "</tr>";
+                }
+              } else {
+                echo "<td>No hay Mensajes Leido para Mostrar</td>";
+              }
+            ?>
+
+</tbody>
 
               </table>
 

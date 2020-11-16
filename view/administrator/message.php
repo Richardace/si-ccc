@@ -78,7 +78,7 @@
 
               <!-- INICIO TABLA -->
 
-              <input type="text" id="myInput" placeholder="Search for names..">
+              
 
               <table id="myTable">
                 <tr class="header">
