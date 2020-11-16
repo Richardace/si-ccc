@@ -41,8 +41,8 @@ session_start();
   <!-- Mis Scripts-->
   <script type="text/javascript" src="view/assets/js/main.js"></script>
 
-    <!-- DROP -->
-    <?php
+  <!-- DROP -->
+  <?php
   include("headerDrop.php");
   ?>
 
@@ -58,20 +58,38 @@ session_start();
       ?>
     </header>
 
+    <?php
+
+    foreach ($data['documento'] as $document) {
+      $idDocumento = $document['id'];
+      $radicado = $document['radicado'];
+      $title = $document['title'];
+      $description = $document['description'];
+      $nombreSolicitante = $document['fullName'];
+      $fechaSolicitud = $document['dateRegister'];
+      $nameFolder = $document['nameFolder'];
+    }
+
+    ?>
+
     <!-- Contenido -->
     <section id="content">
 
       <div class="card">
         <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
-          <center>AÑADIR OBSERVACIONES AL DOCUMENTO</center>
+          <center>AÑADIR CORRECCIONES AL DOCUMENTO</center>
         </div>
         <div class="card-body">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Numero de Radicado del Documento</label>
+              <input type="text" class="form-control radicado" value="<?php echo $radicado; ?>" readonly>
+            </div>
 
+          </div>
 
-          <input type="hidden" class="form-control idDocument" value="<?php echo $data['idDocument']; ?>" readonly>
-
-          <input type="hidden" class="form-control nameFolder" value="<?php echo $data['nameFolder']; ?>" readonly>
-          <input type="hidden" class="form-control idDocumentEvaluador" value="<?php echo $data['idDocumentEvaluador']; ?>" readonly>
+          <input type="hidden" class="form-control nameFolder" value="<?php echo $nameFolder; ?>" readonly>
+          <input type="hidden" class="form-control idDocument" value="<?php echo $idDocumento; ?>" readonly>
 
           <div class="form-row">
             <div class="form-group col-md-12">
@@ -113,6 +131,6 @@ session_start();
   </footer>
 
 </body>
-<script src="view/assets/js/dropzoneEvaluador.js"></script>
+<script src="view/assets/js/dropzoneDocumentoDevolver.js"></script>
 
 </html>

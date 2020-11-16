@@ -15,20 +15,21 @@ class DocumentoController
         require_once "model/DAO/FacultadUserDAO.php";
     }
 
-
     public function administrador()
     {
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentsPending();
         require_once "view/administrator/documentos.php";
-    }
-
-    
+    }  
 
     public function viewDocumentAdministrador($id){
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentById($id);
+        //Get DocumentEvaluador
         $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
+        
+        $data['estados'] = $document->getEstadosDocumento($id);
+
         $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
 
         require_once "view/administrator/viewDocument.php";
@@ -70,21 +71,72 @@ class DocumentoController
     }
 
     public function addCorreccionDocumento(){
-        $idEvaluador = $_POST["idEvaluador"];
-        $radicado = $_POST["radicado"];
+        $idDocumento = $_POST["idDocumento"];
         $descripcion = $_POST["descripcion"];
         $documentos = $_POST["documentos"];
         $nameFolder = $_POST["nameFolder"];
 
         $document = new DocumentDAO;
 
-        $sql = $document->addCorreccionDocument($idEvaluador, $radicado, $descripcion, $documentos, $nameFolder);
+        $sql = $document->addCorreccionDocument($idDocumento, $descripcion, $documentos, $nameFolder);
+
+        $idDependency = $document->getCorreoByDocument($idDocumento);
+
+        $this->enviarNotificacionDeCorreccion($idDependency);
 
         if ($sql) {
             echo "ok";
         } else {
             echo "error";
         }
+    }
+
+    public function addRevisionDocumento(){
+        $idDocumentoEvaluador = $_POST["idDocumentEvaluador"];
+        $descripcion = $_POST["descripcion"];
+        $documentos = $_POST["documentos"];
+        
+
+        $document = new DocumentDAO;
+        $idDocumento = $document->getDocumentByIdEvaluadorDocumento($idDocumentoEvaluador);
+
+        $evaluadores = $document->getEvaluadoresDocument($idDocumento);
+
+        $boolean = true;
+        foreach ($evaluadores as $evaluador){
+
+            if($evaluador['id'] == $idDocumentoEvaluador){
+                continue;
+            }
+
+            if($evaluador['observaciones'] != ""){
+                continue;
+            }else{
+                $boolean = false;
+            }
+        }
+        if($boolean){
+            $sql = $document->addRevisionDocument($idDocumentoEvaluador, $descripcion, $documentos, $idDocumento, 'Revisado por Evaluadores');
+        }else{
+            $sql = $document->addRevisionDocument($idDocumentoEvaluador, $descripcion, $documentos, $idDocumento, '');
+        }
+        //HACER ALGORITMO PARA SABER SI YA LOS 2 EVALUADORES EVALUARON
+
+        
+
+        if ($sql) {
+            echo "ok";
+        } else {
+            echo "error";
+        }
+    }
+
+    public function devolverDocumentoAdministratorView($idDocument){
+        $DocumentDAO = new DocumentDAO;
+        $data['idDocument'] = $idDocument;
+        $data['documento'] = $DocumentDAO->getDocumentById($idDocument);
+
+        require_once "view/administrator/devolverDocumento.php";
     }
 
     // Entrada del Evaluador al documento
@@ -101,6 +153,7 @@ class DocumentoController
 
         $document = new DocumentDAO;
         $identidad = $document->validadIdentidad($idUser, $codigoAcceso);
+        $idDocumentoEvaluador = "";
         $idDocumento = 0;
 
         if ($identidad == NULL) {
@@ -111,6 +164,7 @@ class DocumentoController
         } else {
             foreach ($identidad as $documentoUser) {
                 $idDocumento = $documentoUser['id_document'];
+                $idDocumentoEvaluador = $documentoUser['id'];
             }
 
             $documento = $document->getDocumentById($idDocumento);
@@ -120,7 +174,7 @@ class DocumentoController
             }
 
             if ($estado != "Finalizado" && $estado != "Aprobado" && $estado != "Devuelto con correcciones") {            
-                header("Location: index.php?c=documento&a=evaluador&id=$idDocumento");
+                header("Location: index.php?c=documento&a=evaluador&id=$idDocumentoEvaluador");
             } else {
                 echo "<script>
                     alert('El documento no se encuentra Disponible en estos momentos');
@@ -130,8 +184,11 @@ class DocumentoController
         }
     }
 
-    public function devolverDocumentoView($idDocument){
+    public function devolverDocumentoView($idDocumentEvaluador){
         $DocumentDAO = new DocumentDAO;
+        $data['idDocumentEvaluador'] = $idDocumentEvaluador;
+
+        $idDocument = $DocumentDAO->getDocumentByIdEvaluadorDocumento($idDocumentEvaluador);
         $data['idDocument'] = $idDocument;
         $documento = $DocumentDAO->getFolderDocument($idDocument);
         $data['nameFolder'] = $documento;
@@ -140,11 +197,13 @@ class DocumentoController
 
     public function evaluador($id)
     {
-
         $document = new DocumentDAO;
-        $data['documentos'] = $document->getDocumentById($id);
-        $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
-        $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
+        $data['idDocumentoEvaluador'] = $id;
+        $idDocumento = $document->getDocumentByIdEvaluadorDocumento($id);
+        
+
+        $data['documentos'] = $document->getDocumentById($idDocumento);
+        $data['documentoEvaluador'] = $document->getDocumentEvaluadorEspecifico($id);
 
         require_once "view/evaluador/evaluador.php";
     }
@@ -178,8 +237,18 @@ class DocumentoController
         $idCorreccion = $_POST['idCorreccion'];
 
         $document = new DocumentDAO;
+        $userDAO = new UserDAO;
         
         $sql = $document->updateCorreccionDocument($radicado, $descripcion, $documentos, $idCorreccion);
+
+        $documento = $document->getRadicadoByIdDocument($radicado);
+
+        $administradores = $userDAO->getAdministradores();
+
+        // CORREO PARA EL ADMINISTRADOR
+        foreach ($administradores as $administrador){
+            $this->documentosCorregidosPorDependencia($administrador['id'], $documento['radicado'], $documento['id_user']);
+        }
 
         if ($sql) {
             echo "ok";
@@ -237,8 +306,8 @@ class DocumentoController
         $documento = $document->getCorreccionById($id);
 
         foreach ($documento as $documentoEvaluador) {
-            $files = $documentoEvaluador['documentos_evaluador'];
-            $title = $documentoEvaluador['date_envio_evaluador'];
+            $files = $documentoEvaluador['documentos'];
+            $title = $documentoEvaluador['date_correccion'];
         }
 
         $zip = new ZipArchive();
@@ -276,6 +345,7 @@ class DocumentoController
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentById($id);
         $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
+        $data['estados'] = $document->getEstadosDocumento($id);
         $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
 
         require_once "view/solicitante/viewDocument.php";
@@ -344,13 +414,13 @@ class DocumentoController
 
         $token = $_POST['token'];
 
-        $document->insertDocumentToEvaluate($idUser, $idDocument, $dateLimit, $token);
+        $document->insertDocumentToEvaluate($idUser, $idDocument, $dateLimit, $token, 'Se Asignaron Evaluadores al Documento');
 
         $document->guardarInfoDocumento($idDocument, $sesion, $radicado);
 
         if($email2 != "nn"){
             $idUser2 = $UserDAO->getUserByEmail($email2);
-            $document->insertDocumentToEvaluate($idUser2, $idDocument, $dateLimit, $token);
+            $document->insertDocumentToEvaluate($idUser2, $idDocument, $dateLimit, $token, '');
             $this->enviarCorreoEvaluador($idUser2, $token, $dateLimit);
         }
 
@@ -359,6 +429,24 @@ class DocumentoController
         $data['documentos'] = $document->getDocumentsPending();
 
         require_once "view/administrator/documentos.php";
+    }
+
+    public function changeStateView($id){
+        $document = new DocumentDAO;
+        $data['documentos'] = $document->getDocumentById($id);
+        require_once "view/administrator/changeStateView.php";
+    }
+
+    public function changeStateDocument(){
+        $idDocument= $_POST['idDocument'];
+        $newState = $_POST['state'];
+        $document = new DocumentDAO;
+        $document->changeStateDocument($idDocument, $newState);
+
+        echo "<script>alert('Estado Actualizado con Exito!')</script>";
+
+        $this->viewDocumentAdministrador($idDocument);
+
     }
 
     public function aprobarDocumentoSolicitante($idDocument){
@@ -372,6 +460,8 @@ class DocumentoController
 				";
     }
 
+
+    // Correos Electronicos
     public function recuperarToken($id){
 
         $document = new DocumentDAO;
@@ -385,7 +475,7 @@ class DocumentoController
         }else{
             foreach ($tokens as $token) {
                 $i = $i + 1;
-                $tokensRecuperados = $tokensRecuperados . "Token N° ".$i.": ".$token['key_access']." -> Fecha Limite: ".$token['dateLimit']."<br>";
+                $tokensRecuperados = $tokensRecuperados . "Token N° ".$i.": <span style='font-weight: bold;' >".$token['key_access']."</span> -> Fecha Limite: ".$token['dateLimit']."<br>";
                 
             }
             $tokensActivos = count($tokens);
@@ -411,15 +501,11 @@ class DocumentoController
             <img src='https://i.ibb.co/S621yLn/banner4.png' style='width:694px; height:100px'><br><br>
 
             Cordial Saludo $fullName <br><br>
-            La presente es para solicitarle su valiosa colaboración en la revision de documentos enviados al COMITE CURRICULAR CENTRAL. <br><br>
-            Para acceder al Nuevo Sistema del COMITE CURRICULAR, lo podra hacer mediante el siguiente enlace: <br> <a href='http://localhost/si-ccc/index.php?l=login&a=indexEvaluador&id' style='font-weight: bold;'> INGRESAR </a><br><br>
+            En base a su solicitud de recuperación de TOKENS, encontramos que tiene $tokensActivos activos <br><br>
+            $tokensRecuperados <br><br>
+            Para acceder al Nuevo Sistema del COMITE CURRICULAR, lo podra hacer mediante el siguiente enlace: <a href='http://localhost/si-ccc/index.php?l=login&a=indexEvaluador' style='font-weight: bold;'> INGRESAR </a><br><br>
             Una vez ingrese, debera ingresar el TOKEN de seguridad que le permitira acceder a los documentos: <br><br>
 
-            TOKEN DE SEGURIDAD: <span style='font-weight: bold; background: #cdcdcd; '> <br> $token
-            </span> <br><br>
-            FECHA MAXIMA DE REVISIÓN: <span style='font-weight: bold;background: #cdcdcd;'><br>$fullName</span> <br><br>
-            En la misma plataforma podras asignar correcciones si asi lo ameriten, o en caso contrario si el documento esta apto y cumple con la normativa, podra regresarlo con la Aprobación. <br>
-            Se le agradece su valiosa colaboración.<br><br>
             Att: COMITE CURRICULAR CENTRAL UFPS <br><br>
 
             <div style='background-color:#c31222;  height:20px; width: 694px;'></div>
@@ -429,30 +515,6 @@ class DocumentoController
 
             '</body>' .
             '</html>';
-
-        // $mensaje = '<html>' .
-        //     '<head><center><title>Recuperacion de Tokens de Seguridad</title></center></head>' .
-        //     "<body style='background: #DCDCDC;>
-        //     <center>
-        //         <h1 style='font-weight: bold;' >Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</h1>
-        //     </center>" .
-        //     '<hr>' .
-        //     "<center><div style='width:70%; background: white; border-radius:10px;'>
-        //     <br>
-        //     <br>
-        //     <img src='https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logoufps.png' style='width:60px; height:60px'><br><br>
-        //     Cordial Saludo $fullName <br><br>
-        //     En base a su solicitud de recuperación de TOKENS, encontramos que tiene $tokensActivos activos <br><br>
-        //     $tokensRecuperados <br><br>
-        //     Para acceder al Nuevo Sistema del COMITE CURRICULAR, lo podra hacer mediante el siguiente enlace: <a href='http://localhost/si-ccc/index.php?l=login&a=indexEvaluador' style='font-weight: bold;'> INGRESAR </a><br><br>
-        //     Una vez ingrese, debera ingresar el TOKEN de seguridad que le permitira acceder a los documentos: <br><br>
-
-        //     Att: COMITE CURRICULAR CENTRAL UFPS <br><br>
-
-        //     </div></center>" .
-
-        //     '</body>' .
-        //     '</html>';
 
         $cabeceras = 'MIME-Version: 1.0' . "\r\n";
         $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n";
@@ -466,7 +528,97 @@ class DocumentoController
             </script>";
     }
 
-    // Correos Electronicos
+    public function enviarNotificacionDeCorreccion($id){
+
+        $document = new DocumentDAO;
+        $UserDAO = new UserDAO;
+
+        $fullName = $UserDAO->getNameAndLastNameById($id);
+        $email = $UserDAO->getEmailByIdUser($id);
+
+        $para = $email;
+
+        $titulo = 'Solicitud de Corrección';
+
+        $mensaje = '<html>' .
+            '<head><center><title>Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</title></center></head>' .
+            "<body style='background: #DCDCDC;>
+            <center>
+                <h1 style='font-weight: bold;' ></h1>
+            </center>" .
+            "<center><div style='width:694px; background: white; border-radius:5px;'>
+      
+            <img src='https://i.ibb.co/S621yLn/banner4.png' style='width:694px; height:100px'><br><br>
+
+            Cordial Saludo $fullName <br><br>
+            En base a su solicitud para revisión de documentos a nombre de la dependencia, se notifica que estos han sido devueltos a su cuenta SICCC con correcciones.<br><br>
+            Una vez estos esten corregidos, se solicita mediante la opción CORREGIR, cargar TODOS los documentos nuevamente.<br><br>
+            
+            Att: COMITE CURRICULAR CENTRAL UFPS <br><br>
+
+            <div style='background-color:#c31222;  height:20px; width: 694px;'></div>
+
+
+            </div></center>" .
+
+            '</body>' .
+            '</html>';
+
+        $cabeceras = 'MIME-Version: 1.0' . "\r\n";
+        $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $cabeceras .= 'From: COMITE CURRICULAR CENTRAL UFPS';
+
+        $enviado = mail($para, $titulo, $mensaje, $cabeceras);
+
+    }
+
+    public function documentosCorregidosPorDependencia($id, $radicado, $idDependency){
+
+        $document = new DocumentDAO;
+        $UserDAO = new UserDAO;
+
+        $numRadicado = $radicado;
+        $fullNameDependencia = $UserDAO->getNameAndLastNameById($idDependency);
+
+        $fullName = $UserDAO->getNameAndLastNameById($id);
+        $email = $UserDAO->getEmailByIdUser($id);
+
+        $para = $email;
+
+        $titulo = 'Solicitud de Corrección';
+
+        $mensaje = '<html>' .
+            '<head><center><title>Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</title></center></head>' .
+            "<body style='background: #DCDCDC;>
+            <center>
+                <h1 style='font-weight: bold;' ></h1>
+            </center>" .
+            "<center><div style='width:694px; background: white; border-radius:5px;'>
+      
+            <img src='https://i.ibb.co/S621yLn/banner4.png' style='width:694px; height:100px'><br><br>
+
+            Cordial Saludo $fullName <br><br>
+            Las correcciones establecidas a los documentos con el radicado N° $numRadicado y nombre de Solicitante: $fullNameDependencia<br><br>
+            Han sido devueltas exitosamente<br><br>
+            
+            Att: COMITE CURRICULAR CENTRAL UFPS <br><br>
+
+            <div style='background-color:#c31222;  height:20px; width: 694px;'></div>
+
+
+            </div></center>" .
+
+            '</body>' .
+            '</html>';
+
+        $cabeceras = 'MIME-Version: 1.0' . "\r\n";
+        $cabeceras .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $cabeceras .= 'From: COMITE CURRICULAR CENTRAL UFPS';
+
+        $enviado = mail($para, $titulo, $mensaje, $cabeceras);
+
+    }
+    
     public function enviarCorreoEvaluador($idUser, $token, $dateLimit)
     {
 
@@ -484,22 +636,24 @@ class DocumentoController
             '<head><center><title>Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</title></center></head>' .
             "<body style='background: #DCDCDC;>
             <center>
-                <h1 style='font-weight: bold;' >Solicitud para Evaluar Documentos - Comite Curricular Central UFPS</h1>
+                <h1 style='font-weight: bold;' ></h1>
             </center>" .
-            '<hr>' .
-            "<center><div style='width:70%; background: white; border-radius:10px;'>
-            <br>
-            <br>
-            <img src='https://ww2.ufps.edu.co/public/archivos/elementos_corporativos/logoufps.png' style='width:60px; height:60px'><br><br>
+            "<center><div style='width:694px; background: white; border-radius:5px;'>
+      
+            <img src='https://i.ibb.co/S621yLn/banner4.png' style='width:694px; height:100px'><br><br>
+
             Cordial Saludo $fullName <br><br>
             La presente es para solicitarle su valiosa colaboración en la revision de documentos enviados al COMITE CURRICULAR CENTRAL. <br><br>
             Para acceder al Nuevo Sistema del COMITE CURRICULAR, lo podra hacer mediante el siguiente enlace: <a href='http://localhost/si-ccc/index.php?l=login&a=indexEvaluador' style='font-weight: bold;'> INGRESAR </a><br><br>
-            Una vez ingrese, debera ingresar el TOKEN de seguridad que le permitira acceder a los documentos: <br><br>
-            TOKEN DE SEGURIDAD: <span style='font-weight: bold; background: white;'>$token</span> <br><br>
+            Una vez ingrese, debera ingresar el CODIGO de seguridad que le permitira acceder a los documentos: <br><br>
+            CODIGO DE SEGURIDAD: <span style='font-weight: bold; background: white;'>$token</span> <br><br>
             FECHA MAXIMA DE REVISIÓN: <span style='font-weight: bold;'>$dateLimit</span> <br><br>
             En la misma plataforma podras asignar correcciones si asi lo ameriten, o en caso contrario si el documento esta apto y cumple con la normativa, podra regresarlo con la Aprobación. <br>
             Se le agradece su valiosa colaboración.<br><br>
             Att: COMITE CURRICULAR CENTRAL UFPS <br><br>
+
+            <div style='background-color:#c31222;  height:20px; width: 694px;'></div>
+
 
             </div></center>" .
 

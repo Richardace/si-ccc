@@ -64,6 +64,7 @@ session_start();
 
     foreach ($data['documentoEvaluador'] as $docEvaluador) {
       $dateLimite = $docEvaluador['dateLimit'];
+      $idDocumentoEvaluador = $docEvaluador['id'];
     }
     ?>
     <!-- Contenido -->
@@ -146,7 +147,7 @@ session_start();
           <center>
             <div style="display: inline-block;">
               <div style="background:#DAA900; border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:left; line-height:25px;">
-                <a href="index.php?c=documento&a=devolverDocumentoView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Enviar Revisión</a>
+                <a href="index.php?c=documento&a=devolverDocumentoView&id=<?php echo $data['idDocumentoEvaluador']; ?>" style="color:white; text-decoration: none;">Enviar Revisión</a>
               </div>
 
           </center>

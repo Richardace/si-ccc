@@ -67,36 +67,34 @@ session_start();
     if (count($data['documentoEvaluador']) == 1) {
 
       $estadoEvaluador2 = "nn";
-      
+
       foreach ($data['documentoEvaluador'] as $docEvaluador) {
 
-        if($docEvaluador['observaciones'] == ""){
+        if ($docEvaluador['observaciones'] == "") {
           $color1 = 'rgb(255, 221, 108)';
           $estadoEvaluador1 = "pendiente";
-        }else{
+        } else {
           $color1 = 'rgb(68, 255, 93)';
           $estadoEvaluador1 = "revisado";
-
+          $files1 = $docEvaluador['files'];
           $observaciones1 = $docEvaluador['observaciones'];
           $idRevision1 = $docEvaluador['id'];
           $nombreEvaluador1 = $docEvaluador['fullName'];
-
         }
         $dateLimite = $docEvaluador['dateLimit'];
       }
-
     } else {
 
       foreach ($data['documentoEvaluador'] as $docEvaluador) {
 
-        if($contador == 2){
-          if($docEvaluador['observaciones'] == ""){
+        if ($contador == 2) {
+          if ($docEvaluador['observaciones'] == "") {
             $color2 = 'rgb(255, 221, 108)';
             $estadoEvaluador2 = "pendiente";
-          }else{
+          } else {
             $color2 = 'rgb(68, 255, 93)';
             $estadoEvaluador2 = "revisado";
-
+            $files2 = $docEvaluador['files'];
             $observaciones2 = $docEvaluador['observaciones'];
             $idRevision2 = $docEvaluador['id'];
             $nombreEvaluador2 = $docEvaluador['fullName'];
@@ -104,13 +102,13 @@ session_start();
           continue;
         }
 
-        if($docEvaluador['observaciones'] == ""){
+        if ($docEvaluador['observaciones'] == "") {
           $color1 = 'rgb(255, 221, 108)';
           $estadoEvaluador1 = "pendiente";
-        }else{
+        } else {
           $color1 = 'rgb(68, 255, 93)';
           $estadoEvaluador1 = "revisado";
-          
+          $files1 = $docEvaluador['files'];
           $observaciones1 = $docEvaluador['observaciones'];
           $idRevision1 = $docEvaluador['id'];
           $nombreEvaluador1 = $docEvaluador['fullName'];
@@ -135,6 +133,11 @@ session_start();
 
             <div>
               <div class="btn-agregarUsuario">
+                <a data-toggle="modal" data-target="#estadosDocumento" style="cursor: pointer; float: left; text-decoration: underline; color:blue;">
+                  Historial de estados del Documento
+                </a>
+              </div>
+              <div class="btn-agregarUsuario">
                 <a data-toggle="modal" data-target="#correccionesDocumento" style="cursor: pointer; float: right; text-decoration: underline; color:blue;">
                   Consultar Revisiones Anteriores del Documento
                 </a>
@@ -143,10 +146,60 @@ session_start();
             <br>
             <br>
 
-            <!-- Modal -->
+            <!-- Modal Estados -->
+            <div class="modal fade" id="estadosDocumento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog" style="max-width: 1000px;">
+
+                <div class="modal-content" style="width:50vw;">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Estados del Documento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Contenido -->
+                    <table id="myTable" class="table table-hover">
+                      <thead>
+                        <tr class="header">
+                          <th>Fecha de la Acción</th>
+                          <th>Descripcion</th>
+                        </tr>
+                      </thead>
+                      <tr>
+                        <h1 id="respuesta">
+                        </h1>
+                      </tr>
+                      <tbody>
+                        <?php
+                        if ($data["estados"] != NULL) {
+                          foreach ($data["estados"] as $estados) {
+                            echo "<tr>";
+                            echo "<td>" . $estados["date_action"] . "</td>";
+                            echo "<td>" . $estados["description"] . "</td>";
+                            echo "</tr>";
+                          }
+                        } else {
+                          echo "<td>No hay Estados Registrados para este documento.</td>";
+                        }
+
+                        ?>
+                      </tbody>
+                    </table>
+
+                    <br>
+                    <!-- FIN Contenido -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- FIN MODAL -->
+
+            <!-- Modal Correcciones -->
             <div class="modal fade" id="correccionesDocumento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
+              <div class="modal-dialog" style="max-width: 1000px;">
+
+                <div class="modal-content" style="width:50vw;">
                   <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Correcciones del Documento</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -174,8 +227,8 @@ session_start();
                           foreach ($data["correccionesDocumento"] as $correcciones) {
                             $idDocumentoCorregido = $correcciones['id'];
                             echo "<tr>";
-                            echo "<td>" . $correcciones["date_envio_evaluador"] . "</td>";
-                            echo "<td>" . $correcciones["comentarios_evaluador"] . "</td>";
+                            echo "<td>" . $correcciones["date_correccion"] . "</td>";
+                            echo "<td>" . $correcciones["observaciones"] . "</td>";
                             echo "<td>
                             <a href='index.php?c=documento&a=descargarDocumentosCorregidosById&id=$idDocumentoCorregido' target='_blank'>
                               <span>
@@ -209,29 +262,30 @@ session_start();
                 </div>
               </div>
             </div>
+            <!-- FIN MODAL -->
 
             <div class="form-row">
               <div class="form-group col-md-6">
 
                 <center>
                   <a class="btn botonevaluador" style="width:90%; background: <?php echo $color1; ?>; border: #ccc 4px outset; color: black; font-weight:bold;" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    
-                  <?php
-                    if($estadoEvaluador1 == "pendiente"){
+
+                    <?php
+                    if ($estadoEvaluador1 == "pendiente") {
                       echo "REVISIÓN DEL EVALUADOR 1 - PENDIENTE";
-                    }else{
+                    } else {
                       echo "REVISIÓN DEL EVALUADOR 1";
                     }
-                  ?>
+                    ?>
                   </a>
                 </center>
                 <div class="collapse" id="collapseExample">
                   <div class="card card-body">
-                  <?php
-                    if($estadoEvaluador1 == "pendiente"){
+                    <?php
+                    if ($estadoEvaluador1 == "pendiente") {
                       echo "PENDIENTE DE REVISIÓN";
-                    }else{
-                      
+                    } else {
+
                       echo "
                           <div class='form-row'>
                           <div class='form-group col-md-12'>
@@ -242,13 +296,22 @@ session_start();
                           <div class='form-group col-md-12'>
                             <label>Observaciones</label>
                             <textarea style='height:200px;' type='text' class='form-control'>$observaciones1</textarea>
-                          </div>
+                          </div>";
 
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>Descargar Documentos Adjuntos</a>
+                      if ($files1 != "") {
+                        echo "
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?c=estado&a=descargarDocumentosEvaluador&id=$idRevision1'>Descargar Documentos Adjuntos</a>
+                        ";
+                      }
+
+                      echo "
+
+                          
                         </div>
                       ";
                     }
-                  ?>
+                    ?>
                   </div>
                 </div>
 
@@ -259,25 +322,24 @@ session_start();
 
                 <center>
                   <a class="btn botonevaluador" style="width:90%; background: <?php echo $color2; ?>; border: #ccc 4px outset; color: black; font-weight:bold;" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
-                  <?php
-                    if($estadoEvaluador2 == "pendiente"){
+                    <?php
+                    if ($estadoEvaluador2 == "pendiente") {
                       echo "REVISIÓN DEL EVALUADOR 2 - PENDIENTE";
-                    }else if($estadoEvaluador2 == "nn"){
+                    } else if ($estadoEvaluador2 == "nn") {
                       echo "SIN ASIGNAR SEGUNDO EVALUADOR";
-                    }else{
+                    } else {
                       echo "REVISIÓN DEL EVALUADOR 2";
                     }
-                  ?>
+                    ?>
                   </a>
                 </center>
                 <div class="collapse" id="collapseExample2">
                   <div class="card card-body">
-                  <?php
-                    if($estadoEvaluador2 == "pendiente"){
+                    <?php
+                    if ($estadoEvaluador2 == "pendiente") {
                       echo "PENDIENTE DE REVISIÓN";
-                    }else if($estadoEvaluador2 == "nn"){
-                      
-                    }else{
+                    } else if ($estadoEvaluador2 == "nn") {
+                    } else {
                       echo "
                           <div class='form-row'>
                           <div class='form-group col-md-12'>
@@ -288,13 +350,22 @@ session_start();
                           <div class='form-group col-md-12'>
                             <label>Observaciones</label>
                             <textarea style='height:200px;' type='text' class='form-control'>$observaciones2</textarea>
-                          </div>
+                            </div>";
 
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='#'>Descargar Documentos Adjuntos</a>
-                        </div>
-                      ";
+                      if ($files2 != "") {
+                        echo "
+  
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?c=estado&a=descargarDocumentosEvaluador&id=$idRevision2'>Descargar Documentos Adjuntos</a>
+                          ";
+                      }
+
+                      echo "
+  
+                            
+                          </div>
+                        ";
                     }
-                  ?>
+                    ?>
                   </div>
                 </div>
 
@@ -340,11 +411,11 @@ session_start();
           <center>
             <div style="display: inline-block;">
               <div style="background:#DAA900; border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:left; line-height:25px;">
-                <a href="index.php?c=documento&a=devolverDocumentoView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Solicitar Corrección</a>
+                <a href="index.php?c=documento&a=devolverDocumentoAdministratorView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Solicitar Corrección</a>
               </div>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <div style="background:rgb(47, 196, 0); border:none; font-weight:bold; width:180px; height: 30px; border-radius:5px; float:right; line-height:25px;">
-                <a href="index.php?c=documento&a=aprobarDocumentoSolicitante&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Cambiar Estado</a>
+                <a href="index.php?c=documento&a=changeStateView&id=<?php echo $idDocumento; ?>" style="color:white; text-decoration: none;">Cambiar Estado</a>
               </div>
             </div>
           </center>

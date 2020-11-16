@@ -75,7 +75,7 @@ session_start();
             <label style="text-transform: uppercase; font-weight: bold;">Codigo de Acceso enviado a su correo institucional </label><br>
             <center><input type='text' style='width:40%; text-align:center;' name='codigoAcceso' class='form-control' id='formGroupExampleInput' required></center>
             <center>
-              ¿ Olvidaste el Token ? <a href="index.php?c=documento&a=recuperarToken&id=<?php echo $_SESSION['id']; ?>" style="font-weight: bold;">Recuperar CODIGO DE ACCESO</a>
+              ¿ Olvidaste el Codigo de Acceso ? <a href="index.php?c=documento&a=recuperarToken&id=<?php echo $_SESSION['id']; ?>" style="font-weight: bold;">Recuperar CODIGO DE ACCESO</a>
             </center>
             <br>
             <input id="agregar" type="submit" value="Validar" class="btn btn-primary" style="background:rgb(226, 3, 26); border:none; color:white" />

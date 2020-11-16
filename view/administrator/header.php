@@ -11,7 +11,7 @@
 
                 <input type="checkbox" id="toggle">
 
-                <label for="toggle" class="button"><?php echo $_SESSION['name']; ?> &nbsp<span class="flecha-down"></span></label>
+                <label for="toggle" class="button"><?php echo $_SESSION['name']; ?> &nbsp;<span class="flecha-down"></span></label>
 
                 <nav class="controlMenu">
                     <ul>
