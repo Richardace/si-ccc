@@ -79,6 +79,11 @@ session_start();
 
             <div>
               <div class="btn-agregarUsuario">
+                <a data-toggle="modal" data-target="#estadosDocumento" style="cursor: pointer; float: left; text-decoration: underline; color:blue;">
+                  Historial de estados del Documento
+                </a>
+              </div>
+              <div class="btn-agregarUsuario">
                 <a data-toggle="modal" data-target="#correccionesDocumento" style="cursor: pointer; float: right; text-decoration: underline; color:blue;">
                   Consultar Revisiones Anteriores del Documento
                 </a>
@@ -87,10 +92,60 @@ session_start();
             <br>
             <br>
 
-            <!-- Modal -->
+            <!-- Modal Estados -->
+            <div class="modal fade" id="estadosDocumento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog" style="max-width: 1000px;">
+
+                <div class="modal-content" style="width:50vw;">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Estados del Documento</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Contenido -->
+                    <table id="myTable" class="table table-hover">
+                      <thead>
+                        <tr class="header">
+                          <th>Fecha de la Acción</th>
+                          <th>Descripcion</th>
+                        </tr>
+                      </thead>
+                      <tr>
+                        <h1 id="respuesta">
+                        </h1>
+                      </tr>
+                      <tbody>
+                        <?php
+                        if ($data["estados"] != NULL) {
+                          foreach ($data["estados"] as $estados) {
+                            echo "<tr>";
+                            echo "<td>" . $estados["date_action"] . "</td>";
+                            echo "<td>" . $estados["description"] . "</td>";
+                            echo "</tr>";
+                          }
+                        } else {
+                          echo "<td>No hay Estados Registrados para este documento.</td>";
+                        }
+
+                        ?>
+                      </tbody>
+                    </table>
+
+                    <br>
+                    <!-- FIN Contenido -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- FIN MODAL -->
+
+            <!-- Modal CORRECCIONES -->
             <div class="modal fade" id="correccionesDocumento" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog" >
-                <div class="modal-content">
+              <div class="modal-dialog" style="max-width: 1000px;">
+
+                <div class="modal-content" style="width:50vw;">
                   <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Correcciones del Documento</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -98,7 +153,7 @@ session_start();
                     </button>
                   </div>
                   <div class="modal-body">
-                    <!-- Contenido -->                    
+                    <!-- Contenido -->
                     <table id="myTable" class="table table-hover">
                       <thead>
                         <tr class="header">
@@ -118,8 +173,8 @@ session_start();
                           foreach ($data["correccionesDocumento"] as $correcciones) {
                             $idDocumentoCorregido = $correcciones['id'];
                             echo "<tr>";
-                            echo "<td>" . $correcciones["date_envio_evaluador"] . "</td>";
-                            echo "<td>" . $correcciones["comentarios_evaluador"] . "</td>";
+                            echo "<td>" . $correcciones["date_correccion"] . "</td>";
+                            echo "<td>" . $correcciones["observaciones"] . "</td>";
                             echo "<td>
                             <a href='index.php?c=documento&a=descargarDocumentosCorregidosById&id=$idDocumentoCorregido' target='_blank'>
                               <span>
@@ -153,11 +208,20 @@ session_start();
                 </div>
               </div>
             </div>
+            <!-- FIN MODAL -->
 
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label>Numero de Radicado</label>
-                <input type="text" class="form-control origen" value="<?php echo $radicado; ?>" readonly>
+                <?php
+                if ($radicado == 0) {
+                  echo "<input type='text' class='form-control origen' value='Sin Asignar' readonly>";
+                } else {
+                  echo "<input type='text' class='form-control origen' value='$radicado' readonly>";
+                }
+
+                ?>
+
               </div>
               <div class="form-group col-md-6">
                 <label>Estado</label>
