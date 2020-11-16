@@ -11,6 +11,8 @@
         public function administrador($id){
            
             $message = new MessageDao;
+            $messager= new MessageDao;
+            $data['mensajesR']=$messager->getMessageRecibido($id);
             $data['mensajes'] = $message->getMessageEnviado($id);
     
             require_once "view/administrator/message.php";

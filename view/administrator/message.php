@@ -98,19 +98,43 @@ if (session_status() != 2) {
 
                                         </tr>
 
-                                        <tr>
-                                            <td>INGENIERIA DE SISTEMAS</td>
-                                            <td>Registro Calificado</td>
-                                            <td>26-08-2020 1:45 P.M.</td>
-                                            <td>Leido</td>
-                                            <td>
-                                                <center>
-                                                    <button id="iconoVer">
-                                                        <img src="view/assets/img/ver.png">
-                                                    </button>
-                                                </center>
-                                            </td>
-                                        </tr>
+                                        
+                                          <tbody>
+                                                          <?php
+               
+              
+
+               //Metodo creado para listar mensaje recibido ->Prueba
+               if ($data["mensajesRecibidos"] != NULL) {
+                 foreach ($data["mensajesRecibidos"] as $mensajesR) {
+ 
+                   $variableID = $mensajesR["user_id_destiny"];
+ 
+                   echo "<tr>";
+                   echo "<td>" . $mensajesR["user_id_destiny"] . "</td>";
+                   echo "<td>" . $mensajesR["description"] . "</td>";
+                   echo "<td>" . $mensajesR["title"] . "</td>";
+                   echo "<td>" . $mensajesR["state"] . "</td>";
+                  
+                  if($mensajes["state"] == "Leido"){
+                     echo "<td><span class='badge badge-success'>Leido</span></td>";
+                   }else{
+                  echo "<td>" . $mensajesR["state"] . "</td>";
+                   }
+ 
+                   echo "<td><center>
+                     <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                     </td>";
+ 
+                   echo "</tr>";
+                 }
+               } else {
+                 echo "<td>No hay Mensajes Leido para Mostrar</td>";
+               }
+ 
+               ?>
+                                          </tbody>
+
 
                                     </table>
 
@@ -152,13 +176,11 @@ if (session_status() != 2) {
                                                     echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
                                                     echo "<td>" . $mensajes["description"] . "</td>";
                                                     echo "<td>" . $mensajes["title"] . "</td>";
-
                                                     if ($mensajes["state"] == "Leido") {
                                                         echo "<td><span class='badge badge-success'>Leido</span></td>";
                                                     } else {
                                                         echo "<td>" . $mensajes["state"] . "</td>";
                                                     }
-
                                                     echo "<td><center>
                                                             <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
                                                         </td>";
@@ -181,8 +203,7 @@ if (session_status() != 2) {
                         </div>
                     </div>
 
-
-                </div>
+               </div>
                 <div class="card-footer text-muted" style="color: white; font-weight: bold; background:#dc3545;"></div>
             </div>
             </article>
