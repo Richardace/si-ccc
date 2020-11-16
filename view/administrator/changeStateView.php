@@ -110,8 +110,8 @@ session_start();
                                 <select name="state" style="width:40%;" class='form-control'>
                                 
                                     <option value="<?php echo $stateDocument; ?>"><?php echo $stateDocument; ?></option>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
+                                    <option value="Avalado por el Comite Curricular Central">Avalado por el Comite Curricular Central</option>
+                                    <option value="Documento en Proceso">Documento en Proceso</option>
                                 </select>
                             </div>
                         </center>

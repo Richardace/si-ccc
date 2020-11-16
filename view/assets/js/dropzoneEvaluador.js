@@ -22,9 +22,10 @@ var multimediaFisica = null;
 
 $(".guardarProducto").click(function () {
 
-	if ($(".descripcion").val() && arrayFiles != "") {
+	if ($(".descripcion").val() ) {
 
 		if (arrayFiles.length > 0) {
+			
 
 			var listaMultimedia = [];
 			var finalFor = 0;
@@ -66,6 +67,8 @@ $(".guardarProducto").click(function () {
 					}
 				})
 			}
+		}else{
+			agregarSinProducto();
 		}
 
 	} else {
@@ -84,11 +87,63 @@ $(".guardarProducto").click(function () {
 function agregarMiProducto(imagen) {
 
 	var datosDocumento = new FormData();
-
+	console.log(imagen);
 	datosDocumento.append("idDocumentEvaluador", $(".idDocumentEvaluador").val());
 	datosDocumento.append("descripcion", $(".descripcion").val());
 	datosDocumento.append("nameFolder", $(".nameFolder").val());
 	datosDocumento.append("documentos", imagen);
+
+	
+
+	$.ajax({
+		// url:"productos.ajaxSubida.php",
+		url: "index.php?c=documento&a=addRevisionDocumento",
+		method: "POST",
+		data: datosDocumento,
+		cache: false,
+		contentType: false,
+		processData: false,
+		beforeSend: function () {
+			$('.guardarProducto').html("Enviando ...");
+		},
+		success: function (respuesta) {
+
+			if (respuesta == "ok") {
+
+				swal({
+					type: "success",
+					title: "Las Correcciones han sido guardadas Exitosamente !",
+					showConfirmButton: true,
+					confirmButtonText: "Cerrar"
+				}).then(function (result) {
+					if (result.value) {
+						$('.guardarProducto').html("Guardar producto");
+						window.location = "index.php?c=documento&a=viewEvaluadorInit";
+
+					}
+				})
+			} else if (respuesta == "error") {
+				swal({
+					type: "error",
+					title: "¡Ocurrio un error!",
+					showConfirmButton: true,
+					confirmButtonText: "Cerrar"
+				}).then(function (result) {
+					$('.guardarProducto').html("Guardar producto");
+				})
+			}
+		}
+	})
+}
+
+function agregarSinProducto() {
+
+	var datosDocumento = new FormData();
+
+	datosDocumento.append("idDocumentEvaluador", $(".idDocumentEvaluador").val());
+	datosDocumento.append("descripcion", $(".descripcion").val());
+	datosDocumento.append("nameFolder", $(".nameFolder").val());
+	datosDocumento.append("documentos", '');
 
 
 	$.ajax({
