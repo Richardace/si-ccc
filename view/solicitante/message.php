@@ -1,6 +1,6 @@
 <?php
 
-if(session_status() != 2){
+if (session_status() != 2) {
     session_start();
 }
 
@@ -14,8 +14,8 @@ if(session_status() != 2){
 
     <!-- Estilos CSS -->
     <link rel="stylesheet" type="text/css" href="view/assets/css/style.css" />
-  <link rel="stylesheet" type="text/css" href="view/assets/css/style-index.css" />
-  <link rel="stylesheet" type="text/css" href="view/assets/css/estiloPestañasMensajeria.css" />
+    <link rel="stylesheet" type="text/css" href="view/assets/css/style-index.css" />
+    <link rel="stylesheet" type="text/css" href="view/assets/css/estiloPestañasMensajeria.css" />
 
     <!-- Estilo css Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -81,53 +81,54 @@ if(session_status() != 2){
                                 <div class="wrapper">
 
                                     <!-- INICIO TABLA -->
-
-                                    <input type="text" id="myInput" placeholder="Search for names..">
-
                                     <table id="myTable">
                                         <tr class="header">
-
                                             <th>ORIGEN</th>
                                             <th>ASUNTO</th>
                                             <th>FECHA DE RECIBIDO</th>
                                             <th>ESTADO</th>
                                             <th>OPCIONES</th>
                                         </tr>
-
                                         <tr>
                                             <h1 id="respuesta">
-
                                             </h1>
-
                                         </tr>
+                                        <tbody>
+                                        <tbody>
+                                            <?php
+                                            if ($data["mensajesRecibidos"] != NULL) {
+                                                foreach ($data["mensajesRecibidos"] as $mensajesR) {
+                                                    $variableID = $mensajesR["id"];
+                                                    echo "<tr>";
+                                                    echo "<td>COMITE CURRICULAR CENTRAL</td>";
+                                                    echo "<td>" . $mensajesR["title"] . "</td>";
+                                                    echo "<td>" . $mensajesR["dateMessage"] . "</td>";
+                                                    if ($mensajesR["state"] == "Leido") {
+                                                        echo "<td><span class='badge badge-success'>Leido</span></td>";
+                                                    } else {
+                                                        echo "<td>" . $mensajesR["state"] . "</td>";
+                                                    }
+                                                    echo "<td><center>
+                                                        <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                                                        </td>";
 
-                                        <tr>
-                                            <td>INGENIERIA DE SISTEMAS</td>
-                                            <td>Registro Calificado</td>
-                                            <td>26-08-2020 1:45 P.M.</td>
-                                            <td>Leido</td>
-                                            <td>
-                                                <center>
-                                                    <button id="iconoVer">
-                                                        <img src="view/assets/img/ver.png">
-                                                    </button>
-                                                </center>
-                                            </td>
-                                        </tr>
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "<td>No hay Mensajes para Mostrar</td>";
+                                            }
+                                            ?>
+                                        </tbody>
+                                        </tbody>
 
                                     </table>
-
                                     <!-- FIN TABLA -->
-
                                 </div>
                             </article>
                             <article id="tab2">
                                 <!-- INICIO TABLA -->
                                 <div class="wrapper" id="mensajes">
-
                                     <!-- INICIO TABLA -->
-
-
                                     <table id="myTable">
                                         <tr class="header">
 
@@ -137,68 +138,39 @@ if(session_status() != 2){
                                             <th>ESTADO</th>
                                             <th>OPCIONES</th>
                                         </tr>
-
                                         <tr>
                                             <h1 id="respuesta"></h1>
                                         </tr>
                                         <tbody>
                                             <?php
-
-
-                                            //Metodo creado para listar mensaje ->Prueba
                                             if ($data["mensajes"] != NULL) {
                                                 foreach ($data["mensajes"] as $mensajes) {
-
-                                                    $variableID = $mensajes["user_id_destiny"];
-
+                                                    $variableID = $mensajes["id"];
                                                     echo "<tr>";
-                                                    echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
-                                                    echo "<td>" . $mensajes["description"] . "</td>";
+                                                    echo "<td>COMITE CURRICULAR CENTRAL</td>";
                                                     echo "<td>" . $mensajes["title"] . "</td>";
-
+                                                    echo "<td>" . $mensajes["dateMessage"] . "</td>";
                                                     if ($mensajes["state"] == "Leido") {
                                                         echo "<td><span class='badge badge-success'>Leido</span></td>";
                                                     } else {
                                                         echo "<td>" . $mensajes["state"] . "</td>";
                                                     }
-
                                                     echo "<td><center>
-                                                            <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
-                                                        </td>";
+                                                                <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                                                            </td>";
 
                                                     echo "</tr>";
                                                 }
                                             } else {
-                                                echo "<td>No hay Mensajes Leido para Mostrar</td>";
+                                                echo "<td>No hay Mensajes para Mostrar</td>";
                                             }
-
                                             ?>
-
                                         </tbody>
-                                        <!-- <tr>
-                                            <td>INGENIERIA DE SISTEMAS</td>
-                                            <td>Registro Calificado</td>
-                                            <td>26-08-2020 1:45 P.M.</td>
-                                            <td>Leido</td>
-                                            <td>
-                                                <center>
-                                                <button id="iconoVer">
-                                                    <img src="view/assets/img/ver.png">
-                                                </button>
-                                                </center>
-                                            </td>
-                                            </tr> -->
-
                                     </table>
-
-                                    <!-- FIN TABLA -->
-
                                 </div>
                             </article>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="card-footer text-muted" style="color: white; font-weight: bold; background:#dc3545;"></div>
             </div>

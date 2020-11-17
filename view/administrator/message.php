@@ -72,15 +72,10 @@ if (session_status() != 2) {
                             <li><a href="#tab1"><span class="fa fa-home"></span><span class="tab-text">Mensajes Recibidos</span></a></li>
                             <li><a href="#tab2"><span class="fa fa-group"></span><span class="tab-text">Mensajes Enviados</span></a></li>
                         </ul>
-
                         <div class="secciones">
                             <article id="tab1">
                                 <div class="wrapper">
-
                                     <!-- INICIO TABLA -->
-
-                                    <input type="text" id="myInput" placeholder="Search for names..">
-
                                     <table id="myTable">
                                         <tr class="header">
 
@@ -90,65 +85,44 @@ if (session_status() != 2) {
                                             <th>ESTADO</th>
                                             <th>OPCIONES</th>
                                         </tr>
-
                                         <tr>
                                             <h1 id="respuesta">
 
                                             </h1>
-
                                         </tr>
+                                        <tbody>
+                                            <?php
+                                            if ($data["mensajesRecibidos"] != NULL) {
+                                                foreach ($data["mensajesRecibidos"] as $mensajesR) {
+                                                    $variableID = $mensajesR["id"];
+                                                    echo "<tr>";
+                                                    echo "<td>COMITE CURRICULAR CENTRAL</td>";
+                                                    echo "<td>" . $mensajesR["title"] . "</td>";
+                                                    echo "<td>" . $mensajesR["dateMessage"] . "</td>";
+                                                    if ($mensajesR["state"] == "Leido") {
+                                                        echo "<td><span class='badge badge-success'>Leido</span></td>";
+                                                    } else {
+                                                        echo "<td>" . $mensajesR["state"] . "</td>";
+                                                    }
+                                                    echo "<td><center>
+                                                        <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                                                        </td>";
 
-                                        
-                                          <tbody>
-                                                          <?php
-               
-              
-
-               //Metodo creado para listar mensaje recibido ->Prueba
-               if ($data["mensajesRecibidos"] != NULL) {
-                 foreach ($data["mensajesRecibidos"] as $mensajesR) {
- 
-                   $variableID = $mensajesR["user_id_destiny"];
- 
-                   echo "<tr>";
-                   echo "<td>" . $mensajesR["user_id_destiny"] . "</td>";
-                   echo "<td>" . $mensajesR["description"] . "</td>";
-                   echo "<td>" . $mensajesR["title"] . "</td>";
-                   echo "<td>" . $mensajesR["state"] . "</td>";
-                  
-                  if($mensajes["state"] == "Leido"){
-                     echo "<td><span class='badge badge-success'>Leido</span></td>";
-                   }else{
-                  echo "<td>" . $mensajesR["state"] . "</td>";
-                   }
- 
-                   echo "<td><center>
-                     <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
-                     </td>";
- 
-                   echo "</tr>";
-                 }
-               } else {
-                 echo "<td>No hay Mensajes Leido para Mostrar</td>";
-               }
- 
-               ?>
-                                          </tbody>
-
-
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "<td>No hay Mensajes para Mostrar</td>";
+                                            }
+                                            ?>
+                                        </tbody>
                                     </table>
-
                                     <!-- FIN TABLA -->
-
                                 </div>
                             </article>
                             <article id="tab2">
                                 <!-- INICIO TABLA -->
                                 <div class="wrapper" id="mensajes">
-
                                     <!-- INICIO TABLA -->
-
-
                                     <table id="myTable">
                                         <tr class="header">
 
@@ -158,24 +132,18 @@ if (session_status() != 2) {
                                             <th>ESTADO</th>
                                             <th>OPCIONES</th>
                                         </tr>
-
                                         <tr>
                                             <h1 id="respuesta"></h1>
                                         </tr>
                                         <tbody>
                                             <?php
-
-
-                                            //Metodo creado para listar mensaje ->Prueba
                                             if ($data["mensajes"] != NULL) {
                                                 foreach ($data["mensajes"] as $mensajes) {
-
                                                     $variableID = $mensajes["id"];
-
                                                     echo "<tr>";
-                                                    echo "<td>" . $mensajes["user_id_destiny"] . "</td>";
-                                                    echo "<td>" . $mensajes["description"] . "</td>";
+                                                    echo "<td>COMITE CURRICULAR CENTRAL</td>";
                                                     echo "<td>" . $mensajes["title"] . "</td>";
+                                                    echo "<td>" . $mensajes["dateMessage"] . "</td>";
                                                     if ($mensajes["state"] == "Leido") {
                                                         echo "<td><span class='badge badge-success'>Leido</span></td>";
                                                     } else {
@@ -188,22 +156,17 @@ if (session_status() != 2) {
                                                     echo "</tr>";
                                                 }
                                             } else {
-                                                echo "<td>No hay Mensajes Leido para Mostrar</td>";
+                                                echo "<td>No hay Mensajes para Mostrar</td>";
                                             }
-
                                             ?>
-
                                         </tbody>
                                     </table>
-
                                     <!-- FIN TABLA -->
-
                                 </div>
                             </article>
                         </div>
                     </div>
-
-               </div>
+                </div>
                 <div class="card-footer text-muted" style="color: white; font-weight: bold; background:#dc3545;"></div>
             </div>
             </article>
