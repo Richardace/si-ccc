@@ -1,7 +1,6 @@
 ![SICCC](https://i.ibb.co/nDFFvJ5/banner-Jos-1.png)
 # Título del proyecto: SISTEMA DE INFORMACIÓN DOCUMENTAL COMITE CURRICULAR CENTRAL SICCC
 
-#### Ejemplo de Lectura de datos JSON 
 ***
 ## Índice
 1. [Características](#caracter-sticas-)
