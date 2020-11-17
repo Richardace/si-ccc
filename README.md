@@ -1,7 +1,6 @@
 ![SICCC](https://i.ibb.co/nDFFvJ5/banner-Jos-1.png)
 # Título del proyecto: SISTEMA DE INFORMACIÓN DOCUMENTAL COMITE CURRICULAR CENTRAL SICCC
 
-#### Ejemplo de Lectura de datos JSON 
 ***
 ## Índice
 1. [Características](#caracter-sticas-)
@@ -72,7 +71,7 @@ Para ver el demo de la aplicación puede dirigirse a: [Pizzería_js](http://ufps
 ***
 ### Autor(es)
 Proyecto desarrollado por: 
-[Richard Acevedo] (<richara@ufps.edu.co>).
+[Richard Acevedo] (<richaralexanderar@ufps.edu.co>).
 
 [Jose Suarez] (<joseluissm@ufps.edu.co>).
 
