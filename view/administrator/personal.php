@@ -286,6 +286,8 @@ session_start();
                                             <th>DEPENDENCIA</th>
                                             <th>Nombre y Apellido</th>
                                             <th>correo</th>
+                                            <th>estado</th>
+
                                             <th>
                                                 <center>OPCIONES
                                             </th>
@@ -310,9 +312,14 @@ session_start();
                                                 
                                                 echo "<td>" . $evaluador["firstName"] . " " . $evaluador['lastName'] . "</td>";
                                                 echo "<td>" . $evaluador["email"] . "</td>";
+                                                if($evaluador["state"] == "Activo"){
+                                                    echo "<td><span class='badge badge-success'>".$evaluador["state"]."</span></td>";
+                                                }else{
+                                                    echo "<td><span class='badge badge-danger'>".$evaluador["state"]."</span></td>";
+                                                }
 
                                                 echo "<td><center>
-                                                  <a href='index.php?c=personal&a=eliminarUser&id=" . $evaluador["id"] . "'><span class='badge badge-danger'>Eliminar</span></a>&nbsp&nbsp&nbsp&nbsp
+                                                  <a href='index.php?c=personal&a=eliminarUser&id=" . $evaluador["id"] . "'><span class='badge badge-warning'>Cambiar Estado</span></a>&nbsp&nbsp&nbsp&nbsp
                                                   
                                                 </td>";
 
@@ -432,6 +439,7 @@ session_start();
                                             <th>id</th>
                                             <th>Nombre y Apellido</th>
                                             <th>correo</th>
+                                            <th>estado</th>
                                             <th>OPCIONES</th>
                                         </tr>
 
@@ -451,10 +459,14 @@ session_start();
                                                 echo "<td>" . $correo["id"] . "</td>";
                                                 echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
                                                 echo "<td>" . $correo["email"] . "</td>";
-                                                
+                                                if($correo["state"] == "Activo"){
+                                                    echo "<td><span class='badge badge-success'>".$correo["state"]."</span></td>";
+                                                }else{
+                                                    echo "<td><span class='badge badge-danger'>".$correo["state"]."</span></td>";
+                                                }
 
                                                 echo "<td><center>
-                                                <a href='index.php?c=personal&a=eliminarUser&id=" . $correo["id"] . "'><span class='badge badge-danger'>Eliminar</span></a>&nbsp&nbsp&nbsp&nbsp
+                                                <a href='index.php?c=personal&a=eliminarUser&id=" . $correo["id"] . "'><span class='badge badge-warning'>Cambiar Estado</span></a>&nbsp&nbsp&nbsp&nbsp
                                                   
                                                 </td>";
 

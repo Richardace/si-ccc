@@ -267,10 +267,26 @@ class UserDAO
 		return $users;
 	}
 
-	public function deleteUser($idUser)){
+	public function deleteUser($idUser){
+		
 		$db = new Connect;
-		$consulta = $db->prepare('DELETE FROM usere WHERE id=:idUser');
+		$consulta = $db->prepare('SELECT * FROM user WHERE id=:idUser');
 		$consulta->execute([
+			':idUser'   => $idUser
+		]);
+		$state = "";
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$state = $row['state'];
+		}
+		$newState = "";
+		if($state == "Activo"){
+			$newState = "Inactivo";
+		}else{
+			$newState = "Activo";
+		}
+		$consulta = $db->prepare('UPDATE user SET state = :newState WHERE id=:idUser');
+		$consulta->execute([
+			':newState'   => $newState,
 			':idUser'   => $idUser
 		]);
 	}
