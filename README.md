@@ -1,6 +1,7 @@
 ![SICCC](https://i.ibb.co/nDFFvJ5/banner-Jos-1.png)
 # Título del proyecto: SISTEMA DE INFORMACIÓN DOCUMENTAL COMITE CURRICULAR CENTRAL SICCC
 
+#### Ejemplo de Lectura de datos JSON 
 ***
 ## Índice
 1. [Características](#caracter-sticas-)
@@ -15,7 +16,7 @@
 #### Características:
 
   - Proyecto que usa loguins  mediante la API de Google SESSION. 
-  - El prpyecto  maneja eventos con la API de Google CALENDAR.   
+  - El proyecto  maneja eventos con la API de Google CALENDAR.   
   - Carga dinamica del json enviado por google para registro de datos personales como el nombre,etc.
   - Carga masiva de archivos mediante la libreria Dropzone de JavaScript
   
@@ -40,19 +41,29 @@
 
 
 
-Usted puede ver el siguiente marco conceptual sobre la API fetch:
+Usted puede ver el siguiente marco conceptual sobre la API client:
 
-  - [Vídeo explicativo lectura con fetch()](https://www.youtube.com/watch?v=DP7Hkr2ss_I)
-  - [Gúia de Mozzilla JSON](https://developer.mozilla.org/es/docs/Learn/JavaScript/Objects/JSON)
+   -Esta realiza el proceso de session entre google y php en el siguiente link:https://developers.google.com/api-client-library
+
+Usted puede ver el siguiente marco conceptual sobre la API calendar:
+
+   -Esta realiza el proceso de eventos entre google y php en el siguiente link:https://developers.google.com/calendar
   
   ***
 #### IDE
 
 - El proyecto se desarrolla usando Sublime text,Visual code
-- Visor de JSON -(http://jsonviewer.stack.hu/)
+- Visor demo de sublime -(http://www.sublimetext.com)
+- Visor demo de visualcode -(https://code.visualstudio.com)
 
 ***
 ### Instalación
+
+-Servidor
+
+-Base de datos
+
+-Aplicativo 
 
 Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/).
 El software es necesario para ver la interacción por consola y depuración del código JS
@@ -71,7 +82,7 @@ Para ver el demo de la aplicación puede dirigirse a: [Pizzería_js](http://ufps
 ***
 ### Autor(es)
 Proyecto desarrollado por: 
-[Richard Acevedo] (<richaralexanderar@ufps.edu.co>).
+[Richard Acevedo] (<richara@ufps.edu.co>).
 
 [Jose Suarez] (<joseluissm@ufps.edu.co>).
 
