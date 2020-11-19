@@ -78,7 +78,6 @@ if (session_status() != 2) {
                                     <!-- INICIO TABLA -->
                                     <table id="myTable">
                                         <tr class="header">
-
                                             <th>ORIGEN</th>
                                             <th>ASUNTO</th>
                                             <th>FECHA DE RECIBIDO</th>
@@ -96,16 +95,16 @@ if (session_status() != 2) {
                                                 foreach ($data["mensajesRecibidos"] as $mensajesR) {
                                                     $variableID = $mensajesR["id"];
                                                     echo "<tr>";
-                                                    echo "<td>COMITE CURRICULAR CENTRAL</td>";
+                                                    echo "<td>" . $mensajesR["fullName"] . "</td>";
                                                     echo "<td>" . $mensajesR["title"] . "</td>";
                                                     echo "<td>" . $mensajesR["dateMessage"] . "</td>";
                                                     if ($mensajesR["state"] == "Leido") {
                                                         echo "<td><span class='badge badge-success'>Leido</span></td>";
                                                     } else {
-                                                        echo "<td>" . $mensajesR["state"] . "</td>";
+                                                        echo "<td><span class='badge badge-danger'>No Leido</span></td>";
                                                     }
                                                     echo "<td><center>
-                                                        <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                                                        <a href='index.php?c=message&a=getMensajeIDRecibidoAdministrador&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
                                                         </td>";
 
                                                     echo "</tr>";
@@ -141,16 +140,16 @@ if (session_status() != 2) {
                                                 foreach ($data["mensajes"] as $mensajes) {
                                                     $variableID = $mensajes["id"];
                                                     echo "<tr>";
-                                                    echo "<td>COMITE CURRICULAR CENTRAL</td>";
+                                                    echo "<td>" . $mensajes["fullName"] . "</td>";
                                                     echo "<td>" . $mensajes["title"] . "</td>";
                                                     echo "<td>" . $mensajes["dateMessage"] . "</td>";
                                                     if ($mensajes["state"] == "Leido") {
                                                         echo "<td><span class='badge badge-success'>Leido</span></td>";
                                                     } else {
-                                                        echo "<td>" . $mensajes["state"] . "</td>";
+                                                        echo "<td><span class='badge badge-danger'>No Leido</span></td>";
                                                     }
                                                     echo "<td><center>
-                                                            <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                                                            <a href='index.php?c=message&a=getMensajeIDEnviadoAdministrador&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
                                                         </td>";
 
                                                     echo "</tr>";

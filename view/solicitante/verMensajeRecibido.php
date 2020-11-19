@@ -86,7 +86,7 @@ session_start();
 
           <div class="form-row">
             <div class="form-group col-md-8">
-              <label style="float: left; ">Destino</label>
+              <label style="float: left; ">Origen</label>
               <input type="text" class="form-control origen" value="COMITE CURRICULAR CENTRAL" readonly>
             </div>
             <div class="form-group col-md-4">

@@ -58,7 +58,7 @@ session_start();
 
     <section id="content">
     <?php
-        echo "<a style='float:right' href='index.php?c=message&a=solicitante&id=$_SESSION[id]'>Regresar</a><br>"
+        echo "<a style='float:right' href='index.php?c=message&a=administrador&id=$_SESSION[id]'>Regresar</a><br>"
         ?>
       <div class="card text-center">
        
@@ -79,19 +79,20 @@ session_start();
               $idDocumento = $infoDocumento['user_id_destiny'];
               $title = $infoDocumento['title'];
               $description = $infoDocumento['description'];
-              $state = $infoDocumento['state'];
+              $nombre = $infoDocumento['fullName'];
+              $estado = $infoDocumento['state'];
             }
           }
           ?>
 
           <div class="form-row">
             <div class="form-group col-md-8">
-              <label style="float: left; ">Destino</label>
-              <input type="text" class="form-control origen" value="COMITE CURRICULAR CENTRAL" readonly>
+              <label style="float: left; ">Origen</label>
+              <input type="text" class="form-control origen" value="<?php echo  $nombre; ?>" readonly>
             </div>
             <div class="form-group col-md-4">
               <label style="float: left; ">Estado</label>
-              <input type="text" class="form-control origen" value="<?php echo  $state; ?>" readonly>
+              <input type="text" class="form-control origen" value="<?php echo  $estado; ?>" readonly>
             </div>
           </div>
           <div class="form-row">

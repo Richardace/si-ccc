@@ -73,12 +73,11 @@ session_start();
 
       <div class="wrap">
         <div class="wrapper">
-
-<br>
+          <a hreF="index.php?c=sesion&a=descargarDocumentoSesionActual">DESCARGAR FECHA DE SESIONES PARA ESTE SEMESTRE</a>
+          <br>
           <table id="myTable">
             <thead>
               <tr class="header">
-
                 <th>N° de Radicado</th>
                 <th>FECHA de registro</th>
                 <th>ASUNTO</th>
@@ -93,22 +92,20 @@ session_start();
             </tr>
             <tbody>
               <?php
-
               if ($data["documentos"] != NULL) {
                 foreach ($data["documentos"] as $documentos) {
                   $documentoID = $documentos["id"];
                   echo "<tr>";
-                  if($documentos["radicado"] == 0){
+                  if ($documentos["radicado"] == 0) {
                     echo "<td>Pendiente</td>";
-                  }else{
-                    
+                  } else {
+
                     echo "<td><span class='badge badge-warning'>" . $documentos["radicado"] . "</span></td>";
                   }
-                  
                   echo "<td>" . $documentos["dateRegister"] . "</td>";
                   echo "<td>" . $documentos["title"] . "</td>";
-                  
-                  if($documentos["state"] == "Devuelto con correcciones"){
+
+                  if ($documentos["state"] == "Devuelto con correcciones") {
                     echo "<td>
                           <a href='index.php?c=documento&a=verCorrecionesDocumentoSolicitante&id=$documentoID'>
                             <span>
@@ -116,17 +113,15 @@ session_start();
                             </span>
                           </a>
                         </td>";
-                  }else if($documentos["state"] == "Aprobado"){
+                  } else if ($documentos["state"] == "Aprobado") {
                     echo "<td><span class='badge badge-success'>Aprobado</span></td>";
-                  }else{
+                  } else {
                     echo "<td>" . $documentos["state"] . "</td>";
                   }
-                  
                   echo "<td><center>
                       <a href='index.php?c=documento&a=viewDocumentSolicitante&id=" . $documentos["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Consultar Documento'></span></a>&nbsp&nbsp&nbsp&nbsp        
                       
                             </td>";
-
                   echo "</tr>";
                 }
               } else {

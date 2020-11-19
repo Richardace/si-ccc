@@ -71,8 +71,12 @@ session_start();
       foreach ($data['documentoEvaluador'] as $docEvaluador) {
 
         if ($docEvaluador['observaciones'] == "") {
+          $idEvaluador1 = $docEvaluador['id_user'];
           $color1 = 'rgb(255, 221, 108)';
+          $nombreEvaluador1 = $docEvaluador['fullName'];
           $estadoEvaluador1 = "pendiente";
+          $idRevision1 = $docEvaluador['id'];
+          $email1 = $docEvaluador['emailUser'];
         } else {
           $color1 = 'rgb(68, 255, 93)';
           $estadoEvaluador1 = "revisado";
@@ -89,8 +93,12 @@ session_start();
 
         if ($contador == 2) {
           if ($docEvaluador['observaciones'] == "") {
+            $nombreEvaluador2 = $docEvaluador['fullName'];
+            $idEvaluador2 = $docEvaluador['id_user'];
             $color2 = 'rgb(255, 221, 108)';
             $estadoEvaluador2 = "pendiente";
+            $idRevision2 = $docEvaluador['id'];
+            $email2 = $docEvaluador['emailUser'];
           } else {
             $color2 = 'rgb(68, 255, 93)';
             $estadoEvaluador2 = "revisado";
@@ -103,8 +111,12 @@ session_start();
         }
 
         if ($docEvaluador['observaciones'] == "") {
+          $idEvaluador1 = $docEvaluador['id_user'];
+          $nombreEvaluador1 = $docEvaluador['fullName'];
           $color1 = 'rgb(255, 221, 108)';
           $estadoEvaluador1 = "pendiente";
+          $idRevision1 = $docEvaluador['id'];
+          $email1 = $docEvaluador['emailUser'];
         } else {
           $color1 = 'rgb(68, 255, 93)';
           $estadoEvaluador1 = "revisado";
@@ -283,7 +295,10 @@ session_start();
                   <div class="card card-body">
                     <?php
                     if ($estadoEvaluador1 == "pendiente") {
+                      echo "<label>Nombre Evaluador</label>";
+                      echo "<input type=text class='form-control' value='$nombreEvaluador1 - $email1' ><br>";
                       echo "PENDIENTE DE REVISIÓN";
+                      echo "<center><a style='float:right;' href='index.php?c=documento&a=changeEvaluadorDocument&id=$idRevision1'>Cambiar Evaluador</a></center>";
                     } else {
 
                       echo "
@@ -304,10 +319,7 @@ session_start();
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?c=estado&a=descargarDocumentosEvaluador&id=$idRevision1'>Descargar Documentos Adjuntos</a>
                         ";
                       }
-
                       echo "
-
-                          
                         </div>
                       ";
                     }
@@ -337,7 +349,10 @@ session_start();
                   <div class="card card-body">
                     <?php
                     if ($estadoEvaluador2 == "pendiente") {
+                      echo "<label>Nombre Evaluador</label>";
+                      echo "<input type=text class='form-control' value='$nombreEvaluador2 - $email2' ><br>";
                       echo "PENDIENTE DE REVISIÓN";
+                      echo "<center><a style='float:right;' href='index.php?c=documento&a=changeEvaluadorDocument&id=$idRevision2'>Cambiar Evaluador</a></center>";
                     } else if ($estadoEvaluador2 == "nn") {
                     } else {
                       echo "
@@ -358,10 +373,7 @@ session_start();
                               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?c=estado&a=descargarDocumentosEvaluador&id=$idRevision2'>Descargar Documentos Adjuntos</a>
                           ";
                       }
-
-                      echo "
-  
-                            
+                      echo "   
                           </div>
                         ";
                     }

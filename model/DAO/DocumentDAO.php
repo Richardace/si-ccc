@@ -266,6 +266,7 @@ class DocumentDAO
 		$documentos = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 			$row['fullName'] = $userDAO->getNameAndLastNameById($row['id_user']);
+			$row['emailUser'] = $userDAO->getEmailByIdUser($row['id_user']);
 			$documentos[] = $row;
 		}
 		return $documentos;
@@ -365,6 +366,24 @@ class DocumentDAO
 			':documentID'   => $idDocument,
 			':dateLimit'   => $fechaLimit,
 			':keyAccess'   => $token
+		]);
+
+		return $insertDocumentEvaluador;
+	}
+
+	public function changeEvaluadorDocument($idDocumentEvaluador, $idDocument, $idUser , $mensaje)
+	{
+		$db = new Connect;
+
+		if($mensaje != ''){
+			$sql2 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocument . "', NULL , '".$mensaje."') ");
+			
+		}
+		
+		$insertDocumentEvaluador = $db->prepare("UPDATE documento_evaluador SET id_user=:newIdUser WHERE id=:idDocumentEvaluador");
+		$insertDocumentEvaluador->execute([
+			':newIdUser'   => $idUser,
+			':idDocumentEvaluador' => $idDocumentEvaluador
 		]);
 
 		return $insertDocumentEvaluador;

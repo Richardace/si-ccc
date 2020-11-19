@@ -57,58 +57,37 @@ session_start();
     <!-- Contenido -->
 
     <section id="content">
-    <?php
-        echo "<a style='float:right' href='index.php?c=message&a=solicitante&id=$_SESSION[id]'>Regresar</a><br>"
-        ?>
+
       <div class="card text-center">
-       
-
-
-
-        <div class="card-header" style="color: white; font-weight: bold; background: #dc3545;">
-          DETALLE DEL MENSAJE
+        <div class="card-header" style="color: white; font-weight: bold; background:#dc3545;">
+          AÑADIR NUEVO MENSAJE
         </div>
+        <div class="card-body">
 
-        <div class="card-body" id="mensajesID">
-
-          <?php
-
-          if ($data['mensajesID'] != NULL) {
-
-            foreach ($data['mensajesID'] as $infoDocumento) {
-              $idDocumento = $infoDocumento['user_id_destiny'];
-              $title = $infoDocumento['title'];
-              $description = $infoDocumento['description'];
-              $state = $infoDocumento['state'];
-            }
-          }
-          ?>
-
-          <div class="form-row">
-            <div class="form-group col-md-8">
-              <label style="float: left; ">Destino</label>
-              <input type="text" class="form-control origen" value="COMITE CURRICULAR CENTRAL" readonly>
+          <form method="post" action="index.php?c=message&a=addMessageSolicitante">
+            <input type="hidden" value="<?php echo $_SESSION['id']; ?>" name="idSesion">
+            <br>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label style="float: left; ">Destino</label>
+                <input type="text" class="form-control" value="COMITE CURRICULAR CENTRAL" readonly>
+              </div>
             </div>
-            <div class="form-group col-md-4">
-              <label style="float: left; ">Estado</label>
-              <input type="text" class="form-control origen" value="<?php echo  $state; ?>" readonly>
+            <div class="form-row">  
+              <div class="form-group col-md-12">
+                <label style="float: left; ">Asunto</label>
+                <input type="text" class="form-control" name="asunto">
+              </div>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label style="float: left; ">Asunto</label>
-              <input type="text" class="form-control origen" value="<?php echo  $title; ?>" readonly>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label style="float: left; ">Mensaje</label>
+                <textarea style="height: 200px; " type="text" class="form-control" name="mensaje"></textarea>
+              </div>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label style="float: left; ">Mensaje</label>
-              <textarea style="height: 200px; " type="text" class="form-control destino" readonly> <?php echo $description; ?> </textarea>
-            </div>
-          </div>
-
-
-
+            <br>
+            <center><input id="add" type="submit" value="Enviar Mensaje" class="btn btn-primary" style="background:rgb(226, 3, 26); border:none; color:white; display:inline-block;" /></center>
+          </form>
         </div>
         <div class="card-footer text-muted" style="color: white; font-weight: bold; background:#dc3545;">
 

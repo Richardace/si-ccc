@@ -64,14 +64,37 @@ session_start();
         </div>
         <div class="card-body">
 
+          <form method="post" action="index.php?c=message&a=addMessageAdministrador">
+            <input type="hidden" value="<?php echo $_SESSION['id']; ?>" name="idSesion">
             <br>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label style="float: left; ">Destino</label>
+                <select id="selectPrograma" class="form-control" name="destiny" required>
+                  <?php
+                  foreach ($data["destinatarios"] as $destinatario) {
+                    echo "<option value='" . $destinatario['id'] . "'>" . $destinatario['fullName'] . "</option>";
+                  }
+                  ?>
+                </select>
+              </div>
+
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label style="float: left; ">Asunto</label>
+                <input type="text" class="form-control" name="asunto">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label style="float: left; ">Mensaje</label>
+                <textarea style="height: 200px; " type="text" class="form-control" name="mensaje"></textarea>
+              </div>
+            </div>
             <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            <center><input id="add" type="submit" value="Enviar Mensaje" class="btn btn-primary" style="background:rgb(226, 3, 26); border:none; color:white; display:inline-block;" /></center>
+          </form>
         </div>
         <div class="card-footer text-muted" style="color: white; font-weight: bold; background:#dc3545;">
 

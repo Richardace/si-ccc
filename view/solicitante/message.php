@@ -65,7 +65,7 @@ if (session_status() != 2) {
                 <div class="card-body">
 
                     <div class="btn-agregar">
-                        <a href="index.php?&c=message&a=viewNewMessageAdministrador">
+                        <a href="index.php?&c=message&a=viewNewMessageSolicitante">
                             <img src="view/assets/img/agregar.png" alt="Agregar Mensaje" title="Crear Nuevo Mensaje">
                         </a>
                     </div>
@@ -104,12 +104,12 @@ if (session_status() != 2) {
                                                     echo "<td>" . $mensajesR["title"] . "</td>";
                                                     echo "<td>" . $mensajesR["dateMessage"] . "</td>";
                                                     if ($mensajesR["state"] == "Leido") {
-                                                        echo "<td><span class='badge badge-success'>Leido</span></td>";
+                                                        echo "<td><span class='badge badge-success'>" . $mensajesR["state"] . "</span></td>";
                                                     } else {
-                                                        echo "<td>" . $mensajesR["state"] . "</td>";
+                                                        echo "<td><span class='badge badge-danger'>" . $mensajesR["state"] . "</span></td>";
                                                     }
                                                     echo "<td><center>
-                                                        <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                                                        <a href='index.php?c=message&a=verMensajeRecibidoSolicitante&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
                                                         </td>";
 
                                                     echo "</tr>";
@@ -151,12 +151,12 @@ if (session_status() != 2) {
                                                     echo "<td>" . $mensajes["title"] . "</td>";
                                                     echo "<td>" . $mensajes["dateMessage"] . "</td>";
                                                     if ($mensajes["state"] == "Leido") {
-                                                        echo "<td><span class='badge badge-success'>Leido</span></td>";
+                                                        echo "<td><span class='badge badge-success'>" . $mensajes["state"] . "</span></td>";
                                                     } else {
-                                                        echo "<td>" . $mensajes["state"] . "</td>";
+                                                        echo "<td><span class='badge badge-danger'>" . $mensajes["state"] . "</span></td>";
                                                     }
                                                     echo "<td><center>
-                                                                <a href='index.php?c=message&a=verMensaje&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
+                                                                <a href='index.php?c=message&a=verMensajeEnviadoSolicitante&id=$variableID'><button id='iconoVer'><img src='view/assets/img/ver.png'></button></a>
                                                             </td>";
 
                                                     echo "</tr>";

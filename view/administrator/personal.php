@@ -145,9 +145,7 @@ session_start();
                             </div>
                         </div>
 
-
                         <div class="wrapper">
-
 
                             <!-- INICIO TABLA -->
 
@@ -159,48 +157,37 @@ session_start();
                                             <th>id</th>
                                             <th>Nombre</th>
                                             <th>correo</th>
-                                            <th>ESTADO</th>
-
                                         </tr>
-
                                     </thead>
                                     <tr>
                                         <h1 id="respuesta">
                                         </h1>
                                     </tr>
-
                                     <tbody>
                                         <?php
-
                                         if ($data["solicitante"] != NULL) {
                                             foreach ($data["solicitante"] as $correo) {
                                                 echo "<tr>";
                                                 echo "<td>" . $correo["id"] . "</td>";
                                                 echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
                                                 echo "<td>" . $correo["email"] . "</td>";
-                                                echo "<td>" . $correo["state"] . "</td>";
 
                                                 echo "</tr>";
                                             }
                                         } else {
                                             echo "<td>No hay Directores o Decanos Registrados</td>";
                                         }
-
                                         ?>
 
                                     </tbody>
                                 </table>
                             </div>
-
                             <!-- PAGINACION -->
-
                             <br>
                             <nav id="paginacion">
                                 <ul class="pagination pagination-lg pager" id="myPager"></ul>
                             </nav>
-
                             <!-- FIN TABLA -->
-
                         </div>
                     </article>
 
@@ -299,7 +286,6 @@ session_start();
                                             <th>DEPENDENCIA</th>
                                             <th>Nombre y Apellido</th>
                                             <th>correo</th>
-                                            <th>ESTADO</th>
                                             <th>
                                                 <center>OPCIONES
                                             </th>
@@ -324,11 +310,10 @@ session_start();
                                                 
                                                 echo "<td>" . $evaluador["firstName"] . " " . $evaluador['lastName'] . "</td>";
                                                 echo "<td>" . $evaluador["email"] . "</td>";
-                                                echo "<td>" . $evaluador["state"] . "</td>";
 
                                                 echo "<td><center>
-                                                  <a href='index.php?c=personal&a=verUsuario&id=" . $evaluador["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
-                                                  <a href='index.php?c=correo&a=eliminarCorreo&id=" . $evaluador["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                                                  <a href='index.php?c=personal&a=eliminarUser&id=" . $evaluador["id"] . "'><span class='badge badge-danger'>Eliminar</span></a>&nbsp&nbsp&nbsp&nbsp
+                                                  
                                                 </td>";
 
                                                 echo "</tr>";
@@ -447,7 +432,6 @@ session_start();
                                             <th>id</th>
                                             <th>Nombre y Apellido</th>
                                             <th>correo</th>
-                                            <th>ESTADO</th>
                                             <th>OPCIONES</th>
                                         </tr>
 
@@ -467,11 +451,11 @@ session_start();
                                                 echo "<td>" . $correo["id"] . "</td>";
                                                 echo "<td>" . $correo["firstName"] . " " . $correo['lastName'] . "</td>";
                                                 echo "<td>" . $correo["email"] . "</td>";
-                                                echo "<td>" . $correo["state"] . "</td>";
+                                                
 
                                                 echo "<td><center>
-                                                  <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoVer'><img src='view/assets/img/ver.png' title='Eliminar'></span></a>&nbsp&nbsp&nbsp&nbsp
-                                                  <a href='index.php?c=correo&a=eliminarCorreo&id=" . $correo["id"] . "'><span id='iconoEditar'><img src='view/assets/img/editar.png' title='Eliminar'></span></a>
+                                                <a href='index.php?c=personal&a=eliminarUser&id=" . $correo["id"] . "'><span class='badge badge-danger'>Eliminar</span></a>&nbsp&nbsp&nbsp&nbsp
+                                                  
                                                 </td>";
 
                                                 echo "</tr>";
@@ -558,10 +542,6 @@ session_start();
 
                         <div class="wrapper">
                             <br>
-
-                            <input style="float: right;" type="text" id="myInput" placeholder="Buscar Correo...">
-
-
 
                             <!-- INICIO TABLA -->
                             <div class="table-responsive-lg">

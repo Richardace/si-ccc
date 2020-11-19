@@ -145,6 +145,56 @@ class DocumentoController
         require_once "view/evaluador/validarDocumento.php";
     }
 
+    // Cambiar Evaluador
+    public function changeEvaluadorDocument($idDocumentEvaluador){
+        $user = new UserDAO;
+        $programas = new ProgramDAO;
+        $facultades = new FacultadDAO;
+
+        $data["idDocumentoEvaluador"] = $idDocumentEvaluador;
+        $data["evaluadores"] = $user->getEvaluadores(3);
+        $data["programas"] = $programas->getPrograms();
+        $data["facultades"] = $facultades->getFacultades();
+         
+        require_once "view/administrator/changeEvaluador.php";
+    }
+    
+    public function changeEvaluador(){
+        $emailEvaluadorNuevo = $_POST['email1'];
+        $idDocumentEvaluador = $_POST['idDocumentEvaluador'];
+
+        $document = new DocumentDAO;
+        $UserDAO = new UserDAO;
+
+        $idUser = $UserDAO->getUserByEmail($emailEvaluadorNuevo);
+
+        $documentoEvaluador = $document->getDocumentEvaluadorEspecifico($idDocumentEvaluador);
+
+        foreach($documentoEvaluador as $infoDocument){
+            $idDocument = $infoDocument['id_document'];
+            $token = $infoDocument['key_access'];
+            $dateLimit = $infoDocument['dateLimit'];
+        }
+
+        
+        $document->changeEvaluadorDocument($idDocumentEvaluador, $idDocument, $idUser, 'Se Cambio Evaluador al Documento');
+
+        $this->enviarCorreoEvaluador($idUser, $token, $dateLimit);
+
+        $data['documentos'] = $document->getDocumentsPending();
+
+        echo "
+            <script>
+                alert('Evaluador Cambiado con Exito!');
+            </script>
+        ";
+
+        $this->viewDocumentAdministrador($idDocument);
+
+
+
+    }
+
     // EVALUADOR
     public function validarIdentidad()
     {

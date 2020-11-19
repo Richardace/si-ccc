@@ -41,11 +41,9 @@ session_start();
 
     <!-- Mis Scripts-->
     <script type="text/javascript" src="view/assets/js/personal.js"></script>
-    <script type="text/javascript" src="view/assets/js/main.js"></script>
-    <!-- DROP -->
-    <?php
-    include("headerDrop.php");
-    ?>
+    <style>
+
+    </style>
 
 </head>
 
@@ -59,64 +57,61 @@ session_start();
             ?>
         </header>
 
-        <?php
-        foreach ($data['documento'] as $documento) {
-            $idConfig = $documento['id'];
-            $documentoSesion = $documento['valor'];
-            $dateCambio = $documento['dateCambio'];
-        }
-
-        $obj = json_decode($documento['valor']);
-        $obj2 = $obj[0]->elemento;
-        $nombreDocumento = basename($obj2);
-
-        ?>
         <!-- Contenido -->
 
         <section id="content">
 
             <div class="card text-center">
                 <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
-                    ACTUALIZAR DOCUMENTO DE SESIONES ACTUAL
+                    CAMBIAR EVALUADOR
                 </div>
                 <div class="card-body">
+                    <form method="post" action="index.php?c=documento&a=changeEvaluador">
+                        <br>
+                        <input type="hidden" name="idDocumentEvaluador" value="<?php echo $data['idDocumentoEvaluador']; ?>">
+                        <center>
+                            <div class="form-row" id="eva1">
+                                <div class="col">
+                                    <div>
+                                        <label for="inputState">Elija el Evaluador Nuevo</label><br>
+                                        <select id="selectPrograma" class="form-control" name="email1">
+                                            <?php
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label>Documento Actual</label>
-                            <input type="text" style="text-align:center;" class="form-control origen" value="<?php echo $nombreDocumento; ?>" readonly>
-                            <a href="index.php?c=sesion&a=descargarDocumentosById">Descargar Documento</a>
-                        </div>
+                                            if ($data["evaluadores"] == NULL) {
+                                                echo "<option>No hay Evaluadores Disponibles</option>";
+                                            }
+                                            foreach ($data["evaluadores"] as $usuario) {
+                                                if ($usuario['fullName'] == " ") {
 
-                        <div class="form-group col-md-6">
-                            <label>Fecha de Carga del Ultimo Documento</label>
-                            <input type="text" style="text-align:center;" class="form-control origen" value="<?php echo $dateCambio; ?>" readonly>
-
-                        </div>
-                    </div>
-
-
-
-                    <br>
-                    <label>CARGAR NUEVO DOCUMENTO</label><br>
-                    <br>
-                    <div class="form-group agregarMultimedia">
-                        <div class="multimediaFisica needsclick dz-clickable">
-                            <div class="dz-message needsclick">
-                                Presiona para Buscar ó arrastra el Nuevo Documento - Maximo 1 archivo
+                                                    if ($usuario['dependencyUser'] == "") {
+                                                        echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - Sin Nombre Registrado / Sin dependencia Asociada</option>";
+                                                    } else {
+                                                        echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - Sin Nombre Registrado / " . $usuario['dependencyUser'] . "</option>";
+                                                    }
+                                                } else {
+                                                    if ($usuario['dependencyUser'] == "") {
+                                                        echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - " . $usuario['fullName'] . " / Sin dependencia Asociada</option>";
+                                                    } else {
+                                                        echo "<option value='" . $usuario['email'] . "'>" . $usuario['email'] . " - " . $usuario['fullName'] . " / " . $usuario['dependencyUser'] . "</option>";
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </center>
 
+                        <br>
+
+                        <input id="agregar" type="submit" value="Cambiar" class="btn btn-primary" style="background:rgb(226, 3, 26); border:none; color:white;" />
+
+                    </form>
+                </div>
+                <div class="card-footer text-muted" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
 
                 </div>
-
-                <center><input id="agregar" type="submit" value="Actualizar Documento" class="btn btn-primary guardarProducto" style="background:rgb(226, 3, 26); border:none; color:white; " /></center>
-                <br>
-            </div>
-            <div class="card-footer text-muted" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
-
-            </div>
             </div>
         </section>
     </section>
@@ -131,6 +126,5 @@ session_start();
         </div>
     </footer>
 </body>
-<script src="view/assets/js/dropzoneDocumentoConfig.js"></script>
 
 </html>

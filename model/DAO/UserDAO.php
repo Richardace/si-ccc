@@ -266,4 +266,12 @@ class UserDAO
 		}
 		return $users;
 	}
+
+	public function deleteUser($idUser)){
+		$db = new Connect;
+		$consulta = $db->prepare('DELETE FROM usere WHERE id=:idUser');
+		$consulta->execute([
+			':idUser'   => $idUser
+		]);
+	}
 }

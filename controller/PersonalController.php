@@ -40,18 +40,6 @@ class PersonalController
         require_once "view/solicitante/personal.php";
     }
 
-    // public function addSolicitanteView($id){
-    //     $programas = new ProgramDAO;
-    //     $departamentos = new DepartmentDAO;
-    //     $facultades = new FacultadDAO;
-    //     $correo = new CorreoDAO();
-    //     $data["correo"] = $correo->getCorreo($_GET["id"]);
-    //     $data["programas"] = $programas->getPrograms();
-    //     $data["departamentos"] = $departamentos->getDepartamentos();
-    //     $data["facultades"] = $facultades->getFacultades();
-    //     require_once "view/administrator/addSolicitante.php";
-    // }
-
     public function addSolicitanteSolicitanteView($id)
     {
         $programas = new ProgramDAO;
@@ -188,6 +176,12 @@ class PersonalController
         foreach ($cuentaRegistrada as $cuenta) {
             $idUser = $cuenta['id'];
         }
+        $this->administrador();
+    }
+
+    public function eliminarUser($idUser){
+        $userDAO = new UserDAO;
+        $correo = $userDAO->deleteUser($idUser);
         $this->administrador();
     }
 }
