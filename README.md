@@ -77,9 +77,9 @@ Usted puede ver el siguiente marco conceptual sobre el servicio SENDGRID de Twil
 
 - El proyecto se desarrolla usando Sublime text,Visual code
 - Visor demo de sublime -(http://www.sublimetext.com)
-  ![SICCC](https://i.ibb.co/nDFFvJ5/banner-Jos-1.png)
+  ![Sublime](https://i.ibb.co/Sw7vsSY/imagen-Sublime.png)
 - Visor demo de visualcode -(https://code.visualstudio.com)
-
+  ![Visual](https://i.ibb.co/41sb2xK/imagen-Visual.png)
 ***
 ### Instalación
 
