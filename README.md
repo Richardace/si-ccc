@@ -18,6 +18,7 @@
   - El proyecto  maneja eventos con la API de Google CALENDAR.   
   - Carga dinamica del json enviado por google para registro de datos personales como el nombre,etc.
   - Carga masiva de archivos mediante la libreria Dropzone de JavaScript
+  - Envio de correos electronico mediante el servicio SendGrid de twilio.
   
   
   #### Contenido del proyecto
@@ -40,7 +41,7 @@
       - [login](https://github.com/Richardace/si-ccc/tree/master/view/login) -> Este paquete contiene los archivos .PHP con el codigo HTML de la vista referente al login por cada tipo de usuario. Se tiene un login para [Administradores y Solicitantes](https://github.com/Richardace/si-ccc/tree/master/view/login/loginUser) y un login para [Evaluadores](https://github.com/Richardace/si-ccc/tree/master/view/login/loginEvaluador).
       - [assets](https://github.com/Richardace/si-ccc/tree/master/view/assets) -> Este paquete contiene todo los componentes graficos para las vistas, asi como plugins, codigo bootstrap, JQuery, Fuentes, Iconos, entre otros elementos.
       
-  - [index.php](https://github.com/Richardace/si-ccc/blob/master/index.php) -> Este archivo 
+  - [index.php](https://github.com/Richardace/si-ccc/blob/master/index.php) -> Archivo principal del sistema, a partir de acá se ejecutan todas las funcionalidades del proyecto. Es el archivo de arranque del servidor.
   
 ***
 #### Tecnologías
@@ -66,18 +67,25 @@ Usted puede ver el siguiente marco conceptual sobre la API client:
 Usted puede ver el siguiente marco conceptual sobre la API calendar:
 
    -Esta realiza el proceso de eventos entre google y php en el siguiente link:https://developers.google.com/calendar
+
+Usted puede ver el siguiente marco conceptual sobre el servicio SENDGRID de Twilio:
+
+   -Esta se encargar de enviar correos electronicos dentro del servidor desplegado:https://sendgrid.com/docs/for-developers/sending-email/api-getting-started/
   
   ***
 #### IDE
 
 - El proyecto se desarrolla usando Sublime text,Visual code
 - Visor demo de sublime -(http://www.sublimetext.com)
+  ![SICCC](https://i.ibb.co/nDFFvJ5/banner-Jos-1.png)
 - Visor demo de visualcode -(https://code.visualstudio.com)
 
 ***
 ### Instalación
 
--Servidor
+#### SERVIDOR
+
+
 
 -Base de datos
 
