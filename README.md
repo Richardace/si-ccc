@@ -1,10 +1,9 @@
 ![SICCC](https://i.ibb.co/nDFFvJ5/banner-Jos-1.png)
 # Título del proyecto: SISTEMA DE INFORMACIÓN DOCUMENTAL COMITE CURRICULAR CENTRAL SICCC
 
-#### Ejemplo de Lectura de datos JSON 
 ***
 ## Índice
-1. [Características](#caracter-sticas-)
+1. [Características](#caracteristicas)
 2. [Contenido del proyecto](#contenido-del-proyecto)
 3. [Tecnologías](#tecnologías)
 4. [IDE](#ide)
@@ -15,29 +14,32 @@
 ***
 #### Características:
 
-  - Proyecto que usa loguins  mediante la API de Google SESSION. 
+  - Proyecto que usa logins  mediante la API de Google SESSION. 
   - El proyecto  maneja eventos con la API de Google CALENDAR.   
   - Carga dinamica del json enviado por google para registro de datos personales como el nombre,etc.
   - Carga masiva de archivos mediante la libreria Dropzone de JavaScript
   
   
   #### Contenido del proyecto
-  - [index.html](https://gitlab.com/programacion-web---i-sem-2019/lectura-json-ii-2020-pizzeria/-/blob/master/index.html): Archivo principal de invocación a la lectura de JSON
-  - [js/proceso.js](https://gitlab.com/programacion-web---i-sem-2019/lectura-json-ii-2020-pizzeria/-/blob/master/js/proceso.js): Archivo JS con el proceso de lectura del JSON y sus funciones adicionales para la impresión de resultados
+  # PACKAGE
+   - [assetsDropzone](https://github.com/Richardace/si-ccc/tree/master/assetsDropzone) -> Este paquete contiene todo los componentes de la libreria, asi como plugins, codigo bootstrap, JQuery, Fuentes, Iconos, entre otros elementos que permiten que la libreria funcione correctamente.
+   - [config](https://github.com/Richardace/si-ccc/tree/master/config) -> Este paquete contiene los archivos de configuracion del sistema, asi como la conexión a la [Base de datos](https://github.com/Richardace/si-ccc/blob/master/config/database.php), configuracion de retorno para la API de google tanto para [Solicitantes y Adminitradores](https://github.com/Richardace/si-ccc/blob/master/config/controlGoogle.php) y los [Evaluadores](https://github.com/Richardace/si-ccc/blob/master/config/controlGoogleEvaluador.php). Ademas este paquete contiene los archivos que permiten la carga de documentos en el servidor, asi como su configuracion de ruta, nombre y contenido. [Example](https://github.com/Richardace/si-ccc/blob/master/config/documentos.ajax.php).
+  - [controller](https://github.com/Richardace/si-ccc/tree/master/controller) -> Este paquete contiene los 9 controladores del sistema, y son los que envian y retornan información al usuario.
 
 ***
 #### Tecnologías
 
 
    Tecnologías Frontend: 
-   -Lenguajes: HTML - CSS - JavaScript
-   -Framework: Bootstrap
-   -Librerías: Dropzone, Moment JS, JQuery-UI
+   -Lenguajes: HTML - CSS - JavaScript.
+   -Framework: Bootstrap.
+   -Librerías: Dropzone, Moment JS, JQuery-UI.
 
    Tecnologías Backend:
    -Lenguaje: PHP
    -IDE: Visual Studio Code
    -Framework: N/A
+   -Librerias: Google-API-php-Client y Sendgrid
 
 
 
