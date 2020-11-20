@@ -21,11 +21,27 @@
   
   
   #### Contenido del proyecto
-  # PACKAGE
-   - [assetsDropzone](https://github.com/Richardace/si-ccc/tree/master/assetsDropzone) -> Este paquete contiene todo los componentes de la libreria, asi como plugins, codigo bootstrap, JQuery, Fuentes, Iconos, entre otros elementos que permiten que la libreria funcione correctamente.
+  ##### PACKAGES
+   - [assetsDropzone](https://github.com/Richardace/si-ccc/tree/master/assetsDropzone) -> Este paquete contiene todo los componentes de la libreria Dropzone, asi como plugins, codigo bootstrap, JQuery, Fuentes, Iconos, entre otros elementos que permiten que la libreria funcione correctamente.
+   
    - [config](https://github.com/Richardace/si-ccc/tree/master/config) -> Este paquete contiene los archivos de configuracion del sistema, asi como la conexión a la [Base de datos](https://github.com/Richardace/si-ccc/blob/master/config/database.php), configuracion de retorno para la API de google tanto para [Solicitantes y Adminitradores](https://github.com/Richardace/si-ccc/blob/master/config/controlGoogle.php) y los [Evaluadores](https://github.com/Richardace/si-ccc/blob/master/config/controlGoogleEvaluador.php). Ademas este paquete contiene los archivos que permiten la carga de documentos en el servidor, asi como su configuracion de ruta, nombre y contenido. [Example](https://github.com/Richardace/si-ccc/blob/master/config/documentos.ajax.php).
+   
   - [controller](https://github.com/Richardace/si-ccc/tree/master/controller) -> Este paquete contiene los 9 controladores del sistema, y son los que envian y retornan información al usuario.
-
+  
+  - [core](https://github.com/Richardace/si-ccc/tree/master/core) -> Este paquete contiene un unico archivo llamado [routes.php](https://github.com/Richardace/si-ccc/blob/master/core/routes.php) y es el que permite al index principal acceder a los diferentes [controladores](https://github.com/Richardace/si-ccc/tree/master/controller) del sistema.
+  
+  - [model](https://github.com/Richardace/si-ccc/tree/master/model) -> Este paquete contiene un folder llamado [DAO](https://github.com/Richardace/si-ccc/tree/master/model/DAO) y es el encargado de realizar las diferentes operaciones en la Base de Datos.
+      - [DAO](https://github.com/Richardace/si-ccc/tree/master/model/DAO) -> Este paquete contiene 10 archivos tipo DAO que permiten que las diferentes operaciones que el usuario solicite en el sistema, se ejecuten en la Base de datos y asi permita guardar y extraer informacion.
+     
+  - [view](https://github.com/Richardace/si-ccc/tree/master/view) -> Este paquete contiene 6 folders que contienen los elementos de la vista, como los componentes Bootstrap y los archivos HTML.
+      - [administrator](https://github.com/Richardace/si-ccc/tree/master/view/administrator) -> Este paquete contiene los archivos .PHP con el codigo HTML de la vista referente al rol de Administrador.
+      - [evaluador](https://github.com/Richardace/si-ccc/tree/master/view/evaluador) -> Este paquete contiene los archivos .PHP con el codigo HTML de la vista referente al rol de Evaluador.
+      - [solicitante](https://github.com/Richardace/si-ccc/tree/master/view/solicitante) -> Este paquete contiene los archivos .PHP con el codigo HTML de la vista referente al rol de Solicitante.
+      - [login](https://github.com/Richardace/si-ccc/tree/master/view/login) -> Este paquete contiene los archivos .PHP con el codigo HTML de la vista referente al login por cada tipo de usuario. Se tiene un login para [Administradores y Solicitantes](https://github.com/Richardace/si-ccc/tree/master/view/login/loginUser) y un login para [Evaluadores](https://github.com/Richardace/si-ccc/tree/master/view/login/loginEvaluador).
+      - [assets](https://github.com/Richardace/si-ccc/tree/master/view/assets) -> Este paquete contiene todo los componentes graficos para las vistas, asi como plugins, codigo bootstrap, JQuery, Fuentes, Iconos, entre otros elementos.
+      
+  - [index.php](https://github.com/Richardace/si-ccc/blob/master/index.php) -> Este archivo 
+  
 ***
 #### Tecnologías
 
