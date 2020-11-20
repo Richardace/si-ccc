@@ -74,7 +74,7 @@ Usted puede ver el siguiente marco conceptual sobre el servicio SENDGRID de Twil
   
   ***
 #### IDE
-
+<p align="center"> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="50"/> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="350"/> </p> 
 - El proyecto se desarrolla usando Sublime text,Visual code
 - Visor demo de sublime -(http://www.sublimetext.com)
   ![Sublime](https://i.ibb.co/Sw7vsSY/imagen-Sublime.png)
