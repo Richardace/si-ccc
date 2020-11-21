@@ -81,7 +81,7 @@
 
 - Visor demo de sublime -(http://www.sublimetext.com)
 
-  <p align="center"> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="550"/> </p>
+  <p align="center"> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="550" style="border-radius: 90px;" /> </p>
   
 - Visor demo de visualcode -(https://code.visualstudio.com)
 
