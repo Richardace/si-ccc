@@ -92,7 +92,9 @@
 
 #### SERVIDOR
 
-Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra maquina personal, en este caso instalaremos XAMPP <br> <strong>NOTA: En caso de ya contar con un servidor desplegado en la WEB omitiremos esta instalación, y pasaremos al siguiente paso</strong>
+Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra maquina personal, en este caso instalaremos XAMPP. <br> <strong font-weight="9">NOTA: En caso de ya contar con un servidor desplegado en la WEB omitiremos esta instalación, y pasaremos a la instalación del aplicativo.</strong>
+
+
 
 -Base de datos
 
