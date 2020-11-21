@@ -79,11 +79,11 @@ Usted puede ver el siguiente marco conceptual sobre el servicio SENDGRID de Twil
 
 - Visor demo de sublime -(http://www.sublimetext.com)
 
-  <p align="center"> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="50"/> </p>
+  <p align="center"> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="550"/> </p>
   
 - Visor demo de visualcode -(https://code.visualstudio.com)
 
-  <p align="center"> <img src="https://i.ibb.co/41sb2xK/imagen-Visual.png" width="50"/>  </p>
+  <p align="center"> <img src="https://i.ibb.co/41sb2xK/imagen-Visual.png" width=550"/>  </p>
   
 
 ### Instalación
