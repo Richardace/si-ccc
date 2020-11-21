@@ -20,7 +20,7 @@
   - Carga masiva de archivos mediante la libreria Dropzone de JavaScript
   - Envio de correos electronico mediante el servicio SendGrid de twilio.
   
-  
+  ***
   #### Contenido del proyecto
   ##### PACKAGES
    - [assetsDropzone](https://github.com/Richardace/si-ccc/tree/master/assetsDropzone) -> Este paquete contiene todo los componentes de la libreria Dropzone, asi como plugins, codigo bootstrap, JQuery, Fuentes, Iconos, entre otros elementos que permiten que la libreria funcione correctamente.
@@ -45,7 +45,7 @@
   
 ***
 #### Tecnologías
-
+<br>
 <p align="center"> <img src="https://i.ibb.co/C018CnJ/SG-Twilio-Lockup-RGBx1.png" width="150" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/sWy69jc/php.png" width="90" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/Fzp3x0g/moment.png" width="90" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/yydDBYG/google-API.jpg" width="150" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/V9NHVwj/Dropzone-JS.png" width="150" height="60"/> </p>
 <br>
 
@@ -62,17 +62,17 @@
 
 
 
-Usted puede ver el siguiente marco conceptual sobre la API client:
+#### Usted puede ver el siguiente marco conceptual sobre la API client:
 
-   -Esta realiza el proceso de session entre google y php en el siguiente link:https://developers.google.com/api-client-library
+   -Esta realiza el proceso de session entre GOOGLE y PHP en el siguiente link: [API AUTH](https://developers.google.com/api-client-library)
 
-Usted puede ver el siguiente marco conceptual sobre la API calendar:
+#### Usted puede ver el siguiente marco conceptual sobre la API calendar:
 
-   -Esta realiza el proceso de eventos entre google y php en el siguiente link:https://developers.google.com/calendar
+   -Esta realiza el proceso de eventos entre GOOGLE y PHP en el siguiente link: [API CALENDAR GOOGLE](https://developers.google.com/calendar)
 
-Usted puede ver el siguiente marco conceptual sobre el servicio SENDGRID de Twilio:
+#### Usted puede ver el siguiente marco conceptual sobre el servicio SENDGRID de Twilio:
 
-   -Esta se encargar de enviar correos electronicos dentro del servidor desplegado:https://sendgrid.com/docs/for-developers/sending-email/api-getting-started/
+   -Esta se encargar de enviar correos electronicos dentro del servidor desplegado: [API SENDGRID](https://sendgrid.com/docs/for-developers/sending-email/api-getting-started/)
   
   ***
 #### IDE
