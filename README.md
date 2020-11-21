@@ -47,16 +47,16 @@
 #### Tecnologías
 
 
-   Tecnologías Frontend: 
-   -Lenguajes: HTML - CSS - JavaScript.
-   -Framework: Bootstrap.
-   -Librerías: Dropzone, Moment JS, JQuery-UI.
+   Tecnologías Frontend: <br>
+   -Lenguajes: HTML - CSS - JavaScript. <br>
+   -Framework: Bootstrap.<br>
+   -Librerías: Dropzone, Moment JS, JQuery-UI. <br>
 
-   Tecnologías Backend:
-   -Lenguaje: PHP
-   -IDE: Visual Studio Code
-   -Framework: N/A
-   -Librerias: Google-API-php-Client y Sendgrid
+   Tecnologías Backend:<br>
+   -Lenguaje: PHP<br>
+   -IDE: Visual Studio Code<br>
+   -Framework: N/A<br>
+   -Librerias: Google-API-php-Client y Sendgrid<br>
 
 
 
