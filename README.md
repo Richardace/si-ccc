@@ -94,11 +94,25 @@
 
 Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra maquina personal, en este caso instalaremos XAMPP. <br> <strong font-weight="9">NOTA: En caso de ya contar con un servidor desplegado en la WEB omitiremos esta instalación, y pasaremos a la instalación del aplicativo.</strong>
 
+  1. Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
+  
+  2. Instalar XAMPP y configurar nuestro entorno de trabajo como IDE y Navegador por Defecto.
+
+#### Aplicativo
+
+Para instalar nuestro aplicativo debemos contar con un navegador WEB y posteriormente ejecutar el proyecto. <br>
+  1. El aplicativo permite ejecutarse en diferentes navegadores, a continuacion se deja el enlace de descarga de Google Chrome y Firefox 
+    - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/).
+    - Google Chrome -> [descargar](https://www.google.com/intl/es-419/chrome/).
+  
+  2. Descargar el Proyecto
+    - El aplicativo se puede descargar en formato RAR mediante el siguiente enlace: 
+    - Tambien podemos clonar nuestro proyecto directamente desde GITHUB, para ello insertaremos el siguiente comando en nuestra consola del sistema operativo. (Es importante verificar tener instalado GIT en nuestra maquina, de lo contrario no se podra ejecutar el comando. [DESCARGAR GIT](https://git-scm.com/download/win).
+        git clone https://github.com/Richardace/si-ccc.git
+        
+#### BASE DE DATOS
 
 
--Base de datos
-
--Aplicativo 
 
 Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/).
 El software es necesario para ver la interacción por consola y depuración del código JS
