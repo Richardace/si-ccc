@@ -114,15 +114,15 @@ Para ver el demo de la aplicación puede dirigirse a: [Pizzería_js](http://ufps
 
 ***
 ### Autor(es)
-Proyecto desarrollado por: 
-[Richard Acevedo] (<richara@ufps.edu.co>).
+Proyecto desarrollado por: <br>
+ - [Richard Acevedo] (<richara@ufps.edu.co>).
 
-[Jose Suarez] (<joseluissm@ufps.edu.co>).
+ - [Jose Suarez] (<joseluissm@ufps.edu.co>).
 
-[Marilym Bayona] (<marilymaydeebb@ufps.edu.co>).
+ - [Marilym Bayona] (<marilymaydeebb@ufps.edu.co>).
 
-
-[Marco Adarme] (<madarme@ufps.edu.co>).
+Dirigido por: <br>
+ - [Marco Adarme] (<madarme@ufps.edu.co>).
 
 
 ***
