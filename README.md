@@ -46,7 +46,7 @@
 ***
 #### Tecnologías
 
-<p align="center"> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="550"/> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="550"/> </p>
+<p align="center"> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="50"/> <img src="https://i.ibb.co/Sw7vsSY/imagen-Sublime.png" width="50"/> </p>
 
    Tecnologías Frontend: <br>
    -Lenguajes: HTML - CSS - JavaScript. <br>
