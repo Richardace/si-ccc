@@ -96,20 +96,26 @@ Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra
 
   1. Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
   
+  IMAGEN XAMPP
   2. Instalar XAMPP y configurar nuestro entorno de trabajo como IDE y Navegador por Defecto.
-
+  
+  INSTALAR XAMPP
 #### Aplicativo
 
 Para instalar nuestro aplicativo debemos contar con un navegador WEB y posteriormente ejecutar el proyecto. <br>
   1. El aplicativo permite ejecutarse en diferentes navegadores, a continuacion se deja el enlace de descarga de Google Chrome y Firefox 
     - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/).
     - Google Chrome -> [descargar](https://www.google.com/intl/es-419/chrome/).
+    
+    IMAGENES CHROME Y FIRE
   
   2. Descargar el Proyecto
     - El aplicativo se puede descargar en formato RAR mediante el siguiente enlace: 
-    - Tambien podemos clonar nuestro proyecto directamente desde GITHUB, para ello insertaremos el siguiente comando en nuestra consola del sistema operativo. (Es importante verificar tener instalado GIT en nuestra maquina, de lo contrario no se podra ejecutar el comando. [DESCARGAR GIT](https://git-scm.com/download/win).
-        git clone https://github.com/Richardace/si-ccc.git
-        
+    - Tambien podemos clonar nuestro proyecto directamente desde GITHUB, para ello insertaremos el siguiente comando en nuestra consola del sistema operativo. (Es importante verificar tener instalado GIT en nuestra maquina, de lo contrario no se podra ejecutar el comando. [DESCARGAR GIT](https://git-scm.com/download/win). <br>
+    
+          git clone https://github.com/Richardace/si-ccc.git
+          
+  3. Movemos el contenido de la carpeta que obtenemos al descomprimir el proyecto, y la guardamos en la raiz del servidor. ( En XAMPP la raiz lleva el nombre de HTDOCS y en los servidores generalmente lleva el nombre PUBLIC_HTML  )  
 #### BASE DE DATOS
 
 
