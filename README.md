@@ -90,7 +90,7 @@
 
 ### Instalación
 
-#### SERVIDOR
+#### Servidor
 
 Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra maquina personal, en este caso instalaremos XAMPP. <br> <strong font-weight="9">NOTA: En caso de ya contar con un servidor desplegado en la WEB omitiremos esta instalación, y pasaremos a la instalación del aplicativo.</strong>
 
@@ -100,11 +100,25 @@ Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra
   2. Instalar XAMPP y configurar nuestro entorno de trabajo como IDE y Navegador por Defecto.
   
   INSTALAR XAMPP
+  
+#### Base de Datos
+
+  1. Para instalar la Base de Datos descargaremos el archivo del codigo SQL mediante el siguiente enlace: [SQL Base de Datos](https://github.com/Richardace/si-ccc/blob/master/siccc.sql).
+  
+  2. Crearemos la tabla SICCC en nuestro gestor de Base de Datos, para el ejemplo usaremos el gestor MySQL.
+  
+  // IMAGEN CREACION TABLA SICCC
+  
+  3. Importamos el SQL de la Base de Datos.
+  
+  // Imagen Importacion de la Base de DATOS
+  
+  
 #### Aplicativo
 
 Para instalar nuestro aplicativo debemos contar con un navegador WEB y posteriormente ejecutar el proyecto. <br>
-  1. El aplicativo permite ejecutarse en diferentes navegadores, a continuacion se deja el enlace de descarga de Google Chrome y Firefox 
-    - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/).
+  1. El aplicativo permite ejecutarse en diferentes navegadores, a continuacion se deja el enlace de descarga de Google Chrome y Firefox <br>
+    - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/). <br>
     - Google Chrome -> [descargar](https://www.google.com/intl/es-419/chrome/).
     
     IMAGENES CHROME Y FIRE
@@ -115,19 +129,19 @@ Para instalar nuestro aplicativo debemos contar con un navegador WEB y posterior
     
           git clone https://github.com/Richardace/si-ccc.git
           
-  3. Movemos el contenido de la carpeta que obtenemos al descomprimir el proyecto, y la guardamos en la raiz del servidor. ( En XAMPP la raiz lleva el nombre de HTDOCS y en los servidores generalmente lleva el nombre PUBLIC_HTML  )  
-#### BASE DE DATOS
+  3. Movemos el contenido de la carpeta que obtenemos al descomprimir el proyecto, y la guardamos en la raiz del servidor. ( En XAMPP la raiz lleva el nombre de HTDOCS y en los servidores generalmente lleva el nombre PUBLIC_HTML).
+  
+  4. Posteriormente ya podremos acceder al aplicativo ingresando mediante la siguiente URL
+  
+    - Para Xampp: http://localhost/siccc
+    - Para servidores desplegados: http://dominioweb.com
+  
+  5. A continuación cargaremos la BD del aplicativo.
+  
+  
+Finalmente hemos completado la instalacion del aplicativo <strong>SICCC</strong>
+  
 
-
-
-Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/).
-El software es necesario para ver la interacción por consola y depuración del código JS
-
-
-```sh
--Descargar proyecto
--Invocar página index.html desde Firefox 
-```
 
 ***
 ### Demo video corto OJO  y direcciond el link
