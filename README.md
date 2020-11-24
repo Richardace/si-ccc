@@ -96,11 +96,11 @@ Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra
 
   1. Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
   
-  <p align="center"> <img src="https://i.ibb.co/Rp2MBtx/instalar-xampp.png" width="500" height="500"/> </p>
+  <p align="center"> <img src="https://i.ibb.co/Rp2MBtx/instalar-xampp.png" width="500" height="400"/> </p>
   
   2. Instalar XAMPP y configurar nuestro entorno de trabajo como IDE y Navegador por Defecto.
   
-  <p align="center"> <img src="https://i.ibb.co/HNtfdrH/instalacion-Xampp.png" width="500" height="500"/> </p>
+  <p align="center"> <img src="https://i.ibb.co/HNtfdrH/instalacion-Xampp.png" width="500" height="400"/> </p>
   
 #### Base de Datos
 
@@ -108,11 +108,13 @@ Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra
   
   2. Crearemos la tabla SICCC en nuestro gestor de Base de Datos, para el ejemplo usaremos el gestor MySQL.
   
-  // IMAGEN CREACION TABLA SICCC
+  <p align="center"> <img src="https://i.ibb.co/SXbQRQm/creacion-tabla.png" width="500" height="400"/> </p>
   
   3. Importamos el SQL de la Base de Datos.
   
-  // Imagen Importacion de la Base de DATOS
+  <p align="center"> <img src="https://i.ibb.co/j32ydPz/importacion-SQL.png" width="500" height="400"/> </p>
+  
+  De esta manera se realizan las consultas que contienen la información de la Base de Datos. Ahora Procederemos a instalar el aplicativo.
   
   
 #### Aplicativo
@@ -122,7 +124,7 @@ Para instalar nuestro aplicativo debemos contar con un navegador WEB y posterior
     - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/). <br>
     - Google Chrome -> [descargar](https://www.google.com/intl/es-419/chrome/).
     
-    IMAGENES CHROME Y FIRE
+<p align="center"> <img src="https://i.ibb.co/dr9qhp4/instalar-Chrome.png" width="500" height="400"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.ibb.co/VtRYFPd/firefox.png" width="500" height="400"/> </p>
   
   2. Descargar el Proyecto
     - El aplicativo se puede descargar en formato RAR mediante el siguiente enlace: 
