@@ -108,11 +108,11 @@ Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra
   
   2. Crearemos la tabla SICCC en nuestro gestor de Base de Datos, para el ejemplo usaremos el gestor MySQL.
   
-  <p align="center"> <img src="https://i.ibb.co/SXbQRQm/creacion-tabla.png" width="500" height="400"/> </p>
+  <p align="center"> <img src="https://i.ibb.co/SXbQRQm/creacion-tabla.png" width="400" height="150"/> </p>
   
   3. Importamos el SQL de la Base de Datos.
   
-  <p align="center"> <img src="https://i.ibb.co/j32ydPz/importacion-SQL.png" width="500" height="400"/> </p>
+  <p align="center"> <img src="https://i.ibb.co/j32ydPz/importacion-SQL.png" width="400" height="150"/> </p>
   
   De esta manera se realizan las consultas que contienen la información de la Base de Datos. Ahora Procederemos a instalar el aplicativo.
   
@@ -124,7 +124,7 @@ Para instalar nuestro aplicativo debemos contar con un navegador WEB y posterior
     - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/). <br>
     - Google Chrome -> [descargar](https://www.google.com/intl/es-419/chrome/).
     
-<p align="center"> <img src="https://i.ibb.co/dr9qhp4/instalar-Chrome.png" width="500" height="400"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.ibb.co/VtRYFPd/firefox.png" width="500" height="400"/> </p>
+<p align="center"> <img src="https://i.ibb.co/dr9qhp4/instalar-Chrome.png" width="200" height="200"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.ibb.co/VtRYFPd/firefox.png" width="200" height="200"/> </p>
   
   2. Descargar el Proyecto
     - El aplicativo se puede descargar en formato RAR mediante el siguiente enlace: 
