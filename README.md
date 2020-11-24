@@ -124,7 +124,7 @@ Para instalar nuestro aplicativo debemos contar con un navegador WEB y posterior
     - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/). <br>
     - Google Chrome -> [descargar](https://www.google.com/intl/es-419/chrome/).
     
-<p align="center"> <img src="https://i.ibb.co/dr9qhp4/instalar-Chrome.png" width="200" height="200"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.ibb.co/VtRYFPd/firefox.png" width="200" height="200"/> </p>
+<p align="center"> <img src="https://i.ibb.co/dr9qhp4/instalar-Chrome.png" width="400" height="300"/> &nbsp;&nbsp;<img src="https://i.ibb.co/VtRYFPd/firefox.png" width="400" height="300"/> </p>
   
   2. Descargar el Proyecto
     - El aplicativo se puede descargar en formato RAR mediante el siguiente enlace: 
