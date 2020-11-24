@@ -92,14 +92,15 @@
 
 #### Servidor
 
-Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra maquina personal, en este caso instalaremos XAMPP. <br> <strong font-weight="9">NOTA: En caso de ya contar con un servidor desplegado en la WEB omitiremos esta instalación, y pasaremos a la instalación del aplicativo.</strong>
+Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra maquina personal, en este caso instalaremos XAMPP. <br> <strong font-weight="9">NOTA: En caso de ya contar con un servidor desplegado en la WEB omitiremos esta instalación, y pasaremos a la instalación de la Base de Datos.</strong>
 
   1. Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
   
-  IMAGEN XAMPP
+  <p align="center"> <img src="https://i.ibb.co/Rp2MBtx/instalar-xampp.png" width="500" height="500"/> </p>
+  
   2. Instalar XAMPP y configurar nuestro entorno de trabajo como IDE y Navegador por Defecto.
   
-  INSTALAR XAMPP
+  <p align="center"> <img src="https://i.ibb.co/HNtfdrH/instalacion-Xampp.png" width="500" height="500"/> </p>
   
 #### Base de Datos
 
