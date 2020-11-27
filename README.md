@@ -145,7 +145,7 @@ Finalmente hemos completado la instalacion del aplicativo <strong>SICCC</strong>
 ***
 ### Demo video corto OJO  y direcciond el link
 
-Para ver el demo de la aplicación puede dirigirse a: [Pizzería_js](http://ufps30.madarme.co/json_pizza/).
+Para ver el demo de la aplicación puede dirigirse a: [SICCC](http://siccc.cpsw.ingsistemasufps.co/).
 
 ***
 ### Autor(es)
