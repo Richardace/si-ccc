@@ -18,13 +18,13 @@ El Proyecto SICCC busca resolver la manera de gestionar las solicitudes document
 De esta manera se busca llevar un control tanto en la linea de tiempo de las solicitudes y de de las correcciones que se le asignen a los documentos solicitados.
 Para poder realizar este seguimiento y gestionar las solicitudes se han definidos los siguientes roles, y sus funcionalidades.
 
-- Rol Administrador: Se encarga de gestionar todas las acciones principales del sistema (Registro de Personal, Recepción de Solicitudes, control de las mismas, gestión de sesiones del Comite Curricular Central, descargar copias de seguridad de los documentos) asi mismo, tendrá la posibilidad de enviar mensajes internos a las diferentes dependencias academicas.
+- <strong>Rol Administrador:</strong> Se encarga de gestionar todas las acciones principales del sistema (Registro de Personal, Recepción de Solicitudes, control de las mismas, gestión de sesiones del Comite Curricular Central, descargar copias de seguridad de los documentos) asi mismo, tendrá la posibilidad de enviar mensajes internos a las diferentes dependencias academicas.
 
-- Rol Solicitante: Se encarga de enviar documentos para revision por parte del Comite Curricular Central, asi mismo corregirlos en caso de que asi sea requerido por el Comite. Ademas tendra la posibilidad de enviar mensajes a los administradores del sistema para tratar temas referentes al comité.
+- <strong>Rol Solicitante:</strong> Se encarga de enviar documentos para revision por parte del Comite Curricular Central, asi mismo corregirlos en caso de que asi sea requerido por el Comite. Ademas tendra la posibilidad de enviar mensajes a los administradores del sistema para tratar temas referentes al comité.
 
-- Rol Evaluador: Se encarga de revisar los documentos que le asigne los administradores del sistema, y devolverlos para su posterior revisión y avalado por parte del Comite Curricular Central.
+- <strong>Rol Evaluador:</strong> Se encarga de revisar los documentos que le asigne los administradores del sistema, y devolverlos para su posterior revisión y avalado por parte del Comite Curricular Central.
 
-Referente al proyecto: 
+<strong>Referente al proyecto:</strong>
 
   - Proyecto que usa logins  mediante la API de Google SESSION. 
   - El proyecto  maneja eventos con la API de Google CALENDAR.   
