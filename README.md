@@ -14,9 +14,7 @@
 ***
 ### Características:
 
-El Proyecto SICCC busca resolver la manera de gestionar las solicitudes documentales de las dependencias academicas de la UFPS, permitiendo que estos documentos enviados, sean evaluados y revisados por personal interno o externo a la Universidad.
-De esta manera se busca llevar un control tanto en la linea de tiempo de las solicitudes y de de las correcciones que se le asignen a los documentos solicitados.
-Para poder realizar este seguimiento y gestionar las solicitudes se han definidos los siguientes roles, y sus funcionalidades.
+El Proyecto SICCC busca sistematizar los procesos documentales manejados entre las diferentes dependencias académicas  de la Universidad Francisco de Paula Santander con la oficina del Comité Curricular Central de ella misma, permitiendo mejorar los trámites realizados entre las diferentes facultades adscritas a dichas dependencias, y de ese modo se les permitan  realizar él envió de sus respectivos documentos para su posterior revisión, estos documentos enviados, serán evaluados y revisados por personal interno o externo a la Universidad. De esta manera se busca llevar un control tanto en la línea de tiempo de las solicitudes y de  las correcciones que se le asignen a los documentos solicitados. Para poder realizar este seguimiento y gestionar las solicitudes se han definidos los siguientes roles, y sus funcionalidades.
 
 - <strong>Rol Administrador:</strong> Se encarga de gestionar todas las acciones principales del sistema (Registro de Personal, Recepción de Solicitudes, control de las mismas, gestión de sesiones del Comite Curricular Central, descargar copias de seguridad de los documentos) asi mismo, tendrá la posibilidad de enviar mensajes internos a las diferentes dependencias academicas.
 
