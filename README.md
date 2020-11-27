@@ -143,7 +143,7 @@ Finalmente hemos completado la instalacion del aplicativo <strong>SICCC</strong>
 
 
 ***
-### Demo video corto OJO  y direcciond el link
+### Demo Video corto y Direccion URL del Proyecto
 
 Para ver el demo de la aplicación puede dirigirse a: [SICCC](http://siccc.cpsw.ingsistemasufps.co/).
 
