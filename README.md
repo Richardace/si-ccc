@@ -12,7 +12,7 @@
 7. [Autor(es)](#autores)
 8. [Institución Académica](#institución-académica)
 ***
-#### Características:
+### Características:
 
 El Proyecto SICCC busca resolver la manera de gestionar las solicitudes documentales de las dependencias academicas de la UFPS, permitiendo que estos documentos enviados, sean evaluados y revisados por personal interno o externo a la Universidad.
 De esta manera se busca llevar un control tanto en la linea de tiempo de las solicitudes y de de las correcciones que se le asignen a los documentos solicitados.
@@ -33,7 +33,7 @@ Referente al proyecto:
   - Envio de correos electronico mediante el servicio SendGrid de twilio.
   
   ***
-  #### Contenido del proyecto
+  ### Contenido del proyecto
   ##### PACKAGES
    - [assetsDropzone](https://github.com/Richardace/si-ccc/tree/master/assetsDropzone) -> Este paquete contiene todo los componentes de la libreria Dropzone, asi como plugins, codigo bootstrap, JQuery, Fuentes, Iconos, entre otros elementos que permiten que la libreria funcione correctamente.
    
@@ -56,17 +56,17 @@ Referente al proyecto:
   - [index.php](https://github.com/Richardace/si-ccc/blob/master/index.php) -> Archivo principal del sistema, a partir de acá se ejecutan todas las funcionalidades del proyecto. Es el archivo de arranque del servidor.
   
 ***
-#### Tecnologías
+### Tecnologías
 <br>
 <p align="center"> <img src="https://i.ibb.co/C018CnJ/SG-Twilio-Lockup-RGBx1.png" width="200" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/sWy69jc/php.png" width="90" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/Fzp3x0g/moment.png" width="90" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/yydDBYG/google-API.jpg" width="150" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/V9NHVwj/Dropzone-JS.png" width="150" height="60"/> </p>
 <br>
 
-   ### Tecnologías Frontend: <br>
+   #### Tecnologías Frontend: <br>
      - Lenguajes: HTML - CSS - JavaScript. 
      - Framework: Bootstrap.<br>
      - Librerías: Dropzone, Moment JS, JQuery-UI. 
 
-   ### Tecnologías Backend:<br>
+   #### Tecnologías Backend:<br>
      - Lenguaje: PHP
      - IDE: Visual Studio Code
      - Framework: N/A
@@ -104,12 +104,12 @@ Referente al proyecto:
 
 #### Requerimientos Previos para la Instalación
 
-El aplicativo permite ejecutarse en diferentes navegadores, a continuacion se deja el enlace de descarga de Google Chrome y Firefox <br>
-    - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/). <br>
-    - Google Chrome -> [descargar](https://www.google.com/intl/es-419/chrome/).
+El aplicativo permite ejecutarse en diferentes navegadores, a continuacion se deja el enlace de descarga de Google Chrome y Firefox <br><br>
+    - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/). <br><br>
+    - Google Chrome -> [descargar](https://www.google.com/intl/es-419/chrome/). <br><br>
     
 <p align="center"> <img src="https://i.ibb.co/dr9qhp4/instalar-Chrome.png" width="400" height="300"/> &nbsp;&nbsp;<img src="https://i.ibb.co/VtRYFPd/firefox.png" width="400" height="300"/> </p>
-
+<br>
 Para ejecutar el proyecto en tu computador deberas tener instalado un servidor como XAMPP o WAMPP, ademas deberas contar con la instalación de GIT para clonar el proyecto.
            
    - Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
@@ -132,9 +132,9 @@ Para ejecutar el proyecto en tu computador deberas tener instalado un servidor c
 
   3. Deberás crear una base de Datos con el nombre SICCC, en caso de no usar ese nombre, debes cambiarlo en el archivo de configuración de la database. [VER AQUI](https://github.com/Richardace/si-ccc/blob/master/config/database.php).
 
-  4. Importamos el SQL de la Base de Datos. [BASE DE DATOS](https://github.com/Richardace/si-ccc/blob/master/siccc.sql).
+  4. Importamos el SQL de la Base de Datos. [BASE DE DATOS](https://github.com/Richardace/si-ccc/blob/master/siccc.sql). <br>
   
-  <p align="center"> <img src="https://i.ibb.co/j32ydPz/importacion-SQL.png" width="400" height="150"/> </p>
+  <p align="center"> <img src="https://i.ibb.co/j32ydPz/importacion-SQL.png" width="400" height="150"/> </p> <br>
   
   De esta manera se realizan las consultas que contienen la información de la Base de Datos. Ahora Procederemos a instalar el aplicativo.
    
