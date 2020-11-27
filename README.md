@@ -102,17 +102,20 @@ Referente al proyecto:
 
 ### Instalación
 
+#### Requerimientos Previos para la Instalación
+
+- Para ejecutar el proyecto en tu computador deberas tener instalado un servidor como XAMPP o WAMPP, ademas deberas contar con la instalación de GIT para clonar el proyecto.
+           
+      - Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
+      - Descargar el instalador de  [GIT](https://git-scm.com/downloads) de la pagina oficial.
+
 #### Servidor
 
 Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra maquina personal, en este caso instalaremos XAMPP. <br> <strong font-weight="9">NOTA: En caso de ya contar con un servidor desplegado en la WEB omitiremos esta instalación, y pasaremos a la instalación de la Base de Datos.</strong>
 
   1. Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
   
-  <p align="center"> <img src="https://i.ibb.co/Rp2MBtx/instalar-xampp.png" width="500" height="400"/> </p>
-  
-  2. Instalar XAMPP y configurar nuestro entorno de trabajo como IDE y Navegador por Defecto.
-  
-  <p align="center"> <img src="https://i.ibb.co/HNtfdrH/instalacion-Xampp.png" width="500" height="400"/> </p>
+  2. Descargar el instalador de  [GIT](https://git-scm.com/downloads) de la pagina oficial.
   
 #### Base de Datos
 
