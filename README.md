@@ -56,7 +56,7 @@ El Proyecto SICCC busca sistematizar los procesos documentales manejados entre l
 ***
 ### Tecnologías
 <br>
-<p align="center"> <img src="https://i.ibb.co/C018CnJ/SG-Twilio-Lockup-RGBx1.png" width="200" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/sWy69jc/php.png" width="90" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/Fzp3x0g/moment.png" width="90" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/yydDBYG/google-API.jpg" width="150" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/V9NHVwj/Dropzone-JS.png" width="150" height="60"/> </p>
+<p align="center"> <img src="https://i.ibb.co/C018CnJ/SG-Twilio-Lockup-RGBx1.png" width="150" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/sWy69jc/php.png" width="90" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/Fzp3x0g/moment.png" width="90" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/yydDBYG/google-API.jpg" width="150" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/F4bPSB8/452-4529239-html-css-and-javascript-logo-html-css-logo.png" width="150" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/njdfqT7/Bootstrap-Logo.png" width="150" height="60"/> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="https://i.ibb.co/V9NHVwj/Dropzone-JS.png" width="150" height="60"/> </p>
 <br>
 
    #### Tecnologías Frontend: <br>
@@ -143,7 +143,16 @@ Finalmente hemos completado la instalacion del aplicativo <strong>SICCC</strong>
 ***
 ### Demo Video corto y Direccion URL del Proyecto
 
-Para ver el demo de la aplicación puede dirigirse a: [SICCC](http://siccc.cpsw.ingsistemasufps.co/).
+- <strong>Videos Demostrativos del Aplicativo</strong> <br>
+  
+  - <strong>Rol Administrador: </strong> [VER VIDEO](https://drive.google.com/file/d/18b4TAyXmTH2odQLCiQ3dLcMZde33zp57/view?usp=sharing).
+  - <strong>Rol Evaluador: </strong> [VER VIDEO](https://drive.google.com/file/d/1vAd8ed8eToWnEHZahRO8V7lZZ7bBs_-r/view?usp=sharing).
+  - <strong>Rol Solicitante: </strong> [VER VIDEO](https://drive.google.com/file/d/1te3sRpqKLVUgMRsOTdKhh4vSwfNQst3G/view?usp=sharing).
+
+- <strong>Demo del Aplicativo</strong> <br>
+
+  - Para ver el demo de la aplicación puede dirigirse a: [SICCC](http://siccc.cpsw.ingsistemasufps.co/).
+
 
 ***
 ### Autor(es)
