@@ -20,42 +20,82 @@ $(document).ready(function () {
     filtro()
   });
 
-  $("#myInput").keyup(function () {
+  $("#myInputTableAddSolicitante").keyup(function () {
     filtro();
   });
-
-  $('#mySelect').on('change', function () {
-    valueSelect = $(this).val();
-    filtroEstado();
-  });
-
-  function filtroEstado() {
-    valueSelect = valueSelect.toUpperCase();
+  function filtro() {
     var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("myInput");
+    input = document.getElementById("myInputTableAddSolicitante");
     filter = input.value.toUpperCase();
-    table = document.getElementById("myTable");
+    table = document.getElementById("myTableAddSolicitante");
     tr = table.getElementsByTagName("tr");
 
     for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[5];
-      
+      td = tr[i].getElementsByTagName("td")[seleccion];
       if (td) {
         txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(valueSelect) > -1) {
-          $("#respuesta").html("");
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
           tr[i].style.display = "";
         } else {
-          $("#respuesta").html("No hay Resultados para la Busqueda Solicitada");
+          //$("#respuesta").html("No hay Resultados para la Busqueda Solicitada");
           tr[i].style.display = "none";
         }
       }
     }
   }
 
-
+  $("#myInputTableAddEvaluador").keyup(function () {
+    filtro();
+  });
   function filtro() {
-    
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInputTableAddEvaluador");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTableAddEvaluador");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[seleccion];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          //$("#respuesta").html("No hay Resultados para la Busqueda Solicitada");
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+  $("#myInputTableAddAdministrador").keyup(function () {
+    filtro();
+  });
+  function filtro() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInputTableAddAdministrador");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTableAddAdministrador");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[seleccion];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          //$("#respuesta").html("No hay Resultados para la Busqueda Solicitada");
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+  $("#myInput").keyup(function () {
+    filtro();
+  });
+  function filtro() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
@@ -67,23 +107,14 @@ $(document).ready(function () {
       if (td) {
         txtValue = td.textContent || td.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          $("#respuesta").html("");
           tr[i].style.display = "";
-          filtroEstado();
         } else {
-          $("#respuesta").html("No hay Resultados para la Busqueda Solicitada");
+          //$("#respuesta").html("No hay Resultados para la Busqueda Solicitada");
           tr[i].style.display = "none";
         }
       }
     }
   }
-
-
-
-
-
-
-
 
   // LANZAR POPUP DE REGISTRO
 

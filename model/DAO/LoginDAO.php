@@ -77,5 +77,19 @@
 			return $user;
 		}
 
+		public function getConfiguration($id){
+			$db = new Connect;
+			$checkUser = $db -> prepare("SELECT * FROM user WHERE id=:id");
+            $checkUser -> execute(array(
+                ':id' => $id
+			));
+
+			$cuenta = NULL;
+			while($row = $checkUser->fetch(PDO::FETCH_ASSOC)){
+				$cuenta[] = $row;
+			}
+			return $cuenta;
+		}
+
 	} 
 ?>

@@ -96,10 +96,10 @@ session_start();
                                     </div>
                                     <div class="modal-body">
                                         <!-- Contenido -->
-                                        <!-- <input type="text" class="form-control" id="myInput" style="width:100%;" placeholder="Buscar Correo ..."> -->
+                                        <input type="text" class="form-control" id="myInputTableAddSolicitante" style="width:100%;" placeholder="Buscar Correo ...">
 
 
-                                        <table id="myTable" class="table table-hover">
+                                        <table id="myTableAddSolicitante" class="table table-hover">
                                             <thead>
                                                 <tr class="header">
                                                     <th>Correo Institucional</th>
@@ -373,10 +373,10 @@ session_start();
                                     </div>
                                     <div class="modal-body">
                                         <!-- Contenido -->
-                                        <input type="text" class="form-control" id="myInput" style="width:100%;" placeholder="Buscar Correo ...">
+                                        <input type="text" class="form-control" id="myInputTableAddAdministrador" style="width:100%;" placeholder="Buscar Correo ...">
 
 
-                                        <table id="myTable" class="table table-hover">
+                                        <table id="myTableAddAdministrador" class="table table-hover">
                                             <thead>
                                                 <tr class="header">
                                                     <th>Correo Institucional</th>

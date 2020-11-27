@@ -225,6 +225,12 @@
             require_once "view/login/loginEvaluador/index.php";
         }
 
+        public function configuracionView(){
+            $loginDAO = new LoginDAO;
+
+            require_once "view/administrator/viewConfiguration.php";
+        }
+
         
     }
 

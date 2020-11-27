@@ -20,14 +20,15 @@ class DocumentoController
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentsPending();
         require_once "view/administrator/documentos.php";
-    }  
+    }
 
-    public function viewDocumentAdministrador($id){
+    public function viewDocumentAdministrador($id)
+    {
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentById($id);
         //Get DocumentEvaluador
         $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
-        
+
         $data['estados'] = $document->getEstadosDocumento($id);
 
         $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
@@ -38,7 +39,7 @@ class DocumentoController
     public function solicitante($id)
     {
         $document = new DocumentDAO;
-        $userDAO = new UserDAO;        
+        $userDAO = new UserDAO;
         $data['documentos'] = $document->getDocumentsByIdUser($id);
 
         require_once "view/solicitante/documentos.php";
@@ -70,7 +71,8 @@ class DocumentoController
         }
     }
 
-    public function addCorreccionDocumento(){
+    public function addCorreccionDocumento()
+    {
         $idDocumento = $_POST["idDocumento"];
         $descripcion = $_POST["descripcion"];
         $documentos = $_POST["documentos"];
@@ -91,11 +93,12 @@ class DocumentoController
         }
     }
 
-    public function addRevisionDocumento(){
+    public function addRevisionDocumento()
+    {
         $idDocumentoEvaluador = $_POST["idDocumentEvaluador"];
         $descripcion = $_POST["descripcion"];
         $documentos = $_POST["documentos"];
-        
+
 
         $document = new DocumentDAO;
         $idDocumento = $document->getDocumentByIdEvaluadorDocumento($idDocumentoEvaluador);
@@ -103,26 +106,26 @@ class DocumentoController
         $evaluadores = $document->getEvaluadoresDocument($idDocumento);
 
         $boolean = true;
-        foreach ($evaluadores as $evaluador){
+        foreach ($evaluadores as $evaluador) {
 
-            if($evaluador['id'] == $idDocumentoEvaluador){
+            if ($evaluador['id'] == $idDocumentoEvaluador) {
                 continue;
             }
 
-            if($evaluador['observaciones'] != ""){
+            if ($evaluador['observaciones'] != "") {
                 continue;
-            }else{
+            } else {
                 $boolean = false;
             }
         }
-        if($boolean){
+        if ($boolean) {
             $sql = $document->addRevisionDocument($idDocumentoEvaluador, $descripcion, $documentos, $idDocumento, 'Revisado por Evaluadores');
-        }else{
+        } else {
             $sql = $document->addRevisionDocument($idDocumentoEvaluador, $descripcion, $documentos, $idDocumento, '');
         }
         //HACER ALGORITMO PARA SABER SI YA LOS 2 EVALUADORES EVALUARON
 
-        
+
 
         if ($sql) {
             echo "ok";
@@ -131,7 +134,8 @@ class DocumentoController
         }
     }
 
-    public function devolverDocumentoAdministratorView($idDocument){
+    public function devolverDocumentoAdministratorView($idDocument)
+    {
         $DocumentDAO = new DocumentDAO;
         $data['idDocument'] = $idDocument;
         $data['documento'] = $DocumentDAO->getDocumentById($idDocument);
@@ -146,7 +150,8 @@ class DocumentoController
     }
 
     // Cambiar Evaluador
-    public function changeEvaluadorDocument($idDocumentEvaluador){
+    public function changeEvaluadorDocument($idDocumentEvaluador)
+    {
         $user = new UserDAO;
         $programas = new ProgramDAO;
         $facultades = new FacultadDAO;
@@ -155,11 +160,12 @@ class DocumentoController
         $data["evaluadores"] = $user->getEvaluadores(3);
         $data["programas"] = $programas->getPrograms();
         $data["facultades"] = $facultades->getFacultades();
-         
+
         require_once "view/administrator/changeEvaluador.php";
     }
-    
-    public function changeEvaluador(){
+
+    public function changeEvaluador()
+    {
         $emailEvaluadorNuevo = $_POST['email1'];
         $idDocumentEvaluador = $_POST['idDocumentEvaluador'];
 
@@ -170,13 +176,13 @@ class DocumentoController
 
         $documentoEvaluador = $document->getDocumentEvaluadorEspecifico($idDocumentEvaluador);
 
-        foreach($documentoEvaluador as $infoDocument){
+        foreach ($documentoEvaluador as $infoDocument) {
             $idDocument = $infoDocument['id_document'];
             $token = $infoDocument['key_access'];
             $dateLimit = $infoDocument['dateLimit'];
         }
 
-        
+
         $document->changeEvaluadorDocument($idDocumentEvaluador, $idDocument, $idUser, 'Se Cambio Evaluador al Documento');
 
         $this->enviarCorreoEvaluador($idUser, $token, $dateLimit);
@@ -190,9 +196,6 @@ class DocumentoController
         ";
 
         $this->viewDocumentAdministrador($idDocument);
-
-
-
     }
 
     // EVALUADOR
@@ -223,7 +226,7 @@ class DocumentoController
                 $estado = $documentoEvaluador['state'];
             }
 
-            if ($estado != "Finalizado" && $estado != "Aprobado" && $estado != "Devuelto con correcciones") {            
+            if ($estado != "Finalizado" && $estado != "Aprobado" && $estado != "Devuelto con correcciones") {
                 header("Location: index.php?c=documento&a=evaluador&id=$idDocumentoEvaluador");
             } else {
                 echo "<script>
@@ -234,7 +237,8 @@ class DocumentoController
         }
     }
 
-    public function devolverDocumentoView($idDocumentEvaluador){
+    public function devolverDocumentoView($idDocumentEvaluador)
+    {
         $DocumentDAO = new DocumentDAO;
         $data['idDocumentEvaluador'] = $idDocumentEvaluador;
 
@@ -250,7 +254,7 @@ class DocumentoController
         $document = new DocumentDAO;
         $data['idDocumentoEvaluador'] = $id;
         $idDocumento = $document->getDocumentByIdEvaluadorDocumento($id);
-        
+
 
         $data['documentos'] = $document->getDocumentById($idDocumento);
         $data['documentoEvaluador'] = $document->getDocumentEvaluadorEspecifico($id);
@@ -259,28 +263,29 @@ class DocumentoController
     }
 
     // SOLICITANTE
-    public function verCorrecionesDocumentoSolicitante($id){
+    public function verCorrecionesDocumentoSolicitante($id)
+    {
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentById($id);
         $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
         $data['correccionesDocumento'] = $document->getCorreccionesDocumentEvaluador($id);
 
         require_once "view/solicitante/viewCorreccionesDocument.php";
-        
     }
 
-    public function corregirDocumentoView($idCorreccion){
+    public function corregirDocumentoView($idCorreccion)
+    {
         $documentDAO = new DocumentDAO;
         $idDocument = $documentDAO->getDocumentByIdCorreccion($idCorreccion);
         $data['idCorreccion'] = $idCorreccion;
         $data['documentos'] = $documentDAO->getDocumentById($idDocument);
 
         require_once "view/solicitante/updateDocumentByCorrecciones.php";
-
     }
 
-    public function udpdateCorreccionDocumento(){        
-        
+    public function udpdateCorreccionDocumento()
+    {
+
         $radicado = $_POST['radicado'];
         $descripcion = $_POST['descripcion'];
         $documentos = $_POST['documentos'];
@@ -288,7 +293,7 @@ class DocumentoController
 
         $document = new DocumentDAO;
         $userDAO = new UserDAO;
-        
+
         $sql = $document->updateCorreccionDocument($radicado, $descripcion, $documentos, $idCorreccion);
 
         $documento = $document->getRadicadoByIdDocument($radicado);
@@ -296,7 +301,7 @@ class DocumentoController
         $administradores = $userDAO->getAdministradores();
 
         // CORREO PARA EL ADMINISTRADOR
-        foreach ($administradores as $administrador){
+        foreach ($administradores as $administrador) {
             $this->documentosCorregidosPorDependencia($administrador['id'], $documento['radicado'], $documento['id_user']);
         }
 
@@ -364,7 +369,7 @@ class DocumentoController
         // Creamos y abrimos un archivo zip temporal
         $zip->open("documentos.zip", ZipArchive::CREATE);
         // Añadimos un directorio
-        $dir = "Correcciones ".$title;
+        $dir = "Correcciones " . $title;
         $zip->addEmptyDir($dir);
         // Añadimos un archivo en la raid del zip.
         //$zip->addFile("index.php", "index.php");
@@ -391,7 +396,8 @@ class DocumentoController
 
     }
 
-    public function viewDocumentSolicitante($id){
+    public function viewDocumentSolicitante($id)
+    {
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentById($id);
         $data['documentoEvaluador'] = $document->getDocumentEvaluador($id);
@@ -411,11 +417,11 @@ class DocumentoController
         $data["evaluadores"] = $user->getEvaluadores(3);
         $programas = new ProgramDAO;
         $facultades = new FacultadDAO;
-        
+
         $data["programas"] = $programas->getPrograms();
         $data["facultades"] = $facultades->getFacultades();
         $data['sesionesActivas'] = $document->getSesionesActivas();
-        
+
         require_once "view/administrator/addEvaluadorDocument.php";
     }
 
@@ -448,7 +454,7 @@ class DocumentoController
     }
 
     public function addDocumentToEvaluate()
-    {   
+    {
         $document = new DocumentDAO;
         $UserDAO = new UserDAO;
 
@@ -456,7 +462,7 @@ class DocumentoController
         $email2 = $_POST['email2'];
 
         $idUser = $UserDAO->getUserByEmail($email1);
-        
+
         $idDocument = $_POST['idDocument'];
         $dateLimit = $_POST['dateLimit'];
         $radicado = $_POST['radicado'];
@@ -468,7 +474,7 @@ class DocumentoController
 
         $document->guardarInfoDocumento($idDocument, $sesion, $radicado);
 
-        if($email2 != "nn"){
+        if ($email2 != "nn") {
             $idUser2 = $UserDAO->getUserByEmail($email2);
             $document->insertDocumentToEvaluate($idUser2, $idDocument, $dateLimit, $token, '');
             $this->enviarCorreoEvaluador($idUser2, $token, $dateLimit);
@@ -481,14 +487,16 @@ class DocumentoController
         require_once "view/administrator/documentos.php";
     }
 
-    public function changeStateView($id){
+    public function changeStateView($id)
+    {
         $document = new DocumentDAO;
         $data['documentos'] = $document->getDocumentById($id);
         require_once "view/administrator/changeStateView.php";
     }
 
-    public function changeStateDocument(){
-        $idDocument= $_POST['idDocument'];
+    public function changeStateDocument()
+    {
+        $idDocument = $_POST['idDocument'];
         $newState = $_POST['state'];
         $document = new DocumentDAO;
         $document->changeStateDocument($idDocument, $newState);
@@ -496,10 +504,10 @@ class DocumentoController
         echo "<script>alert('Estado Actualizado con Exito!')</script>";
 
         $this->viewDocumentAdministrador($idDocument);
-
     }
 
-    public function aprobarDocumentoSolicitante($idDocument){
+    public function aprobarDocumentoSolicitante($idDocument)
+    {
         $document = new DocumentDAO;
         $document->aprobarDocumento($idDocument);
         echo "
@@ -512,7 +520,8 @@ class DocumentoController
 
 
     // Correos Electronicos
-    public function recuperarToken($id){
+    public function recuperarToken($id)
+    {
 
         $document = new DocumentDAO;
         $UserDAO = new UserDAO;
@@ -520,18 +529,17 @@ class DocumentoController
         $tokens = $document->getTokenEnableById($id);
         $tokensRecuperados = "";
         $i = 0;
-        if($tokens == NULL){
+        if ($tokens == NULL) {
             $tokensActivos = 0;
-        }else{
+        } else {
             foreach ($tokens as $token) {
                 $i = $i + 1;
-                $tokensRecuperados = $tokensRecuperados . "Token N° ".$i.": <span style='font-weight: bold;' >".$token['key_access']."</span> -> Fecha Limite: ".$token['dateLimit']."<br>";
-                
+                $tokensRecuperados = $tokensRecuperados . "Token N° " . $i . ": <span style='font-weight: bold;' >" . $token['key_access'] . "</span> -> Fecha Limite: " . $token['dateLimit'] . "<br>";
             }
             $tokensActivos = count($tokens);
         }
-        
-        
+
+
         $fullName = $UserDAO->getNameAndLastNameById($id);
         $email = $UserDAO->getEmailByIdUser($id);
 
@@ -578,7 +586,8 @@ class DocumentoController
             </script>";
     }
 
-    public function enviarNotificacionDeCorreccion($id){
+    public function enviarNotificacionDeCorreccion($id)
+    {
 
         $document = new DocumentDAO;
         $UserDAO = new UserDAO;
@@ -619,10 +628,10 @@ class DocumentoController
         $cabeceras .= 'From: COMITE CURRICULAR CENTRAL UFPS';
 
         $enviado = mail($para, $titulo, $mensaje, $cabeceras);
-
     }
 
-    public function documentosCorregidosPorDependencia($id, $radicado, $idDependency){
+    public function documentosCorregidosPorDependencia($id, $radicado, $idDependency)
+    {
 
         $document = new DocumentDAO;
         $UserDAO = new UserDAO;
@@ -666,9 +675,8 @@ class DocumentoController
         $cabeceras .= 'From: COMITE CURRICULAR CENTRAL UFPS';
 
         $enviado = mail($para, $titulo, $mensaje, $cabeceras);
-
     }
-    
+
     public function enviarCorreoEvaluador($idUser, $token, $dateLimit)
     {
 
@@ -717,5 +725,48 @@ class DocumentoController
         $enviado = mail($para, $titulo, $mensaje, $cabeceras);
 
         return true;
+    }
+
+    // Descarga de BACKUPs
+
+    public function descargarDocumentosBACKUP()
+    {
+        $document = new DocumentDAO;
+        $zip = new ZipArchive();
+        $documento = $document->getDocumentsToDownload();
+        $zip->open("BackupDocumentos.zip", ZipArchive::CREATE);
+
+        foreach ($documento as $documentoEvaluador) {
+            $files = $documentoEvaluador['files'];
+            $title = $documentoEvaluador['title'];
+            $radicado = $documentoEvaluador['radicado'];
+            $dateRegister = $documentoEvaluador['dateRegister'];
+            $dir = $radicado . " - " . $title . " - " . $dateRegister;
+            $zip->addEmptyDir($dir);
+            $obj = json_decode($files);
+            for ($i = 0; $i <= count($obj); $i++) {
+
+                $obj2 = $obj[$i]->elemento;
+
+                $zip->addFile(str_replace("../", "", $obj2), $dir . "/" . basename($obj2));
+            }
+        }
+        $zip->close();
+        header("Content-type: application/octet-stream");
+        header("Content-disposition: attachment; filename=BackupDocumentos.zip");
+        // leemos el archivo creado
+        readfile('BackupDocumentos.zip');
+        // Por último eliminamos el archivo temporal creado
+        unlink('BackupDocumentos.zip'); //Destruye el archivo temporal
+    }
+
+    public function descargarBaseDatosBACKUP()
+    {
+        $document = new DocumentDAO;
+        $login = new LoginController;
+
+        $result = $document->getBackup();
+        $login->configuracionView();
+
     }
 }

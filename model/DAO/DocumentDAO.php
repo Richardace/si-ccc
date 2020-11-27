@@ -32,13 +32,14 @@ class DocumentDAO
 		return $sql;
 	}
 
-	public function addRevisionDocument($idDocumentoEvaluador, $descripcion, $documentos, $idDocumento, $mensaje){
+	public function addRevisionDocument($idDocumentoEvaluador, $descripcion, $documentos, $idDocumento, $mensaje)
+	{
 		$db = new Connect;
-		if($mensaje != ""){
+		if ($mensaje != "") {
 			$sql1 = $db->query("UPDATE documento SET state= 'Revisado Por Evaluador' WHERE id = '" . $idDocumento . "'");
-			$sql3 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocumento . "', NULL , '".$mensaje."') ");
+			$sql3 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocumento . "', NULL , '" . $mensaje . "') ");
 		}
-		
+
 		$sql2 = $db->query("UPDATE documento_evaluador SET observaciones= '" . $descripcion . "' , files= '" . $documentos . "' WHERE id = '" . $idDocumentoEvaluador . "'");
 
 		return $sql2;
@@ -76,11 +77,12 @@ class DocumentDAO
 		return $documentos;
 	}
 
-	public function changeStateDocument($idDocument, $newState){
+	public function changeStateDocument($idDocument, $newState)
+	{
 		$db = new Connect;
 
-		$sql3 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocument . "', NULL , 'Se cambio el estado del documento a: ".$newState."') ");
-		
+		$sql3 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocument . "', NULL , 'Se cambio el estado del documento a: " . $newState . "') ");
+
 		$changeState = $db->prepare("UPDATE documento SET state=:newState WHERE id=:idDocumento");
 		$changeState->execute([
 			':idDocumento'   => $idDocument,
@@ -106,7 +108,8 @@ class DocumentDAO
 		return $documentos;
 	}
 
-	public function getCorreccionesDocumentEvaluador($id){
+	public function getCorreccionesDocumentEvaluador($id)
+	{
 		require_once "model/DAO/UserDAO.php";
 		$db = new Connect;
 		$userDAO = new UserDAO;
@@ -154,8 +157,9 @@ class DocumentDAO
 		return $documentos;
 	}
 
-	public function getDocumentByIdCorreccion($idCorreccion){
-		
+	public function getDocumentByIdCorreccion($idCorreccion)
+	{
+
 		$db = new Connect;
 		$consulta = $db->prepare('SELECT * FROM correcciones WHERE id = :id');
 		$consulta->execute([
@@ -169,8 +173,9 @@ class DocumentDAO
 		return $idDocumento;
 	}
 
-	public function getDocumentByIdEvaluadorDocumento($idCorreccion){
-		
+	public function getDocumentByIdEvaluadorDocumento($idCorreccion)
+	{
+
 		$db = new Connect;
 		$consulta = $db->prepare('SELECT * FROM documento_evaluador WHERE id = :id');
 		$consulta->execute([
@@ -184,8 +189,9 @@ class DocumentDAO
 		return $idDocumento;
 	}
 
-	public function getDocumentEvaluadorById($id){
-		
+	public function getDocumentEvaluadorById($id)
+	{
+
 		$db = new Connect;
 		$consulta = $db->prepare('SELECT * FROM documento_evaluador WHERE id = :id');
 		$consulta->execute([
@@ -211,13 +217,12 @@ class DocumentDAO
 		$semestres = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 			$semestres[] = $row;
-
-
 		}
 		return $semestres;
 	}
 
-	public function getPeriodos($x, $a){
+	public function getPeriodos($x, $a)
+	{
 		require_once "model/DAO/UserDAO.php";
 		$db = new Connect;
 
@@ -231,13 +236,12 @@ class DocumentDAO
 		$semestres = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 			$semestres[] = $row;
-
-
 		}
 		return $semestres;
 	}
 
-	public function getDocumentsByPeriodo($idSesion){
+	public function getDocumentsByPeriodo($idSesion)
+	{
 		$db = new Connect;
 		$userDAO = new UserDAO;
 		$consulta = $db->prepare('SELECT * FROM documento WHERE sesion = :sesion');
@@ -272,8 +276,9 @@ class DocumentDAO
 		return $documentos;
 	}
 
-	public function getEstadosDocumento($idDocument){
-		
+	public function getEstadosDocumento($idDocument)
+	{
+
 		$db = new Connect;
 		$consulta = $db->prepare('SELECT * FROM state_documents WHERE id_document=:id ORDER BY id DESC');
 		$consulta->execute([
@@ -354,11 +359,10 @@ class DocumentDAO
 	{
 		$db = new Connect;
 
-		if($mensaje != ''){
-			$sql2 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocument . "', NULL , '".$mensaje."') ");
-			
+		if ($mensaje != '') {
+			$sql2 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocument . "', NULL , '" . $mensaje . "') ");
 		}
-		
+
 		$insertDocumentEvaluador = $db->prepare("INSERT INTO documento_evaluador (id_user, id_document, dateLimit, dateRegister, observaciones, files, key_access) 
 										VALUES (:userID, :documentID, :dateLimit, NULL, '', '', :keyAccess)");
 		$insertDocumentEvaluador->execute([
@@ -371,15 +375,14 @@ class DocumentDAO
 		return $insertDocumentEvaluador;
 	}
 
-	public function changeEvaluadorDocument($idDocumentEvaluador, $idDocument, $idUser , $mensaje)
+	public function changeEvaluadorDocument($idDocumentEvaluador, $idDocument, $idUser, $mensaje)
 	{
 		$db = new Connect;
 
-		if($mensaje != ''){
-			$sql2 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocument . "', NULL , '".$mensaje."') ");
-			
+		if ($mensaje != '') {
+			$sql2 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocument . "', NULL , '" . $mensaje . "') ");
 		}
-		
+
 		$insertDocumentEvaluador = $db->prepare("UPDATE documento_evaluador SET id_user=:newIdUser WHERE id=:idDocumentEvaluador");
 		$insertDocumentEvaluador->execute([
 			':newIdUser'   => $idUser,
@@ -389,7 +392,8 @@ class DocumentDAO
 		return $insertDocumentEvaluador;
 	}
 
-	public function guardarInfoDocumento($idDocument, $sesion, $radicado){
+	public function guardarInfoDocumento($idDocument, $sesion, $radicado)
+	{
 		$db = new Connect;
 
 		// Change State Document
@@ -436,7 +440,8 @@ class DocumentDAO
 		return $tokensActivos;
 	}
 
-	public function getCorreoByDocument($idDocument){
+	public function getCorreoByDocument($idDocument)
+	{
 		require_once "model/DAO/UserDAO.php";
 		$db = new Connect;
 		$userDAO = new UserDAO;
@@ -445,13 +450,14 @@ class DocumentDAO
 			':id'   => $idDocument
 		]);
 		$idDependencia = NULL;
-		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {			
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 			$idDependencia = $row['id_user'];
 		}
 		return $idDependencia;
 	}
 
-	public function getRadicadoByIdDocument($radicado){
+	public function getRadicadoByIdDocument($radicado)
+	{
 		require_once "model/DAO/UserDAO.php";
 		$db = new Connect;
 		$consulta = $db->prepare('SELECT * FROM documento WHERE id=:id');
@@ -459,27 +465,29 @@ class DocumentDAO
 			':id'   => $radicado
 		]);
 		$documento = NULL;
-		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {			
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
 			$documento = $row;
 		}
 		return $documento;
 	}
 
-	public function updateCorreccionDocument($idDocumento, $descripcion, $documentos, $idCorreccion){
+	public function updateCorreccionDocument($idDocumento, $descripcion, $documentos, $idCorreccion)
+	{
 		$db = new Connect;
 
 		$sql3 = $db->query("INSERT INTO state_documents(id_document, date_action, description) VALUES('" . $idDocumento . "', NULL , 'Documento regresado con correcciones por parte de la dependencia') ");
 
 		// CORREO PARA ADMINISTRADORE CON NOTIFICACION
 
-		$sql = $db->query("UPDATE documento SET state= 'En Revisión', description= '".$descripcion."', files = '".$documentos."' WHERE id = '" . $idDocumento . "'");
+		$sql = $db->query("UPDATE documento SET state= 'En Revisión', description= '" . $descripcion . "', files = '" . $documentos . "' WHERE id = '" . $idDocumento . "'");
 
 		$sql2 = $db->query("UPDATE correcciones SET state= 'Corregido' WHERE id = '" . $idCorreccion . "'");
 
 		return $sql2;
 	}
 
-	public function getSesionesActivas(){
+	public function getSesionesActivas()
+	{
 		$db = new Connect;
 		$consulta = $db->prepare('SELECT * FROM sesiones WHERE state=:state');
 		$consulta->execute([
@@ -487,9 +495,39 @@ class DocumentDAO
 		]);
 		$sesiones = NULL;
 		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-			
+
 			$sesiones[] = $row;
 		}
 		return $sesiones;
+	}
+
+	public function getDocumentsToDownload()
+	{
+		$db = new Connect;
+		$consulta = $db->prepare('SELECT * FROM documento');
+		$consulta->execute();
+		$correcciones = NULL;
+		while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+			$correcciones[] = $row;
+		}
+		return $correcciones;
+	}
+
+	public function getBackup()
+	{
+		include('config/MySqlBackup.php');
+		$arrayDbConf['host'] = 'localhost';
+		$arrayDbConf['user'] = 'root';
+		$arrayDbConf['pass'] = '';
+		$arrayDbConf['name'] = 'siccc';
+
+		try {
+			$bck = new MySqlBackupLite($arrayDbConf);
+			$bck->backUp();
+			$bck->downloadFile();
+		} catch (Exception $e) {
+			echo $e;
+		}
+		return true;
 	}
 }

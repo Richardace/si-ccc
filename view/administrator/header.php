@@ -3,6 +3,18 @@
         <div id="fecha">
         <!-- Cargar Reloj -->
         </div>
+        <div style="margin-top: 5px;">
+            <?php 
+            if($_SESSION['rol_id'] == 1){
+                echo "<strong>ADMINISTRADOR</strong>";
+            }else if($_SESSION['rol_id'] == 2){
+                echo "<strong>SOLICITANTE</strong>";
+            }else{
+                echo "<strong>EVALUADOR</strong>";
+            }
+            ?>
+        </div>
+
         <br>
     </div>
     <div id="control">
@@ -16,6 +28,7 @@
                 <nav class="controlMenu">
                     <ul>
                         <a href="config/logout.php">Cerrar Sessión</a>
+                        <a href="index.php?c=login&a=configuracionView&id=<?php echo $_SESSION['id']; ?>">Configuración</a>
                     </ul>
                 </nav>
 

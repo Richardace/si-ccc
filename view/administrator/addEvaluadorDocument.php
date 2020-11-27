@@ -65,7 +65,7 @@ session_start();
         }
 
         function loadClient() {
-            gapi.client.setApiKey("AIzaSyAZvvx1JvVrxZ5KOP9Io1IlDVNM4wpP4kc");
+            gapi.client.setApiKey("AIzaSyBioBzoZgjtWd5eDz2MmRWVX-9RJM77HIo");
             return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest")
                 .then(function() {
                         console.log("GAPI client loaded for API");
@@ -101,7 +101,7 @@ session_start();
             }
 
             return gapi.client.calendar.events.insert({
-                    "calendarId": "eq2tt4qt2e3k2id62449e4i8oc@group.calendar.google.com",
+                    "calendarId": "dk60d8hqbl5705n0trpjrur3eg@group.calendar.google.com",
                     "maxAttendees": 4,
                     "sendNotifications": true,
                     "resource": {
@@ -126,7 +126,7 @@ session_start();
         }
         gapi.load("client:auth2", function() {
             gapi.auth2.init({
-                client_id: "466390034500-biv2ngcm1f3unftvco3l20kkf7koceg6.apps.googleusercontent.com"
+                client_id: "192901693118-m76c8shcga7c90529l2e2o783q8q1f61.apps.googleusercontent.com"
             });
         });
     </script>
@@ -169,7 +169,7 @@ foreach ($data["documentos"] as $documento) {
 
             <div class="card text-center">
                 <center>
-                    <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+                    <div class="card-header" style="color: white; font-weight: bold; background: #dc3545;">
                         AGREGAR EVALUADOR AL DOCUMENTO
                     </div>
                 </center>
@@ -328,7 +328,7 @@ foreach ($data["documentos"] as $documento) {
 
             <div class="card">
                 <center>
-                    <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+                    <div class="card-header" style="color: white; font-weight: bold; background: #dc3545;">
                         INFORMACIÓN DEL DOCUMENTO
                     </div>
                 </center>
