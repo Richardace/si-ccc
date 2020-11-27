@@ -51,7 +51,7 @@
 					</span>
 					<center>
 						<button onclick="window.location = '<?php echo $login_url; ?>'" type="button" class="loginBtn loginBtn--google js-tilt">
-							Login with Google
+							Ingresar con Google
 						</button>
 					</center>
 				</form>

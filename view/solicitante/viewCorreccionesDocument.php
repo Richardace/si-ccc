@@ -58,7 +58,7 @@ session_start();
 
             <div class="card">
                 <center>
-                    <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+                    <div class="card-header" style="color: white; font-weight: bold; background: #dc3545;">
                         VER CORRECCIONES DEL DOCUMENTO
                     </div>
                 </center>

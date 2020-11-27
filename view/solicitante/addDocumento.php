@@ -58,7 +58,7 @@ session_start();
 
       <div class="card">
         <center>
-          <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+          <div class="card-header" style="color: white; font-weight: bold; background: #dc3545;">
             AÑADIR DOCUMENTO
           </div>
         </center>
@@ -118,7 +118,7 @@ session_start();
           <center><input id="agregar" type="submit" value="Enviar Documentos" class="btn btn-primary guardarProducto" style="background:rgb(226, 3, 26); border:none; color:white; " /></center>
           <br>
         </div>
-        <div class="card-footer text-muted" style="color: white; font-weight: bold; background:rgb(226, 3, 26);"></div>
+        <div class="card-footer text-muted" style="color: white; font-weight: bold; background: #dc3545;"></div>
       </div>
     </section>
 </body>

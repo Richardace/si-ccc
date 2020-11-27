@@ -63,14 +63,6 @@ session_start();
                     COPIAS DE SEGURIDAD DEL SISTEMA
                 </div>
                 <div class="card-body">
-
-                    <?php
-
-                    foreach ($data['dataUser'] as $infoUser) {
-                        $idUser = $infoUser['id'];
-                    }
-                    ?>
-
                     <form method="post" action="index.php?c=personal&a=addEvaluador">
 
                         <div class="container">
@@ -81,7 +73,7 @@ session_start();
                                             RESPALDO DE LOS DOCUMENTOS
                                         </div>
                                         <div class="card-body">
-                                            <a class="btn" href="index.php?c=documento&a=descargarDocumentosBACKUP" role="button" style="background: #12AD00; color: white;">Descargar Backup de Documentos</a>
+                                            <a class="btn" href="index.php?c=documento&a=descargarDocumentosBACKUP" role="button" style="background: #12AD00; color: white;">Descargar Copia de Seguridad de Documentos</a>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +83,7 @@ session_start();
                                             RESPALDO DE LA BASE DE DATOS
                                         </div>
                                         <div class="card-body">
-                                        <a class="btn" href="index.php?c=documento&a=descargarBaseDatosBACKUP" role="button" style="background: #12AD00; color: white;">Descargar Backup de Base de Datos</a>
+                                        <a class="btn" href="index.php?c=documento&a=descargarBaseDatosBACKUP" role="button" style="background: #12AD00; color: white;">Descargar Copia de Seguridad de Base de Datos</a>
                                         </div>
                                     </div>
                                 </div>

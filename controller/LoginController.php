@@ -118,8 +118,11 @@
                         header('Location: ../index.php?c=message&a=administrador&id='.$_SESSION['id']);
                     } else if($info['rol_id'] == 2){
                         header('Location: ../index.php?c=message&a=solicitante&id='.$_SESSION['id']);
-                    }else if($info['rol_id'] == 4){
-                        header('Location: ../index.php?c=message&a=index');
+                    }else if($info['rol_id'] == 3){
+                        echo "<script>
+                                alert('Su rol es de Evaluador, debe ingresar mediante el Correo');
+                                window.location= '../config/logout.php'
+                            </script>";
                     }else{
                         header('Location: ../index.php');
                     }
@@ -204,7 +207,16 @@
                     $_SESSION['email'] = $info['email'];
                     $_SESSION['rol_id'] = $info['rol_id'];
 
-                    header('Location: ../index.php?c=documento&a=viewEvaluadorInit');
+                    if($info['rol_id'] != 3){
+                        echo "<script>
+                            alert('Su rol no es de Evaluador');
+                            window.location= '../config/logoutEvaluador.php'
+                        </script>";
+                    } else{
+                        header('Location: ../index.php?c=documento&a=viewEvaluadorInit');
+                    }
+
+                    
 
                     exit();
                 }

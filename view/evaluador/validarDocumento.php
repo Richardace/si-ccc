@@ -59,7 +59,7 @@ session_start();
     <section id="content">
 
       <div class="card text-center">
-        <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+        <div class="card-header" style="color: white; font-weight: bold; background: #dc3545;">
           VALIDAR IDENTIDAD DEL DOCUMENTO
         </div>
         <div class="card-body">
@@ -82,7 +82,7 @@ session_start();
 
           </form>
         </div>
-        <div class="card-footer text-muted" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+        <div class="card-footer text-muted" style="color: white; font-weight: bold; background: #dc3545;">
 
         </div>
       </div>

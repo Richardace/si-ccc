@@ -181,6 +181,11 @@ $(document).ready(function () {
     $("#personal").addClass("activeMenu");
   }
 
+  if (window.location.href.indexOf('login') >= 0) {
+    $("#message").removeClass("activeMenu");
+    
+  }
+
   $("#programa").click(function () {
     $("#selectPrograma").show();
     $("#selectFacultad").hide();

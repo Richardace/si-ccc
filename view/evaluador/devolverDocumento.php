@@ -62,7 +62,7 @@ session_start();
     <section id="content">
 
       <div class="card">
-        <div class="card-header" style="color: white; font-weight: bold; background:rgb(226, 3, 26);">
+        <div class="card-header" style="color: white; font-weight: bold; background: #dc3545;">
           <center>AÑADIR OBSERVACIONES AL DOCUMENTO</center>
         </div>
         <div class="card-body">
