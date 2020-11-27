@@ -104,59 +104,40 @@ Referente al proyecto:
 
 #### Requerimientos Previos para la Instalación
 
-- Para ejecutar el proyecto en tu computador deberas tener instalado un servidor como XAMPP o WAMPP, ademas deberas contar con la instalación de GIT para clonar el proyecto.
-           
-      - Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
-      - Descargar el instalador de  [GIT](https://git-scm.com/downloads) de la pagina oficial.
-
-#### Servidor
-
-Para poder ejecutar el proyecto, primero debemos instalar un servidor en nuestra maquina personal, en este caso instalaremos XAMPP. <br> <strong font-weight="9">NOTA: En caso de ya contar con un servidor desplegado en la WEB omitiremos esta instalación, y pasaremos a la instalación de la Base de Datos.</strong>
-
-  1. Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
-  
-  2. Descargar el instalador de  [GIT](https://git-scm.com/downloads) de la pagina oficial.
-  
-#### Base de Datos
-
-  1. Para instalar la Base de Datos descargaremos el archivo del codigo SQL mediante el siguiente enlace: [SQL Base de Datos](https://github.com/Richardace/si-ccc/blob/master/siccc.sql).
-  
-  2. Crearemos la tabla SICCC en nuestro gestor de Base de Datos, para el ejemplo usaremos el gestor MySQL.
-  
-  <p align="center"> <img src="https://i.ibb.co/SXbQRQm/creacion-tabla.png" width="400" height="150"/> </p>
-  
-  3. Importamos el SQL de la Base de Datos.
-  
-  <p align="center"> <img src="https://i.ibb.co/j32ydPz/importacion-SQL.png" width="400" height="150"/> </p>
-  
-  De esta manera se realizan las consultas que contienen la información de la Base de Datos. Ahora Procederemos a instalar el aplicativo.
-  
-  
-#### Aplicativo
-
-Para instalar nuestro aplicativo debemos contar con un navegador WEB y posteriormente ejecutar el proyecto. <br>
-  1. El aplicativo permite ejecutarse en diferentes navegadores, a continuacion se deja el enlace de descarga de Google Chrome y Firefox <br>
+El aplicativo permite ejecutarse en diferentes navegadores, a continuacion se deja el enlace de descarga de Google Chrome y Firefox <br>
     - Firefox Devoloper Edition-> [descargar](https://www.mozilla.org/es-ES/firefox/developer/). <br>
     - Google Chrome -> [descargar](https://www.google.com/intl/es-419/chrome/).
     
 <p align="center"> <img src="https://i.ibb.co/dr9qhp4/instalar-Chrome.png" width="400" height="300"/> &nbsp;&nbsp;<img src="https://i.ibb.co/VtRYFPd/firefox.png" width="400" height="300"/> </p>
+
+Para ejecutar el proyecto en tu computador deberas tener instalado un servidor como XAMPP o WAMPP, ademas deberas contar con la instalación de GIT para clonar el proyecto.
+           
+   - Descargar el instalador de  [XAMPP](https://www.apachefriends.org/es/index.html) de la pagina oficial.
+     
+   - Descargar el instalador de  [GIT](https://git-scm.com/downloads) de la pagina oficial.
+   
+   - Deberás crear una base de Datos con el nombre SICCC, en caso de no usar ese nombre, debes cambiarlo en el archivo de configuración de la database. [VER AQUI](https://github.com/Richardace/si-ccc/blob/master/config/database.php).
+   
+#### Pasos para la Instalación
+
+ 1. Primero debemos clonar nuestro proyecto. ( En XAMPP deberás clonarlo en la ruta C:/xampp/htdocs/ ), para ello utilizaremos el siguiente comando en nuestra consola de Windows o Linux.
+ 
+        git clone https://github.com/Richardace/si-ccc.git
+   
+ 2. La carpeta raiz del proyecto deberá llevar el nombre:
+ 
+        siccc
+        
+   De esta manera las rutas por defecto del sistema funcionarán correctamente.
+
+  3. Deberás crear una base de Datos con el nombre SICCC, en caso de no usar ese nombre, debes cambiarlo en el archivo de configuración de la database. [VER AQUI](https://github.com/Richardace/si-ccc/blob/master/config/database.php).
+
+  4. Importamos el SQL de la Base de Datos. [BASE DE DATOS](https://github.com/Richardace/si-ccc/blob/master/siccc.sql).
   
-  2. Descargar el Proyecto
-    - El aplicativo se puede descargar en formato RAR mediante el siguiente enlace: 
-    - Tambien podemos clonar nuestro proyecto directamente desde GITHUB, para ello insertaremos el siguiente comando en nuestra consola del sistema operativo. (Es importante verificar tener instalado GIT en nuestra maquina, de lo contrario no se podra ejecutar el comando. [DESCARGAR GIT](https://git-scm.com/download/win). <br>
-    
-          git clone https://github.com/Richardace/si-ccc.git
-          
-  3. Movemos el contenido de la carpeta que obtenemos al descomprimir el proyecto, y la guardamos en la raiz del servidor. ( En XAMPP la raiz lleva el nombre de HTDOCS y en los servidores generalmente lleva el nombre PUBLIC_HTML).
+  <p align="center"> <img src="https://i.ibb.co/j32ydPz/importacion-SQL.png" width="400" height="150"/> </p>
   
-  4. Posteriormente ya podremos acceder al aplicativo ingresando mediante la siguiente URL
-  
-    - Para Xampp: http://localhost/siccc
-    - Para servidores desplegados: http://dominioweb.com
-  
-  5. A continuación cargaremos la BD del aplicativo.
-  
-  
+  De esta manera se realizan las consultas que contienen la información de la Base de Datos. Ahora Procederemos a instalar el aplicativo.
+   
 Finalmente hemos completado la instalacion del aplicativo <strong>SICCC</strong>
   
 
@@ -169,7 +150,7 @@ Para ver el demo de la aplicación puede dirigirse a: [Pizzería_js](http://ufps
 ***
 ### Autor(es)
 Proyecto desarrollado por: <br>
- - [Richard Acevedo] (<richara@ufps.edu.co>).
+ - [Richard Acevedo] (<richaralexanderar@ufps.edu.co>).
 
  - [Jose Suarez] (<joseluissm@ufps.edu.co>).
 
